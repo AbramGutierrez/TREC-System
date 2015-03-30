@@ -13,8 +13,40 @@
   </head>
 
   <body>
-
-    <%= yield %>
+	<div class="row">
+		<div class="small-12 columns">
+			<h1>TREC System</h1>
+		</div>
+	</div>
+	<nav class="top-bar">
+	  <ul class="title-area">
+	    <li class="name"></li>
+	  </ul>
+	  <section class="top-bar-section">
+	    <ul class="center">
+		  <li><%= link_to "Home", root_path %></li>
+		  <li class="divider"></li>
+		  <li><%= link_to "Itinerary" %></li>
+		  <li class="divider"></li>
+		  <li><%= link_to "Log-in" %></li>
+		  <li class="divider"></li>
+		  <li><%= link_to "Register" %></li>
+	    </ul>
+	  </div>
+	</nav>	
+	<div class="row">
+	  <div class="small-10 columns">
+		<%= yield %>
+	  </div>
+	  <div class="small-2 columns">
+	    <h5>Sponsors</h5>
+	  </div>
+	</div>
+	<div class="row">
+	  <div class="small-12 columns">
+		<h5 align="center">Footer</h5>
+	  </div>
+	</div>
 
   </body>
 </html>
