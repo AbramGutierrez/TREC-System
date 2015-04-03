@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Captain:</strong>
+  <%= @participant.captain %>
+</p>
+
+<p>
+  <strong>Waiver signed:</strong>
+  <%= @participant.waiver_signed %>
+</p>
+
+<p>
+  <strong>Shirt size:</strong>
+  <%= @participant.shirt_size %>
+</p>
+
+<%= link_to 'Edit', edit_participant_path(@participant) %> |
+<%= link_to 'Back', participants_path %>
