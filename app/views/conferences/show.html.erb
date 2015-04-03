@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @conference.start_date %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @conference.end_date %>
+</p>
+
+<p>
+  <strong>Max team size:</strong>
+  <%= @conference.max_team_size %>
+</p>
+
+<p>
+  <strong>Min team size:</strong>
+  <%= @conference.min_team_size %>
+</p>
+
+<p>
+  <strong>Max teams:</strong>
+  <%= @conference.max_teams %>
+</p>
+
+<p>
+  <strong>Tamu cost:</strong>
+  <%= @conference.tamu_cost %>
+</p>
+
+<p>
+  <strong>Other cost:</strong>
+  <%= @conference.other_cost %>
+</p>
+
+<p>
+  <strong>Challenge desc:</strong>
+  <%= @conference.challenge_desc %>
+</p>
+
+<%= link_to 'Edit', edit_conference_path(@conference) %> |
+<%= link_to 'Back', conferences_path %>
