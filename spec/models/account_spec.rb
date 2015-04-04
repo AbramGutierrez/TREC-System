@@ -2,10 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Account, type: :model do
     before(:each) do
-		@account = Account.new
-		@account.first_name = "first"
-		@account.last_name = "last"
-		@account.email = "valid_email@test.com"
+		@account = Account.new(first_name: "first", last_name: "last",
+								email: "valid_email@test.com", password: "123456",
+								password_confirmation: "123456")
     end
 	
 	it "should be valid" do
@@ -36,5 +35,10 @@ RSpec.describe Account, type: :model do
 		duplicate_email.email = @account.email.upcase
 		@account.save
 		duplicate_email.should_not be_valid
+	end
+	
+	it "should enforce a minimum password length" do
+		@account.password = @account.password_confirmation = "a" * 5
+		@account.should_not be_valid
 	end
 end
