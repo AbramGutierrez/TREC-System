@@ -3,10 +3,11 @@ require 'rails_helper'
 RSpec.describe "accounts/edit", type: :view do
   before(:each) do
     @account = assign(:account, Account.create!(
-      :email => "MyString",
-      :password_digest => "MyString",
-      :first_name => "MyString",
-      :last_name => "MyString"
+      :email => "test_email@example.com",
+      :password => "password",
+	  :password_confirmation => "password",
+      :first_name => "TestFirstName",
+      :last_name => "TestLastName"
     ))
   end
 

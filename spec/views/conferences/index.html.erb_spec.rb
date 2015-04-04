@@ -8,7 +8,7 @@ RSpec.describe "conferences/index", type: :view do
         :min_team_size => 2,
         :max_teams => 3,
         :tamu_cost => 1.5,
-        :other_cost => 1.5,
+        :other_cost => 2.5,
         :challenge_desc => "MyText"
       ),
       Conference.create!(
@@ -16,7 +16,7 @@ RSpec.describe "conferences/index", type: :view do
         :min_team_size => 2,
         :max_teams => 3,
         :tamu_cost => 1.5,
-        :other_cost => 1.5,
+        :other_cost => 2.5,
         :challenge_desc => "MyText"
       )
     ])
@@ -28,7 +28,7 @@ RSpec.describe "conferences/index", type: :view do
     assert_select "tr>td", :text => 2.to_s, :count => 2
     assert_select "tr>td", :text => 3.to_s, :count => 2
     assert_select "tr>td", :text => 1.5.to_s, :count => 2
-    assert_select "tr>td", :text => 1.5.to_s, :count => 2
+    assert_select "tr>td", :text => 2.5.to_s, :count => 2
     assert_select "tr>td", :text => "MyText".to_s, :count => 2
   end
 end
