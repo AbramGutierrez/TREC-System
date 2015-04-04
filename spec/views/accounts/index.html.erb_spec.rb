@@ -1,15 +1,15 @@
 require 'rails_helper'
 
-RSpec.describe "users/index", type: :view do
+RSpec.describe "accounts/index", type: :view do
   before(:each) do
-    assign(:users, [
-      User.create!(
+    assign(:accounts, [
+      Account.create!(
         :email => "Email",
         :password_digest => "Password Digest",
         :first_name => "First Name",
         :last_name => "Last Name"
       ),
-      User.create!(
+      Account.create!(
         :email => "Email",
         :password_digest => "Password Digest",
         :first_name => "First Name",
@@ -18,7 +18,7 @@ RSpec.describe "users/index", type: :view do
     ])
   end
 
-  it "renders a list of users" do
+  it "renders a list of accounts" do
     render
     assert_select "tr>td", :text => "Email".to_s, :count => 2
     assert_select "tr>td", :text => "Password Digest".to_s, :count => 2
