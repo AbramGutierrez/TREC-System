@@ -14,6 +14,8 @@
 ActiveRecord::Schema.define(version: 20150404014423) do
 
   create_table "accounts", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "user_type"
     t.string   "email"
     t.string   "password_digest"
     t.string   "first_name"
@@ -21,6 +23,8 @@ ActiveRecord::Schema.define(version: 20150404014423) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
+
+  add_index "accounts", ["user_type", "user_id"], name: "index_accounts_on_user_type_and_user_id"
 
   create_table "administrators", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -41,6 +45,7 @@ ActiveRecord::Schema.define(version: 20150404014423) do
   end
 
   create_table "participants", force: :cascade do |t|
+    t.integer  "team_id"
     t.boolean  "captain"
     t.boolean  "waiver_signed"
     t.string   "shirt_size"
@@ -48,20 +53,28 @@ ActiveRecord::Schema.define(version: 20150404014423) do
     t.datetime "updated_at",    null: false
   end
 
+  add_index "participants", ["team_id"], name: "index_participants_on_team_id"
+
   create_table "sponsors", force: :cascade do |t|
+    t.integer  "conference_id"
     t.string   "sponsor_name"
     t.string   "logo_path"
     t.integer  "priority"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
+  add_index "sponsors", ["conference_id"], name: "index_sponsors_on_conference_id"
+
   create_table "teams", force: :cascade do |t|
+    t.integer  "conference_id"
     t.string   "team_name"
     t.string   "paid_status"
     t.string   "school"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
+
+  add_index "teams", ["conference_id"], name: "index_teams_on_conference_id"
 
 end
