@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get	'register'	=> 'account#new'
+
   resources :accounts
 
   resources :administrators

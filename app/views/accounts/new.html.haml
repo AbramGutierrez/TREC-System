@@ -1,0 +1,20 @@
+%h2 Register
+
+= form_tag accounts_path, :method => :post do
+
+	= label :account, :first_name, 'First Name'
+	= text_field :account, :first_name
+	
+	= label :account, :last_name, 'Last Name'
+	= text_field :account, :last_name
+	
+	= label :account, :email, 'Email'
+	= text_field :account, :email
+	
+	= label :account, :password, 'Password'
+	= text_field :account, :password
+	
+	= label :account, :password_confirmation, 'Confirm password'
+	= text_field :account, :password_confirmation
+	
+	= submit_tag 'Submit'
