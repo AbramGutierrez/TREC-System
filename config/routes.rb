@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get    'login'   => 'sessions#new'
+  post   'login'   => 'sessions#create'
+  delete 'logout'  => 'sessions#destroy'
+
   get	'register'	=> 'account#new'
 
   resources :accounts
@@ -14,6 +18,8 @@ Rails.application.routes.draw do
   resources :teams
 
   resources :conferences
+  
+  resources :sessions
 
   get 'welcome/index'
 
