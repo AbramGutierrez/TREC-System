@@ -1,0 +1,36 @@
+<%= form_tag :action => 'create' %>
+  <p>School Name: <%= text_field :team, :school %></p>
+  <p>Team Name: <%= text_field :team, :team_name %></p>
+  <table>
+  <thead>
+    <tr>
+      <th> Role </th>
+	  <th> Phone Number </th>
+	  <th> Shirt Size </th>
+	  <th> First Name </th>
+	  <th> Last Name </th>
+	  <th> Email </th>
+	</tr>
+  </thead>
+  <tbody>
+	<% for i in 0..6 %>
+	  <tr>
+	    <%= fields_for "participants[#{i}]" do |f| %>
+	    <% if i == 0 %>
+		  <td> <p>Capt.</p> </td>
+		  <%= f.hidden_field :captain, :value => true %>
+		<% else %>
+		  <td> <p>Member</p> </td>
+		  <%= f.hidden_field :captain, :value => false %>
+		<% end %>
+		<td> <%= f.text_field :phone, :placeholder => "EX. 0123456789"%> </td>	
+        <td> <%= f.select :shirt_size, options_for_select(%w[S M L XL]) %> </td>
+        <td> <%= f.text_field :first_name %> </td>	
+        <td> <%= f.text_field :last_name %> </td>	
+        <td> <%= f.text_field :email, :placeholder => "example@domain.com"%> </td>			
+	    <% end %>
+	  </tr>
+	<% end %>
+  </tbody>
+  </table>
+<%= submit_tag 'Submit' %>
