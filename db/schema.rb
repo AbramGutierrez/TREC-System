@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150404014423) do
+ActiveRecord::Schema.define(version: 20150405175622) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer  "user_id"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20150404014423) do
     t.text     "challenge_desc"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.boolean  "is_active"
   end
 
   create_table "participants", force: :cascade do |t|
@@ -51,6 +52,7 @@ ActiveRecord::Schema.define(version: 20150404014423) do
     t.string   "shirt_size"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.integer  "phone"
   end
 
   add_index "participants", ["team_id"], name: "index_participants_on_team_id"
