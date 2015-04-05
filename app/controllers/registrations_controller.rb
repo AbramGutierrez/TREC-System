@@ -3,7 +3,7 @@ class RegistrationsController < ApplicationController
 	end
 	
 	def create
-	  @conference = Conference.find_by active: true
+	  @conference = Conference.find_by is_active: true
 	  
 	  @team = Team.new(conference_id: @conference.id, 
 	    team_name: params[:team][:team_name],
