@@ -57,6 +57,14 @@ group :development, :test do
   gem 'rspec-rails'
 end
 
+group :test do
+	gem 'cucumber-rails', :require => false
+	gem 'cucumber-rails-training-wheels'
+	gem 'database_cleaner' # to clear Cucumber's test database between runs
+	gem 'capybara'
+	gem 'launchy' # a useful debugging aid for user stories
+end
+
 group :production do
 	gem 'pg'
 	gem 'rails_12factor'
