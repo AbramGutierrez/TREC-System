@@ -3,9 +3,11 @@ require 'rails_helper'
 
 feature 'Log in' do
 	before(:each) do
+		p = Participant.create(captain: false, shirt_size: "medium", 
+			phone: 1234567890)
 		Account.create(first_name: "TestFirst", last_name: "TestLast",
 			email: "test@example.com", password: "password",
-			password_confirmation: "password")
+			password_confirmation: "password", user: p)
 	end
 
 	scenario 'with valid email and password' do		
