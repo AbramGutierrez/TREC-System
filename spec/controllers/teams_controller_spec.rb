@@ -19,9 +19,11 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe TeamsController, type: :controller do
-
-  before(:all) do
-	  c = Conference.create(start_date: Date.parse("2015-4-4"), 
+ 
+  # This should return the minimal set of attributes required to create a valid
+  # Team. As you add validations to Team, be sure to
+  # adjust the attributes here as well.
+  c = Conference.create!(start_date: Date.parse("2015-4-4"), 
 	  end_date: Date.parse("2015-6-6"),
 	  max_team_size: 6,
 	  min_team_size: 1,
@@ -33,13 +35,9 @@ RSpec.describe TeamsController, type: :controller do
 	  updated_at: DateTime.parse("2015-4-3"),
 	  is_active: true
 	  )
-  end	  
-  # This should return the minimal set of attributes required to create a valid
-  # Team. As you add validations to Team, be sure to
-  # adjust the attributes here as well.
   let(:valid_attributes) { {
 	# skip("Add a hash of attributes valid for your model")
-	:conference_id => 1,	
+	:conference_id => c.id,	
 	:school => "TestSchool",
 	:paid_status => "paid", 
 	:team_name => "Winners"
