@@ -8,6 +8,13 @@ class Account < ActiveRecord::Base
 	validates :email, presence: true, length: { maximum: 255 },
 					  format: { with: VALID_EMAIL_REGEX },
 					  uniqueness: { case_sensitive: false }
-	#has_secure_password
-	#validates :password, length: { minimum: 6 }	
+					  
+	# This is necessary to create and encrypt the password
+	# To suppress the validations that it adds, pass "validations: false" as an argument to it	
+	has_secure_password validations: false
+	
+	#validates :password, length: { minimum: 6 }
+
+	# Temporary work-around
+	attr_accessor :password_confirmation	
 end
