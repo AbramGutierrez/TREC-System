@@ -25,6 +25,11 @@ class AccountsController < ApplicationController
   # POST /accounts.json
   def create
     @account = Account.new(account_params)
+	
+	# temporary work-around for testing purposes
+	p = Participant.create(captain: false, shirt_size: "medium", 
+			phone: 1234567890)
+	@account.user = p		
 
     respond_to do |format|
       if @account.save
