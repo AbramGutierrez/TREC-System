@@ -63,6 +63,8 @@ group :test do
 	gem 'database_cleaner' # to clear Cucumber's test database between runs
 	gem 'capybara'
 	gem 'launchy' # a useful debugging aid for user stories
+	
+	gem 'simplecov', '~> 0.9.0', :require => false
 end
 
 group :production do
