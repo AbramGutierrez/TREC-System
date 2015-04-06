@@ -28,6 +28,16 @@ feature 'Log in' do
 		expect(page).to have_content('Log in')
 	end
 	
+	scenario 'with valid information and then logout' do
+		log_in_with('test@example.com', 'password')
+		
+		Capybara.current_session.driver.delete logout_path
+		Capybara.current_session.driver.response.should be_redirect
+		visit Capybara.current_session.driver.response.location
+
+		expect(page).to have_content('Home')
+	end
+	
 	def log_in_with(email, password)
 		visit login_path
 		fill_in 'Email', with: email
