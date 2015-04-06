@@ -3,9 +3,10 @@ require 'rails_helper'
 RSpec.describe "participants/edit", type: :view do
   before(:each) do
     @participant = assign(:participant, Participant.create!(
-      :captain => false,
+      :captain => true,
       :waiver_signed => false,
-      :shirt_size => "MyString"
+      :shirt_size => "MyString",
+	  :phone => 1111111111
     ))
   end
 
