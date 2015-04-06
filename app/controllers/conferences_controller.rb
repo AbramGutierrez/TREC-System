@@ -69,6 +69,6 @@ class ConferencesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def conference_params
-      params.require(:conference).permit(:start_date, :end_date, :max_team_size, :min_team_size, :max_teams, :tamu_cost, :other_cost, :challenge_desc)
+      params.require(:conference).permit(:start_date, :end_date, :max_team_size, :min_team_size, :max_teams, :tamu_cost, :other_cost, :challenge_desc, :is_active)
     end
 end

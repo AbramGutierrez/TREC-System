@@ -20,15 +20,42 @@ require 'rails_helper'
 
 RSpec.describe ConferencesController, type: :controller do
 
+  before(:all) do
+    Conference.delete_all
+  end
   # This should return the minimal set of attributes required to create a valid
   # Conference. As you add validations to Conference, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+  let(:valid_attributes) { {
+    # skip("Add a hash of attributes valid for your model")
+	:start_date => Date.parse("2015-4-4"),
+	:end_date => Date.parse("2015-6-6"),
+	:max_team_size => 6,
+	:min_team_size => 1,
+	:max_teams => 5,
+	:tamu_cost => 30.00,
+	:other_cost => 60.00,
+	:challenge_desc => 'yay!',
+	:created_at => DateTime.parse("2015-4-3"),
+	:updated_at => DateTime.parse("2015-4-3"),
+	:is_active => true
+	}  
   }
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+  let(:invalid_attributes) { {
+    # skip("Add a hash of attributes invalid for your model")
+	:start_date => "",
+	:end_date => Date.parse("2015-6-6"),
+	:max_team_size => 6,
+	:min_team_size => 1,
+	:max_teams => 5,
+	:tamu_cost => 30.00,
+	:other_cost => 60.00,
+	:challenge_desc => 'yay!',
+	:created_at => DateTime.parse("2015-4-3"),
+	:updated_at => DateTime.parse("2015-4-3"),
+	:is_active => true
+	}
   }
 
   # This should return the minimal set of values that should be in the session
@@ -102,15 +129,28 @@ RSpec.describe ConferencesController, type: :controller do
 
   describe "PUT #update" do
     context "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+      let(:new_attributes) { {
+        # skip("Add a hash of attributes valid for your model")
+		:start_date => Date.parse("2015-4-4"),
+		:end_date => Date.parse("2015-6-6"),
+		:max_team_size => 8,
+		:min_team_size => 1,
+		:max_teams => 15,
+		:tamu_cost => 40.00,
+		:other_cost => 50.00,
+		:challenge_desc => 'yay!',
+		:created_at => DateTime.parse("2015-4-3"),
+		:updated_at => DateTime.parse("2015-4-3"),
+		:is_active => true
+	    } 
       }
 
       it "updates the requested conference" do
         conference = Conference.create! valid_attributes
         put :update, {:id => conference.to_param, :conference => new_attributes}, valid_session
         conference.reload
-        skip("Add assertions for updated state")
+        # skip("Add assertions for updated state")
+		expect(assigns(:conference)).to eq(conference)
       end
 
       it "assigns the requested conference as @conference" do
