@@ -20,15 +20,39 @@ require 'rails_helper'
 
 RSpec.describe TeamsController, type: :controller do
 
+  before(:all) do
+	  c = Conference.create(start_date: Date.parse("2015-4-4"), 
+	  end_date: Date.parse("2015-6-6"),
+	  max_team_size: 6,
+	  min_team_size: 1,
+	  max_teams: 5,
+	  tamu_cost: 30.00,
+	  other_cost: 60.00,
+	  challenge_desc: 'yay!',
+	  created_at: DateTime.parse("2015-4-3"),
+	  updated_at: DateTime.parse("2015-4-3"),
+	  is_active: true
+	  )
+  end	  
   # This should return the minimal set of attributes required to create a valid
   # Team. As you add validations to Team, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+  let(:valid_attributes) { {
+	# skip("Add a hash of attributes valid for your model")
+	:conference_id => 1,	
+	:school => "TestSchool",
+	:paid_status => "paid", 
+	:team_name => "Winners"
+	}
   }
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+  let(:invalid_attributes) { {
+    # skip("Add a hash of attributes invalid for your model")
+	:conference_id => 1,	
+	:school => "",
+	:paid_status => "paid", 
+	:team_name => "Winners"
+    } 
   }
 
   # This should return the minimal set of values that should be in the session
@@ -102,15 +126,21 @@ RSpec.describe TeamsController, type: :controller do
 
   describe "PUT #update" do
     context "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+      let(:new_attributes) { {
+	    :conference_id => 1,	
+		:school => "TestSchool2",
+		:paid_status => "paid", 
+		:team_name => "Losers"
+	    }
+        # skip("Add a hash of attributes valid for your model")
       }
 
       it "updates the requested team" do
         team = Team.create! valid_attributes
         put :update, {:id => team.to_param, :team => new_attributes}, valid_session
         team.reload
-        skip("Add assertions for updated state")
+        # skip("Add assertions for updated state")
+		expect(assigns(:team)).to eq(team)
       end
 
       it "assigns the requested team as @team" do

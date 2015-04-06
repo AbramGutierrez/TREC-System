@@ -25,6 +25,21 @@ class TeamsController < ApplicationController
   # POST /teams.json
   def create
     @team = Team.new(team_params)
+	
+	# c = Conference.create(start_date: Date.parse("2015-4-4"), 
+	  # end_date: Date.parse("2015-6-6"),
+	  # max_team_size: 6,
+	  # min_team_size: 1,
+	  # max_teams: 5,
+	  # tamu_cost: 30.00,
+	  # other_cost: 60.00,
+	  # challenge_desc: 'yay!',
+	  # created_at: DateTime.parse("2015-4-3"),
+	  # updated_at: DateTime.parse("2015-4-3"),
+	  # is_active: true
+	  # )
+	  
+	# @team.conference = c  
 
     respond_to do |format|
       if @team.save
@@ -69,6 +84,6 @@ class TeamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
-      params.require(:team).permit(:team_name, :paid_status, :school)
+      params.require(:team).permit(:conference, :conference_id, :team_name, :paid_status, :school)
     end
 end

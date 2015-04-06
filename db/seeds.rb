@@ -15,3 +15,8 @@
 	  updated_at: DateTime.parse("2015-4-3"),
 	  is_active: true
 	  )
+	Team.create(:conference_id => 1,	
+	  :school => "TestSchool",
+	  :paid_status => "paid", 
+	  :team_name => "Winners" 
+	  )
