@@ -48,7 +48,7 @@ RSpec.describe TeamsController, type: :controller do
 
   let(:invalid_attributes) { {
     # skip("Add a hash of attributes invalid for your model")
-	:conference_id => c.id,	
+	# :conference_id => c.id,	
 	:school => "",
 	:paid_status => "paid", 
 	:team_name => "Winners"
