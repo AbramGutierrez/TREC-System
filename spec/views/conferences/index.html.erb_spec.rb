@@ -4,7 +4,9 @@ RSpec.describe "conferences/index", type: :view do
   before(:each) do
     assign(:conferences, [
       Conference.create!(
-        :max_team_size => 1,
+        :start_date => Date.parse("2015-4-4"), 
+	    :end_date => Date.parse("2015-6-6"),
+		:max_team_size => 1,
         :min_team_size => 2,
         :max_teams => 3,
         :tamu_cost => 1.5,
@@ -12,6 +14,8 @@ RSpec.describe "conferences/index", type: :view do
         :challenge_desc => "MyText"
       ),
       Conference.create!(
+	    :start_date => Date.parse("2015-4-4"), 
+	    :end_date => Date.parse("2015-6-6"),
         :max_team_size => 1,
         :min_team_size => 2,
         :max_teams => 3,

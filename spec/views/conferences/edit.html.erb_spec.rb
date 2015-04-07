@@ -3,7 +3,9 @@ require 'rails_helper'
 RSpec.describe "conferences/edit", type: :view do
   before(:each) do
     @conference = assign(:conference, Conference.create!(
-      :max_team_size => 1,
+      :start_date => Date.parse("2015-4-4"), 
+	  :end_date => Date.parse("2015-6-6"),
+	  :max_team_size => 1,
       :min_team_size => 1,
       :max_teams => 1,
       :tamu_cost => 1.5,
