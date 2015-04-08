@@ -44,6 +44,9 @@ RSpec.describe ParticipantsController, type: :controller do
 
   describe "GET #index" do
     it "assigns all participants as @participants" do
+	  # Make sure there are not old participants in the db that will break the test
+	  Participant.delete_all
+	  
       participant = Participant.create! valid_attributes
       get :index, {}, valid_session
       expect(assigns(:participants)).to eq([participant])
