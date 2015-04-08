@@ -1,27 +1,27 @@
 {
   "RSpec": {
     "coverage": {
-      "C:/Users/Taylor/Documents/Ruby/TREC-System/app/helpers/accounts_helper.rb": [
+      "C:/Users/Rikog/Documents/GitHub/TREC-System/app/helpers/accounts_helper.rb": [
         1,
         null
       ],
-      "C:/Users/Taylor/Documents/Ruby/TREC-System/app/helpers/administrators_helper.rb": [
+      "C:/Users/Rikog/Documents/GitHub/TREC-System/app/helpers/administrators_helper.rb": [
         1,
         null
       ],
-      "C:/Users/Taylor/Documents/Ruby/TREC-System/app/helpers/application_helper.rb": [
+      "C:/Users/Rikog/Documents/GitHub/TREC-System/app/helpers/application_helper.rb": [
         1,
         null
       ],
-      "C:/Users/Taylor/Documents/Ruby/TREC-System/app/helpers/conferences_helper.rb": [
+      "C:/Users/Rikog/Documents/GitHub/TREC-System/app/helpers/conferences_helper.rb": [
         1,
         null
       ],
-      "C:/Users/Taylor/Documents/Ruby/TREC-System/app/helpers/participants_helper.rb": [
+      "C:/Users/Rikog/Documents/GitHub/TREC-System/app/helpers/participants_helper.rb": [
         1,
         null
       ],
-      "C:/Users/Taylor/Documents/Ruby/TREC-System/app/helpers/sessions_helper.rb": [
+      "C:/Users/Rikog/Documents/GitHub/TREC-System/app/helpers/sessions_helper.rb": [
         1,
         null,
         null,
@@ -46,19 +46,19 @@
         null,
         null
       ],
-      "C:/Users/Taylor/Documents/Ruby/TREC-System/app/helpers/sponsors_helper.rb": [
+      "C:/Users/Rikog/Documents/GitHub/TREC-System/app/helpers/sponsors_helper.rb": [
         1,
         null
       ],
-      "C:/Users/Taylor/Documents/Ruby/TREC-System/app/helpers/teams_helper.rb": [
+      "C:/Users/Rikog/Documents/GitHub/TREC-System/app/helpers/teams_helper.rb": [
         1,
         null
       ],
-      "C:/Users/Taylor/Documents/Ruby/TREC-System/app/helpers/welcome_helper.rb": [
+      "C:/Users/Rikog/Documents/GitHub/TREC-System/app/helpers/welcome_helper.rb": [
         1,
         null
       ],
-      "C:/Users/Taylor/Documents/Ruby/TREC-System/app/controllers/teams_controller.rb": [
+      "C:/Users/Rikog/Documents/GitHub/TREC-System/app/controllers/conferences_controller.rb": [
         1,
         1,
         null,
@@ -86,21 +86,6 @@
         null,
         1,
         5,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
         null,
         5,
         5,
@@ -149,7 +134,7 @@
         null,
         null
       ],
-      "C:/Users/Taylor/Documents/Ruby/TREC-System/app/controllers/application_controller.rb": [
+      "C:/Users/Rikog/Documents/GitHub/TREC-System/app/controllers/application_controller.rb": [
         1,
         null,
         null,
@@ -157,23 +142,14 @@
         1,
         null
       ],
-      "C:/Users/Taylor/Documents/Ruby/TREC-System/app/models/conference.rb": [
+      "C:/Users/Rikog/Documents/GitHub/TREC-System/app/models/conference.rb": [
         1,
         1,
         1,
-        null
-      ],
-      "C:/Users/Taylor/Documents/Ruby/TREC-System/app/models/team.rb": [
         1,
-        1,
-        1,
-        null,
-        1,
-        null,
-        null,
         null
       ]
     },
-    "timestamp": 1428353968
+    "timestamp": 1428513466
   }
 }
