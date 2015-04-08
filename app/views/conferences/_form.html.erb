@@ -12,12 +12,16 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :start_date %><br>
-    <%= f.date_select :start_date %>
+    <%= f.label :start_date, "Registration Start Date" %><br>
+    <%= f.date_select :start_date, 
+		options = { :order => [:month, :day, :year]},
+		html_options = { class: 'select-date' }%>
   </div>
   <div class="field">
     <%= f.label :end_date %><br>
-    <%= f.date_select :end_date %>
+    <%= f.date_select :end_date, 
+		options = { :order => [:month, :day, :year]},
+		html_options = { class: 'select-date' }%>
   </div>
   <div class="field">
     <%= f.label :max_team_size %><br>
