@@ -23,8 +23,8 @@ RSpec.describe AdministratorsController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # Administrator. As you add validations to Administrator, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+  let(:valid_attributes) { { }
+    
   }
 
   let(:invalid_attributes) {
@@ -102,15 +102,15 @@ RSpec.describe AdministratorsController, type: :controller do
 
   describe "PUT #update" do
     context "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+      let(:new_attributes) { { }
+        
       }
 
       it "updates the requested administrator" do
         administrator = Administrator.create! valid_attributes
         put :update, {:id => administrator.to_param, :administrator => new_attributes}, valid_session
         administrator.reload
-        skip("Add assertions for updated state")
+        expect(assigns(:administrator)).to eq(administrator)
       end
 
       it "assigns the requested administrator as @administrator" do
