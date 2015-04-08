@@ -23,7 +23,6 @@ RSpec.describe TeamsController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # Team. As you add validations to Team, be sure to
   # adjust the attributes here as well.
-  Conference.delete_all
   c = Conference.create!(start_date: Date.parse("2015-4-10"), 
 	  end_date: Date.parse("2015-6-12"),
 	  max_team_size: 6,
@@ -35,11 +34,7 @@ RSpec.describe TeamsController, type: :controller do
 	  is_active: true
 	  )
 	  
-	puts c.id
-	puts "\n"
   let(:valid_attributes) { {
-	# skip("Add a hash of attributes valid for your model")
-	# :conference => c,
 	:conference_id => c.id,	
 	:school => "TestSchool",
 	:paid_status => "paid", 
@@ -48,7 +43,6 @@ RSpec.describe TeamsController, type: :controller do
   }
 
   let(:invalid_attributes) { {
-    # skip("Add a hash of attributes invalid for your model")
 	:conference_id => c.id,	
 	:school => "",
 	:paid_status => "paid", 
@@ -133,14 +127,12 @@ RSpec.describe TeamsController, type: :controller do
 		:paid_status => "paid", 
 		:team_name => "Losers"
 	    }
-        # skip("Add a hash of attributes valid for your model")
       }
 
       it "updates the requested team" do
         team = Team.create! valid_attributes
         put :update, {:id => team.to_param, :team => new_attributes}, valid_session
         team.reload
-        # skip("Add assertions for updated state")
 		expect(assigns(:team)).to eq(team)
       end
 
