@@ -20,9 +20,6 @@ require 'rails_helper'
 
 RSpec.describe ConferencesController, type: :controller do
 
-  before(:all) do
-    Conference.delete_all
-  end
   # This should return the minimal set of attributes required to create a valid
   # Conference. As you add validations to Conference, be sure to
   # adjust the attributes here as well.
@@ -65,6 +62,7 @@ RSpec.describe ConferencesController, type: :controller do
 
   describe "GET #index" do
     it "assigns all conferences as @conferences" do
+	  Conference.delete_all
       conference = Conference.create! valid_attributes
       get :index, {}, valid_session
       expect(assigns(:conferences)).to eq([conference])
