@@ -38,8 +38,8 @@ RSpec.describe TeamsController, type: :controller do
 	  )
   let(:valid_attributes) { {
 	# skip("Add a hash of attributes valid for your model")
-	:conference => c,
-	# :conference_id => c.id,	
+	# :conference => c,
+	:conference_id => c.id,	
 	:school => "TestSchool",
 	:paid_status => "paid", 
 	:team_name => "Winners"
@@ -48,7 +48,7 @@ RSpec.describe TeamsController, type: :controller do
 
   let(:invalid_attributes) { {
     # skip("Add a hash of attributes invalid for your model")
-	# :conference_id => c.id,	
+	:conference_id => c.id,	
 	:school => "",
 	:paid_status => "paid", 
 	:team_name => "Winners"
@@ -127,7 +127,7 @@ RSpec.describe TeamsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) { {
-	    :conference_id => 1,	
+	    :conference_id => c.id,	
 		:school => "TestSchool2",
 		:paid_status => "paid", 
 		:team_name => "Losers"
