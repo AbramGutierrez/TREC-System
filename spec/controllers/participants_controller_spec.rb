@@ -23,12 +23,18 @@ RSpec.describe ParticipantsController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # Participant. As you add validations to Participant, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+  let(:valid_attributes) { {
+    :captain => false, 
+	:shirt_size => "medium", 
+	:phone => 1234567890
+	}
   }
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+  let(:invalid_attributes) {{
+    :captain => false, 
+	:shirt_size => "", 
+	:phone => 1234567890
+	}
   }
 
   # This should return the minimal set of values that should be in the session
@@ -102,15 +108,18 @@ RSpec.describe ParticipantsController, type: :controller do
 
   describe "PUT #update" do
     context "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+      let(:new_attributes) { {
+		:captain => true, 
+		:shirt_size => "medium", 
+		:phone => 1234567890
+		}
       }
 
       it "updates the requested participant" do
         participant = Participant.create! valid_attributes
         put :update, {:id => participant.to_param, :participant => new_attributes}, valid_session
         participant.reload
-        skip("Add assertions for updated state")
+        expect(assigns(:participant)).to eq(participant)
       end
 
       it "assigns the requested participant as @participant" do
