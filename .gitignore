@@ -17,4 +17,4 @@
 /tmp
 
 # Ignore the SimpleCov coverage files
-/coverage
+/coverage/
