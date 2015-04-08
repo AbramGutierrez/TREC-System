@@ -40,7 +40,7 @@ RSpec.describe Account, type: :model do
 	end
 	
 	it "should combine first and last name" do
-	  @account.name.should eql(@account.first_name + " " + @account.last_name)
+	  @account.name.should eql(@account.first_name.to_s + " " + @account.last_name.to_s)
 	end
 	
 	# it "should enforce a minimum password length" do

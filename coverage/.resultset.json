@@ -1,7 +1,97 @@
 {
   "RSpec": {
     "coverage": {
+      "c:/Users/Kiri/Documents/TREC-System/TREC/app/helpers/accounts_helper.rb": [
+        1,
+        null
+      ],
+      "c:/Users/Kiri/Documents/TREC-System/TREC/app/helpers/administrators_helper.rb": [
+        1,
+        null
+      ],
+      "c:/Users/Kiri/Documents/TREC-System/TREC/app/helpers/application_helper.rb": [
+        1,
+        null
+      ],
+      "c:/Users/Kiri/Documents/TREC-System/TREC/app/helpers/conferences_helper.rb": [
+        1,
+        null
+      ],
+      "c:/Users/Kiri/Documents/TREC-System/TREC/app/helpers/participants_helper.rb": [
+        1,
+        null
+      ],
+      "c:/Users/Kiri/Documents/TREC-System/TREC/app/helpers/sessions_helper.rb": [
+        1,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        null,
+        1,
+        0,
+        0,
+        null,
+        null
+      ],
+      "c:/Users/Kiri/Documents/TREC-System/TREC/app/helpers/sponsors_helper.rb": [
+        1,
+        null
+      ],
+      "c:/Users/Kiri/Documents/TREC-System/TREC/app/helpers/teams_helper.rb": [
+        1,
+        null
+      ],
+      "c:/Users/Kiri/Documents/TREC-System/TREC/app/helpers/welcome_helper.rb": [
+        1,
+        null
+      ],
+      "c:/Users/Kiri/Documents/TREC-System/TREC/app/models/account.rb": [
+        1,
+        1,
+        null,
+        1,
+        null,
+        3,
+        1,
+        1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        null,
+        null,
+        null,
+        null,
+        1,
+        null,
+        1,
+        1,
+        null,
+        null
+      ],
+      "c:/Users/Kiri/Documents/TREC-System/TREC/app/models/participant.rb": [
+        1,
+        1,
+        1,
+        1,
+        null
+      ]
     },
-    "timestamp": 1428506502
+    "timestamp": 1428516601
   }
 }
