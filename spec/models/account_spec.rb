@@ -39,6 +39,10 @@ RSpec.describe Account, type: :model do
 		duplicate_email.should_not be_valid
 	end
 	
+	it "should combine first and last name" do
+	  @account.name.should eql(@account.first_name.to_s + " " + @account.last_name.to_s)
+	end
+	
 	# it "should enforce a minimum password length" do
 		# @account.password = @account.password_confirmation = "a" * 5
 		# @account.should_not be_valid
