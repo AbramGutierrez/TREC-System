@@ -17,4 +17,14 @@ class Account < ActiveRecord::Base
 
 	# Temporary work-around
 	attr_accessor :password_confirmation	
+	
+	def name
+	  name = String.new
+	  if defined? :first_name && defined? :last_name
+	    name = :first_name + " " + :last_name
+	  else
+	    name = :first_name + :last_name
+	  end
+	  return name
+	end
 end
