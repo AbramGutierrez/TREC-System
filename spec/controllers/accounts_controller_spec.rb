@@ -23,12 +23,29 @@ RSpec.describe AccountsController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # Account. As you add validations to Account, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+  p = Participant.create!(captain: false, shirt_size: "medium", 
+			phone: 1234567890)
+
+  let(:valid_attributes) { {
+    :email => "test@example.com",
+	:password => "password",
+	:password_confirmation => "password",
+	:first_name => "First",
+    :last_name => "Last",
+	:user_id => p.id,
+	:user_type => Participant
+    }
   }
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+  let(:invalid_attributes) { {
+    :email => "bad_email",
+	:password => "123",
+	:password_confirmation => "123",
+	:first_name => "First",
+    :last_name => "Last",
+	:user_id => p.id,
+	:user_type => Participant
+	}
   }
 
   # This should return the minimal set of values that should be in the session
@@ -102,15 +119,22 @@ RSpec.describe AccountsController, type: :controller do
 
   describe "PUT #update" do
     context "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+      let(:new_attributes) { {
+        :email => "test2@example.com",
+		:password => "password",
+		:password_confirmation => "password",
+		:first_name => "FirstName",
+		:last_name => "LastName",
+		:user_id => p.id,
+		:user_type => Participant
+    }
       }
 
       it "updates the requested account" do
         account = Account.create! valid_attributes
         put :update, {:id => account.to_param, :account => new_attributes}, valid_session
         account.reload
-        skip("Add assertions for updated state")
+        expect(assigns(:account)).to eq(account)
       end
 
       it "assigns the requested account as @account" do

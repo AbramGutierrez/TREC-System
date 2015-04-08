@@ -25,11 +25,6 @@ class AccountsController < ApplicationController
   # POST /accounts.json
   def create
     @account = Account.new(account_params)
-	
-	# temporary work-around for testing purposes
-	p = Participant.create(captain: false, shirt_size: "medium", 
-			phone: 1234567890)
-	@account.user = p		
 
     respond_to do |format|
       if @account.save
@@ -45,7 +40,7 @@ class AccountsController < ApplicationController
 
   # PATCH/PUT /accounts/1
   # PATCH/PUT /accounts/1.json
-  def update
+  def update 
     respond_to do |format|
       if @account.update(account_params)
         format.html { redirect_to @account, notice: 'Account was successfully updated.' }
@@ -75,6 +70,6 @@ class AccountsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def account_params
-      params.require(:account).permit(:email, :password, :password_confirmation, :first_name, :last_name)
+      params.require(:account).permit(:email, :password, :password_confirmation, :first_name, :last_name, :user_id, :user_type)
     end
 end
