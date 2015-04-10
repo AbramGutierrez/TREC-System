@@ -40,6 +40,11 @@
 	</nav>	
 	<div class="row">
 	  <div class="small-10 columns">
+	    <% flash.each do |message_type, message| %>
+          <div class="alert-box <%= message_type %>">
+			<%= message %>
+		  </div>	
+        <% end %>
 		<%= yield %>
 	  </div>
 	  <div class="small-2 columns">
