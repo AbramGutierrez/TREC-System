@@ -16,7 +16,7 @@ module NavigationHelpers
     when /^the home\s?page$/
       '/'
 	
-	when /^the Log-in page/
+	when /^the Log in page/
 	  '/login'
 	
     # Add more mappings here.
