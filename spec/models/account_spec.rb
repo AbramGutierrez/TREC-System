@@ -48,3 +48,23 @@ RSpec.describe Account, type: :model do
 		# @account.should_not be_valid
 	# end
 end
+
+RSpec.describe Account, type: :model do
+  it "should accept only a first name" do
+    account = Account.new(first_name: "first",
+                email: "valid_email@test.com", password: "123456",
+                password_confirmation: "123456", user: p)
+    account.name.should eql(account.first_name.to_s)
+  end
+  
+  it "should accept only a last name" do
+    account = Account.new(last_name: "last",
+                email: "valid_email@test.com", password: "123456",
+                password_confirmation: "123456", user: p)
+    account.name.should eql(account.last_name.to_s)
+  end
+  
+  it "should have a first or last name" do
+    account = Account.new(:first_name => "", :last_name => "").should_not be_valid
+  end
+end
