@@ -15,3 +15,14 @@
 	  updated_at: DateTime.parse("2015-4-3"),
 	  is_active: true
 	  )
+	  
+	Account.create(
+		email: "ag@example.com",
+		password_digest: "password",
+		first_name: "Abram",
+		last_name: "Gutierrez",
+		user: Participant.create(
+			captain: true,
+			shirt_size: "medium",
+			phone: 1234567890)
+	)
