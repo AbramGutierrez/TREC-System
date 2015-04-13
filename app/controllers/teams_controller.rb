@@ -24,9 +24,6 @@ class TeamsController < ApplicationController
   # POST /teams
   # POST /teams.json
   def create
-    puts "team_params: "
-    puts team_params
-	puts "\n"
 	@team = Team.new(team_params) 
 
     respond_to do |format|

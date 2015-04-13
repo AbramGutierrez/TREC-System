@@ -40,7 +40,7 @@ RSpec.describe AdministratorsController, type: :controller do
     it "assigns all administrators as @administrators" do
       administrator = Administrator.create! valid_attributes
       get :index, {}, valid_session
-      expect(assigns(:administrators)).to eq([administrator])
+      expect(assigns(:administrators)).to include(administrator)
     end
   end
 

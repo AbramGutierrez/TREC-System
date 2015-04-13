@@ -1,4 +1,5 @@
 class AccountsController < ApplicationController
+  before_action :logged_in_user, only: [:edit, :update]
   before_action :set_account, only: [:show, :edit, :update, :destroy]
 
   # GET /accounts
@@ -72,4 +73,14 @@ class AccountsController < ApplicationController
     def account_params
       params.require(:account).permit(:email, :password, :password_confirmation, :first_name, :last_name, :user_id, :user_type)
     end
+	
+	# Before Filter
+	# Ensure that a user is logged in to an account
+	def logged_in_user
+	  unless logged_in?
+	    flash[:alert] = "Please log in."
+		puts "LOG IN!!"
+		redirect_to login_url
+	  end	
+	end
 end

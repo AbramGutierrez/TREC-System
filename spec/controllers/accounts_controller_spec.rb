@@ -25,6 +25,8 @@ RSpec.describe AccountsController, type: :controller do
   # adjust the attributes here as well.
   p = Participant.create!(captain: false, shirt_size: "medium", 
 			phone: 1234567890)
+			
+  admin = Administrator.create!()	
 
   let(:valid_attributes) { {
     :email => "test@example.com",
@@ -51,13 +53,15 @@ RSpec.describe AccountsController, type: :controller do
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # AccountsController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
+  let(:valid_session) {}  
 
   describe "GET #index" do
     it "assigns all accounts as @accounts" do
       account = Account.create! valid_attributes
       get :index, {}, valid_session
-      expect(assigns(:accounts)).to eq([account])
+	  # last_account = accounts.last
+      # expect(assigns(:accounts)).to eq([account])
+	  expect(assigns(:accounts)).to include(account)
     end
   end
 
@@ -79,7 +83,8 @@ RSpec.describe AccountsController, type: :controller do
   describe "GET #edit" do
     it "assigns the requested account as @account" do
       account = Account.create! valid_attributes
-      get :edit, {:id => account.to_param}, valid_session
+      # get :edit, {:id => account.to_param}, valid_session
+	  get :edit, {:id => account.to_param}, { :account_id => Account.last.id}
       expect(assigns(:account)).to eq(account)
     end
   end
@@ -131,7 +136,9 @@ RSpec.describe AccountsController, type: :controller do
       }
 
       it "updates the requested account" do
+	    
         account = Account.create! valid_attributes
+		log_in_as(p.account)
         put :update, {:id => account.to_param, :account => new_attributes}, valid_session
         account.reload
         expect(assigns(:account)).to eq(account)
@@ -139,12 +146,14 @@ RSpec.describe AccountsController, type: :controller do
 
       it "assigns the requested account as @account" do
         account = Account.create! valid_attributes
+		log_in_as(p.account)
         put :update, {:id => account.to_param, :account => valid_attributes}, valid_session
         expect(assigns(:account)).to eq(account)
       end
 
       it "redirects to the account" do
         account = Account.create! valid_attributes
+		log_in_as(p.account)
         put :update, {:id => account.to_param, :account => valid_attributes}, valid_session
         expect(response).to redirect_to(account)
       end
@@ -153,12 +162,14 @@ RSpec.describe AccountsController, type: :controller do
     context "with invalid params" do
       it "assigns the account as @account" do
         account = Account.create! valid_attributes
+		log_in_as(p.account)
         put :update, {:id => account.to_param, :account => invalid_attributes}, valid_session
         expect(assigns(:account)).to eq(account)
       end
 
       it "re-renders the 'edit' template" do
         account = Account.create! valid_attributes
+		log_in_as(p.account)
         put :update, {:id => account.to_param, :account => invalid_attributes}, valid_session
         expect(response).to render_template("edit")
       end
