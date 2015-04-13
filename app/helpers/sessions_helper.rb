@@ -10,6 +10,10 @@ module SessionsHelper
 		@currect_account ||= Account.find_by(id: session[:account_id])
 	end
 	
+	def current_account?(account)
+		account == current_account
+	end
+	
 	# Returns true if the account is logged in, false otherwise.
 	def logged_in?
 		!current_account.nil?

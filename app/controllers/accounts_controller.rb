@@ -1,6 +1,7 @@
 class AccountsController < ApplicationController
   before_action :logged_in_user, only: [:edit, :update]
   before_action :set_account, only: [:show, :edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update]
 
   # GET /accounts
   # GET /accounts.json
@@ -79,8 +80,12 @@ class AccountsController < ApplicationController
 	def logged_in_user
 	  unless logged_in?
 	    flash[:alert] = "Please log in."
-		puts "LOG IN!!"
 		redirect_to login_url
 	  end	
+	end
+	
+	def correct_user
+	  # @account = Account.find(params[:id])
+	  redirect_to(root_url) unless current_account?(@account)
 	end
 end

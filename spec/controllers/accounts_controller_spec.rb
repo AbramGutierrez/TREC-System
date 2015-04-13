@@ -26,6 +26,16 @@ RSpec.describe AccountsController, type: :controller do
   p = Participant.create!(captain: false, shirt_size: "medium", 
 			phone: 1234567890)
 			
+  p2 = Participant.create!(captain: false, shirt_size: "large",
+			phone: 1876543211)
+			
+  			
+  p2.create_account!(first_name: "A", last_name: "Z", email: "p2@example.com",
+			password: "mypassword", password_confirmation: "mypassword")	
+  puts "p2.account.id = "
+  puts p2.account.id
+  puts "\n"  
+			
   admin = Administrator.create!()	
 
   let(:valid_attributes) { {
@@ -83,9 +93,25 @@ RSpec.describe AccountsController, type: :controller do
   describe "GET #edit" do
     it "assigns the requested account as @account" do
       account = Account.create! valid_attributes
-      # get :edit, {:id => account.to_param}, valid_session
-	  get :edit, {:id => account.to_param}, { :account_id => Account.last.id}
+	  log_in_as(p.account)
+      get :edit, {:id => account.to_param}, valid_session
       expect(assigns(:account)).to eq(account)
+    end
+	
+	it "redirects edit when not logged in" do
+      account = Account.create! valid_attributes
+      get :edit, {:id => account.to_param}, valid_session
+      # flash.should_not be_nil
+	  expect(flash).to_not be_nil
+      expect(response).to redirect_to(login_url)
+    end
+	
+	it "redirects edit when wrong user" do
+      account = Account.create! valid_attributes
+	  log_in_as(p2.account)
+      get :edit, {:id => account.to_param}, valid_session
+      flash.should_not be_nil
+      expect(response).to redirect_to(root_url)
     end
   end
 
@@ -157,6 +183,21 @@ RSpec.describe AccountsController, type: :controller do
         put :update, {:id => account.to_param, :account => valid_attributes}, valid_session
         expect(response).to redirect_to(account)
       end
+	  
+	  it "redirects update when not logged in" do
+	    account = Account.create! valid_attributes
+        put :update, {:id => account.to_param, :account => valid_attributes}, valid_session
+		flash.should_not be_nil
+        expect(response).to redirect_to(login_url)
+	  end
+	  
+	  it "redirects update when wrong user" do
+	    account = Account.create! valid_attributes
+		log_in_as(p2.account)
+        put :update, {:id => account.to_param, :account => valid_attributes}, valid_session
+		flash.should_not be_nil
+        expect(response).to redirect_to(root_url)
+	  end
     end
 
     context "with invalid params" do
