@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   delete 'logout'  => 'sessions#destroy'
   
   get    'registrations/success'   => 'registrations#success'
+  get    'registrations/'   => 'registrations#new'
 
   resources :accounts
 

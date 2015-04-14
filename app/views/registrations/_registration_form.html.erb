@@ -13,21 +13,21 @@
 	</tr>
   </thead>
   <tbody>
-	<% for i in 0..6 %>
+    <% for i in 1..(@conference.max_team_size) %>
 	  <tr>
 	    <%= fields_for "participants[#{i}]" do |f| %>
-	    <% if i == 0 %>
-		  <td> <p>Capt.</p> </td>
-		  <%= f.hidden_field :captain, :value => true %>
-		<% else %>
-		  <td> <p>Member</p> </td>
-		  <%= f.hidden_field :captain, :value => false %>
-		<% end %>
-		<td> <%= f.text_field :phone, :placeholder => "EX. 0123456789"%> </td>	
-        <td> <%= f.select :shirt_size, options_for_select(%w[S M L XL]) %> </td>
-        <td> <%= f.text_field :first_name %> </td>	
-        <td> <%= f.text_field :last_name %> </td>	
-        <td> <%= f.text_field :email, :placeholder => "example@domain.com"%> </td>			
+		  <% if i == 1 %>
+		    <td> <p>Capt.</p> </td>
+		    <%= f.hidden_field :captain, :value => true %>
+		  <% else %>
+		    <td> <p>Member</p> </td>
+		    <%= f.hidden_field :captain, :value => false %>
+		  <% end %>
+		  <td> <%= f.text_field :phone, :placeholder => "EX. 0123456789"%> </td>	
+		  <td> <%= f.select :shirt_size, options_for_select(%w[S M L XL]) %> </td>
+		  <td> <%= f.text_field :first_name %> </td>	
+		  <td> <%= f.text_field :last_name %> </td>	
+		  <td> <%= f.text_field :email, :placeholder => "example@domain.com"%> </td>
 	    <% end %>
 	  </tr>
 	<% end %>

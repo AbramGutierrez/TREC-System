@@ -1,5 +1,10 @@
 class RegistrationsController < ApplicationController
 	def new
+	  @conference = Conference.find_by is_active: true
+	  if(@conference.nil?)
+		redirect_to action: "fail" 
+	  end
+	    
 	end
 	
 	def create
@@ -63,6 +68,8 @@ class RegistrationsController < ApplicationController
 	end
 	
 	def success
+	end
+	def fail
 	end
 	
 	def has_blank(fields)
