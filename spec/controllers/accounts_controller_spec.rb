@@ -114,6 +114,17 @@ RSpec.describe AccountsController, type: :controller do
       flash.should_not be_nil
       expect(response).to redirect_to(root_url)
     end
+	
+	# Needs to be a Cucumber test!
+	# it "successful edit with friendly forwarding" do
+	  # account = Account.create! valid_attributes
+	  # get :edit, {:id => account.to_param}, valid_session
+	  # expect(response).to redirect_to(login_path)
+	  # log_in_as(p.account)
+	  # expect(response).to redirect_to(edit_account_path(account))
+	  # get :edit, {:id => account.to_param}, valid_session
+      # expect(assigns(:account)).to eq(account)
+	# end
   end
 
   describe "POST #create" do

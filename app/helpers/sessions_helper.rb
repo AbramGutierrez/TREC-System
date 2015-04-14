@@ -10,6 +10,7 @@ module SessionsHelper
 		@currect_account ||= Account.find_by(id: session[:account_id])
 	end
 	
+	# Returns true if the account passed in is the current account
 	def current_account?(account)
 		account == current_account
 	end
@@ -24,4 +25,15 @@ module SessionsHelper
 		session.delete(:account_id)
 		@current_account = nil
 	end
+	
+	# Redirects to stored location (or to the default).
+    def redirect_back_or(default)
+      redirect_to(session[:forwarding_url] || default)
+      session.delete(:forwarding_url)
+    end
+	
+	# Stores the URL trying to be accessed.
+    def store_location
+      session[:forwarding_url] = request.url if request.get?
+    end
 end

@@ -12,18 +12,20 @@ Scenario: Login
 	Given I am on the home page
     When I follow "Log in"
 	Then I should be on the Log in page
-	When I enter test@example.com to Email
-	And I enter password to Password
+	When I fill in "Email" with "test@example.com"
+	And I fill in "Password" with "password"
+	And I press "Log in"
 	Then I should be on the home page
-	And I should see "Logout"
+	And I should see "Log out"
 	
 Scenario: Logout
 	Given I am on the home page
     When I follow "Log in"
 	Then I should be on the Log in page
-	When I enter test@example.com to Email
-	And I enter password to Password
+	When I fill in "Email" with "test@example.com"
+	And I fill in "Password" with "password"
+	And I press "Log in"
 	Then I should be on the home page
-	When I follow "Logout"
+	When I follow "Log out"
 	Then I should be on the home page
 	And I should see "Log in"
