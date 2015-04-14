@@ -29,12 +29,13 @@ RSpec.describe AccountsController, type: :controller do
   p2 = Participant.create!(captain: false, shirt_size: "large",
 			phone: 1876543211)
 			
-  			
-  p2.create_account!(first_name: "A", last_name: "Z", email: "p2@example.com",
-			password: "mypassword", password_confirmation: "mypassword")	
-  puts "p2.account.id = "
-  puts p2.account.id
-  puts "\n"  
+  before(:all){			
+    p2.create_account!(first_name: "A", last_name: "Z", email: "p4@example.com",
+			password: "mypassword", password_confirmation: "mypassword")
+  }	
+  after(:all){
+	p2.account.delete
+  }  
 			
   admin = Administrator.create!()	
 
