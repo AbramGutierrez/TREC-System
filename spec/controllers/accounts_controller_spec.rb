@@ -29,15 +29,21 @@ RSpec.describe AccountsController, type: :controller do
   p2 = Participant.create!(captain: false, shirt_size: "large",
 			phone: 1876543211)
 			
+  admin = Administrator.create!()			
+			
   before(:all){			
     p2.create_account!(first_name: "A", last_name: "Z", email: "p4@example.com",
 			password: "mypassword", password_confirmation: "mypassword")
+			
+	admin.create_account!(first_name: "Admin", last_name: "istrator", email: "admin@example.com",
+			password: "admin", password_confirmation: "admin")		
   }	
   after(:all){
 	p2.account.delete
+	admin.account.delete
   }  
 			
-  admin = Administrator.create!()	
+  	
 
   let(:valid_attributes) { {
     :email => "test@example.com",
@@ -69,11 +75,17 @@ RSpec.describe AccountsController, type: :controller do
   describe "GET #index" do
     it "assigns all accounts as @accounts" do
       account = Account.create! valid_attributes
+	  log_in_as(p.account)
       get :index, {}, valid_session
-	  # last_account = accounts.last
-      # expect(assigns(:accounts)).to eq([account])
 	  expect(assigns(:accounts)).to include(account)
     end
+	
+	it "redirects index when not logged in" do
+	  account = Account.create! valid_attributes
+	  get :index, {}, valid_session
+	  expect(flash).to_not be_nil
+      expect(response).to redirect_to(login_url)
+	end
   end
 
   describe "GET #show" do
@@ -102,7 +114,6 @@ RSpec.describe AccountsController, type: :controller do
 	it "redirects edit when not logged in" do
       account = Account.create! valid_attributes
       get :edit, {:id => account.to_param}, valid_session
-      # flash.should_not be_nil
 	  expect(flash).to_not be_nil
       expect(response).to redirect_to(login_url)
     end
@@ -111,20 +122,10 @@ RSpec.describe AccountsController, type: :controller do
       account = Account.create! valid_attributes
 	  log_in_as(p2.account)
       get :edit, {:id => account.to_param}, valid_session
-      flash.should_not be_nil
+      expect(flash).to_not be_nil
       expect(response).to redirect_to(root_url)
     end
 	
-	# Needs to be a Cucumber test!
-	# it "successful edit with friendly forwarding" do
-	  # account = Account.create! valid_attributes
-	  # get :edit, {:id => account.to_param}, valid_session
-	  # expect(response).to redirect_to(login_path)
-	  # log_in_as(p.account)
-	  # expect(response).to redirect_to(edit_account_path(account))
-	  # get :edit, {:id => account.to_param}, valid_session
-      # expect(assigns(:account)).to eq(account)
-	# end
   end
 
   describe "POST #create" do
@@ -232,6 +233,7 @@ RSpec.describe AccountsController, type: :controller do
   describe "DELETE #destroy" do
     it "destroys the requested account" do
       account = Account.create! valid_attributes
+	  log_in_as(admin.account)
       expect {
         delete :destroy, {:id => account.to_param}, valid_session
       }.to change(Account, :count).by(-1)
@@ -239,9 +241,23 @@ RSpec.describe AccountsController, type: :controller do
 
     it "redirects to the accounts list" do
       account = Account.create! valid_attributes
+	  log_in_as(admin.account)
       delete :destroy, {:id => account.to_param}, valid_session
       expect(response).to redirect_to(accounts_url)
     end
+	
+	it "redirects destroy when not logged in" do
+	  account = Account.create! valid_attributes
+      delete :destroy, {:id => account.to_param}, valid_session
+      expect(response).to redirect_to(login_url)
+	end
+	
+	it "redirects destroy when account is not an admin" do
+	  account = Account.create! valid_attributes
+	  log_in_as(p.account)
+      delete :destroy, {:id => account.to_param}, valid_session
+      expect(response).to redirect_to(root_url)
+	end
   end
 
 end

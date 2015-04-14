@@ -1,7 +1,8 @@
 class AccountsController < ApplicationController
-  before_action :logged_in_user, only: [:edit, :update]
+  before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
   before_action :set_account, only: [:show, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update]
+  before_action :admin_account, only: :destroy
 
   # GET /accounts
   # GET /accounts.json
@@ -88,5 +89,9 @@ class AccountsController < ApplicationController
 	def correct_user
 	  # @account = Account.find(params[:id])
 	  redirect_to(root_url) unless current_account?(@account)
+	end
+	
+	def admin_account
+	  redirect_to(root_url) unless current_account.user.is_a?(Administrator)	
 	end
 end
