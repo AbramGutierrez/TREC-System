@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "TREC" %></title>
 
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
@@ -33,7 +33,7 @@
 		  <% else %>
 			<li><%= link_to "Log in", login_path %></li>
 			<li class="divider"></li>
-			<li><%= link_to "Register", controller: "accounts", action: "new" %></li>
+			<li><%= link_to "Register", controller: "registrations", action: "new" %></li>
 		  <% end %>	
 	    </ul>
 	  </div>
@@ -51,11 +51,15 @@
 	    <h5>Sponsors</h5>
 	  </div>
 	</div>
+	<hr>
 	<div class="row">
-	  <div class="small-12 columns">
-		<h5 align="center">Footer</h5>
+	  <div class ='small-6 columns' align='left'>&copy; 2015 Student Engineers' Council. All Rights Reserved.</div>
+	  <div class='small-6 columns' align='right'>
+		  <a href='http://sec.tamu.edu/terms.asp'><strong>Terms&nbsp;</strong></a>
+		  <a href='http://sec.tamu.edu/privacy.asp'><strong>Privacy&nbsp;</strong></a>
+		  <a href='http://sec.tamu.edu/contact.asp'><strong>Contact</strong></a>
 	  </div>
 	</div>
-
+	
   </body>
 </html>
