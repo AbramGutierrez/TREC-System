@@ -5,9 +5,13 @@ RSpec.describe "Accounts", type: :request do
 		@p = Participant.create!(captain: false, shirt_size: "medium", 
 			phone: 1234567890)
 		@p.create_account!(first_name: "TestFirst", last_name: "TestLast",
-			email: "test@example.com", password: "password",
+			email: "tester@example.com", password: "password",
 			password_confirmation: "password")
-	end
+  end
+	
+  after(:each) do
+	@p.account.delete
+  end
 
   describe "GET /accounts" do
     it "works! (now write some real specs)" do

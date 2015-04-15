@@ -23,7 +23,9 @@ RSpec.describe TeamsController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # Team. As you add validations to Team, be sure to
   # adjust the attributes here as well.
-  c = Conference.create!(start_date: Date.parse("2015-4-10"), 
+  
+  before(:all) {
+    @c = Conference.create!(start_date: Date.parse("2015-4-10"), 
 	  end_date: Date.parse("2015-6-12"),
 	  max_team_size: 6,
 	  min_team_size: 1,
@@ -33,20 +35,21 @@ RSpec.describe TeamsController, type: :controller do
 	  challenge_desc: 'fun!',
 	  is_active: true
 	  )
+  }	  
 	  
   let(:valid_attributes) { {
-	:conference_id => c.id,	
+	:conference_id => @c.id,	
 	:school => "TestSchool",
 	:paid_status => "paid", 
-	:team_name => "Winners"
+	:team_name => "BestTeam"
 	}
   }
 
   let(:invalid_attributes) { {
-	:conference_id => c.id,	
+	:conference_id => @c.id,	
 	:school => "",
 	:paid_status => "paid", 
-	:team_name => "Winners"
+	:team_name => "BestTeam"
     } 
   }
 
@@ -59,7 +62,7 @@ RSpec.describe TeamsController, type: :controller do
     it "assigns all teams as @teams" do
       team = Team.create! valid_attributes
       get :index, {}, valid_session
-      expect(assigns(:teams)).to eq([team])
+      expect(assigns(:teams)).to include(team)
     end
   end
 
@@ -122,7 +125,7 @@ RSpec.describe TeamsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) { {
-	    :conference_id => c.id,	
+	    :conference_id => @c.id,	
 		:school => "TestSchool2",
 		:paid_status => "paid", 
 		:team_name => "Losers"

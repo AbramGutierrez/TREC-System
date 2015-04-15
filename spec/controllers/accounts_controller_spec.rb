@@ -47,7 +47,7 @@ RSpec.describe AccountsController, type: :controller do
   	
 
   let(:valid_attributes) { {
-    :email => "test@example.com",
+    :email => "testing@example.com",
 	:password => "password",
 	:password_confirmation => "password",
 	:first_name => "First",

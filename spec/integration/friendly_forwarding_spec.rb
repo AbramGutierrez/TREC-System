@@ -5,8 +5,12 @@ RSpec.describe "friendly forwarding", :type => :request do
 		@p = Participant.create!(captain: false, shirt_size: "medium", 
 			phone: 1234567890)
 		@p.create_account!(first_name: "TestFirst", last_name: "TestLast",
-			email: "test@example.com", password: "password",
+			email: "friendly_forward@example.com", password: "password",
 			password_confirmation: "password")
+	end
+	
+	after(:each) do
+		@p.account.delete
 	end
 	
 	it 'user is properly redirected with friendly forwarding' do
