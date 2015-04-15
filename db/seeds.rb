@@ -20,3 +20,22 @@
 	  :paid_status => "paid", 
 	  :team_name => "Winners" 
 	  )
+	  
+	Account.create(
+		email: "participant@example.com",
+		password: "password",
+		first_name: "Abram",
+		last_name: "Gutierrez",
+		user: Participant.create(
+			captain: true,
+			shirt_size: "medium",
+			phone: 1234567890)
+	)
+	
+	Account.create(
+		email: "administrator@example.com",
+		password: "password",
+		first_name: "Abram",
+		last_name: "Gutierrez",
+		user: Administrator.create()
+	)
