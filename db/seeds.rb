@@ -17,7 +17,7 @@
 	  )
 	  
 	Account.create(
-		email: "ag@example.com",
+		email: "participant@example.com",
 		password: "password",
 		first_name: "Abram",
 		last_name: "Gutierrez",
@@ -28,7 +28,7 @@
 	)
 	
 	Account.create(
-		email: "admin@example.com",
+		email: "administrator@example.com",
 		password: "password",
 		first_name: "Abram",
 		last_name: "Gutierrez",
