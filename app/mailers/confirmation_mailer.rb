@@ -1,9 +1,9 @@
 class ConfirmationMailer < ApplicationMailer
-  default from: ConfirmationMailer.default_from()
-  
   def self.default_from()
     'TREC@sec.tamu.edu'
   end
+  
+  default from: ConfirmationMailer.default_from()
   
   def welcome_email(user)
     @user = user
