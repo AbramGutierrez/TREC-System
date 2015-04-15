@@ -76,22 +76,9 @@ class AccountsController < ApplicationController
       params.require(:account).permit(:email, :password, :password_confirmation, :first_name, :last_name, :user_id, :user_type)
     end
 	
-	# Before Filter
-	# Ensure that a user is logged in to an account
-	def logged_in_user
-	  unless logged_in?
-	    store_location
-	    flash[:alert] = "Please log in."
-		redirect_to login_url
-	  end	
-	end
-	
 	def correct_user
 	  # @account = Account.find(params[:id])
 	  redirect_to(root_url) unless current_account?(@account)
 	end
 	
-	def admin_account
-	  redirect_to(root_url) unless current_account.user.is_a?(Administrator)	
-	end
 end
