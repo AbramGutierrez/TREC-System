@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   resources :teams
 
   resources :conferences
+  get	'create_conference' => 'conferences#new'
+  post	'create_conference' => 'conferences#create'
   
   resources :sessions
 
