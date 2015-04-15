@@ -18,11 +18,19 @@
 	  
 	Account.create(
 		email: "ag@example.com",
-		password_digest: "password",
+		password: "password",
 		first_name: "Abram",
 		last_name: "Gutierrez",
 		user: Participant.create(
 			captain: true,
 			shirt_size: "medium",
 			phone: 1234567890)
+	)
+	
+	Account.create(
+		email: "admin@example.com",
+		password: "password",
+		first_name: "Abram",
+		last_name: "Gutierrez",
+		user: Administrator.create()
 	)
