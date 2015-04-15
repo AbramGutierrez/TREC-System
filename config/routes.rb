@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   
   get    'registrations/success'   => 'registrations#success'
   get    'registrations/'   => 'registrations#new'
+  get	 'registrations/fail'	=> 'registrations#fail'
 
   resources :accounts
 
