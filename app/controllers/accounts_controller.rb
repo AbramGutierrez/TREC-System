@@ -1,8 +1,8 @@
 class AccountsController < ApplicationController
-  before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy]
   before_action :set_account, only: [:show, :edit, :update, :destroy]
-  before_action :correct_user, only: [:edit, :update]
-  before_action :admin_account, only: :destroy
+  before_action :correct_user, only: [:show, :edit, :update]
+  before_action :admin_account, only: [:index, :destroy]
 
   # GET /accounts
   # GET /accounts.json

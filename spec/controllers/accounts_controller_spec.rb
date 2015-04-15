@@ -75,10 +75,18 @@ RSpec.describe AccountsController, type: :controller do
 
   describe "GET #index" do
     it "assigns all accounts as @accounts" do
+	  account = Account.create! valid_attributes
+	  log_in_as(@admin.account)
+      get :index, {}, valid_session
+	  expect(assigns(:accounts)).to include(account)
+	end
+	
+    it "redirects index when account is not admin" do
       account = Account.create! valid_attributes
 	  log_in_as(@p.account)
       get :index, {}, valid_session
-	  expect(assigns(:accounts)).to include(account)
+	  # expect(assigns(:accounts)).to include(account)
+	  expect(response).to redirect_to(root_url)
     end
 	
 	it "redirects index when not logged in" do
@@ -92,8 +100,24 @@ RSpec.describe AccountsController, type: :controller do
   describe "GET #show" do
     it "assigns the requested account as @account" do
       account = Account.create! valid_attributes
+	  log_in_as(@p.account)
       get :show, {:id => account.to_param}, valid_session
       expect(assigns(:account)).to eq(account)
+    end
+	
+	it "redirects show when not logged in" do
+      account = Account.create! valid_attributes
+      get :show, {:id => account.to_param}, valid_session
+	  expect(flash).to_not be_nil
+      expect(response).to redirect_to(login_url)
+    end
+	
+	it "redirects show when wrong user" do
+      account = Account.create! valid_attributes
+	  log_in_as(@p2.account)
+      get :show, {:id => account.to_param}, valid_session
+      expect(flash).to_not be_nil
+      expect(response).to redirect_to(root_url)
     end
   end
 
