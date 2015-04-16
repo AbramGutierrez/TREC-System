@@ -5,14 +5,14 @@
 <table>
   <thead>
     <tr>
-      <th>Start date</th>
-      <th>End date</th>
-      <th>Max team size</th>
-      <th>Min team size</th>
-      <th>Max teams</th>
-      <th>Tamu cost</th>
-      <th>Other cost</th>
-      <th>Challenge desc</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Team Size</th>
+      <th>Max Teams</th>
+      <th>Tamu Cost</th>
+      <th>Other Cost</th>
+      <th>Challenge Desc</th>
+      <th>Active?</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -22,12 +22,18 @@
       <tr>
         <td><%= conference.start_date %></td>
         <td><%= conference.end_date %></td>
-        <td><%= conference.max_team_size %></td>
-        <td><%= conference.min_team_size %></td>
+        <td><%= conference.min_team_size %> - <%= conference.max_team_size %></td>
         <td><%= conference.max_teams %></td>
-        <td><%= conference.tamu_cost %></td>
-        <td><%= conference.other_cost %></td>
+        <td><%= number_to_currency(conference.tamu_cost) %></td>
+        <td><%= number_to_currency(conference.other_cost) %></td>
         <td><%= conference.challenge_desc %></td>
+        <td><%= 
+                if conference.is_active == true
+                  'Yes' 
+                elsif conference.is_active == false
+                  'No'
+                end
+            %></td>
         <td><%= link_to 'Show', conference %></td>
         <td><%= link_to 'Edit', edit_conference_path(conference) %></td>
         <td><%= link_to 'Destroy', conference, method: :delete, data: { confirm: 'Are you sure?' } %></td>
