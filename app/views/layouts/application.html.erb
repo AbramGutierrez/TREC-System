@@ -24,16 +24,23 @@
 	  </ul>
 	  <section class="top-bar-section">
 	    <ul class="center">
+		  <li class="divider"></li>
 		  <li><%= link_to "Home", root_path %></li>
 		  <li class="divider"></li>
 		  <li><%= link_to "Itinerary" %></li>
 		  <li class="divider"></li>
 		  <% if logged_in? %>
+		    <li class="divider"></li>
+		    <li><%= link_to "List Participants", controller: "participants", method: "index" %></li>
+			<li class="divider"></li>
 			<li><%= link_to "Log out", logout_path, method: "delete" %></li>
+			<li class="divider"></li>
 		  <% else %>
+		    <li class="divider"></li>
 			<li><%= link_to "Log in", login_path %></li>
 			<li class="divider"></li>
 			<li><%= link_to "Register", controller: "registrations", action: "new" %></li>
+			<li class="divider"></li>
 		  <% end %>	
 	    </ul>
 	  </div>

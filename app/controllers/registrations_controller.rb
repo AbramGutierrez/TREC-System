@@ -6,7 +6,6 @@ class RegistrationsController < ApplicationController
 	  if(@conference.nil?)
 		redirect_to action: "fail" 
 	  end
-	    
 	end
 	
 	def create

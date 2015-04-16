@@ -5,16 +5,21 @@
 <table>
   <thead>
     <tr>
-      <th>Captain</th>
-      <th>Waiver signed</th>
+	  <th>Team Name</th>
+	  <th>First Name</th>
+	  <th>Last Name</th>
+      <th>Is the Captain?</th>
+      <th>Waiver signed?</th>
       <th>Shirt size</th>
-      <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @participants.each do |participant| %>
       <tr>
+	    <td><%= participant.team.team_name %></td>
+		<td><%= participant.account.first_name %></td>
+		<td><%= participant.account.last_name %></td>
         <td><%= participant.captain %></td>
         <td><%= participant.waiver_signed %></td>
         <td><%= participant.shirt_size %></td>

@@ -7,7 +7,7 @@ module SessionsHelper
 	
 	# Returns the current logged-in account (if there is one).
 	def current_account
-		@currect_account ||= Account.find_by(id: session[:account_id])
+		@current_account ||= Account.find_by(id: session[:account_id])
 	end
 	
 	# Returns true if the account is logged in, false otherwise.

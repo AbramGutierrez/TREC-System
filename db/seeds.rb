@@ -19,20 +19,51 @@
 	  :paid_status => "paid", 
 	  :team_name => "Winners" 
 	  )
+<<<<<<< HEAD
 
+=======
+	  
+	new_team2 = Team.create(:conference_id => 1,	
+	  :school => "TestSchool2",
+	  :paid_status => "unpaid", 
+	  :team_name => "HelloWorld" 
+	  )
+	  
+>>>>>>> origin/admin-view-participants
 	new_participant = Participant.create(
 	  team_id: new_team.id,
 	  waiver_signed: true,
 	  captain: true,
 	  shirt_size: "medium",
 	  phone: 1234567890)
+<<<<<<< HEAD
 			
+=======
+	
+	new_participant2 = Participant.create(
+	  team_id: new_team2.id,
+	  waiver_signed: false,
+	  captain: true,
+	  shirt_size: "large",
+	  phone: 1234567890)
+	  
+>>>>>>> origin/admin-view-participants
 	Account.create(
 		email: "participant@example.com",
 		password: "password",
 		first_name: "Abram",
 		last_name: "Gutierrez",
 		user: new_participant
+<<<<<<< HEAD
+=======
+	)
+	Account.create(
+		email: "participant2@example.com",
+		password: "password",
+		first_name: "Tian",
+		last_name: "Zhang",
+		user: new_participant2
+>>>>>>> origin/admin-view-participants
 	)
 	
 	Account.create(
