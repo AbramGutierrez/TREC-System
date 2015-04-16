@@ -13,21 +13,26 @@
 	  challenge_desc: 'yay!',
 	  is_active: true
 	  )
-	Team.create(:conference_id => 1,	
+	  
+	new_team = Team.create(:conference_id => 1,	
 	  :school => "TestSchool",
 	  :paid_status => "paid", 
 	  :team_name => "Winners" 
 	  )
-	  
+
+	new_participant = Participant.create(
+	  team_id: new_team.id,
+	  waiver_signed: true,
+	  captain: true,
+	  shirt_size: "medium",
+	  phone: 1234567890)
+			
 	Account.create(
 		email: "participant@example.com",
 		password: "password",
 		first_name: "Abram",
 		last_name: "Gutierrez",
-		user: Participant.create(
-			captain: true,
-			shirt_size: "medium",
-			phone: 1234567890)
+		user: new_participant
 	)
 	
 	Account.create(
