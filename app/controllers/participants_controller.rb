@@ -8,33 +8,17 @@ class ParticipantsController < ApplicationController
   # GET /participants
   # GET /participants.json
   def index
-	current_account = Account.find_by(id: session[:account_id])
-	if current_account.nil?
-	   flash[:error] = "You need to be logged in."	
-	   redirect_to root_url  
-	elsif is_administrator(current_account) 
+	account = Account.find_by(id: session[:account_id])
+	if is_administrator?(account) 
 	  @participants = Participant.all
 	else 
-	  #TODO:show participant-view
-	  flash[:error] = "try logging in as administrator."	
-      redirect_to root_url  
+	#TODO
 	end
   end
 
   # GET /participants/1
   # GET /participants/1.json
   def show
-    current_account = Account.find_by(id: session[:account_id])
-    if current_account.nil?
-	   flash[:error] = "You need to be logged in."	
-	   redirect_to root_url  
-	elsif (!is_administrator(current_account) && 
-      (current_account.user_id != params[:id]))
-	  flash[:error] = "You are not authorized to view."	
-	  redirect_to action: "index"  
-	else 
-	  set_participant 
-	end
   end
 
   # GET /participants/new
@@ -100,14 +84,14 @@ class ParticipantsController < ApplicationController
       params.require(:participant).permit(:captain, :waiver_signed, :shirt_size, :phone)
     end
 	
-
-	def is_administrator(account)
+	def is_administrator?(account)
 	    if account.user_type == "Administrator"
 	      return true
 	    else
 	      return false
 	    end
 	end
+	
 	def correct_user_or_admin
 	  redirect_to(root_url) unless current_participant?(@participant) || current_account.user.is_a?(Administrator)
 	end
