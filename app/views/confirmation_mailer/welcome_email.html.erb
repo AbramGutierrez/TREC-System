@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Welcome to TREC, <%= @user.name %></h1>
+    <p>
+      Please confirm your email using the link below.
+      You will create your password there.<br>
+      Please note that you can only set your email through
+      this link once.<br>
+    </p>
+    <p>
+      Please click here to confirm this email: <%= @url %>.
+    </p>
+    <p>Thanks for joining and have a great day!</p>
+  </body>
+</html>

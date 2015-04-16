@@ -55,6 +55,9 @@ group :development, :test do
   
   # Use RSpec for TDD
   gem 'rspec-rails'
+  
+  #TDD 
+  gem 'factory_girl'
 end
 
 group :test do

@@ -49,8 +49,6 @@ RSpec.describe ConferencesController, type: :controller do
 	:tamu_cost => 30.00,
 	:other_cost => 60.00,
 	:challenge_desc => 'yay!',
-	:created_at => DateTime.parse("2015-4-3"),
-	:updated_at => DateTime.parse("2015-4-3"),
 	:is_active => true
 	}  
   }
@@ -64,8 +62,6 @@ RSpec.describe ConferencesController, type: :controller do
 	:tamu_cost => 30.00,
 	:other_cost => 60.00,
 	:challenge_desc => 'yay!',
-	:created_at => DateTime.parse("2015-4-3"),
-	:updated_at => DateTime.parse("2015-4-3"),
 	:is_active => true
 	}
   }

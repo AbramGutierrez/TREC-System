@@ -19,6 +19,12 @@ class Account < ActiveRecord::Base
 	attr_accessor :password_confirmation	
 	
 	def name
-	  [first_name, last_name].join " "
+	  result = String.new
+	  if (!first_name.blank? && !last_name.blank?)
+	   result = [first_name, last_name].join " "
+	  else
+	    result = [first_name, last_name].join
+	  end
+	  result
 	end
 end

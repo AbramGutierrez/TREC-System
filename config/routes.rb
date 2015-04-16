@@ -2,8 +2,10 @@ Rails.application.routes.draw do
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
-
-  get	'register'	=> 'account#new'
+  
+  get    'registrations/success'   => 'registrations#success'
+  get    'registrations/'   => 'registrations#new'
+  get	 'registrations/fail'	=> 'registrations#fail'
 
   resources :accounts
 
@@ -18,8 +20,12 @@ Rails.application.routes.draw do
   resources :teams
 
   resources :conferences
+  get	'create_conference' => 'conferences#new'
+  post	'create_conference' => 'conferences#create'
   
   resources :sessions
+  
+  resources :registrations
 
   get 'welcome/index'
 

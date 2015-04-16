@@ -22,5 +22,8 @@ module TREC
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+    
+    # Because of this, need to use *_url instead of *_path in mailer code
+    config.action_mailer.default_url_options = { host: 'TREC.herokuapp.com' }
   end
 end

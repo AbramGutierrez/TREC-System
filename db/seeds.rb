@@ -11,22 +11,34 @@
 	  tamu_cost: 30.00,
 	  other_cost: 60.00,
 	  challenge_desc: 'yay!',
-	  created_at: DateTime.parse("2015-4-3"),
-	  updated_at: DateTime.parse("2015-4-3"),
 	  is_active: true
 	  )
-	Team.create(:conference_id => c.id,	
+
+	new_team = Team.create(:conference_id => 1,	
 	  :school => "TestSchool",
 	  :paid_status => "paid", 
 	  :team_name => "Winners" 
 	  )
-	p = Participant.create(captain: false, shirt_size: "medium", 
-			phone: 1234567890)
 
-	p.create_account(
-    email: "test@example.com",
-	password: "password",
-	password_confirmation: "password",
-	first_name: "First",
-    last_name: "Last"
-    )		
+	new_participant = Participant.create(
+	  team_id: new_team.id,
+	  waiver_signed: true,
+	  captain: true,
+	  shirt_size: "medium",
+	  phone: 1234567890)
+			
+	Account.create(
+		email: "participant@example.com",
+		password: "password",
+		first_name: "Abram",
+		last_name: "Gutierrez",
+		user: new_participant
+	)
+	
+	Account.create(
+		email: "administrator@example.com",
+		password: "password",
+		first_name: "Abram",
+		last_name: "Gutierrez",
+		user: Administrator.create()
+	)
