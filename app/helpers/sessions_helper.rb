@@ -15,6 +15,10 @@ module SessionsHelper
 		account == current_account
 	end
 	
+	def current_participant?(participant)
+	   participant == current_account.user
+	end
+	
 	# Returns true if the account is logged in, false otherwise.
 	def logged_in?
 		!current_account.nil?

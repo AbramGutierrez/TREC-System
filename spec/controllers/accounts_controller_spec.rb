@@ -85,7 +85,6 @@ RSpec.describe AccountsController, type: :controller do
       account = Account.create! valid_attributes
 	  log_in_as(@p.account)
       get :index, {}, valid_session
-	  # expect(assigns(:accounts)).to include(account)
 	  expect(response).to redirect_to(root_url)
     end
 	
