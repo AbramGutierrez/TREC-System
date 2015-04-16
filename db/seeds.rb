@@ -3,7 +3,7 @@
 #
 # Examples:
 #   start = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-    Conference.create(start_date: Date.parse("2015-4-4"), 
+    c = Conference.create(start_date: Date.parse("2015-4-4"), 
 	  end_date: Date.parse("2015-6-6"),
 	  max_team_size: 6,
 	  min_team_size: 1,
@@ -13,7 +13,7 @@
 	  challenge_desc: 'yay!',
 	  is_active: true
 	  )
-	  
+
 	new_team = Team.create(:conference_id => 1,	
 	  :school => "TestSchool",
 	  :paid_status => "paid", 

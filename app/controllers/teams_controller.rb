@@ -1,5 +1,9 @@
 class TeamsController < ApplicationController
+  before_action :logged_in_user, only: [:index, :show, :new, :edit, :create, :update, :destroy]
   before_action :set_team, only: [:show, :edit, :update, :destroy]
+  before_action :admin_account, only: [:index, :destroy]
+  before_action :participant_account, only: [:new, :create]
+  before_action :on_team, only: [:show, :edit, :update]
 
   # GET /teams
   # GET /teams.json
@@ -24,9 +28,6 @@ class TeamsController < ApplicationController
   # POST /teams
   # POST /teams.json
   def create
-    puts "team_params: "
-    puts team_params
-	puts "\n"
 	@team = Team.new(team_params) 
 
     respond_to do |format|
@@ -74,4 +75,9 @@ class TeamsController < ApplicationController
     def team_params
       params.require(:team).permit(:conference, :conference_id, :team_name, :paid_status, :school)
     end
+	
+	# Ensure that the currently logged-in participant is on the current team
+	def on_team
+	  redirect_to(root_url) unless current_account.user.is_a?(Participant) && current_participant.team == @team
+	end
 end

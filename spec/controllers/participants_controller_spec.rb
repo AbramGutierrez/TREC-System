@@ -23,6 +23,23 @@ RSpec.describe ParticipantsController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # Participant. As you add validations to Participant, be sure to
   # adjust the attributes here as well.
+  before(:all){				
+    @p2 = Participant.create!(captain: false, shirt_size: "large",
+			phone: 1876543211)
+			
+    @admin = Administrator.create!()  
+	
+    @p2.create_account!(first_name: "A", last_name: "Z", email: "p4@example.com",
+			password: "mypassword", password_confirmation: "mypassword")
+			
+	@admin.create_account!(first_name: "Admin", last_name: "istrator", email: "admin@example.com",
+			password: "admin", password_confirmation: "admin")		
+  }	
+  after(:all){
+	@p2.account.delete
+	@admin.account.delete
+  }
+  
   let(:valid_attributes) { {
     :captain => false, 
 	:shirt_size => "medium", 
@@ -43,21 +60,59 @@ RSpec.describe ParticipantsController, type: :controller do
   let(:valid_session) { {} }
 
   describe "GET #index" do
-    it "assigns all participants as @participants" do
-	  # Make sure there are not old participants in the db that will break the test
-	  Participant.delete_all
-	  
+    it "assigns all participants as @participants" do 
+      log_in_as(@admin.account)	
       participant = Participant.create! valid_attributes
       get :index, {}, valid_session
-      expect(assigns(:participants)).to eq([participant])
+      expect(assigns(:participants)).to include(participant)
     end
+	
+	it "redirects index when account is not admin" do
+      participant = Participant.create! valid_attributes
+	  log_in_as(@p2.account)
+      get :index, {}, valid_session
+	  expect(response).to redirect_to(root_url)
+    end
+	
+	it "redirects index when not logged in" do
+	  participant = Participant.create! valid_attributes
+	  get :index, {}, valid_session
+	  expect(flash).to_not be_nil
+      expect(response).to redirect_to(login_url)
+	end
   end
 
   describe "GET #show" do
     it "assigns the requested participant as @participant" do
       participant = Participant.create! valid_attributes
+	  participant.create_account!(first_name: "A", last_name: "Z", email: "part@example.com",
+			password: "mypassword", password_confirmation: "mypassword")
+	  log_in_as(participant.account)		
       get :show, {:id => participant.to_param}, valid_session
       expect(assigns(:participant)).to eq(participant)
+	  participant.account.delete
+    end
+	
+	it "does not redirect for an admin" do
+	  participant = Participant.create! valid_attributes
+	  log_in_as(@admin.account)
+	  get :show, {:id => participant.to_param}, valid_session
+      expect(assigns(:participant)).to eq(participant)
+	end
+	
+	it "redirects show when not logged in" do
+      participant = Participant.create! valid_attributes
+      get :show, {:id => participant.to_param}, valid_session
+	  expect(flash).to_not be_nil
+      expect(response).to redirect_to(login_url)
+    end
+	
+	it "redirects show when wrong user" do
+      participant = Participant.create! valid_attributes
+	  log_in_as(@p2.account)
+      get :show, {:id => participant.to_param}, valid_session
+      expect(flash).to_not be_nil
+      expect(response).to redirect_to(root_url)
     end
   end
 
@@ -71,8 +126,34 @@ RSpec.describe ParticipantsController, type: :controller do
   describe "GET #edit" do
     it "assigns the requested participant as @participant" do
       participant = Participant.create! valid_attributes
+	  participant.create_account!(first_name: "A", last_name: "Z", email: "part@example.com",
+			password: "mypassword", password_confirmation: "mypassword")
+	  log_in_as(participant.account)
       get :edit, {:id => participant.to_param}, valid_session
       expect(assigns(:participant)).to eq(participant)
+	  participant.account.delete
+    end
+	
+	it "does not redirect for an admin" do
+	  participant = Participant.create! valid_attributes
+	  log_in_as(@admin.account)
+      get :edit, {:id => participant.to_param}, valid_session
+      expect(assigns(:participant)).to eq(participant)
+	end
+	
+	it "redirects edit when not logged in" do
+      participant = Participant.create! valid_attributes
+      get :edit, {:id => participant.to_param}, valid_session
+	  expect(flash).to_not be_nil
+      expect(response).to redirect_to(login_url)
+    end
+	
+	it "redirects edit when wrong user" do
+      participant = Participant.create! valid_attributes
+	  log_in_as(@p2.account)
+      get :edit, {:id => participant.to_param}, valid_session
+      expect(flash).to_not be_nil
+      expect(response).to redirect_to(root_url)
     end
   end
 
@@ -120,41 +201,85 @@ RSpec.describe ParticipantsController, type: :controller do
 
       it "updates the requested participant" do
         participant = Participant.create! valid_attributes
+		participant.create_account!(first_name: "A", last_name: "Z", email: "part@example.com",
+			password: "mypassword", password_confirmation: "mypassword")
+	    log_in_as(participant.account)
         put :update, {:id => participant.to_param, :participant => new_attributes}, valid_session
         participant.reload
         expect(assigns(:participant)).to eq(participant)
+		participant.account.delete
       end
 
       it "assigns the requested participant as @participant" do
         participant = Participant.create! valid_attributes
+		participant.create_account!(first_name: "A", last_name: "Z", email: "part@example.com",
+			password: "mypassword", password_confirmation: "mypassword")
+	    log_in_as(participant.account)
         put :update, {:id => participant.to_param, :participant => valid_attributes}, valid_session
         expect(assigns(:participant)).to eq(participant)
+		participant.account.delete
       end
 
       it "redirects to the participant" do
         participant = Participant.create! valid_attributes
+		participant.create_account!(first_name: "A", last_name: "Z", email: "part@example.com",
+			password: "mypassword", password_confirmation: "mypassword")
+	    log_in_as(participant.account)
         put :update, {:id => participant.to_param, :participant => valid_attributes}, valid_session
         expect(response).to redirect_to(participant)
+		participant.account.delete
       end
+	  
+	  it "does not redirect for an admin" do
+	    participant = Participant.create! valid_attributes
+	    log_in_as(@admin.account)
+        put :update, {:id => participant.to_param, :participant => new_attributes}, valid_session
+        participant.reload
+        expect(assigns(:participant)).to eq(participant)
+	  end
+	  
+	  it "redirects update when not logged in" do
+	    participant = Participant.create! valid_attributes
+        put :update, {:id => participant.to_param, :participant => valid_attributes}, valid_session
+		flash.should_not be_nil
+        expect(response).to redirect_to(login_url)
+	  end
+	  
+	  it "redirects update when wrong user" do
+	    participant = Participant.create! valid_attributes
+		log_in_as(@p2.account)
+        put :update, {:id => participant.to_param, :participant => valid_attributes}, valid_session
+		flash.should_not be_nil
+        expect(response).to redirect_to(root_url)
+	  end
     end
 
     context "with invalid params" do
       it "assigns the participant as @participant" do
         participant = Participant.create! valid_attributes
+		participant.create_account!(first_name: "A", last_name: "Z", email: "part@example.com",
+			password: "mypassword", password_confirmation: "mypassword")
+	    log_in_as(participant.account)
         put :update, {:id => participant.to_param, :participant => invalid_attributes}, valid_session
         expect(assigns(:participant)).to eq(participant)
+		participant.account.delete
       end
 
       it "re-renders the 'edit' template" do
         participant = Participant.create! valid_attributes
+		participant.create_account!(first_name: "A", last_name: "Z", email: "part@example.com",
+			password: "mypassword", password_confirmation: "mypassword")
+	    log_in_as(participant.account)
         put :update, {:id => participant.to_param, :participant => invalid_attributes}, valid_session
         expect(response).to render_template("edit")
+		participant.account.delete
       end
     end
   end
 
   describe "DELETE #destroy" do
     it "destroys the requested participant" do
+	  log_in_as(@admin.account)
       participant = Participant.create! valid_attributes
       expect {
         delete :destroy, {:id => participant.to_param}, valid_session
@@ -162,10 +287,24 @@ RSpec.describe ParticipantsController, type: :controller do
     end
 
     it "redirects to the participants list" do
+	  log_in_as(@admin.account)
       participant = Participant.create! valid_attributes
       delete :destroy, {:id => participant.to_param}, valid_session
       expect(response).to redirect_to(participants_url)
     end
+	
+	it "redirects destroy when not logged in" do
+	  participant = Participant.create! valid_attributes
+      delete :destroy, {:id => participant.to_param}, valid_session
+      expect(response).to redirect_to(login_url)
+	end
+	
+	it "redirects destroy when account is not an admin" do
+	  participant = Participant.create! valid_attributes
+	  log_in_as(@p2.account)
+      delete :destroy, {:id => participant.to_param}, valid_session
+      expect(response).to redirect_to(root_url)
+	end
   end
 
 end
