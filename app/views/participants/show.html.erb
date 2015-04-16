@@ -1,18 +1,42 @@
 <p id="notice"><%= notice %></p>
+<p>
+  <strong>Team:</strong>
+  <%= @participant.team.team_name %>
+</p>
 
 <p>
-  <strong>Captain:</strong>
+  <strong>First Name:</strong>
+  <%= @participant.account.first_name %>
+</p>
+
+<p>
+  <strong>Last Name:</strong>
+  <%= @participant.account.last_name %>
+</p>
+
+<p>
+  <strong>Is Captain?:</strong>
   <%= @participant.captain %>
 </p>
 
 <p>
-  <strong>Waiver signed:</strong>
+  <strong>Waiver signed?:</strong>
   <%= @participant.waiver_signed %>
 </p>
 
 <p>
   <strong>Shirt size:</strong>
   <%= @participant.shirt_size %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @participant.account.email %>
+</p>
+
+<p>
+  <strong>Phone Number:</strong>
+  <%= @participant.phone %>
 </p>
 
 <%= link_to 'Edit', edit_participant_path(@participant) %> |

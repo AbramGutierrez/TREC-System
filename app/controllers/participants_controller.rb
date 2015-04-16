@@ -1,15 +1,36 @@
 class ParticipantsController < ApplicationController
-  before_action :set_participant, only: [:show, :edit, :update, :destroy]
+  #before_action :set_participant, only: [:show, :edit, :update, :destroy]
 
   # GET /participants
   # GET /participants.json
   def index
-    @participants = Participant.all
+	current_account = Account.find_by(id: session[:account_id])
+	if current_account.nil?
+	   flash[:error] = "You need to be logged in."	
+	   redirect_to root_url  
+	elsif is_administrator(current_account) 
+	  @participants = Participant.all
+	else 
+	  #TODO:show participant-view
+	  flash[:error] = "try logging in as administrator."	
+      redirect_to root_url  
+	end
   end
 
   # GET /participants/1
   # GET /participants/1.json
   def show
+    current_account = Account.find_by(id: session[:account_id])
+    if current_account.nil?
+	   flash[:error] = "You need to be logged in."	
+	   redirect_to root_url  
+	elsif (!is_administrator(current_account) && 
+      (current_account.user_id != params[:id]))
+	  flash[:error] = "You are not authorized to view."	
+	  redirect_to action: "index"  
+	else 
+	  set_participant 
+	end
   end
 
   # GET /participants/new
@@ -65,10 +86,21 @@ class ParticipantsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_participant
       @participant = Participant.find(params[:id])
+	  rescue ActiveRecord::RecordNotFound
+	    flash[:error] = "No such participant exists."	
+	    redirect_to action: "index"  
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def participant_params
       params.require(:participant).permit(:captain, :waiver_signed, :shirt_size, :phone)
     end
+	
+	def is_administrator(account)
+	    if account.user_type == "Administrator"
+	      return true
+	    else
+	      return false
+	    end
+	end
 end
