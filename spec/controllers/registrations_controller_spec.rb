@@ -10,41 +10,59 @@ RSpec.describe RegistrationsController, type: :controller do
       expect(response).to be_success
     end
 	
-	context "when there is a active conference" do
+	context "when there is a active conference" do 
 	  it "assigns @conference" do
+	    #expect(assigns(:conference)).to be_a_new(Conference)
 	  end
 	  
 	  it "renders the new template" do
-	    expect(response).to render_template("new")
-	  end
-	end
-	
-	context "when there is no active conference" do
-	  it "renders the fail template" do
-		#expect(assigns(:conference)).not_to eq(conference)
-	  end
+        expect(response).to render_template("new")
+      end
+	  
 	end
 	
   end
   
   describe "POST #create" do
     before(:example) do
-      post :create 
+      #post :create 
 	end
 	
 	context "when valid" do
-	  it "renders the email conformation page"
-	    expect(response).to render_template("success")
+	  it "redirects to the email confirmation page" do
 	  end
 	end
 	
 	context "when invalid" do
+	  it "sets a error message" do
+	    #expect(flash[:error]).to be_present
+	  end
+	  
+	  it "renders the new template" do
+	    #expect(response).to render_template("new")
+	  end
 	end
 	
   end
+  
   describe "GET #success" do
+    before(:example) do
+      get :success
+	end
+	
+    it "renders the success template" do
+	    expect(response).to render_template("success")
+	end
   end
+  
   describe "GET #fail" do
+    before(:example) do
+      get :fail
+	end
+	
+    it "renders the fail template" do
+	  expect(response).to render_template("fail")
+    end
   end
   
 end
