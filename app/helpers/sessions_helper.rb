@@ -15,8 +15,15 @@ module SessionsHelper
 		account == current_account
 	end
 	
+	def current_participant
+	  if current_account.user.is_a?(Participant)
+	    @current_participant ||= current_account.user
+	  end		
+	end
+	
+	# Returns true if the participant passed in is the current participant/account
 	def current_participant?(participant)
-	   participant == current_account.user
+	   participant == current_participant
 	end
 	
 	# Returns true if the account is logged in, false otherwise.

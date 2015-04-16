@@ -224,7 +224,7 @@ RSpec.describe AccountsController, type: :controller do
 	  it "redirects update when not logged in" do
 	    account = Account.create! valid_attributes
         put :update, {:id => account.to_param, :account => valid_attributes}, valid_session
-		flash.should_not be_nil
+		expect(flash).to_not be_nil
         expect(response).to redirect_to(login_url)
 	  end
 	  
@@ -232,7 +232,7 @@ RSpec.describe AccountsController, type: :controller do
 	    account = Account.create! valid_attributes
 		log_in_as(@p2.account)
         put :update, {:id => account.to_param, :account => valid_attributes}, valid_session
-		flash.should_not be_nil
+		expect(flash).to_not be_nil
         expect(response).to redirect_to(root_url)
 	  end
     end

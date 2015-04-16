@@ -67,7 +67,7 @@ RSpec.describe ParticipantsController, type: :controller do
       expect(assigns(:participants)).to include(participant)
     end
 	
-	  it "redirects index when account is not admin" do
+	it "redirects index when account is not admin" do
       participant = Participant.create! valid_attributes
 	  log_in_as(@p2.account)
       get :index, {}, valid_session

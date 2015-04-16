@@ -18,4 +18,9 @@ class ApplicationController < ActionController::Base
 	def admin_account
 	  redirect_to(root_url) unless current_account.user.is_a?(Administrator)	
 	end
+	
+	# Ensure that the user is a participant
+	def participant_account
+	  redirect_to(root_url) unless current_account.user.is_a?(Participant)	
+	end
 end
