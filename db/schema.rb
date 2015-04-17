@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150405175622) do
+ActiveRecord::Schema.define(version: 20150417154836) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer  "user_id"
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 20150405175622) do
     t.string   "shirt_size"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.integer  "phone"
+    t.string   "phone"
   end
 
   add_index "participants", ["team_id"], name: "index_participants_on_team_id"
