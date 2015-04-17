@@ -5,18 +5,20 @@
 <table>
   <thead>
     <tr>
-	  <th>Team Name</th>
-	  <th>First Name</th>
-	  <th>Last Name</th>
-      <th>Is the Captain?</th>
-      <th>Waiver signed?</th>
-      <th>Shirt size</th>
+	  <th><%= sortable "teams.conference_id", "Conference" %></th>
+	  <th><%= sortable "teams.team_name", "Team Name" %></th>
+	  <th><%= sortable "accounts.first_name", "First Name" %></th>
+	  <th><%= sortable "accounts.last_name", "Last Name" %></th>
+	  <th><%= sortable "captain", "Is the Captain?" %></th>
+	  <th><%= sortable "waiver_signed", "Waiver Signed?" %></th>
+	  <th><%= sortable "shirt_size", "Shirt Size" %></th>
     </tr>
   </thead>
 
   <tbody>
     <% @participants.each do |participant| %>
       <tr>
+	    <td><%= participant.team.conference.start_date %></td>
 	    <td><%= participant.team.team_name %></td>
 		<td><%= participant.account.first_name %></td>
 		<td><%= participant.account.last_name %></td>
