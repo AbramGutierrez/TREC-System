@@ -1,10 +1,10 @@
 Feature: Administrator can add new conference
 
 Background: Start from Administrator page
-	Given I am on the TREC home page
-	Then I should see "Log-in"
-	When I follow "Log-in"
-	And I fill in "Email" with "admin"
+	Given I am on the home page
+	Then I should see "Log in"
+	When I follow "Log in"
+	And I fill in "Email" with "administrator@example.com"
 	And I fill in "Password" with "password"
 	And I press "Log in"
 	Then I should be on the Administrator page
@@ -19,6 +19,6 @@ Scenario: Add new conference (happy)
 	And I fill in "TAMU cost" with "30.00"
 	And I fill in "Other cost" with "30.00"
 	And I fill in "Challenge desc" with "Some challenge info"
-	Add I hit "Create Conference"
+	And I press "Create Conference"
 	Then I should be on Conference Information page
 	

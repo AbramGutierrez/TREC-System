@@ -12,7 +12,7 @@ Scenario: Login
 	Given I am on the home page
     When I follow "Log in"
 	Then I should be on the Log in page
-	When I fill in "Email" with "test@example.com"
+	When I fill in "Email" with "participant@example.com"
 	And I fill in "Password" with "password"
 	And I press "Log in"
 	Then I should be on the home page
@@ -22,7 +22,7 @@ Scenario: Logout
 	Given I am on the home page
     When I follow "Log in"
 	Then I should be on the Log in page
-	When I fill in "Email" with "test@example.com"
+	When I fill in "Email" with "participant@example.com"
 	And I fill in "Password" with "password"
 	And I press "Log in"
 	Then I should be on the home page

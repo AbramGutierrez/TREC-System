@@ -5,7 +5,7 @@ RSpec.describe "participants/show", type: :view do
     @new_team = Team.create!(:conference_id => 1,	
 	  :school => "TestSchool",
 	  :paid_status => "paid", 
-	  :team_name => "Winners" 
+	  :team_name => "ParticipantShowTeam" 
 	  )
     @participant = assign(:participant, Participant.create!(
 	  :team_id => @new_team.id,

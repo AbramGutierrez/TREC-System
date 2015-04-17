@@ -9,6 +9,7 @@ class ParticipantsController < ApplicationController
   # GET /participants.json
   def index
 	account = Account.find_by(id: session[:account_id])
+	# to distinguish between admin view and participant view
 	if is_administrator?(account) 
 	  @participants = Participant.includes(:team, :account).order(sort_column + " " + sort_direction)
 	else 
