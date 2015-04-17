@@ -9,7 +9,8 @@ class ParticipantsController < ApplicationController
   # GET /participants.json
   def index
 	account = Account.find_by(id: session[:account_id])
-	@participants = Participant.includes(:team, :account).order(sort_column + " " + sort_direction)
+	@participants = Participant.includes(:team, :account).order(sort_column + " " + 
+	  sort_direction).paginate(:page => params[:page], :per_page => 15)
   end
 
   # GET /participants/1

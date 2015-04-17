@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Participants</h1>
-
-<table>
+<h1>Participants List</h1>
+<%= will_paginate @participants %>
+<table class="list_participant">
   <thead>
     <tr>
 	  <th><%= sortable "teams.conference_id", "Conference" %></th>
@@ -30,9 +30,10 @@
         <td><%= link_to 'Destroy', participant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
+	
   </tbody>
 </table>
-
+<%= will_paginate @participants %>
 <br>
 
 <%= link_to 'New Participant', new_participant_path %>

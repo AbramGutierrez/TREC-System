@@ -3,4 +3,5 @@ class Participant < ActiveRecord::Base
 	has_one :account, :as => :user
 	validates :shirt_size, :phone, presence: true
 	# validates :captain, presence: true
+	
 end
