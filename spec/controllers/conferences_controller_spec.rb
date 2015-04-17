@@ -43,7 +43,7 @@ RSpec.describe ConferencesController, type: :controller do
 	  )
   
     @p = Participant.create!(captain: false, shirt_size: "medium", 
-			phone: 1234567890, team: @team) 
+			phone: "1234567890", team: @team) 
 	
     @p.create_account!(first_name: "A", last_name: "Z", email: "p4@example.com",
 			password: "mypassword", password_confirmation: "mypassword")	

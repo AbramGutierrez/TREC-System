@@ -42,10 +42,10 @@ RSpec.describe AccountsController, type: :controller do
 	  :team_name => "ControllerTest" 
 	  )    
     @p = Participant.create!(captain: false, shirt_size: "medium", 
-			phone: 1234567890, team: @team)
+			phone: "1234567890", team: @team)
 			
     @p2 = Participant.create!(captain: false, shirt_size: "large",
-			phone: 1876543211, team: @team)
+			phone: "1876543211", team: @team)
 			
     @admin = Administrator.create!()  
 	

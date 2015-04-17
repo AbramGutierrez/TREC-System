@@ -6,7 +6,7 @@ RSpec.describe "participants/edit", type: :view do
       :captain => true,
       :waiver_signed => false,
       :shirt_size => "MyString",
-	  :phone => 1111111111
+	  :phone => "1111111111"
     ))
   end
 

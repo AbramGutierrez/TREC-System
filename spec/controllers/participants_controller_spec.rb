@@ -42,7 +42,7 @@ RSpec.describe ParticipantsController, type: :controller do
 	  )
   
     @p2 = Participant.create!(captain: false, shirt_size: "large",
-			phone: 1876543211, team: @team)
+			phone: "1876543211", team: @team)
 			
     @admin = Administrator.create!()  
 	
@@ -64,7 +64,7 @@ RSpec.describe ParticipantsController, type: :controller do
   let(:valid_attributes) { {
     :captain => false, 
 	:shirt_size => "medium", 
-	:phone => 1234567890,
+	:phone => "1234567890",
 	:team => @team
 	}
   }
@@ -72,7 +72,7 @@ RSpec.describe ParticipantsController, type: :controller do
   let(:invalid_attributes) {{
     :captain => false, 
 	:shirt_size => "", 
-	:phone => 1234567890
+	:phone => "1234567890"
 	}
   }
 
@@ -224,7 +224,7 @@ RSpec.describe ParticipantsController, type: :controller do
       let(:new_attributes) { {
 		:captain => true, 
 		:shirt_size => "medium", 
-		:phone => 1234567890
+		:phone => "1234567890"
 		}
       }
 

@@ -49,7 +49,7 @@ RSpec.describe TeamsController, type: :controller do
   }	
   before(:each){
 	@p = Participant.create!(captain: false, shirt_size: "large",
-			phone: 1876543211, team: @team)
+			phone: "1876543211", team: @team)
 	@p.create_account!(first_name: "A", last_name: "Z", email: "p4@example.com",
 			password: "mypassword", password_confirmation: "mypassword")
   }
