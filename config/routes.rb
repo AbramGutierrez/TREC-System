@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
+
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
+  
+  get    'register' => 'register#new'
+  post   'register' => 'register#create'
   
   get    'registrations/success'   => 'registrations#success'
   get    'registrations/'   => 'registrations#new'
@@ -24,6 +28,8 @@ Rails.application.routes.draw do
   post	'create_conference' => 'conferences#create'
   
   resources :sessions
+  
+  resources :register
   
   resources :registrations
 
