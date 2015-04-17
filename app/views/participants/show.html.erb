@@ -1,5 +1,13 @@
 <p id="notice"><%= notice %></p>
 <p>
+  <strong>Conference Start Date:</strong>
+  <%= @participant.team.conference.start_date %>
+</p>
+<p>
+  <strong>Conference End Date:</strong>
+  <%= @participant.team.conference.end_date %>
+</p>
+<p>
   <strong>Team:</strong>
   <%= @participant.team.team_name %>
 </p>

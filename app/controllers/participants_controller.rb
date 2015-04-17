@@ -10,7 +10,6 @@ class ParticipantsController < ApplicationController
   def index
 	account = Account.find_by(id: session[:account_id])
 	@participants = Participant.includes(:team, :account).order(sort_column + " " + sort_direction)
-	end
   end
 
   # GET /participants/1
