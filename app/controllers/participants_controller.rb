@@ -8,12 +8,7 @@ class ParticipantsController < ApplicationController
   # GET /participants
   # GET /participants.json
   def index
-	account = Account.find_by(id: session[:account_id])
-	if is_administrator?(account) 
-	  @participants = Participant.all
-	else 
-	#TODO
-	end
+	@participants = Participant.all
   end
 
   # GET /participants/1
@@ -84,13 +79,13 @@ class ParticipantsController < ApplicationController
       params.require(:participant).permit(:captain, :waiver_signed, :shirt_size, :phone)
     end
 	
-	def is_administrator?(account)
-	    if account.user_type == "Administrator"
-	      return true
-	    else
-	      return false
-	    end
-	end
+	# def is_administrator?(account)
+	    # if account.user_type == "Administrator"
+	      # return true
+	    # else
+	      # return false
+	    # end
+	# end
 	
 	def correct_user_or_admin
 	  redirect_to(root_url) unless current_participant?(@participant) || current_account.user.is_a?(Administrator)
