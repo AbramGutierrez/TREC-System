@@ -9,11 +9,7 @@ class ParticipantsController < ApplicationController
   # GET /participants.json
   def index
 	account = Account.find_by(id: session[:account_id])
-	# to distinguish between admin view and participant view
-	if is_administrator?(account) 
-	  @participants = Participant.includes(:team, :account).order(sort_column + " " + sort_direction)
-	else 
-	#TODO
+	@participants = Participant.includes(:team, :account).order(sort_column + " " + sort_direction)
 	end
   end
 
@@ -84,14 +80,6 @@ class ParticipantsController < ApplicationController
     def participant_params
       params.require(:participant).permit(:captain, :waiver_signed, :shirt_size, :phone)
     end
-	
-	def is_administrator?(account)
-	    if account.user_type == "Administrator"
-	      return true
-	    else
-	      return false
-	    end
-	end
 	
 	def correct_user_or_admin
 	  redirect_to(root_url) unless current_participant?(@participant) || current_account.user.is_a?(Administrator)
