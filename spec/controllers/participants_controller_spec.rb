@@ -23,9 +23,26 @@ RSpec.describe ParticipantsController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # Participant. As you add validations to Participant, be sure to
   # adjust the attributes here as well.
-  before(:all){				
+  before(:all){	
+    @c = Conference.create!(start_date: Date.parse("2015-4-4"), 
+	  end_date: Date.parse("2015-6-6"),
+	  max_team_size: 6,
+	  min_team_size: 1,
+	  max_teams: 5,
+	  tamu_cost: 30.00,
+	  other_cost: 60.00,
+	  challenge_desc: 'yay!',
+	  is_active: true
+	  )
+  
+    @team = Team.create!(:conference => @c,	
+	  :school => "TestSchool",
+	  :paid_status => "paid", 
+	  :team_name => "PartControllerTest" 
+	  )
+  
     @p2 = Participant.create!(captain: false, shirt_size: "large",
-			phone: 1876543211)
+			phone: 1876543211, team: @team)
 			
     @admin = Administrator.create!()  
 	
@@ -38,12 +55,17 @@ RSpec.describe ParticipantsController, type: :controller do
   after(:all){
 	@p2.account.delete
 	@admin.account.delete
+	@team.delete unless @team == nil
+	@c.delete
+	@p2.delete
+	@admin.delete
   }
   
   let(:valid_attributes) { {
     :captain => false, 
 	:shirt_size => "medium", 
-	:phone => 1234567890
+	:phone => 1234567890,
+	:team => @team
 	}
   }
 
@@ -62,10 +84,13 @@ RSpec.describe ParticipantsController, type: :controller do
   describe "GET #index" do
   
     it "assigns all participants as @participants" do 
-      #log_in_as(@admin.account)	
-      #participant = Participant.create! valid_attributes
-      #get :index, {}, valid_session
-      #expect(assigns(:participants)).to include(participant)
+      log_in_as(@admin.account)	
+      participant = Participant.create! valid_attributes
+	  participant.create_account!(first_name: "A", last_name: "Z", email: "part@example.com",
+			password: "mypassword", password_confirmation: "mypassword")
+      get :index, {}, valid_session
+      expect(assigns(:participants)).to include(participant)
+	  participant.account.delete
     end
 	
 	it "redirects index when account is not admin" do
@@ -85,20 +110,23 @@ RSpec.describe ParticipantsController, type: :controller do
 
   describe "GET #show" do
     it "assigns the requested participant as @participant" do
-      #participant = Participant.create! valid_attributes
-	  #participant.create_account!(first_name: "A", last_name: "Z", email: "part@example.com",
-			#password: "mypassword", password_confirmation: "mypassword")
-	  #log_in_as(participant.account)		
-      #get :show, {:id => participant.to_param}, valid_session
-      #expect(assigns(:participant)).to eq(participant)
-	  #participant.account.delete
+      participant = Participant.create! valid_attributes
+	  participant.create_account!(first_name: "A", last_name: "Z", email: "part@example.com",
+			password: "mypassword", password_confirmation: "mypassword")
+	  log_in_as(participant.account)		
+      get :show, {:id => participant.to_param}, valid_session
+      expect(assigns(:participant)).to eq(participant)
+	  participant.account.delete
     end
 	
 	it "does not redirect for an admin" do
-	  #participant = Participant.create! valid_attributes
-	  #log_in_as(@admin.account)
-	  #get :show, {:id => participant.to_param}, valid_session
-      #expect(assigns(:participant)).to eq(participant)
+	  participant = Participant.create! valid_attributes
+	  participant.create_account!(first_name: "A", last_name: "Z", email: "part@example.com",
+			password: "mypassword", password_confirmation: "mypassword")
+	  log_in_as(@admin.account)
+	  get :show, {:id => participant.to_param}, valid_session
+      expect(assigns(:participant)).to eq(participant)
+	  participant.account.delete
 	end
 	
 	it "redirects show when not logged in" do

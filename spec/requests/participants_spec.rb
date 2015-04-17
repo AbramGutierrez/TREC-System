@@ -14,9 +14,9 @@ RSpec.describe "Participants", type: :request do
 
   describe "GET /participants" do
     it "works! (now write some real specs)" do
-	  #log_in_as(@admin.account)
-      #get participants_path
-      #expect(response).to have_http_status(200)
+	  log_in_as(@admin.account)
+      get participants_path
+      expect(response).to have_http_status(200)
     end
   end
 end

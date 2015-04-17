@@ -24,16 +24,6 @@ RSpec.describe SponsorsController, type: :controller do
   # Sponsor. As you add validations to Sponsor, be sure to
   # adjust the attributes here as well.	
   before(:all){		
-    @p = Participant.create!(captain: false, shirt_size: "medium", 
-			phone: 1234567890) 
-	
-    @p.create_account!(first_name: "A", last_name: "Z", email: "p4@example.com",
-			password: "mypassword", password_confirmation: "mypassword")	
-
-	@admin = Administrator.create!()		
-	@admin.create_account!(first_name: "Admin", last_name: "istrator", email: "admin@example.com",
-			password: "admin", password_confirmation: "admin")	
-
 	@c = Conference.create!(start_date: Date.parse("2015-4-10"), 
 	  end_date: Date.parse("2015-6-12"),
 	  max_team_size: 6,
@@ -43,11 +33,31 @@ RSpec.describe SponsorsController, type: :controller do
 	  other_cost: 40.00,
 	  challenge_desc: 'fun!',
 	  is_active: true
-	  )		
+	  )	
+	  
+	@team = Team.create!(:conference => @c,	
+	  :school => "TestSchool",
+	  :paid_status => "paid", 
+	  :team_name => "ControllerTest" 
+	  )  
+
+    @p = Participant.create!(captain: false, shirt_size: "medium", 
+			phone: 1234567890, team: @team) 
+	
+    @p.create_account!(first_name: "A", last_name: "Z", email: "p4@example.com",
+			password: "mypassword", password_confirmation: "mypassword")	
+
+	@admin = Administrator.create!()		
+	@admin.create_account!(first_name: "Admin", last_name: "istrator", email: "admin@example.com",
+			password: "admin", password_confirmation: "admin")	  
   }	
   after(:all){
 	@p.account.delete
 	@admin.account.delete
+	@team.delete
+	@c.delete
+	@admin.delete
+	@p.delete
   }	
   
   let(:valid_attributes) { {

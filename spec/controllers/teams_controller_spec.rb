@@ -35,7 +35,13 @@ RSpec.describe TeamsController, type: :controller do
 	  challenge_desc: 'fun!',
 	  is_active: true
 	  )
-			
+		
+    @team = Team.create!(:conference => @c,	
+	  :school => "TestSchool",
+	  :paid_status => "paid", 
+	  :team_name => "ControllerTest" 
+	  )  
+		
     @admin = Administrator.create!()  
 		
 	@admin.create_account!(first_name: "Admin", last_name: "istrator", email: "admin@example.com",
@@ -43,16 +49,19 @@ RSpec.describe TeamsController, type: :controller do
   }	
   before(:each){
 	@p = Participant.create!(captain: false, shirt_size: "large",
-			phone: 1876543211)
+			phone: 1876543211, team: @team)
 	@p.create_account!(first_name: "A", last_name: "Z", email: "p4@example.com",
 			password: "mypassword", password_confirmation: "mypassword")
   }
   after(:each){
     @p.account.delete
+	@p.delete
   }
   after(:all){
-	
+	@c.delete
+	@team.delete
 	@admin.account.delete
+	@admin.delete
   }
 	  
   let(:valid_attributes) { {
