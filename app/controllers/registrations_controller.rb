@@ -76,7 +76,7 @@ class RegistrationsController < ApplicationController
 		#and a list of accounts linked to each participant
 	    redirect_to action: "success"
 	  else 
-	    flash.now[:error] = "Make sure that school name is filled and please try a different team name."
+	    flash.now[:error] = "Make sure that school name is filled or try a different team name."
 		render 'new' and return
 	  end
 	end
