@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Account, type: :model do
     before(:each) do
 		p = Participant.create(captain: false, shirt_size: "medium", 
-			phone: 1234567890)
+			phone: "1234567890")
 		@account = Account.new(first_name: "first", last_name: "last",
 								email: "valid_email@test.com", password: "123456",
 								password_confirmation: "123456", user: p)

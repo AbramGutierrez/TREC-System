@@ -7,13 +7,13 @@ RSpec.describe "participants/index", type: :view do
         :captain => true,
         :waiver_signed => true,
         :shirt_size => "Shirt Size",
-		:phone => 1111111111
+		:phone => "1111111111"
       ),
       Participant.create!(
         :captain => true,
         :waiver_signed => true,
         :shirt_size => "Shirt Size",
-		:phone => 1111111111
+		:phone => "1111111111"
       )
     ])
   end

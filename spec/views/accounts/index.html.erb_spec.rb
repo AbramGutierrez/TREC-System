@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe "accounts/index", type: :view do
   before(:each) do
     p1 = Participant.create(captain: false, shirt_size: "medium", 
-			phone: 1234567890)
+			phone: "1234567890")
 	p2 = Participant.create(captain: false, shirt_size: "medium", 
-			phone: 1234567899)		
+			phone: "1234567899")		
     assign(:accounts, [
       Account.create!(
         :email => "test_email@example.com",

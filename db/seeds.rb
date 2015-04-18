@@ -31,14 +31,14 @@
 	  waiver_signed: true,
 	  captain: true,
 	  shirt_size: "medium",
-	  phone: 1234567890)
+	  phone: "1234567890")
 	
 	new_participant2 = Participant.create(
 	  team_id: new_team2.id,
 	  waiver_signed: false,
 	  captain: true,
 	  shirt_size: "large",
-	  phone: 1234567890)
+	  phone: "1234567890")
 	  
 
 	Account.create(

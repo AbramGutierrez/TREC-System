@@ -58,6 +58,9 @@ group :development, :test do
   
   #TDD 
   gem 'factory_girl'
+  
+  #paginate for tables
+  gem 'will_paginate', '~> 3.0.6'
 end
 
 group :test do

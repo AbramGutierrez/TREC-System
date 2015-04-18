@@ -3,17 +3,14 @@ class ParticipantsController < ApplicationController
   before_action :set_participant, only: [:show, :edit, :update, :destroy]
   before_action :correct_user_or_admin, only: [:show, :edit, :update]
   before_action :admin_account, only: [:index, :destroy]
-
+  helper_method :sort_column, :sort_direction
 
   # GET /participants
   # GET /participants.json
   def index
 	account = Account.find_by(id: session[:account_id])
-	if is_administrator?(account) 
-	  @participants = Participant.all
-	else 
-	#TODO
-	end
+	@participants = Participant.includes(:team, :account).order(sort_column + " " + 
+	  sort_direction).paginate(:page => params[:page], :per_page => 15)
   end
 
   # GET /participants/1
@@ -84,15 +81,16 @@ class ParticipantsController < ApplicationController
       params.require(:participant).permit(:captain, :waiver_signed, :shirt_size, :phone)
     end
 	
-	def is_administrator?(account)
-	    if account.user_type == "Administrator"
-	      return true
-	    else
-	      return false
-	    end
-	end
-	
 	def correct_user_or_admin
 	  redirect_to(root_url) unless current_participant?(@participant) || current_account.user.is_a?(Administrator)
+	end
+	
+	def sort_column
+	  %w[teams.team_name accounts.first_name accounts.last_name captain waiver_signed shirt_size 
+	    teams.conference_id].include?( params[:sort]) ? params[:sort] : "teams.conference_id"
+	end
+	
+	def sort_direction
+	  %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
 	end
 end
