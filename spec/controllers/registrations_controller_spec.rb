@@ -1,6 +1,25 @@
 require 'rails_helper'
 
 RSpec.describe RegistrationsController, type: :controller do
+
+  	let(:valid_team){ {
+	    team_name: "RegistrationTestTeam",
+		school: "TestSchool"
+	  }
+	}  
+	
+	before(:all) do
+	    @valid_participants = Hash.new
+	    @valid_participants[0] = {captain: true, phone: "9999999999", shirt_size: "S", first_name: "participant1", last_name: "participant1", email: "partici1@example.com"}
+	    @valid_participants[1] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant2", last_name: "participant2", email: "partici2@example.com"}
+	    @valid_participants[2] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant3", last_name: "participant3", email: "partici3@example.com"}
+	    @valid_participants[3] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant4", last_name: "participant4", email: "partici4@example.com"}
+	    @valid_participants[4] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant5", last_name: "participant5", email: "partici5@example.com"}
+	    @valid_participants[5] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant6", last_name: "participant6", email: "partici6@example.com"}
+	end
+	
+	let(:valid_session) { {} }
+
   describe "GET #new" do
     before(:all) do
 	  @conference = Conference.create!(start_date: Date.parse("2015-4-4"), 
@@ -21,6 +40,7 @@ RSpec.describe RegistrationsController, type: :controller do
 	after(:all) do
 	  @conference.delete
 	end
+
 	
     it "responds successfully with an HTTP 200 status code" do
       expect(response).to be_success
@@ -43,9 +63,25 @@ RSpec.describe RegistrationsController, type: :controller do
     before(:example) do
       #post :create 
 	end
+
 	
 	context "when valid" do
-	  it "redirects to the email confirmation page" do
+	  	
+	  it "successfully creates the team" do
+	    original_count = Team.count
+        post :create, {:team => valid_team, :participants => @valid_participants}, valid_session
+        expect(Team.count).to be(original_count+1)
+	  end	
+		
+	  it "successfully creates the participants" do
+	    original_count = Participant.count
+        post :create, {:team => valid_team, :participants => @valid_participants}, valid_session
+        expect(Participant.count).to be(original_count+6)
+	  end
+	  
+	  it "redirects to the success page" do
+	    post :create, {:team => valid_team, :participants => @valid_participants}, valid_session
+		expect(response).to redirect_to('/registrations/success')
 	  end
 	end
 	
