@@ -19,27 +19,24 @@ RSpec.describe "participants/show", type: :view do
 	  :team_name => "ParticipantShowTeam" 
 	  )
     @participant = assign(:participant, Participant.create!(
-	  :team_id => @new_team.id,
+	  :team => @new_team,
       :captain => true,
       :waiver_signed => false,
       :shirt_size => "MyString",
-	  :phone => "1111111111"
-    ))
-	@account = Account.create!(
-		email: "test@example.com",
+	  :phone => "1111111111",
+	  :account_attributes => {
+	    email: "test@example.com",
 		password: "password",
 		first_name: "hello",
-		last_name: "world",
-		user: @participant
-
-	)
+		last_name: "world"
+	  }
+    ))
   end
   
   after(:all) do
-    @c.delete
-	@new_team.delete
-	@participant.delete
-	@account.delete
+    @c.destroy
+	@new_team.destroy
+	@participant.destroy
   end
 
   it "renders attributes in <p>" do

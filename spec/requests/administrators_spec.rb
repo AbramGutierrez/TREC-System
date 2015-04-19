@@ -2,14 +2,12 @@ require 'rails_helper'
 
 RSpec.describe "Administrators", type: :request do
   before(:each) do
-		@admin = Administrator.create!()
-		@admin.create_account!(first_name: "TestFirst", last_name: "TestLast",
-			email: "tester@example.com", password: "password",
-			password_confirmation: "password")
+	    @admin = Administrator.create!(account_attributes: {first_name: "Admin", last_name: "istrator", email: "admin@example.com",
+			password: "password", password_confirmation: "password"}) 
   end
 	
   after(:each) do
-	@admin.account.delete
+	@admin.destroy
   end
 
   describe "GET /administrators" do
