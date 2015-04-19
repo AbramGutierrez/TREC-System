@@ -40,7 +40,13 @@
 	  shirt_size: "large",
 	  phone: "1234567890")
 	  
-
+    new_participant3 = Participant.create(
+	  team_id: new_team2.id,
+	  waiver_signed: false,
+	  captain: false,
+	  shirt_size: "small",
+	  phone: "1234567890")
+	  
 	Account.create(
 		email: "participant@example.com",
 		password: "password",
@@ -56,7 +62,13 @@
 		last_name: "Zhang",
 		user: new_participant2
 	)
-	
+	Account.create(
+		email: "participant3@example.com",
+		password: "password",
+		first_name: "John",
+		last_name: "Smith",
+		user: new_participant3
+	)
 	Account.create(
 		email: "administrator@example.com",
 		password: "password",

@@ -48,6 +48,14 @@ class ParticipantsController < ApplicationController
   def update
     respond_to do |format|
       if @participant.update(participant_params)
+	    # there can only be one captain per team
+	    if @participant.captain == true
+		  @participants = Participant.where('participants.id != ? and participants.team_id = ?', 
+		    @participant.id, @participant.team_id)
+		  @participants.each do |participant|
+		    participant.update(:captain => false)
+		  end
+		end
         format.html { redirect_to @participant, notice: 'Participant was successfully updated.' }
         format.json { render :show, status: :ok, location: @participant }
       else
@@ -60,9 +68,21 @@ class ParticipantsController < ApplicationController
   # DELETE /participants/1
   # DELETE /participants/1.json
   def destroy
+    if @participant.captain == true
+	  # randomly assign the next captain
+	  @next_captain = Participant.where('participants.id != ? and participants.team_id = ?', 
+		    @participant.id, @participant.team_id).first
+	  #if there is no more participants in a team, then destroy the team
+	  if @next_captain.nil?
+	    @participant.team.destroy
+	  else
+	    @next_captain.update_attributes(captain: true)
+	  end
+	end
+	@participant.account.destroy
     @participant.destroy
     respond_to do |format|
-      format.html { redirect_to participants_url, notice: 'Participant was successfully destroyed.' }
+      format.html { redirect_to participants_url, notice: 'Participant was successfully deleted.' }
       format.json { head :no_content }
     end
   end
