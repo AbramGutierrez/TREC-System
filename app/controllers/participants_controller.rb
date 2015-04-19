@@ -34,10 +34,15 @@ class ParticipantsController < ApplicationController
   # POST /participants
   # POST /participants.json
   def create
-    @participant = Participant.new(participant_params)
+    @team = Team.find_by_team_name(params[:team][:team_name])
+    @participant = Participant.new(params[:participant])
+	@account = Account.new(params[:account])
 
     respond_to do |format|
-      if @participant.save
+      if @participant.valid? && @account.valid?
+	    @participant.team_id = @team.id
+		@participant.save
+		@account.save
         format.html { redirect_to @participant, notice: 'Participant was successfully created.' }
         format.json { render :show, status: :created, location: @participant }
       else
@@ -80,7 +85,7 @@ class ParticipantsController < ApplicationController
 	  if @next_captain.nil?
 	    @participant.team.destroy
 	  else
-	    @next_captain.update_attributes(captain: true)
+	    @next_captain.update(:captain => true)
 	  end
 	end
 	@participant.account.destroy
