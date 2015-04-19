@@ -1,4 +1,4 @@
-<%= form_for(@sponsor) do |f| %>
+<%= form_for @sponsor, :html => {:multipart => true} do |f| %>
   <% if @sponsor.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@sponsor.errors.count, "error") %> prohibited this sponsor from being saved:</h2>
@@ -12,18 +12,27 @@
   <% end %>
 
   <div class="field">
+    <%= f.label "Conference Start Date" %><br>
+    <%= f.select :conference, options_for_select(@conference_array)  %>
+  </div>
+  
+  <div class="field">
     <%= f.label :sponsor_name %><br>
     <%= f.text_field :sponsor_name %>
   </div>
+  
   <div class="field">
-    <%= f.label :logo_path %><br>
-    <%= f.text_field :logo_path %>
+    <%= f.label "Upload Logo" %><br>
+    <%= f.file_field :logo_path %>
   </div>
+  
   <div class="field">
-    <%= f.label :priority %><br>
+    <%= f.label "Priority [min: 0] (higher priority logos are displayed before lower ones)" %><br>
     <%= f.number_field :priority %>
   </div>
+  
   <div class="actions">
     <%= f.submit %>
   </div>
+  
 <% end %>

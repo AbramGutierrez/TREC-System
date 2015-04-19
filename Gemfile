@@ -40,6 +40,17 @@ gem 'bcrypt', '~> 3.1.7'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+#paginate for tables
+  gem 'will_paginate', '~> 3.0.6'
+  
+#resize image
+  gem 'rmagick', '~>2.13.2'
+  
+#upload image
+  gem "carrierwave"
+
+
+
 group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
@@ -59,8 +70,6 @@ group :development, :test do
   #TDD 
   gem 'factory_girl'
   
-  #paginate for tables
-  gem 'will_paginate', '~> 3.0.6'
 end
 
 group :test do
