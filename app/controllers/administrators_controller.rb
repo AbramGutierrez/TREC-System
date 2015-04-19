@@ -30,11 +30,9 @@ class AdministratorsController < ApplicationController
 	
     respond_to do |format|
       if @administrator.save
-	    puts "\nadmin saved\n"
         format.html { redirect_to @administrator, notice: 'Administrator was successfully created.' }
         format.json { render :show, status: :created, location: @administrator }
       else
-	    puts "\nadmin did not save!!\n"
         format.html { render :new }
         format.json { render json: @administrator.errors, status: :unprocessable_entity }
       end
