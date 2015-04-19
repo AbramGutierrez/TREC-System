@@ -20,7 +20,11 @@ class ParticipantsController < ApplicationController
 
   # GET /participants/new
   def new
-    @participant = Participant.new
+    @team_array = Team.all.map { |team| [team.team_name] }
+	if @team_array.nil? || @team_array.blank?
+	  flash[:error] = "No team available to add participants to."
+	  redirect_to action: "index" and return
+	end
   end
 
   # GET /participants/1/edit

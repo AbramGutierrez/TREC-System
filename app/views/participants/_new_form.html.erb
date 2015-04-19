@@ -1,0 +1,10 @@
+<%= form_tag :action => 'create' %>
+  <p>Is the Captain? <%= check_box :participant, :captain %></p>
+  <p>Waiver Signed? <%= check_box :participant, :waiver_signed %></p>
+  <p>Shirt Size: <%= select :participant, :shirt_size, options_for_select(%w[small medium large]) %></p>
+  <p>Phone Number: <%= text_field :participant, :phone, :placeholder => "EX. 0123456789" %></p>
+  <p>First Name: <%= text_field :account, :first_name %></p>
+  <p>Last Name: <%= text_field :account, :last_name %></p>
+  <p>Email: <%= text_field :account, :email, :placeholder => "EX. example@domain.com" %></p>
+  <p>Team: <%= select :team, :team_name, options_for_select(@team_array) %></p>
+<%= submit_tag 'Submit' %>
