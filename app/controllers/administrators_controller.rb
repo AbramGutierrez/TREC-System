@@ -27,12 +27,14 @@ class AdministratorsController < ApplicationController
   # POST /administrators.json
   def create
     @administrator = Administrator.new(administrator_params)
-
+	
     respond_to do |format|
       if @administrator.save
+	    puts "\nadmin saved\n"
         format.html { redirect_to @administrator, notice: 'Administrator was successfully created.' }
         format.json { render :show, status: :created, location: @administrator }
       else
+	    puts "\nadmin did not save!!\n"
         format.html { render :new }
         format.json { render json: @administrator.errors, status: :unprocessable_entity }
       end
@@ -71,6 +73,6 @@ class AdministratorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def administrator_params
-      params[:administrator]
+	  params.require(:administrator).permit(:account_attributes => [:first_name, :last_name, :email, :password, :password_confirmation])
     end
 end

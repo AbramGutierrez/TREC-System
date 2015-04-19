@@ -42,37 +42,48 @@ RSpec.describe ParticipantsController, type: :controller do
 	  )
   
     @p2 = Participant.create!(captain: false, shirt_size: "large",
-			phone: "1876543211", team: @team)
+			phone: "1876543211", team: @team, account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
+			password: "mypassword", password_confirmation: "mypassword"})
 			
-    @admin = Administrator.create!()  
-	
-    @p2.create_account!(first_name: "A", last_name: "Z", email: "p4@example.com",
-			password: "mypassword", password_confirmation: "mypassword")
-			
-	@admin.create_account!(first_name: "Admin", last_name: "istrator", email: "admin@example.com",
-			password: "admin", password_confirmation: "admin")		
+    @admin = Administrator.create!(account_attributes: {first_name: "Admin", last_name: "istrator", email: "admin@example.com",
+			password: "admin", password_confirmation: "admin"}) 		
   }	
   after(:all){
-	@p2.account.delete
-	@admin.account.delete
-	@team.delete unless @team == nil
-	@c.delete
-	@p2.delete
-	@admin.delete
+	@p2.account.destroy
+	@admin.account.destroy
+	@team.destroy unless @team == nil
+	@c.destroy
+	@p2.destroy
+	@admin.destroy
   }
   
   let(:valid_attributes) { {
     :captain => false, 
 	:shirt_size => "medium", 
 	:phone => "1234567890",
-	:team => @team
+	:team => @team,
+	:account_attributes => {
+	  first_name: "A", 
+	  last_name: "Z", 
+	  email: "part@example.com",
+	  password: "mypassword", 
+	  password_confirmation: "mypassword"
+	}
 	}
   }
 
   let(:invalid_attributes) {{
     :captain => false, 
 	:shirt_size => "", 
-	:phone => "1234567890"
+	:phone => "1234567890",
+	:team => @team,
+	:account_attributes => {
+	  first_name: "A", 
+	  last_name: "Z", 
+	  email: "part@example.com",
+	  password: "mypassword", 
+	  password_confirmation: "mypassword"
+	}
 	}
   }
 
@@ -86,11 +97,8 @@ RSpec.describe ParticipantsController, type: :controller do
     it "assigns all participants as @participants" do 
       log_in_as(@admin.account)	
       participant = Participant.create! valid_attributes
-	  participant.create_account!(first_name: "A", last_name: "Z", email: "part@example.com",
-			password: "mypassword", password_confirmation: "mypassword")
       get :index, {}, valid_session
       expect(assigns(:participants)).to include(participant)
-	  participant.account.delete
     end
 	
 	it "redirects index when account is not admin" do
@@ -111,22 +119,16 @@ RSpec.describe ParticipantsController, type: :controller do
   describe "GET #show" do
     it "assigns the requested participant as @participant" do
       participant = Participant.create! valid_attributes
-	  participant.create_account!(first_name: "A", last_name: "Z", email: "part@example.com",
-			password: "mypassword", password_confirmation: "mypassword")
 	  log_in_as(participant.account)		
       get :show, {:id => participant.to_param}, valid_session
       expect(assigns(:participant)).to eq(participant)
-	  participant.account.delete
     end
 	
 	it "does not redirect for an admin" do
 	  participant = Participant.create! valid_attributes
-	  participant.create_account!(first_name: "A", last_name: "Z", email: "part@example.com",
-			password: "mypassword", password_confirmation: "mypassword")
 	  log_in_as(@admin.account)
 	  get :show, {:id => participant.to_param}, valid_session
       expect(assigns(:participant)).to eq(participant)
-	  participant.account.delete
 	end
 	
 	it "redirects show when not logged in" do
@@ -155,12 +157,9 @@ RSpec.describe ParticipantsController, type: :controller do
   describe "GET #edit" do
     it "assigns the requested participant as @participant" do
       participant = Participant.create! valid_attributes
-	  participant.create_account!(first_name: "A", last_name: "Z", email: "part@example.com",
-			password: "mypassword", password_confirmation: "mypassword")
 	  log_in_as(participant.account)
       get :edit, {:id => participant.to_param}, valid_session
       expect(assigns(:participant)).to eq(participant)
-	  participant.account.delete
     end
 	
 	it "does not redirect for an admin" do
@@ -224,39 +223,38 @@ RSpec.describe ParticipantsController, type: :controller do
       let(:new_attributes) { {
 		:captain => true, 
 		:shirt_size => "medium", 
-		:phone => "1234567890"
+		:phone => "1234567890",
+		:team => @team,
+		:account_attributes => {
+		  first_name: "A", 
+		  last_name: "Z", 
+		  email: "part@example.com",
+		  password: "mypassword", 
+		  password_confirmation: "mypassword"
+		}
 		}
       }
 
       it "updates the requested participant" do
         participant = Participant.create! valid_attributes
-		participant.create_account!(first_name: "A", last_name: "Z", email: "part@example.com",
-			password: "mypassword", password_confirmation: "mypassword")
 	    log_in_as(participant.account)
         put :update, {:id => participant.to_param, :participant => new_attributes}, valid_session
         participant.reload
         expect(assigns(:participant)).to eq(participant)
-		participant.account.delete
       end
 
       it "assigns the requested participant as @participant" do
         participant = Participant.create! valid_attributes
-		participant.create_account!(first_name: "A", last_name: "Z", email: "part@example.com",
-			password: "mypassword", password_confirmation: "mypassword")
 	    log_in_as(participant.account)
         put :update, {:id => participant.to_param, :participant => valid_attributes}, valid_session
         expect(assigns(:participant)).to eq(participant)
-		participant.account.delete
       end
 
       it "redirects to the participant" do
         participant = Participant.create! valid_attributes
-		participant.create_account!(first_name: "A", last_name: "Z", email: "part@example.com",
-			password: "mypassword", password_confirmation: "mypassword")
 	    log_in_as(participant.account)
         put :update, {:id => participant.to_param, :participant => valid_attributes}, valid_session
         expect(response).to redirect_to(participant)
-		participant.account.delete
       end
 	  
 	  it "does not redirect for an admin" do
@@ -286,22 +284,16 @@ RSpec.describe ParticipantsController, type: :controller do
     context "with invalid params" do
       it "assigns the participant as @participant" do
         participant = Participant.create! valid_attributes
-		participant.create_account!(first_name: "A", last_name: "Z", email: "part@example.com",
-			password: "mypassword", password_confirmation: "mypassword")
 	    log_in_as(participant.account)
         put :update, {:id => participant.to_param, :participant => invalid_attributes}, valid_session
         expect(assigns(:participant)).to eq(participant)
-		participant.account.delete
       end
 
       it "re-renders the 'edit' template" do
         participant = Participant.create! valid_attributes
-		participant.create_account!(first_name: "A", last_name: "Z", email: "part@example.com",
-			password: "mypassword", password_confirmation: "mypassword")
 	    log_in_as(participant.account)
         put :update, {:id => participant.to_param, :participant => invalid_attributes}, valid_session
         expect(response).to render_template("edit")
-		participant.account.delete
       end
     end
   end

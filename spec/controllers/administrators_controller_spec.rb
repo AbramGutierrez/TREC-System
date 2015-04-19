@@ -42,24 +42,45 @@ RSpec.describe AdministratorsController, type: :controller do
 	  :team_name => "ControllerTest" 
 	  )  
     @p = Participant.create!(captain: false, shirt_size: "medium", 
-			phone: "1234567890", team: @team) 
-	
-    @p.create_account!(first_name: "A", last_name: "Z", email: "p4@example.com",
-			password: "mypassword", password_confirmation: "mypassword")		
+			phone: "1234567890", team: @team, account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
+			password: "mypassword", password_confirmation: "mypassword"}) 
+    @admin = Administrator.create!(account_attributes: {first_name: "Admin", last_name: "istrator", email: "admin@example.com",
+			password: "admin", password_confirmation: "admin"})
+			
   }	
+  
+  # after(:each){
+    # a = Account.where(email: "adminControllerSpec@example.com")
+    # if a != nil
+	  # puts "grrr\n"
+	  # a.destroy_all
+	# end  
+  # }
+  
   after(:all){
-	@p.account.delete
-	@p.delete
-	@team.delete
-	@c.delete
+	@p.destroy
+	@team.destroy
+	@c.destroy
+	@admin.destroy
   } 
   
-  let(:valid_attributes) { { }
-    
+  let(:valid_attributes) { {account_attributes: {
+	  first_name: "an",
+	  last_name: "admin",
+	  email: "adminControllerSpec@example.com",
+	  password: "admin",
+	  password_confirmation: "admin"
+	}} 
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {account_attributes: {
+	  first_name: "an",
+	  last_name: "admin",
+	  email: "invalid email",
+	  password: "admin",
+	  password_confirmation: "admin"
+	}} 
   }
 
   # This should return the minimal set of values that should be in the session
@@ -70,12 +91,9 @@ RSpec.describe AdministratorsController, type: :controller do
   describe "GET #index" do
     it "assigns all administrators as @administrators" do
       administrator = Administrator.create! valid_attributes
-	  administrator.create_account!(first_name: "Admin", last_name: "istrator", email: "admin@example.com",
-			password: "admin", password_confirmation: "admin")
 	  log_in_as(administrator.account)		
       get :index, {}, valid_session
       expect(assigns(:administrators)).to include(administrator)
-	  administrator.account.delete
     end
 	
 	it "redirects index when account is not admin" do
@@ -96,12 +114,9 @@ RSpec.describe AdministratorsController, type: :controller do
   describe "GET #show" do
     it "assigns the requested administrator as @administrator" do
       administrator = Administrator.create! valid_attributes
-	  administrator.create_account!(first_name: "Admin", last_name: "istrator", email: "admin@example.com",
-			password: "admin", password_confirmation: "admin")
 	  log_in_as(administrator.account)
       get :show, {:id => administrator.to_param}, valid_session
       expect(assigns(:administrator)).to eq(administrator)
-	  administrator.account.delete
     end
 	
 	it "redirects show when not logged in" do
@@ -122,12 +137,9 @@ RSpec.describe AdministratorsController, type: :controller do
   describe "GET #new" do
     it "assigns a new administrator as @administrator" do
 	  admin = Administrator.create! valid_attributes
-	  admin.create_account!(first_name: "Admin", last_name: "istrator", email: "admin@example.com",
-			password: "admin", password_confirmation: "admin")
 	  log_in_as(admin.account)
       get :new, {}, valid_session
       expect(assigns(:administrator)).to be_a_new(Administrator)
-	  admin.account.delete
     end
 	
 	it "redirects new when not logged in" do
@@ -146,12 +158,9 @@ RSpec.describe AdministratorsController, type: :controller do
   describe "GET #edit" do
     it "assigns the requested administrator as @administrator" do
       administrator = Administrator.create! valid_attributes
-	  administrator.create_account!(first_name: "Admin", last_name: "istrator", email: "admin@example.com",
-			password: "admin", password_confirmation: "admin")
 	  log_in_as(administrator.account)		
       get :edit, {:id => administrator.to_param}, valid_session
       expect(assigns(:administrator)).to eq(administrator)
-	  administrator.account.delete
     end
 	
 	it "redirects edit when not logged in" do
@@ -172,35 +181,23 @@ RSpec.describe AdministratorsController, type: :controller do
   describe "POST #create" do
     context "with valid params" do
       it "creates a new Administrator" do
-	    admin = Administrator.create! valid_attributes
-	    admin.create_account!(first_name: "Admin", last_name: "istrator", email: "admin@example.com",
-			password: "admin", password_confirmation: "admin")
-		log_in_as(admin.account)	
+		log_in_as(@admin.account)	
         expect {
           post :create, {:administrator => valid_attributes}, valid_session
         }.to change(Administrator, :count).by(1)
-		admin.account.delete
       end
 
       it "assigns a newly created administrator as @administrator" do
-	    admin = Administrator.create! valid_attributes
-	    admin.create_account!(first_name: "Admin", last_name: "istrator", email: "admin@example.com",
-			password: "admin", password_confirmation: "admin")
-		log_in_as(admin.account)
+		log_in_as(@admin.account)
         post :create, {:administrator => valid_attributes}, valid_session
         expect(assigns(:administrator)).to be_a(Administrator)
         expect(assigns(:administrator)).to be_persisted
-		admin.account.delete
       end
 
       it "redirects to the created administrator" do
-	    admin = Administrator.create! valid_attributes
-	    admin.create_account!(first_name: "Admin", last_name: "istrator", email: "admin@example.com",
-			password: "admin", password_confirmation: "admin")
-		log_in_as(admin.account)
+		log_in_as(@admin.account)
         post :create, {:administrator => valid_attributes}, valid_session
         expect(response).to redirect_to(Administrator.last)
-		admin.account.delete
       end
 	  
 	  it "redirects create when not logged in" do
@@ -219,61 +216,52 @@ RSpec.describe AdministratorsController, type: :controller do
     context "with invalid params" do
       it "assigns a newly created but unsaved administrator as @administrator" do
 	    admin = Administrator.create! valid_attributes
-	    admin.create_account!(first_name: "Admin", last_name: "istrator", email: "admin@example.com",
-			password: "admin", password_confirmation: "admin")
 		log_in_as(admin.account)
         post :create, {:administrator => invalid_attributes}, valid_session
         expect(assigns(:administrator)).to be_a_new(Administrator)
-		admin.account.delete
       end
 
       it "re-renders the 'new' template" do
 	    admin = Administrator.create! valid_attributes
-	    admin.create_account!(first_name: "Admin", last_name: "istrator", email: "admin@example.com",
-			password: "admin", password_confirmation: "admin")
 		log_in_as(admin.account)
         post :create, {:administrator => invalid_attributes}, valid_session
         expect(response).to render_template("new")
-		admin.account.delete
       end
     end
   end
 
   describe "PUT #update" do
     context "with valid params" do
-      let(:new_attributes) { { }
-        
+      let(:new_attributes) {{account_attributes: {
+		  first_name: "new",
+		  last_name: "admin",
+		  email: "adminControllerSpec2@example.com",
+		  password: "admin",
+		  password_confirmation: "admin"
+		}
+		}
       }
 
       it "updates the requested administrator" do
         administrator = Administrator.create! valid_attributes
-		administrator.create_account!(first_name: "Admin", last_name: "istrator", email: "admin@example.com",
-			password: "admin", password_confirmation: "admin")
 	    log_in_as(administrator.account)
         put :update, {:id => administrator.to_param, :administrator => new_attributes}, valid_session
         administrator.reload
         expect(assigns(:administrator)).to eq(administrator)
-		administrator.account.delete
       end
 
       it "assigns the requested administrator as @administrator" do
         administrator = Administrator.create! valid_attributes
-		administrator.create_account!(first_name: "Admin", last_name: "istrator", email: "admin@example.com",
-			password: "admin", password_confirmation: "admin")
 	    log_in_as(administrator.account)
         put :update, {:id => administrator.to_param, :administrator => valid_attributes}, valid_session
         expect(assigns(:administrator)).to eq(administrator)
-		administrator.account.delete
       end
 
       it "redirects to the administrator" do
         administrator = Administrator.create! valid_attributes
-		administrator.create_account!(first_name: "Admin", last_name: "istrator", email: "admin@example.com",
-			password: "admin", password_confirmation: "admin")
 	    log_in_as(administrator.account)
         put :update, {:id => administrator.to_param, :administrator => valid_attributes}, valid_session
         expect(response).to redirect_to(administrator)
-		administrator.account.delete
       end
 	  
 	  it "redirects update when not logged in" do
@@ -294,48 +282,34 @@ RSpec.describe AdministratorsController, type: :controller do
     context "with invalid params" do
       it "assigns the administrator as @administrator" do
         administrator = Administrator.create! valid_attributes
-		administrator.create_account!(first_name: "Admin", last_name: "istrator", email: "admin@example.com",
-			password: "admin", password_confirmation: "admin")
 	    log_in_as(administrator.account)
         put :update, {:id => administrator.to_param, :administrator => invalid_attributes}, valid_session
         expect(assigns(:administrator)).to eq(administrator)
-		administrator.account.delete
       end
 
       it "re-renders the 'edit' template" do
         administrator = Administrator.create! valid_attributes
-        administrator.create_account!(first_name: "Admin", last_name: "istrator", email: "admin@example.com",
-			password: "admin", password_confirmation: "admin")
 	    log_in_as(administrator.account)
 		put :update, {:id => administrator.to_param, :administrator => invalid_attributes}, valid_session
         expect(response).to render_template("edit")
-		administrator.account.delete
       end
     end
   end
 
   describe "DELETE #destroy" do
     it "destroys the requested administrator" do
-	  admin = Administrator.create! valid_attributes
-	  admin.create_account!(first_name: "Admin", last_name: "istrator", email: "admin@example.com",
-		password: "admin", password_confirmation: "admin")
-	  log_in_as(admin.account)
+	  log_in_as(@admin.account)
       administrator = Administrator.create! valid_attributes
       expect {
         delete :destroy, {:id => administrator.to_param}, valid_session
       }.to change(Administrator, :count).by(-1)
-	  admin.account.delete
     end
 
     it "redirects to the administrators list" do
-	  admin = Administrator.create! valid_attributes
-	  admin.create_account!(first_name: "Admin", last_name: "istrator", email: "admin@example.com",
-		password: "admin", password_confirmation: "admin")
-      log_in_as(admin.account)
+      log_in_as(@admin.account)
       administrator = Administrator.create! valid_attributes
       delete :destroy, {:id => administrator.to_param}, valid_session
       expect(response).to redirect_to(administrators_url)
-	  admin.account.delete
     end
 	
 	it "redirects destroy when not logged in" do

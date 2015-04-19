@@ -1,7 +1,7 @@
 class Account < ActiveRecord::Base
 	belongs_to :user, :polymorphic => true
 	
-	validates :user, presence: true
+	# validates :user, presence: true
 	
 	before_save { self.email = email.downcase }
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

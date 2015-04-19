@@ -41,23 +41,18 @@ RSpec.describe SponsorsController, type: :controller do
 	  :team_name => "ControllerTest" 
 	  )  
 
-    @p = Participant.create!(captain: false, shirt_size: "medium", 
-			phone: "1234567890", team: @team) 
-	
-    @p.create_account!(first_name: "A", last_name: "Z", email: "p4@example.com",
-			password: "mypassword", password_confirmation: "mypassword")	
-
-	@admin = Administrator.create!()		
-	@admin.create_account!(first_name: "Admin", last_name: "istrator", email: "admin@example.com",
-			password: "admin", password_confirmation: "admin")	  
+	@p = Participant.create!(captain: false, shirt_size: "large",
+			phone: "1876543211", team: @team, account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
+			password: "mypassword", password_confirmation: "mypassword"})
+			
+    @admin = Administrator.create!(account_attributes: {first_name: "Admin", last_name: "istrator", email: "admin@example.com",
+			password: "admin", password_confirmation: "admin"})   
   }	
   after(:all){
-	@p.account.delete
-	@admin.account.delete
-	@team.delete
-	@c.delete
-	@admin.delete
-	@p.delete
+	@team.destroy
+	@c.destroy
+	@admin.destroy
+	@p.destroy
   }	
   
   let(:valid_attributes) { {

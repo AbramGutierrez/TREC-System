@@ -41,28 +41,22 @@ RSpec.describe AccountsController, type: :controller do
 	  :paid_status => "paid", 
 	  :team_name => "ControllerTest" 
 	  )    
-    @p = Participant.create!(captain: false, shirt_size: "medium", 
-			phone: "1234567890", team: @team)
+    # @p = Participant.create!(captain: false, shirt_size: "medium", 
+			# phone: "1234567890", team: @team)	
 			
     @p2 = Participant.create!(captain: false, shirt_size: "large",
-			phone: "1876543211", team: @team)
+			phone: "1876543211", team: @team, account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
+			password: "mypassword", password_confirmation: "mypassword"})
 			
-    @admin = Administrator.create!()  
-	
-    @p2.create_account!(first_name: "A", last_name: "Z", email: "p4@example.com",
-			password: "mypassword", password_confirmation: "mypassword")
+    @admin = Administrator.create!(account_attributes: {first_name: "Admin", last_name: "istrator", email: "admin@example.com",
+			password: "admin", password_confirmation: "admin"})  
 			
-	@admin.create_account!(first_name: "Admin", last_name: "istrator", email: "admin@example.com",
-			password: "admin", password_confirmation: "admin")		
   }	
   after(:all){
-	@p2.account.delete
-	@admin.account.delete
-	@team.delete
-	@c.delete
-	@p.delete
-	@p2.delete
-	@admin.delete
+	@team.destroy
+	@c.destroy
+	@p2.destroy
+	@admin.destroy
   }  
 			
   	
@@ -72,9 +66,7 @@ RSpec.describe AccountsController, type: :controller do
 	:password => "password",
 	:password_confirmation => "password",
 	:first_name => "First",
-    :last_name => "Last",
-	:user_id => @p.id,
-	:user_type => Participant
+    :last_name => "Last"
     }
   }
 
@@ -83,9 +75,7 @@ RSpec.describe AccountsController, type: :controller do
 	:password => "123",
 	:password_confirmation => "123",
 	:first_name => "First",
-    :last_name => "Last",
-	:user_id => @p.id,
-	:user_type => Participant
+    :last_name => "Last"
 	}
   }
 
@@ -104,7 +94,7 @@ RSpec.describe AccountsController, type: :controller do
 	
     it "redirects index when account is not admin" do
       account = Account.create! valid_attributes
-	  log_in_as(@p.account)
+	  log_in_as(@p2.account)
       get :index, {}, valid_session
 	  expect(response).to redirect_to(root_url)
     end
@@ -120,9 +110,12 @@ RSpec.describe AccountsController, type: :controller do
   describe "GET #show" do
     it "assigns the requested account as @account" do
       account = Account.create! valid_attributes
-	  log_in_as(@p.account)
+	  p = Participant.create!(captain: false, shirt_size: "medium", 
+			phone: "1234567890", team: @team, account: account)
+	  log_in_as(p.account)
       get :show, {:id => account.to_param}, valid_session
       expect(assigns(:account)).to eq(account)
+	  p.destroy
     end
 	
 	it "redirects show when not logged in" do
@@ -151,9 +144,12 @@ RSpec.describe AccountsController, type: :controller do
   describe "GET #edit" do
     it "assigns the requested account as @account" do
       account = Account.create! valid_attributes
-	  log_in_as(@p.account)
+	  p = Participant.create!(captain: false, shirt_size: "medium", 
+			phone: "1234567890", team: @team, account: account)
+	  log_in_as(p.account)
       get :edit, {:id => account.to_param}, valid_session
       expect(assigns(:account)).to eq(account)
+	  p.destroy
     end
 	
 	it "redirects edit when not logged in" do
@@ -213,33 +209,40 @@ RSpec.describe AccountsController, type: :controller do
 		:password => "password",
 		:password_confirmation => "password",
 		:first_name => "FirstName",
-		:last_name => "LastName",
-		:user_id => @p.id,
-		:user_type => Participant
+		:last_name => "LastName"
     }
       }
 
       it "updates the requested account" do
 	    
         account = Account.create! valid_attributes
-		log_in_as(@p.account)
+		p = Participant.create!(captain: false, shirt_size: "medium", 
+			phone: "1234567890", team: @team, account: account)
+		log_in_as(p.account)
         put :update, {:id => account.to_param, :account => new_attributes}, valid_session
         account.reload
         expect(assigns(:account)).to eq(account)
+		p.destroy
       end
 
       it "assigns the requested account as @account" do
         account = Account.create! valid_attributes
-		log_in_as(@p.account)
+		p = Participant.create!(captain: false, shirt_size: "medium", 
+			phone: "1234567890", team: @team, account: account)
+		log_in_as(p.account)
         put :update, {:id => account.to_param, :account => valid_attributes}, valid_session
         expect(assigns(:account)).to eq(account)
+		p.destroy
       end
 
       it "redirects to the account" do
         account = Account.create! valid_attributes
-		log_in_as(@p.account)
+		p = Participant.create!(captain: false, shirt_size: "medium", 
+			phone: "1234567890", team: @team, account: account)
+		log_in_as(p.account)
         put :update, {:id => account.to_param, :account => valid_attributes}, valid_session
         expect(response).to redirect_to(account)
+		p.destroy
       end
 	  
 	  it "redirects update when not logged in" do
@@ -261,16 +264,22 @@ RSpec.describe AccountsController, type: :controller do
     context "with invalid params" do
       it "assigns the account as @account" do
         account = Account.create! valid_attributes
-		log_in_as(@p.account)
+		p = Participant.create!(captain: false, shirt_size: "medium", 
+			phone: "1234567890", team: @team, account: account)
+		log_in_as(p.account)
         put :update, {:id => account.to_param, :account => invalid_attributes}, valid_session
         expect(assigns(:account)).to eq(account)
+		p.destroy
       end
 
       it "re-renders the 'edit' template" do
         account = Account.create! valid_attributes
-		log_in_as(@p.account)
+		p = Participant.create!(captain: false, shirt_size: "medium", 
+			phone: "1234567890", team: @team, account: account)
+		log_in_as(p.account)
         put :update, {:id => account.to_param, :account => invalid_attributes}, valid_session
         expect(response).to render_template("edit")
+		p.destroy
       end
     end
   end
@@ -299,7 +308,7 @@ RSpec.describe AccountsController, type: :controller do
 	
 	it "redirects destroy when account is not an admin" do
 	  account = Account.create! valid_attributes
-	  log_in_as(@p.account)
+	  log_in_as(@p2.account)
       delete :destroy, {:id => account.to_param}, valid_session
       expect(response).to redirect_to(root_url)
 	end
