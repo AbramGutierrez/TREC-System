@@ -17,35 +17,65 @@ class RegistrationsController < ApplicationController
 	    school: params[:team][:school])
 		
 	  @participants = Array.new
-	  @accounts = Array.new
+	  # @accounts = Array.new
 	  
 	  #make sure all team, participants, and accounts are valid before final creation
 	  if @team.valid?
 	    params[:participants].each_value do |participant|
 		  #skip member entries that are left blank
 		  unless has_blank(participant)
-			  @new_participant = Participant.new(captain: participant[:captain],
+			  # @new_participant = Participant.new(captain: participant[:captain],
+				# shirt_size: participant[:shirt_size],
+				# phone: participant[:phone])
+				# #if is a valid participant then try create a account for it
+				# if @new_participant.valid?
+				  # @participants.push(@new_participant)
+				  
+				  # @new_account = Account.new(user: @new_participant,
+				  # email: participant[:email],
+				  # first_name: participant[:first_name],
+				  # last_name: participant[:last_name])
+				
+				  # if @new_account.valid?
+					# @accounts.push(@new_account)
+				  # else
+					# flash.now[:error] = "There was an error with the provided participant information." +
+				  # " Please make sure a name and email is provided for each participant and the email is in the same format shown."
+					# render 'new' and return			  
+				  # end 
+				# else
+				  # flash.now[:error] = "There was an error with the provided participant information." +
+				  # " Please make sure a phone number is provided and in the same format shown." 
+				  # render 'new' and return
+				# end
+				
+				@new_participant = Participant.new(captain: participant[:captain],
 				shirt_size: participant[:shirt_size],
-				phone: participant[:phone])
+				phone: participant[:phone],
+				account_attributes: {
+				  email: participant[:email],
+				  first_name: participant[:first_name],
+				  last_name: participant[:last_name]
+				})
 				#if is a valid participant then try create a account for it
 				if @new_participant.valid?
 				  @participants.push(@new_participant)
 				  
-				  @new_account = Account.new(user: @new_participant,
-				  email: participant[:email],
-				  first_name: participant[:first_name],
-				  last_name: participant[:last_name])
+				  # @new_account = Account.new(user: @new_participant,
+				  # email: participant[:email],
+				  # first_name: participant[:first_name],
+				  # last_name: participant[:last_name])
 				
-				  if @new_account.valid?
-					@accounts.push(@new_account)
-				  else
-					flash.now[:error] = "There was an error with the provided participant information." +
-				  " Please make sure a name and email is provided for each participant and the email is in the same format shown."
-					render 'new' and return			  
-				  end 
+				  # if @new_account.valid?
+					# @accounts.push(@new_account)
+				  # else
+					# flash.now[:error] = "There was an error with the provided participant information." +
+				  # " Please make sure a name and email is provided for each participant and the email is in the same format shown."
+					# render 'new' and return			  
+				  # end 
 				else
-				  flash.now[:error] = "There was an error with the provided participant information." +
-				  " Please make sure a phone number is provided and in the same format shown." 
+				  flash.now[:alert] = "There was an error with the provided participant information." +
+				  " Please make sure that name, email, and phone number are provided for each participant and are in the correct format." 
 				  render 'new' and return
 				end
 		    end
@@ -68,9 +98,9 @@ class RegistrationsController < ApplicationController
 	      participant.save
 	    end
 		#create account
-	    @accounts.each do |account|
-	      account.save
-	    end
+	    # @accounts.each do |account|
+	      # account.save
+	    # end
 		#successfully created a team, a list of participants of that team, 
 		#and a list of accounts linked to each participant
 	    redirect_to action: "success"
