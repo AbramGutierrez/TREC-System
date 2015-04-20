@@ -2,11 +2,16 @@ require 'rails_helper'
 
 RSpec.describe "sponsors/edit", type: :view do
   before(:each) do
+    image = "/tamu.png"
+    file = fixture_file_upload(image, "image/png")
     @sponsor = assign(:sponsor, Sponsor.create!(
+	  :conference => Conference.first,
       :sponsor_name => "MyString",
-      :logo_path => "MyString",
+      :logo_path => file,
       :priority => 1
     ))
+	@conference_array = Array.new
+	@conference_array.push(Conference.first)
   end
 
   it "renders the edit sponsor form" do

@@ -37,7 +37,7 @@ class SponsorsController < ApplicationController
 	  :logo_path => params[:sponsor][:logo_path],
 	  :priority => params[:sponsor][:priority]
 	)
-	# puts "\nparams: #{params[:sponsor][:logo_path].inspect}\n"
+
     respond_to do |format|
       if @sponsor.save
         format.html { redirect_to @sponsor, notice: 'Sponsor was successfully created.' }
