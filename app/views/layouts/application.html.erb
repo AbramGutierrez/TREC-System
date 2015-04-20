@@ -30,6 +30,9 @@
 		  <li><%= link_to "Itinerary" %></li>
 		  <li class="divider"></li>
 		  <% if logged_in? %>
+		  	<li class="divider"></li>
+		    <li><%= link_to "Manage Conferences", controller: "conferences", method: "index" %></li>
+			<li class="divider"></li>
 		    <li class="divider"></li>
 		    <li><%= link_to "Manage Participants", controller: "participants", method: "index" %></li>
 			<li class="divider"></li>
