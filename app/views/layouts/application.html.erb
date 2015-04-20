@@ -31,10 +31,10 @@
 		  <li class="divider"></li>
 		  <% if logged_in? %>
 		    <li class="divider"></li>
-		    <li><%= link_to "Participants List", controller: "participants", method: "index" %></li>
+		    <li><%= link_to "Manage Participants", controller: "participants", method: "index" %></li>
 			<li class="divider"></li>
 			<li class="divider"></li>
-		    <li><%= link_to "Sponsor List", controller: "sponsors", method: "index" %></li>
+		    <li><%= link_to "Manage Sponsors", controller: "sponsors", method: "index" %></li>
 			<li class="divider"></li>
 			<li><%= link_to "Log out", logout_path, method: "delete" %></li>
 			<li class="divider"></li>

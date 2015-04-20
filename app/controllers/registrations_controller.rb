@@ -26,7 +26,8 @@ class RegistrationsController < ApplicationController
 		  unless has_blank(participant)
 			  @new_participant = Participant.new(captain: participant[:captain],
 				shirt_size: participant[:shirt_size],
-				phone: participant[:phone])
+				phone: participant[:phone],
+				waiver_signed: false)
 				#if is a valid participant then try create a account for it
 				if @new_participant.valid?
 				  @participants.push(@new_participant)
