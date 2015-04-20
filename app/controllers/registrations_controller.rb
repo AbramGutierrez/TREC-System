@@ -43,14 +43,14 @@ class RegistrationsController < ApplicationController
 	    end
 		
 		unless has_captain(@participants)
-		  flash.now[:error] = "A captain is required."
+		  flash.now[:alert] = "A captain is required."
 		  render 'new' and return
 		end
 		#create team
 		@team.save
 		
 	    if @participants.length > @conference.max_team_size 
-		  flash.now[:error] = flash.now[:error] = "Too many participants."
+		  flash.now[:alert] = flash.now[:alert] = "Too many participants."
 		  render 'new' and return
 	    end
 		#create participants
@@ -63,7 +63,7 @@ class RegistrationsController < ApplicationController
 		#and a list of accounts linked to each participant
 	    redirect_to action: "success"
 	  else 
-	    flash.now[:error] = "Make sure that school name is filled and please try a different team name."
+	    flash.now[:alert] = "Make sure that school name is filled and please try a different team name."
 		render 'new' and return
 	  end
 	end

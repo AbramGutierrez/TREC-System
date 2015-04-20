@@ -8,6 +8,12 @@ RSpec.describe RegistrationsController, type: :controller do
 	  }
 	}  
 	
+	let(:invalid_team){ {
+	    team_name: "",
+		school: "TestSchool"
+	  }
+	} 
+	
 	before(:all) do
 	    @valid_participants = Hash.new
 	    @valid_participants[0] = {captain: true, phone: "9999999999", shirt_size: "S", first_name: "participant1", last_name: "participant1", email: "partici1@example.com"}
@@ -16,6 +22,28 @@ RSpec.describe RegistrationsController, type: :controller do
 	    @valid_participants[3] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant4", last_name: "participant4", email: "partici4@example.com"}
 	    @valid_participants[4] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant5", last_name: "participant5", email: "partici5@example.com"}
 	    @valid_participants[5] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant6", last_name: "participant6", email: "partici6@example.com"}
+		@participants_no_captain = Hash.new
+	    @participants_no_captain[0] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant1", last_name: "participant1", email: "partici1@example.com"}
+	    @participants_no_captain[1] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant2", last_name: "participant2", email: "partici2@example.com"}
+	    @participants_no_captain[2] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant3", last_name: "participant3", email: "partici3@example.com"}
+	    @participants_no_captain[3] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant4", last_name: "participant4", email: "partici4@example.com"}
+	    @participants_no_captain[4] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant5", last_name: "participant5", email: "partici5@example.com"}
+	    @participants_no_captain[5] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant6", last_name: "participant6", email: "partici6@example.com"}
+		@participants_no_phone = Hash.new
+	    @participants_no_phone[0] = {captain: true, phone: "9999999999", shirt_size: "S", first_name: "participant1", last_name: "participant1", email: "partici1@example.com"}
+	    @participants_no_phone[1] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant2", last_name: "participant2", email: "partici2@example.com"}
+	    @participants_no_phone[2] = {captain: false, phone: "", shirt_size: "S", first_name: "participant3", last_name: "participant3", email: "partici3@example.com"}
+	    @participants_no_phone[3] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant4", last_name: "participant4", email: "partici4@example.com"}
+	    @participants_no_phone[4] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant5", last_name: "participant5", email: "partici5@example.com"}
+	    @participants_no_phone[5] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant6", last_name: "participant6", email: "partici6@example.com"}
+		@participants_no_email = Hash.new
+	    @participants_no_email[0] = {captain: true, phone: "9999999999", shirt_size: "S", first_name: "participant1", last_name: "participant1", email: "partici1@example.com"}
+	    @participants_no_email[1] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant2", last_name: "participant2", email: "partici2@example.com"}
+	    @participants_no_email[2] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant3", last_name: "participant3", email: "partici3@example.com"}
+	    @participants_no_email[3] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant4", last_name: "participant4", email: "partici4@example.com"}
+	    @participants_no_email[4] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant5", last_name: "participant5", email: "partici5@example.com"}
+	    @participants_no_email[5] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant6", last_name: "participant6", email: ""}
+		
 	end
 	
 	let(:valid_session) { {} }
@@ -86,12 +114,28 @@ RSpec.describe RegistrationsController, type: :controller do
 	end
 	
 	context "when invalid" do
-	  it "sets a error message" do
-	    #expect(flash[:error]).to be_present
+	  it "sets a error message and renders new for invalid team" do
+	    post :create, {:team => invalid_team, :participants => @valid_participants}, valid_session
+	    expect(flash[:alert]).to be_present
+		expect(response).to render_template("new")
 	  end
 	  
-	  it "renders the new template" do
-	    #expect(response).to render_template("new")
+	  it "sets a error message and renders new for no captain" do
+	    post :create, {:team => valid_team, :participants => @participants_no_captain}, valid_session
+	    expect(flash[:alert]).to be_present
+		expect(response).to render_template("new")
+	  end
+	  
+	  it "sets a error message and renders new for no phone" do
+	    post :create, {:team => valid_team, :participants => @participants_no_phone}, valid_session
+	    expect(flash[:alert]).to be_present
+		expect(response).to render_template("new")
+	  end
+	  
+	  it "sets a error message and renders new for no email" do
+	    post :create, {:team => valid_team, :participants => @participants_no_email}, valid_session
+	    expect(flash[:alert]).to be_present
+		expect(response).to render_template("new")
 	  end
 	end
 	
