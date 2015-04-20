@@ -50,26 +50,23 @@
 		first_name: "Tian",
 		last_name: "Zhang"})
 		
+	new_participant3 = Participant.create(
+	  team_id: new_team2.id,
+	  waiver_signed: false,
+	  captain: false,
+	  shirt_size: "small",
+	  phone: "1234567890",
+	  account_attributes: {
+	    email: "participant3@example.com",
+		password: "password",
+		first_name: "John",
+		last_name: "Smith"
+	  })  	
+		
 	admin = Administrator.create!(account_attributes:{
 		email: "administrator@example.com",
 		password: "password",
 		password_confirmation: "password",
 		first_name: "Abram",
 		last_name: "Gutierrez"
-		})	
-	  
-
-	# Account.create(
-		
-		# user: new_participant
-
-	# )
-	# Account.create(
-		# ,
-		# user: new_participant2
-	# )
-	
-	# Account.create(
-		# ,
-		# user: Administrator.create()
-	# )
+		})

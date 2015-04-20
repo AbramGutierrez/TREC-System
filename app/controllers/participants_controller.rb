@@ -21,6 +21,11 @@ class ParticipantsController < ApplicationController
   # GET /participants/new
   def new
     @participant = Participant.new
+    @team_array = Team.all.map { |team| [team.team_name] }
+	if @team_array.nil? || @team_array.blank?
+	  flash[:error] = "No team available to add participants to."
+	  redirect_to action: "index" and return
+	end
   end
 
   # GET /participants/1/edit
@@ -30,10 +35,19 @@ class ParticipantsController < ApplicationController
   # POST /participants
   # POST /participants.json
   def create
+    if !params[:team].nil?
+	  if !params[:team][:team_name].nil?
+        @team = Team.find_by_team_name(params[:team][:team_name])
+	  end	
+	end  
     @participant = Participant.new(participant_params)
 
     respond_to do |format|
       if @participant.save
+	    if participant_params[:team_id].nil? && !params[:team][:team_name].nil?
+	      @participant.team = @team
+		  @participant.save
+		end  
         format.html { redirect_to @participant, notice: 'Participant was successfully created.' }
         format.json { render :show, status: :created, location: @participant }
       else
@@ -48,6 +62,14 @@ class ParticipantsController < ApplicationController
   def update
     respond_to do |format|
       if @participant.update(participant_params)
+	    # there can only be one captain per team
+	    if @participant.captain == true
+		  @participants = Participant.where('participants.id != ? and participants.team_id = ?', 
+		    @participant.id, @participant.team_id)
+		  @participants.each do |participant|
+		    participant.update(:captain => false)
+		  end
+		end
         format.html { redirect_to @participant, notice: 'Participant was successfully updated.' }
         format.json { render :show, status: :ok, location: @participant }
       else
@@ -60,9 +82,21 @@ class ParticipantsController < ApplicationController
   # DELETE /participants/1
   # DELETE /participants/1.json
   def destroy
+    if @participant.captain == true
+	  # randomly assign the next captain
+	  @next_captain = Participant.where('participants.id != ? and participants.team_id = ?', 
+		    @participant.id, @participant.team_id).first
+	  #if there is no more participants in a team, then destroy the team
+	  if @next_captain.nil?
+	    @participant.team.destroy
+	  else
+	    @next_captain.update(:captain => true)
+	  end
+	end
+	@participant.account.destroy
     @participant.destroy
     respond_to do |format|
-      format.html { redirect_to participants_url, notice: 'Participant was successfully destroyed.' }
+      format.html { redirect_to participants_url, notice: 'Participant was successfully deleted.' }
       format.json { head :no_content }
     end
   end
@@ -78,7 +112,7 @@ class ParticipantsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def participant_params
-      params.require(:participant).permit(:captain, :waiver_signed, :shirt_size, :phone, 
+      params.require(:participant).permit(:captain, :waiver_signed, :shirt_size, :phone, :team_id,
 		:account_attributes => [:first_name, :last_name, :email, :password, :password_confirmation])
     end
 	

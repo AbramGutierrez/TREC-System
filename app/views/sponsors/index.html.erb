@@ -5,8 +5,8 @@
 <table>
   <thead>
     <tr>
-      <th>Sponsor name</th>
-      <th>Logo path</th>
+      <th>Sponsor Name</th>
+      <th>Logo</th>
       <th>Priority</th>
       <th colspan="3"></th>
     </tr>
@@ -16,7 +16,7 @@
     <% @sponsors.each do |sponsor| %>
       <tr>
         <td><%= sponsor.sponsor_name %></td>
-        <td><%= sponsor.logo_path %></td>
+        <td><%= image_tag(sponsor.logo_path_url.to_s, size: "100") %></td>
         <td><%= sponsor.priority %></td>
         <td><%= link_to 'Show', sponsor %></td>
         <td><%= link_to 'Edit', edit_sponsor_path(sponsor) %></td>

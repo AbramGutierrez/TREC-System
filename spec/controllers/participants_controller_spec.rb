@@ -61,7 +61,7 @@ RSpec.describe ParticipantsController, type: :controller do
     :captain => false, 
 	:shirt_size => "medium", 
 	:phone => "1234567890",
-	:team => @team,
+	:team_id => @team.id,
 	:account_attributes => {
 	  first_name: "A", 
 	  last_name: "Z", 
@@ -74,9 +74,9 @@ RSpec.describe ParticipantsController, type: :controller do
 
   let(:invalid_attributes) {{
     :captain => false, 
-	:shirt_size => "", 
-	:phone => "1234567890",
-	:team => @team,
+	:shirt_size => "medium", 
+	:phone => "",
+	:team_id => @team.id,
 	:account_attributes => {
 	  first_name: "A", 
 	  last_name: "Z", 
@@ -224,7 +224,7 @@ RSpec.describe ParticipantsController, type: :controller do
 		:captain => true, 
 		:shirt_size => "medium", 
 		:phone => "1234567890",
-		:team => @team,
+		:team => @team.id,
 		:account_attributes => {
 		  first_name: "A", 
 		  last_name: "Z", 
@@ -268,7 +268,7 @@ RSpec.describe ParticipantsController, type: :controller do
 	  it "redirects update when not logged in" do
 	    participant = Participant.create! valid_attributes
         put :update, {:id => participant.to_param, :participant => valid_attributes}, valid_session
-		flash.should_not be_nil
+		expect(flash).to_not be_nil
         expect(response).to redirect_to(login_url)
 	  end
 	  
@@ -276,7 +276,7 @@ RSpec.describe ParticipantsController, type: :controller do
 	    participant = Participant.create! valid_attributes
 		log_in_as(@p2.account)
         put :update, {:id => participant.to_param, :participant => valid_attributes}, valid_session
-		flash.should_not be_nil
+		expect(flash).to_not be_nil
         expect(response).to redirect_to(root_url)
 	  end
     end

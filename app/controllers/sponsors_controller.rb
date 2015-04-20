@@ -1,6 +1,7 @@
 class SponsorsController < ApplicationController
   before_action :logged_in_user, only: [:index, :show, :new, :edit, :create, :update, :destroy]
   before_action :set_sponsor, only: [:show, :edit, :update, :destroy]
+  before_action :set_conference, only: [:new, :edit, :create, :update]
   before_action :admin_account, only: [:index, :show, :new, :edit, :create, :update, :destroy]
 
   # GET /sponsors
@@ -17,6 +18,10 @@ class SponsorsController < ApplicationController
   # GET /sponsors/new
   def new
     @sponsor = Sponsor.new
+	if @conference_array.nil? || @conference_array.blank?
+	  flash[:error] = "No conference available to add sponsor to. Please add a conference first."
+	  redirect_to action: "index" and return
+	end
   end
 
   # GET /sponsors/1/edit
@@ -26,8 +31,13 @@ class SponsorsController < ApplicationController
   # POST /sponsors
   # POST /sponsors.json
   def create
-    @sponsor = Sponsor.new(sponsor_params)
-
+    @conference = Conference.find_by_start_date(params[:sponsor][:conference])
+    @sponsor = Sponsor.new(:conference => @conference,
+	  :sponsor_name => params[:sponsor][:sponsor_name],
+	  :logo_path => params[:sponsor][:logo_path],
+	  :priority => params[:sponsor][:priority]
+	)
+	# puts "\nparams: #{params[:sponsor][:logo_path].inspect}\n"
     respond_to do |format|
       if @sponsor.save
         format.html { redirect_to @sponsor, notice: 'Sponsor was successfully created.' }
@@ -42,8 +52,13 @@ class SponsorsController < ApplicationController
   # PATCH/PUT /sponsors/1
   # PATCH/PUT /sponsors/1.json
   def update
+    @conference = Conference.find_by_start_date(params[:sponsor][:conference])
     respond_to do |format|
-      if @sponsor.update(sponsor_params)
+      if @sponsor.update(:conference => @conference,
+	    :sponsor_name => params[:sponsor][:sponsor_name],
+	    :logo_path => params[:sponsor][:logo_path],
+	    :priority => params[:sponsor][:priority]
+	  )
         format.html { redirect_to @sponsor, notice: 'Sponsor was successfully updated.' }
         format.json { render :show, status: :ok, location: @sponsor }
       else
@@ -62,15 +77,18 @@ class SponsorsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_sponsor
       @sponsor = Sponsor.find(params[:id])
     end
-
+	def set_conference
+      @conference_array = Conference.all.map { |conference| [conference.start_date] }
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def sponsor_params
-      params.require(:sponsor).permit(:conference_id, :sponsor_name, :logo_path, :priority)
+      params.require(:sponsor).permit(:conference, :conference_id, :sponsor_name, :logo_path, :priority)
     end
 end

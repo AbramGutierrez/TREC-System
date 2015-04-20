@@ -5,7 +5,7 @@ RSpec.describe "participants/edit", type: :view do
     @participant = assign(:participant, Participant.create!(
       :captain => true,
       :waiver_signed => false,
-      :shirt_size => "MyString",
+      :shirt_size => "small",
 	  :phone => "1111111111",
 	  :account_attributes => {
 	    email: "test@example.com",

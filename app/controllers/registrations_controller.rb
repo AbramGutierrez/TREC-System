@@ -10,7 +10,7 @@ class RegistrationsController < ApplicationController
 	
 	def create
 	  @conference = Conference.find_by is_active: true
-	  
+
 	  @team = Team.new(conference_id: @conference.id, 
 	    team_name: params[:team][:team_name],
 	    paid_status: "unpaid",
@@ -26,6 +26,7 @@ class RegistrationsController < ApplicationController
 				@new_participant = Participant.new(captain: participant[:captain],
 				shirt_size: participant[:shirt_size],
 				phone: participant[:phone],
+				waiver_signed: false,
 				account_attributes: {
 				  email: participant[:email],
 				  first_name: participant[:first_name],

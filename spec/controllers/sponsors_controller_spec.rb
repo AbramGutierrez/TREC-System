@@ -46,7 +46,9 @@ RSpec.describe SponsorsController, type: :controller do
 			password: "mypassword", password_confirmation: "mypassword"})
 			
     @admin = Administrator.create!(account_attributes: {first_name: "Admin", last_name: "istrator", email: "admin@example.com",
-			password: "admin", password_confirmation: "admin"})   
+			password: "admin", password_confirmation: "admin"})  
+
+    @start_date = Date.parse("2015-4-10")		
   }	
   after(:all){
 	@team.destroy
@@ -58,7 +60,15 @@ RSpec.describe SponsorsController, type: :controller do
   let(:valid_attributes) { {
     :conference_id => @c.id,
 	:sponsor_name => "Test",
-	:logo_path => "fake_path",
+	:logo_path => File.new(File.join(Rails.root.join, "app/assets/images/up.gif")),
+	:priority => 1
+	}
+  }
+  
+  let(:valid_attributes2) { {
+    :conference => Date.parse("2015-4-10"),
+	:sponsor_name => "Test",
+	:logo_path => File.new(File.join(Rails.root.join, "app/assets/images/up.gif")),
 	:priority => 1
 	}
   }
@@ -166,32 +176,32 @@ RSpec.describe SponsorsController, type: :controller do
       it "creates a new Sponsor" do
 	    log_in_as(@admin.account)
         expect {
-          post :create, {:sponsor => valid_attributes}, valid_session
+          post :create, {:sponsor => valid_attributes2, :conf_start_date => @start_date}, valid_session
         }.to change(Sponsor, :count).by(1)
       end
 
       it "assigns a newly created sponsor as @sponsor" do
 	    log_in_as(@admin.account)
-        post :create, {:sponsor => valid_attributes}, valid_session
+        post :create, {:sponsor => valid_attributes2, :conf_start_date => @start_date}, valid_session
         expect(assigns(:sponsor)).to be_a(Sponsor)
         expect(assigns(:sponsor)).to be_persisted
       end
 
       it "redirects to the created sponsor" do
 	    log_in_as(@admin.account)
-        post :create, {:sponsor => valid_attributes}, valid_session
+        post :create, {:sponsor => valid_attributes2, :conf_start_date => @start_date}, valid_session
         expect(response).to redirect_to(Sponsor.last)
       end
 	  
 	  it "redirects create when not logged in" do
-	    post :create, {:sponsor => valid_attributes}, valid_session
+	    post :create, {:sponsor => valid_attributes2, :conf_start_date => @start_date}, valid_session
 		expect(flash).to_not be_nil
 		expect(response).to redirect_to(login_url)
 	  end
 	  
 	  it "redirects create when not an admin" do
 	    log_in_as(@p.account)
-		post :create, {:sponsor => valid_attributes}, valid_session
+		post :create, {:sponsor => valid_attributes2, :conf_start_date => @start_date}, valid_session
 		expect(response).to redirect_to(root_url)
 	  end
     end
@@ -199,13 +209,13 @@ RSpec.describe SponsorsController, type: :controller do
     context "with invalid params" do
       it "assigns a newly created but unsaved sponsor as @sponsor" do
 	    log_in_as(@admin.account)
-        post :create, {:sponsor => invalid_attributes}, valid_session
+        post :create, {:sponsor => invalid_attributes, :conf_start_date => @start_date}, valid_session
         expect(assigns(:sponsor)).to be_a_new(Sponsor)
       end
 
       it "re-renders the 'new' template" do
 	    log_in_as(@admin.account)
-        post :create, {:sponsor => invalid_attributes}, valid_session
+        post :create, {:sponsor => invalid_attributes, :conf_start_date => @start_date}, valid_session
         expect(response).to render_template("new")
       end
     end
@@ -214,10 +224,10 @@ RSpec.describe SponsorsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) { {
-      :conference_id => @c.id,
-	  :sponsor_name => "NewName",
-	  :logo_path => "NewPath",
-	  :priority => 5
+    :conference => Date.parse("2015-4-10"),
+	:sponsor_name => "Test",
+	:logo_path => File.new(File.join(Rails.root.join, "app/assets/images/up.gif")),
+	:priority => 5
 	}
       }
 
@@ -232,20 +242,20 @@ RSpec.describe SponsorsController, type: :controller do
       it "assigns the requested sponsor as @sponsor" do
 	    log_in_as(@admin.account)
         sponsor = Sponsor.create! valid_attributes
-        put :update, {:id => sponsor.to_param, :sponsor => valid_attributes}, valid_session
+        put :update, {:id => sponsor.to_param, :sponsor => valid_attributes2}, valid_session
         expect(assigns(:sponsor)).to eq(sponsor)
       end
 
       it "redirects to the sponsor" do
 	    log_in_as(@admin.account)
         sponsor = Sponsor.create! valid_attributes
-        put :update, {:id => sponsor.to_param, :sponsor => valid_attributes}, valid_session
+        put :update, {:id => sponsor.to_param, :sponsor => valid_attributes2}, valid_session
         expect(response).to redirect_to(sponsor)
       end
 	  
 	  it "redirects update when not logged in" do
 	    sponsor = Sponsor.create! valid_attributes
-		put :update, {:id => sponsor.to_param, :sponsor => valid_attributes}, valid_session
+		put :update, {:id => sponsor.to_param, :sponsor => valid_attributes2}, valid_session
 		expect(flash).to_not be_nil
 		expect(response).to redirect_to(login_url)
 	  end
@@ -253,7 +263,7 @@ RSpec.describe SponsorsController, type: :controller do
 	  it "redirects update when not an admin" do
 	    sponsor = Sponsor.create! valid_attributes
 		log_in_as(@p.account)
-		put :update, {:id => sponsor.to_param, :sponsor => valid_attributes}, valid_session
+		put :update, {:id => sponsor.to_param, :sponsor => valid_attributes2}, valid_session
 		expect(response).to redirect_to(root_url)
 	  end
     end

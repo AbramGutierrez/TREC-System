@@ -6,7 +6,7 @@ RSpec.describe "participants/index", type: :view do
       Participant.create!(
         :captain => true,
         :waiver_signed => true,
-        :shirt_size => "Shirt Size",
+        :shirt_size => "small",
 		:phone => "1111111111",
 	    :account_attributes => {
 	      email: "test@example.com",
@@ -18,7 +18,7 @@ RSpec.describe "participants/index", type: :view do
       Participant.create!(
         :captain => true,
         :waiver_signed => true,
-        :shirt_size => "Shirt Size",
+        :shirt_size => "small",
 		:phone => "1111111111",
 	    :account_attributes => {
 	      email: "test2@example.com",

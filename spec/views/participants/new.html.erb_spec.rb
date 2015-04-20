@@ -5,7 +5,14 @@ RSpec.describe "participants/new", type: :view do
     assign(:participant, Participant.new(
       :captain => false,
       :waiver_signed => false,
-      :shirt_size => "MyString"
+      :shirt_size => "small",
+	  :phone => "9876654321",
+	  :account_attributes => {
+	    email: "test@example.com",
+		password: "password",
+		first_name: "hello",
+		last_name: "world"
+	  }
     ))
   end
 
@@ -18,7 +25,7 @@ RSpec.describe "participants/new", type: :view do
 
       assert_select "input#participant_waiver_signed[name=?]", "participant[waiver_signed]"
 
-      assert_select "input#participant_shirt_size[name=?]", "participant[shirt_size]"
+      # assert_select "input#participant_shirt_size[name=?]", "participant[shirt_size]"
     end
   end
 end
