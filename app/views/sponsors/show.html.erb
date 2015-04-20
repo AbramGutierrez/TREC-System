@@ -7,7 +7,7 @@
 
 <p>
   <strong>Logo:</strong>
-  <%= image_tag @sponsor.logo_path_url(:thumb).to_s %>
+  <%= image_tag(@sponsor.logo_path_url.to_s, size: "100") %>
 </p>
 
 <p>

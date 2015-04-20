@@ -44,7 +44,7 @@ gem 'bcrypt', '~> 3.1.7'
   gem 'will_paginate', '~> 3.0.6'
   
 #resize image
-  gem 'rmagick', '~>2.13.2'
+  #gem 'rmagick', '~>2.13.2'
   
 #upload image
   gem "carrierwave"
