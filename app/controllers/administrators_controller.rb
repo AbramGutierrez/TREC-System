@@ -56,11 +56,16 @@ class AdministratorsController < ApplicationController
   # DELETE /administrators/1
   # DELETE /administrators/1.json
   def destroy
-    @administrator.destroy
-    respond_to do |format|
-      format.html { redirect_to administrators_url, notice: 'Administrator was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    if Administrator.count == 1
+	  flash[:alert] = "You cannot delete the only administrator!"
+	  redirect_to administrators_url
+	else  
+      @administrator.destroy
+      respond_to do |format|
+        format.html { redirect_to administrators_url, notice: 'Administrator was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+	end  
   end
 
   private
