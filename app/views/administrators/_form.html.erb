@@ -11,6 +11,28 @@
     </div>
   <% end %>
 
+  <%= f.fields_for :account_attributes do |ff| %>
+	  <div class="field">
+		<%= ff.label :first_name %><br>
+		<%= ff.text_field :first_name %>
+	  </div>
+	  <div class="field">
+		<%= ff.label :last_name %><br>
+		<%= ff.text_field :last_name %>
+	  </div>
+	  <div class="field">
+		<%= ff.label :email %><br>
+		<%= ff.text_field :email %>
+	  </div>
+	  <div class="field">
+		<%= ff.label :password %><br>
+		<%= ff.password_field :password %>
+	  </div>
+	  <div class="field">
+		<%= ff.label :password_confirmation %><br>
+		<%= ff.password_field :password_confirmation %>
+	  </div>
+  <% end %>
   <div class="actions">
     <%= f.submit %>
   </div>
