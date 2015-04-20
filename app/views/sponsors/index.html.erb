@@ -16,7 +16,7 @@
     <% @sponsors.each do |sponsor| %>
       <tr>
         <td><%= sponsor.sponsor_name %></td>
-        <td><%= image_tag sponsor.logo_path_url(:thumb).to_s %></td>
+        <td><%= image_tag(sponsor.logo_path_url.to_s, size: "100") %></td>
         <td><%= sponsor.priority %></td>
         <td><%= link_to 'Show', sponsor %></td>
         <td><%= link_to 'Edit', edit_sponsor_path(sponsor) %></td>
