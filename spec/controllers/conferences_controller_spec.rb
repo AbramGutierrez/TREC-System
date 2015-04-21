@@ -68,6 +68,19 @@ RSpec.describe ConferencesController, type: :controller do
 	:is_active => true
 	}  
   }
+  
+  let(:inactive_attributes) { {
+	:start_date => Date.parse("2015-7-7"),
+	:end_date => Date.parse("2015-8-8"),
+	:max_team_size => 6,
+	:min_team_size => 1,
+	:max_teams => 5,
+	:tamu_cost => 30.00,
+	:other_cost => 60.00,
+	:challenge_desc => 'yay!',
+	:is_active => false
+	}  
+  }
 
   let(:invalid_attributes) { {
 	:start_date => "",
@@ -118,6 +131,13 @@ RSpec.describe ConferencesController, type: :controller do
       expect(assigns(:conference)).to eq(conference)
     end
 	
+	it "allows participants to view the current conference" do
+	  log_in_as(@p.account)
+      conference = Conference.create! valid_attributes
+      get :show, {:id => conference.to_param}, valid_session
+      expect(assigns(:conference)).to eq(conference)
+    end
+	
 	it "redirects show when not logged in" do
 	  conference = Conference.create! valid_attributes
       get :show, {:id => conference.to_param}, valid_session
@@ -125,12 +145,12 @@ RSpec.describe ConferencesController, type: :controller do
 	  expect(response).to redirect_to(login_url)
 	end
 	
-	# it "redirects show when not an admin" do
-	  # conference = Conference.create! valid_attributes
-	  # log_in_as(@p.account)
-      # get :show, {:id => conference.to_param}, valid_session
-	  # expect(response).to redirect_to(root_url)
-	# end
+	it "redirects show when not an admin and conference not active" do
+	  conference = Conference.create! inactive_attributes
+	  log_in_as(@p.account)
+      get :show, {:id => conference.to_param}, valid_session
+	  expect(response).to redirect_to(root_url)
+	end
   end
 
   describe "GET #new" do

@@ -1,7 +1,7 @@
 class ConferencesController < ApplicationController
   before_action :logged_in_user, only: [:index, :show, :new, :edit, :create, :update, :destroy]
   before_action :set_conference, only: [:show, :edit, :update, :destroy]
-  #before_action :admin_account, only: [:index, :show, :new, :edit, :create, :update, :destroy]
+  before_action :show_security, only: :show
   before_action :admin_account, only: [:index, :new, :edit, :create, :update, :destroy]
 
   # GET /conferences
@@ -74,4 +74,9 @@ class ConferencesController < ApplicationController
     def conference_params
       params.require(:conference).permit(:start_date, :end_date, :max_team_size, :min_team_size, :max_teams, :tamu_cost, :other_cost, :challenge_desc, :is_active)
     end
+	
+	# Only let a user see the "show" for a conference if the user is an admin or if it is the current conference
+	def show_security
+	  redirect_to(root_url) unless @conference.is_active? || current_account.user.is_a?(Administrator)
+	end
 end
