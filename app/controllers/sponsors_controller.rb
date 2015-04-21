@@ -3,7 +3,6 @@ class SponsorsController < ApplicationController
   before_action :set_sponsor, only: [:show, :edit, :update, :destroy]
   before_action :set_conference, only: [:new, :edit, :create, :update]
   before_action :admin_account, only: [:index, :show, :new, :edit, :create, :update, :destroy]
-
   # GET /sponsors
   # GET /sponsors.json
   def index
@@ -71,6 +70,7 @@ class SponsorsController < ApplicationController
   # DELETE /sponsors/1
   # DELETE /sponsors/1.json
   def destroy
+    @sponsor.logo_path.delete_empty_dirs
     @sponsor.destroy
     respond_to do |format|
       format.html { redirect_to sponsors_url, notice: 'Sponsor was successfully destroyed.' }

@@ -47,5 +47,11 @@ class ImageUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
+  def delete_empty_dirs
+    path = File.expand_path(store_dir, root)
+    Dir.rmdir(path)
+  rescue
+    true
+  end
 
 end
