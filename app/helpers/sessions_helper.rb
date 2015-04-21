@@ -31,6 +31,11 @@ module SessionsHelper
 		!current_account.nil?
 	end
 	
+	# Returns true if the account is an admin, false otherwise.
+	def is_admin?
+	    current_account.user.is_a?(Administrator)
+	end
+	
 	#Logs out the current user.
 	def log_out
 		session.delete(:account_id)
