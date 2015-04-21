@@ -2,6 +2,7 @@ class ConferencesController < ApplicationController
   before_action :logged_in_user, only: [:index, :show, :new, :edit, :create, :update, :destroy]
   before_action :set_conference, only: [:show, :edit, :update, :destroy]
   #before_action :admin_account, only: [:index, :show, :new, :edit, :create, :update, :destroy]
+  before_action :admin_account, only: [:index, :new, :edit, :create, :update, :destroy]
 
   # GET /conferences
   # GET /conferences.json

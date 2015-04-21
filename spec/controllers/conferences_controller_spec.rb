@@ -125,12 +125,12 @@ RSpec.describe ConferencesController, type: :controller do
 	  expect(response).to redirect_to(login_url)
 	end
 	
-	it "redirects show when not an admin" do
-	  conference = Conference.create! valid_attributes
-	  log_in_as(@p.account)
-      get :show, {:id => conference.to_param}, valid_session
-	  expect(response).to redirect_to(root_url)
-	end
+	# it "redirects show when not an admin" do
+	  # conference = Conference.create! valid_attributes
+	  # log_in_as(@p.account)
+      # get :show, {:id => conference.to_param}, valid_session
+	  # expect(response).to redirect_to(root_url)
+	# end
   end
 
   describe "GET #new" do
