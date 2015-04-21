@@ -36,6 +36,11 @@ module SessionsHelper
 	    current_account.user.is_a?(Administrator)
 	end
 	
+	# Return true if the account is a participant, false otherwise.
+	def is_participant?
+	    current_account.user.is_a?(Participant)
+	end
+	
 	#Logs out the current user.
 	def log_out
 		session.delete(:account_id)
