@@ -25,6 +25,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use foundation for stylesheets
 gem 'foundation-rails'
 
+# Use icons in sass
+gem 'foundation-icons-sass-rails'
+
 # Necessary to prevent no timezone data errors on Windows
 gem 'tzinfo-data'
 
