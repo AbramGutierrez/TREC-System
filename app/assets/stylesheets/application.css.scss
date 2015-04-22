@@ -1,0 +1,61 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ *= require foundation_and_overrides
+
+ */
+ 
+ @import 'foundation-icons';
+
+.size-12 { font-size: 12px; }
+.size-14 { font-size: 14px; }
+.size-16 { font-size: 16px; }
+.size-18 { font-size: 18px; }
+.size-21 { font-size: 21px; }
+.size-24 { font-size: 24px; }
+.size-36 { font-size: 36px; }
+.size-48 { font-size: 48px; }
+.size-60 { font-size: 60px; }
+.size-72 { font-size: 72px; }
+
+table.icon {
+	width: 100%;
+	background: #ffffff;
+	border: none;
+}
+
+table.icon tr:nth-child(even) {
+	background: #ffffff;
+}
+
+td.icon-logo {
+	width: 30%;
+	padding: 5px;
+	margin: auto;
+	text-align: center;
+	background: light-gray;
+}
+
+button.icon-logo {
+	margin: 0px;
+	border-radius: 40px;
+	font-size: 72px;
+}
+
+td.icon-label {
+	padding: 0px;
+	margin: auto;
+	font-size: 36px;
+	vertical-align: middle;
+}
