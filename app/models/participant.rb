@@ -4,7 +4,7 @@ class Participant < ActiveRecord::Base
 	validates :phone, :account, presence: true
 	validates :shirt_size, presence: true, inclusion: { in: %w(small medium large),
       message: "%{value} is not a valid size, try entering small, medium, or large." }
-	# validates :captain, presence: true
+	validates :captain, presence: true
 	
 	accepts_nested_attributes_for :account
 end
