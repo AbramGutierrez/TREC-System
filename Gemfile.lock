@@ -99,6 +99,7 @@ GEM
       activesupport (>= 4.1.0)
     haml (4.0.6)
       tilt
+    hashie (3.4.1)
     hike (1.2.3)
     i18n (0.7.0)
     jbuilder (2.2.11)
@@ -126,6 +127,13 @@ GEM
       mini_portile (~> 0.6.0)
     nokogiri (1.6.6.2-x86-mingw32)
       mini_portile (~> 0.6.0)
+    omniauth (1.2.2)
+      hashie (>= 1.2, < 4)
+      rack (~> 1.0)
+    omniauth-cas (1.1.0)
+      addressable (~> 2.3)
+      nokogiri (~> 1.5)
+      omniauth (~> 1.2.0)
     pg (0.18.1)
     pg (0.18.1-x64-mingw32)
     pg (0.18.1-x86-mingw32)
@@ -251,6 +259,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   launchy
+  omniauth-cas
   pg
   rails (= 4.2.0)
   rails_12factor

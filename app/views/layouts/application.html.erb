@@ -50,6 +50,8 @@
 				<% @participantConference = @participantTeam.conference %>
 				<li><%= link_to "Conference Info", controller: "conferences", action: "show", id: @participantConference %></li>
 				<li class="divider"></li>
+			    <li><%= link_to "TAMU AUTH", "/auth/cas" %></li>
+				<li class="divider"></li>
 			<% end %>
 			
 			<li><%= link_to "Log out", logout_path, method: "delete" %></li>

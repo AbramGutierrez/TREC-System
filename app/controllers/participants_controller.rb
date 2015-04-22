@@ -108,15 +108,12 @@ class ParticipantsController < ApplicationController
   end
   
   def update_waivers
-  
     #ignore unchecked waivers
     @checked_participants = params[:participants].delete_if {|key, value| value["waiver_signed"] == "0"}
-	  
 	unless @checked_participants.nil?
 	  Participant.update(@checked_participants.keys, @checked_participants.values)
 	end
 	redirect_to participants_url
-	
   end
 
   private

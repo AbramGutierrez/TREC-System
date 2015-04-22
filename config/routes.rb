@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   get	 'participants/waiver_checklist' => 'participants#waiver_checklist'
   post	 'participants/update_waivers' => 'participants#update_waivers'
 
+  get '/auth/cas/callback' => 'accounts#authenticate'
+  #post 'accounts/authenticate' => 'accounts#authenticate'
+  
   resources :accounts
 
   resources :administrators

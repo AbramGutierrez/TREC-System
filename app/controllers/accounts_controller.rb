@@ -67,6 +67,12 @@ class AccountsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def authenticate
+  # use ["provider"] ["user"] ...etc to get specific values
+    @something = request.env["omniauth.auth"]
+	
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

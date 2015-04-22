@@ -11,8 +11,8 @@
   </thead>
   <tbody>
   
-<% @active_teams.each do |team| %>
-      <% (team.participants).each do |participant| %>
+  <% @active_teams.each do |team| %>
+    <% (team.participants).each do |participant| %>
 	  <tr>
 	    <td> <%= participant.team.team_name %> </td>	
 		<td> <%= participant.account.first_name %> </td>
@@ -21,9 +21,9 @@
 		  <td> <%= f.check_box :waiver_signed %> </td>
 	    <% end %>
 	  </tr>
-	  <% end %>
-<% end %>
+	<% end %>
+  <% end %>
 
-</tbody>
- </table>
- <%= submit_tag 'Submit' %>
+  </tbody>
+</table>
+<%= submit_tag 'Submit' %>

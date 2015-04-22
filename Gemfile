@@ -43,14 +43,12 @@ gem 'bcrypt', '~> 3.1.7'
 #paginate for tables
   gem 'will_paginate', '~> 3.0.6'
   
-#resize image
-  #gem 'rmagick', '~>2.13.2'
-  
 #upload image
   gem "carrierwave"
 
-
-
+#NETID login
+  gem 'omniauth-cas'
+  
 group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
