@@ -33,12 +33,12 @@
 		  	<li class="divider"></li>
 			<% if is_admin? %>
 		      <li><%= link_to "Manage Conferences", controller: "conferences", method: "index" %></li>
-			  <li class="divider"></li>
 		      <li class="divider"></li>
 		      <li><%= link_to "Manage Participants", controller: "participants", method: "index" %></li>
 			  <li class="divider"></li>
-			  <li class="divider"></li>
 		      <li><%= link_to "Manage Sponsors", controller: "sponsors", method: "index" %></li>
+			  <li class="divider"></li>
+			  <li><%= link_to "Waiver Checklist", "/participants/waiver_checklist" %></li>
 			  <li class="divider"></li>
 			<% end %>
 			

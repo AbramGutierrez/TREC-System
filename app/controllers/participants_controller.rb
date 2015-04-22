@@ -99,6 +99,25 @@ class ParticipantsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def waiver_checklist
+    @active_teams = Conference.find_by_is_active(true).teams
+	unless @active_teams.nil?
+	  @active_teams = @active_teams.order("teams.team_name")
+	end
+  end
+  
+  def update_waivers
+  
+    #ignore unchecked waivers
+    @checked_participants = params[:participants].delete_if {|key, value| value["waiver_signed"] == "0"}
+	  
+	unless @checked_participants.nil?
+	  Participant.update(@checked_participants.keys, @checked_participants.values)
+	end
+	redirect_to participants_url
+	
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
