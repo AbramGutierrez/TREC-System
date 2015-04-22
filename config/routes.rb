@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   get    'registrations/success'   => 'registrations#success'
   get    'registrations/'   => 'registrations#new'
   get	 'registrations/fail'	=> 'registrations#fail'
+  
+  get	 'participants/waiver_checklist' => 'participants#waiver_checklist'
+  post	 'participants/update_waivers' => 'participants#update_waivers'
 
   resources :accounts
 
