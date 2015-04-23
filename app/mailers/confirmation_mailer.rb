@@ -1,6 +1,6 @@
 class ConfirmationMailer < ApplicationMailer
   def self.default_from()
-    'TREC@sec.tamu.edu'
+    'trec.system.test@gmail.com'
   end
   
   default from: ConfirmationMailer.default_from()

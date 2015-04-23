@@ -4,6 +4,7 @@ class Account < ActiveRecord::Base
 	# validates :user, presence: true
 	
 	before_save { self.email = email.downcase }
+	after_save { ConfirmationMailer.welcome_email(self).deliver_now! }
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	validates :email, presence: true, length: { maximum: 255 },
 					  format: { with: VALID_EMAIL_REGEX },
