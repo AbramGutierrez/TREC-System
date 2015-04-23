@@ -16,46 +16,43 @@
 
  */
  
+ @import "foundation";
  @import 'foundation-icons';
-
-.size-12 { font-size: 12px; }
-.size-14 { font-size: 14px; }
-.size-16 { font-size: 16px; }
-.size-18 { font-size: 18px; }
-.size-21 { font-size: 21px; }
-.size-24 { font-size: 24px; }
-.size-36 { font-size: 36px; }
-.size-48 { font-size: 48px; }
-.size-60 { font-size: 60px; }
-.size-72 { font-size: 72px; }
 
 table.icon {
 	width: 100%;
-	background: #ffffff;
-	border: none;
+	box-shadow: 10px 10px 5px #888888;
 }
 
-table.icon tr:nth-child(even) {
+table.icon tr {
 	background: #ffffff;
 }
 
-td.icon-logo {
-	width: 30%;
-	padding: 5px;
+td.icon {
+	width: 40%;
+	padding: 20px;
 	margin: auto;
 	text-align: center;
 	background: light-gray;
 }
 
-button.icon-logo {
+a.ibutton {
+	@include button;
+	@include radius(50px);
 	margin: 0px;
-	border-radius: 40px;
-	font-size: 72px;
+	width: 60%;
+	background: #500000;
+	color: #ffffff;
+	font-size: 60px;
+}
+
+a.ibutton:hover {
+	background: #104554;
 }
 
 td.icon-label {
 	padding: 0px;
 	margin: auto;
-	font-size: 36px;
+	font-size: 24px;
 	vertical-align: middle;
 }

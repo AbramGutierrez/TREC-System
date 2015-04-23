@@ -15,7 +15,7 @@
   <body>
 	<div class="row">
 		<div class="small-12 columns">
-			<h1>Header</h1>
+			<h1>Texas A&M Regional Conference</h1>
 		</div>
 	</div>
 	<nav class="top-bar">
@@ -32,17 +32,11 @@
 		  <% if logged_in? %>
 		  	<li class="divider"></li>
 			<% if is_admin? %>
-		      <li><%= link_to "Manage Conferences", controller: "conferences", method: "index" %></li>
+		      <li><%= link_to "Dashboard", admin_dashboard_path %></li>
 		      <li class="divider"></li>
-		      <li><%= link_to "Manage Participants", controller: "participants", method: "index" %></li>
-			  <li class="divider"></li>
-		      <li><%= link_to "Manage Sponsors", controller: "sponsors", method: "index" %></li>
-			  <li class="divider"></li>
-			  <li><%= link_to "Waiver Checklist", "/participants/waiver_checklist" %></li>
-			  <li class="divider"></li>
 			<% end %>
 			
-			 <% if is_participant? %>
+			<% if is_participant? %>
 				<% @participantTeam = current_participant.team %>
 				<li><%= link_to "Group Info", controller: "teams", action: "show", id: @participantTeam %></li>
 				<li class="divider"></li>

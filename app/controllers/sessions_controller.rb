@@ -7,7 +7,11 @@ class SessionsController < ApplicationController
 	account = Account.find_by(email: params[:session][:email].downcase)
 	if account && account.authenticate(params[:session][:password])
 		log_in account
-		redirect_back_or root_url
+		if is_admin?
+			redirect_to admin_dashboard_path
+		else
+			redirect_back_or root_url
+		end
 	else
 		flash.now[:alert] = 'Invalid email/password combination'
 		render 'new'

@@ -1,0 +1,24 @@
+<h1>Admin Dashboard</h1>
+
+<table class="icon">
+  <tr>
+    <td class="icon"><%= link_to "", root_path, :class => "ibutton fi-mail"%></td>
+    <td class="icon-label">Send Notifications</td> 
+  </tr>
+  <tr>
+    <td class="icon"><%= link_to "", { controller: "participants", method: "index" }, :class => "ibutton fi-address-book"%></td>
+    <td class="icon-label">Manage Participants</td>  
+  </tr>
+  <tr>
+    <td class="icon"><%= link_to "", { controller: "conferences", method: "index" }, :class => "ibutton fi-torsos-all"%></td>
+    <td class="icon-label">Manage Conferences</td>  
+  </tr>
+  <tr>
+    <td class="icon"><%= link_to "", root_path, :class => "ibutton fi-torso-business"%></td>
+    <td class="icon-label">Manage Sponsors</td>  
+  </tr>
+  <tr>
+    <td class="icon"><%= link_to "", "/participants/waiver_checklist", :class => "ibutton fi-checkbox"%></td>
+    <td class="icon-label">Participant Check-In</td>  
+  </tr>
+</table>
