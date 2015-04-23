@@ -23,7 +23,7 @@ class AdministratorsController < ApplicationController
   def edit
   end
   
-  # GET /administrators/1/dashboard
+  # GET /administrator/dashboard
   def dashboard
   end
 

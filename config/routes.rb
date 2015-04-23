@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   post	 'participants/update_waivers' => 'participants#update_waivers'
   
   get	 'administrator/dashboard' => 'administrators#dashboard', as: :admin_dashboard
+  get	 'participant/dashboard' => 'participants#dashboard', as: :participant_dashboard
   
   resources :accounts
 

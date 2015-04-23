@@ -32,17 +32,12 @@
 		  <% if logged_in? %>
 		  	<li class="divider"></li>
 			<% if is_admin? %>
-		      <li><%= link_to "Dashboard", admin_dashboard_path %></li>
-		      <li class="divider"></li>
+				<li><%= link_to "Dashboard", admin_dashboard_path %></li>
+				<li class="divider"></li>
 			<% end %>
 			
 			<% if is_participant? %>
-				<% @participantTeam = current_participant.team %>
-				<li><%= link_to "Group Info", controller: "teams", action: "show", id: @participantTeam %></li>
-				<li class="divider"></li>
-
-				<% @participantConference = @participantTeam.conference %>
-				<li><%= link_to "Conference Info", controller: "conferences", action: "show", id: @participantConference %></li>
+				<li><%= link_to "Dashboard", participant_dashboard_path %></li>
 				<li class="divider"></li>
 			<% end %>
 			
