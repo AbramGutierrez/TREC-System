@@ -15,3 +15,44 @@
  *= require foundation_and_overrides
 
  */
+ 
+ @import "foundation";
+ @import 'foundation-icons';
+
+table.icon {
+	width: 100%;
+	box-shadow: 10px 10px 5px #888888;
+}
+
+table.icon tr {
+	background: #ffffff;
+}
+
+td.icon {
+	width: 40%;
+	padding: 20px;
+	margin: auto;
+	text-align: center;
+	background: light-gray;
+}
+
+a.ibutton {
+	@include button;
+	@include radius(50px);
+	margin: 0px;
+	width: 60%;
+	background: #500000;
+	color: #ffffff;
+	font-size: 60px;
+}
+
+a.ibutton:hover {
+	background: #104554;
+}
+
+td.icon-label {
+	padding: 0px;
+	margin: auto;
+	font-size: 24px;
+	vertical-align: middle;
+}

@@ -1,7 +1,7 @@
 class AdministratorsController < ApplicationController
-  before_action :logged_in_user, only: [:index, :show, :new, :edit, :create, :update, :destroy]
+  before_action :logged_in_user, only: [:index, :show, :new, :edit, :dashboard, :create, :update, :destroy]
   before_action :set_administrator, only: [:show, :edit, :update, :destroy]
-  before_action :admin_account, only: [:index, :show, :new, :edit, :create, :update, :destroy]
+  before_action :admin_account, only: [:index, :show, :new, :edit, :dashboard, :create, :update, :destroy]
 
   # GET /administrators
   # GET /administrators.json
@@ -21,6 +21,10 @@ class AdministratorsController < ApplicationController
 
   # GET /administrators/1/edit
   def edit
+  end
+  
+  # GET /administrator/dashboard
+  def dashboard
   end
 
   # POST /administrators

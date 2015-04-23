@@ -10,7 +10,10 @@ Rails.application.routes.draw do
   
   get	 'participants/waiver_checklist' => 'participants#waiver_checklist'
   post	 'participants/update_waivers' => 'participants#update_waivers'
-
+  
+  get	 'administrator/dashboard' => 'administrators#dashboard', as: :admin_dashboard
+  get	 'participant/dashboard' => 'participants#dashboard', as: :participant_dashboard
+  
   resources :accounts
 
   resources :administrators
@@ -24,13 +27,11 @@ Rails.application.routes.draw do
   resources :teams
 
   resources :conferences
-  get	'create_conference' => 'conferences#new'
-  post	'create_conference' => 'conferences#create'
   
   resources :sessions
   
   resources :registrations
-
+  
   get 'welcome/index'
 
   # The priority is based upon order of creation: first created -> highest priority.

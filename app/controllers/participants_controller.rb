@@ -1,5 +1,5 @@
 class ParticipantsController < ApplicationController
-  before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:index, :show, :edit, :dashboard, :update, :destroy]
   before_action :set_participant, only: [:show, :edit, :update, :destroy]
   before_action :correct_user_or_admin, only: [:show, :edit, :update]
   before_action :admin_account, only: [:index, :destroy]
@@ -29,6 +29,10 @@ class ParticipantsController < ApplicationController
 
   # GET /participants/1/edit
   def edit
+  end
+  
+  # GET /administrator/dashboard
+  def dashboard
   end
 
   # POST /participants
