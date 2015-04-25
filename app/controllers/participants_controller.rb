@@ -74,6 +74,7 @@ class ParticipantsController < ApplicationController
 		    participant.update(:captain => false)
 		  end
 		end
+		log_in @participant.account
         format.html { redirect_to @participant, notice: 'Participant was successfully updated.' }
         format.json { render :show, status: :ok, location: @participant }
       else

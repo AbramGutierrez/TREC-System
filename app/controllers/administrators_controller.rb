@@ -48,6 +48,7 @@ class AdministratorsController < ApplicationController
   def update
     respond_to do |format|
       if @administrator.update(administrator_params)
+	    log_in @administrator.account
         format.html { redirect_to @administrator, notice: 'Administrator was successfully updated.' }
         format.json { render :show, status: :ok, location: @administrator }
       else
