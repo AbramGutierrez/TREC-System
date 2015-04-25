@@ -20,5 +20,6 @@
 </p>
 
 <% if is_participant? || is_admin? %>
-<%= link_to 'Edit', edit_team_path(@team) %>
+<%= link_to 'Edit Team Info', edit_team_path(@team) %> |
+<%= link_to 'Add/Remove Team Members', edit_team_path(@team) %>
 <% end %>
