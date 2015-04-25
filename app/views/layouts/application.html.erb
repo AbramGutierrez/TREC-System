@@ -64,11 +64,13 @@
 	  </div>
 	  <div class="small-2 columns" align='center'>
 	    <h5>Sponsors</h5>
-		<% (get_sponsors).each do |sponsor| %>
+		<% if !(get_sponsors).nil? %>
+		  <% (get_sponsors).each do |sponsor| %>
 		  
-		  <%= image_tag(sponsor.logo_path_url.to_s, size: "100", alt: "") %> <br><br>
+		    <%= image_tag(sponsor.logo_path_url.to_s, size: "100", alt: "") %> <br><br>
 		  
-		<% end %>
+		  <% end %>
+		<% end %>  
 	  </div>
 	</div>
 	<hr>

@@ -33,7 +33,7 @@ class AccountsController < ApplicationController
       if @account.save
 		    log_in @account
 		    
-		    ConfirmationMailer.welcome_email(@account).deliver_later
+		    ConfirmationMailer.welcome_email(@account).deliver_now!
 		    
         format.html { redirect_to @account, notice: 'Account was successfully created.' }
         format.json { render :show, status: :created, location: @account }
