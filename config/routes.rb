@@ -31,6 +31,8 @@ Rails.application.routes.draw do
   resources :sessions
   
   resources :registrations
+
+  resources :team_members
   
   get 'welcome/index'
 

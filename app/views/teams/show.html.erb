@@ -21,5 +21,6 @@
 
 <% if is_participant? || is_admin? %>
 <%= link_to 'Edit Team Info', edit_team_path(@team) %> |
-<%= link_to 'Add/Remove Team Members', edit_team_path(@team) %>
+<% @team_id = @team.id %>
+<%= link_to "Add/Remove Team Members", controller: "team_members", action: "show", id: @team_id %>
 <% end %>
