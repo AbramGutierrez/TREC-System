@@ -15,7 +15,7 @@ Scenario: Login
 	When I fill in "Email" with "participant@example.com"
 	And I fill in "Password" with "password"
 	And I press "Log in"
-	Then I should be on the home page
+	Then I should be on the participant dashboard
 	And I should see "Log out"
 	
 Scenario: Logout
@@ -25,7 +25,7 @@ Scenario: Logout
 	When I fill in "Email" with "participant@example.com"
 	And I fill in "Password" with "password"
 	And I press "Log in"
-	Then I should be on the home page
+	Then I should be on the participant dashboard
 	When I follow "Log out"
 	Then I should be on the home page
 	And I should see "Log in"

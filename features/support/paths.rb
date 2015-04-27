@@ -18,6 +18,12 @@ module NavigationHelpers
 	
 	when /^the Log in page/
 	  '/login'
+	  
+	when /^the participant dashboard/
+      '/participant/dashboard'	
+	  
+	when /^the administrator dashboard/
+      '/administrator/dashboard'  
 	
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
