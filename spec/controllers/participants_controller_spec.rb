@@ -149,6 +149,7 @@ RSpec.describe ParticipantsController, type: :controller do
 
   describe "GET #new" do
     it "assigns a new participant as @participant" do
+	  log_in_as(@p2.account)
       get :new, {}, valid_session
       expect(assigns(:participant)).to be_a_new(Participant)
     end
@@ -188,18 +189,21 @@ RSpec.describe ParticipantsController, type: :controller do
   describe "POST #create" do
     context "with valid params" do
       it "creates a new Participant" do
+	    log_in_as(@p2.account)
         expect {
           post :create, {:participant => valid_attributes}, valid_session
         }.to change(Participant, :count).by(1)
       end
 
       it "assigns a newly created participant as @participant" do
+	    log_in_as(@p2.account)
         post :create, {:participant => valid_attributes}, valid_session
         expect(assigns(:participant)).to be_a(Participant)
         expect(assigns(:participant)).to be_persisted
       end
 
       it "redirects to the created participant" do
+	    log_in_as(@p2.account)
         post :create, {:participant => valid_attributes}, valid_session
         expect(response).to redirect_to(Participant.last)
       end
@@ -207,11 +211,13 @@ RSpec.describe ParticipantsController, type: :controller do
 
     context "with invalid params" do
       it "assigns a newly created but unsaved participant as @participant" do
+	    log_in_as(@p2.account)
         post :create, {:participant => invalid_attributes}, valid_session
         expect(assigns(:participant)).to be_a_new(Participant)
       end
 
       it "re-renders the 'new' template" do
+	    log_in_as(@p2.account)
         post :create, {:participant => invalid_attributes}, valid_session
         expect(response).to render_template("new")
       end
