@@ -10,7 +10,7 @@
     <td class="icon-label">Team Information</td>  
   </tr>
   <tr>
-    <td class="icon"><%= link_to "", root_path, :class => "ibutton fi-torso"%></td>
+    <td class="icon"><%= link_to "", {controller: "participants", action: "edit", id: current_participant}, :class => "ibutton fi-torso"%></td>
     <td class="icon-label">Manage Account</td>  
   </tr>
 </table>

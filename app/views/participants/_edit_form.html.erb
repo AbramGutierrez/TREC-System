@@ -39,7 +39,7 @@
     </div>
     <div class="field">
       <%= f.label :shirt_size %><br>
-      <%= f.select :shirt_size, options_for_select(%w[small medium large]) %>
+      <%= f.select :shirt_size, options_for_select(%w[small medium large], :selected => @participant.shirt_size) %>
     </div>
     <div class="actions">
       <%= f.submit %>
