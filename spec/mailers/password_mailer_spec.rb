@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe ConfirmationMailer, type: :mailer do
+RSpec.describe PasswordMailer, type: :mailer do
   describe "sends a confirmation email" do
     let(:participant) { Participant.new() }
     let(:account) { Account.create(first_name: "first", last_name: "last",
