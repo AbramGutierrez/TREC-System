@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Welcome to TREC, <%= @user.name %></h1>
+    <p>
+     	Please login with your email and password using the link below.
+     	Your current password is: <%= @user.password %><br>
+      
+		Please change your password as soon as possible for more security.<br>
+    </p>
+    <p>
+      You can login here: http://trec.herokuapp.com/login.
+    </p>
+    <p>Thanks for joining and have a great day!</p>
+  </body>
+</html>

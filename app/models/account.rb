@@ -5,11 +5,9 @@ class Account < ActiveRecord::Base
 	
 	before_save { self.email = email.downcase }
 	after_create { 
-	  temp_password = SecureRandom.base64 4
-	  self.password = temp_password
-	  self.password_confirmation = temp_password
+	  self.randomize_email()
 	  
-	  ConfirmationMailer.welcome_email(self).deliver_now 
+	  PasswordMailer.welcome_email(self).deliver_now 
 	}
 	
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -34,5 +32,11 @@ class Account < ActiveRecord::Base
 	    result = [first_name, last_name].join
 	  end
 	  result
+	end
+	
+	def randomize_email
+	  temp_password = SecureRandom.base64 4
+    self.password = temp_password
+    self.password_confirmation = temp_password
 	end
 end
