@@ -16,6 +16,6 @@ RSpec.describe "friendly forwarding", :type => :request do
 		get edit_account_path(@p.account)
 	    expect(response).to redirect_to(login_path)
 	    log_in_as(@p.account)
-	    expect(response).to redirect_to(participant_dashboard_url)
+	    expect(response).to redirect_to(edit_account_path(@p.account))
 	end
 end

@@ -8,9 +8,9 @@ class SessionsController < ApplicationController
 	if account && account.authenticate(params[:session][:password])
 		log_in account
 		if is_admin?
-			redirect_to admin_dashboard_path
+			redirect_back_or admin_dashboard_path
 		elsif is_participant?
-			redirect_to participant_dashboard_path
+			redirect_back_or participant_dashboard_path
 		else
 			redirect_back_or root_url
 		end

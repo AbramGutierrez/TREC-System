@@ -20,6 +20,14 @@ RSpec.describe "teams/show", type: :view do
       :school => "MyString",
 	  :conference => c
     ))
+	@p = Participant.create!(captain: false, shirt_size: "large",
+			phone: "1876543211", account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
+			password: "password", password_confirmation: "password"}, team: @team)
+	log_in_as(@p.account)		
+  end
+  
+  after(:each) do
+    @p.destroy
   end
 
   it "renders attributes in <p>" do
