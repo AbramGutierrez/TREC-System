@@ -32,7 +32,7 @@ class ParticipantsController < ApplicationController
   def edit
   end
   
-  # GET /administrator/dashboard
+  # GET /participant/dashboard
   def dashboard
   end
 
@@ -51,7 +51,8 @@ class ParticipantsController < ApplicationController
 	    if participant_params[:team_id].nil? && !params[:team][:team_name].nil?
 	      @participant.team = @team
 		  @participant.save
-		end  
+		end
+		log_in @participant.account	
         format.html { redirect_to @participant, notice: 'Participant was successfully created.' }
         format.json { render :show, status: :created, location: @participant }
       else
@@ -74,6 +75,7 @@ class ParticipantsController < ApplicationController
 		    participant.update(:captain => false)
 		  end
 		end
+		log_in @participant.account
         format.html { redirect_to @participant, notice: 'Participant was successfully updated.' }
         format.json { render :show, status: :ok, location: @participant }
       else
