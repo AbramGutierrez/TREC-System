@@ -12,6 +12,10 @@ RSpec.describe ConfirmationMailer, type: :mailer do
       expect(mail.body.encoded).to match(account.password)
     end
     
+    it "containing a 6-digit password" do
+      expect(account.password.length()).to be_within(3).of(6)
+    end
+    
     it "and renders the subject" do
       expect(mail.subject).to match('Welcome to TREC')
     end

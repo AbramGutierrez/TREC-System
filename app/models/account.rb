@@ -5,7 +5,7 @@ class Account < ActiveRecord::Base
 	
 	before_save { self.email = email.downcase }
 	after_create { 
-	  temp_password = SecureRandom.base64
+	  temp_password = SecureRandom.base64 4
 	  self.password = temp_password
 	  self.password_confirmation = temp_password
 	  
