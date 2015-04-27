@@ -17,6 +17,8 @@ class Account < ActiveRecord::Base
 					  format: { with: VALID_EMAIL_REGEX },
 					  uniqueness: { case_sensitive: false }
 					  
+	validate :name_validation				  
+					  
 	# This is necessary to create and encrypt the password
 	# To suppress the validations that it adds, pass "validations: false" as an argument to it	
 	has_secure_password validations: false
@@ -35,4 +37,9 @@ class Account < ActiveRecord::Base
 	  end
 	  result
 	end
+	
+	private
+		def name_validation
+		  errors.add(:first_name, "first and last name cannot be blank") unless !first_name.blank? || !last_name.blank?
+		end
 end

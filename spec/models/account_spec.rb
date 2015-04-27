@@ -2,11 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Account, type: :model do
     before(:each) do
-		p = Participant.create(captain: false, shirt_size: "medium", 
-			phone: "1234567890")
 		@account = Account.new(first_name: "first", last_name: "last",
 								email: "valid_email@test.com", password: "123456",
-								password_confirmation: "123456", user: p)
+								password_confirmation: "123456")
     end
 	
 	it "should be valid" do
@@ -14,16 +12,22 @@ RSpec.describe Account, type: :model do
 	end
 	
 	it "should require an email" do
-		Account.new(:email => "").should_not be_valid
+		Account.new(first_name: "first", last_name: "last",
+								email: "", password: "123456",
+								password_confirmation: "123456").should_not be_valid
 	end
 	
 	it "should require a valid email" do
-		Account.new(:email => "invalid_email").should_not be_valid
+		Account.new(first_name: "first", last_name: "last",
+								email: "invalid_email", password: "123456",
+								password_confirmation: "123456").should_not be_valid
 	end
 	
 	it "should not allow an email longer than the max length" do
 		invalid_email = "a" * 244 + "@example.com"
-		Account.new(:email => invalid_email).should_not be_valid
+		Account.new(first_name: "first", last_name: "last",
+			:email => invalid_email, password: "123456",
+								password_confirmation: "123456").should_not be_valid
 	end
 	
 	it "should not allow duplicate email addresses" do
@@ -65,6 +69,8 @@ RSpec.describe Account, type: :model do
   end
   
   it "should have a first or last name" do
-    account = Account.new(:first_name => "", :last_name => "").should_not be_valid
+    account = Account.new(:first_name => "", :last_name => "",
+		:email => "avalidemail@valid.com", :password => "123456",
+		:password_confirmation => "123456").should_not be_valid
   end
 end
