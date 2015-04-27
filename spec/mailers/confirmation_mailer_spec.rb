@@ -13,7 +13,7 @@ RSpec.describe ConfirmationMailer, type: :mailer do
     end
     
     it "containing a 6-digit password" do
-      expect(account.password.length()).to be_within(3).of(6)
+      expect(account.password.length()).to be_within(2).of(6)
     end
     
     it "and renders the subject" do
