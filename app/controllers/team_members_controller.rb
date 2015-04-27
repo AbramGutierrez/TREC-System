@@ -5,6 +5,8 @@ class TeamMembersController < ApplicationController
 
 	def show
 		@participants = Participant.where(:team_id => params[:id])
+		#@accounts = Accounts.all(:joins => :participant, :conditions => { :participant => { :team_id => params[:id] } })
+
 	end
 
 	def new
