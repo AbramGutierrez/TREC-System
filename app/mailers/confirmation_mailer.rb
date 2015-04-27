@@ -7,7 +7,6 @@ class ConfirmationMailer < ApplicationMailer
   
   def welcome_email(user)
     @user = user
-    @url = 'http://trec.herokuapp.com/confirmation/#{user.user_id}'
     mail(to: @user.email, subject: 'Welcome to TREC')
   end
 end

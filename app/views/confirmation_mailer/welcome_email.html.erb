@@ -6,13 +6,13 @@
   <body>
     <h1>Welcome to TREC, <%= @user.name %></h1>
     <p>
-      Please confirm your email using the link below.
-      You will create your password there.<br>
-      Please note that you can only set your email through
-      this link once.<br>
+     	Please login with your email and password using the link below.
+     	Your current password is: <%= @user.password %><br>
+      
+		Please change your password as soon as possible for more security.<br>
     </p>
     <p>
-      Please click here to confirm this email: <%= @url %>.
+      You can login here: http://trec.herokuapp.com/login.
     </p>
     <p>Thanks for joining and have a great day!</p>
   </body>
