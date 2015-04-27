@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+   <body>
+		<h1>Hello, <%= @user.name %>,</h1>
+		<p>
+			As requested, we have reset your password for TREC. Please use this password to log in and create a new personal password for yourself.
+		</p>
+		<p>Your new password is: <%= @user.password %></p>
+		<p>You can login here: http://trec.herokuapp.com/login.</p>
+		<p>Thank you, and have a good day.</p>
+	</body>
+</html>
