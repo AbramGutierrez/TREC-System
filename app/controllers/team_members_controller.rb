@@ -4,6 +4,7 @@ class TeamMembersController < ApplicationController
 	end
 
 	def show
+		@participants = Participant.where(:team_id => params[:id])
 	end
 
 	def new

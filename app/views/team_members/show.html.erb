@@ -1,3 +1,9 @@
 <h1>Show team members</h1>
 
+<% @participants.each do |participant| %>
+	<p><%= participant.id %> | Destroy</p>
+
+<% end %>
+
+
 <li><%= link_to "Add new team member", controller: "participants", action: "new" %></li>
