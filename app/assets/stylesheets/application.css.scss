@@ -15,9 +15,11 @@
  *= require foundation_and_overrides
 
  */
- 
- @import "foundation";
+
+ @import 'foundation_and_overrides';
+ //@import 'foundation';
  @import 'foundation-icons';
+
 
 table.icon {
 	width: 100%;
