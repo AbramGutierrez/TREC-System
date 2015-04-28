@@ -44,4 +44,39 @@ RSpec.describe PasswordMailer, type: :mailer do
       expect { Account.create(first_name: "first", last_name: "last", email: "valid_email@test.com", user: participant) }.to change { ActionMailer::Base.deliveries.count }.by(1)
     end
   end
+  
+  describe "sends a reset password email" do
+    let(:participant) { Participant.new() }
+    let(:account) { Account.create(first_name: "first", last_name: "last",
+                email: "valid_email@test.com", user: participant,
+                password: "new_password")
+    }
+    let(:mail) { PasswordMailer.reset_email(account) }
+    
+    it "containing the user's new password" do
+      expect(mail.body.encoded).to match(account.password)
+    end
+    
+    it "and renders the subject" do
+      expect(mail.subject).to match('TREC Password Reset')
+    end
+    
+    it "to the correct person" do
+      expect(mail.to).to match([account.email])
+    end
+    
+    it "from TREC" do
+      expect(mail.from).to match([PasswordMailer.default_from()])
+    end
+    
+    it "containing a link to the login page" do
+      expect(mail.body.encoded).to match('http://trec.herokuapp.com/login')
+    end
+    
+    it "after changing the user's password" do
+      account.randomize_email()
+      new_mail = PasswordMailer.reset_email(account)
+      expect(new_mail.body.encoded).to match(account.password)
+    end
+  end
 end
