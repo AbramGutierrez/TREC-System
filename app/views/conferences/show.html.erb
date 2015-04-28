@@ -50,5 +50,27 @@
 <br/>
 
 <p align="center"><h2>Statistics</h2></p>
+<table>
+  <thead>
+    <tr>
+      <th colspan='5'>Shirt Sizes</th>
+    </tr>
+    <tr>
+      <th>XS</th>
+      <th>S</th>
+      <th>M</th>
+      <th>L</th>
+      <th>XL</th>
+    </tr>
+  </thead>
 
-<p>In here i'll figure out how to be better at accessing stuff through rails and make neat charts and whatnot</p>
+  <tbody>
+    <tr>
+      <td><%= count_shirts('X-small') %></td>
+      <td><%= count_shirts('Small') %></td>
+      <td><%= count_shirts('Medium') %></td>
+      <td><%= count_shirts('Large') %></td>
+      <td><%= count_shirts('X-large') %></td>
+    </tr>
+  </tbody>
+</table>

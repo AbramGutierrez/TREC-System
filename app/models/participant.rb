@@ -3,7 +3,7 @@ class Participant < ActiveRecord::Base
 	has_one :account, :as => :user, dependent: :destroy
 	
 	validates :phone, :account, :team, presence: true
-	validates :shirt_size, presence: true, inclusion: { in: %w(small medium large),
+	validates :shirt_size, presence: true, inclusion: { in: %w(X-small Small Medium Large X-large),
       message: "%{value} is not a valid size, try entering small, medium, or large." }
 	  
 	# Apparently Ruby views nil and false as the same thing, so this only allows captain to be true
