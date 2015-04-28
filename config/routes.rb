@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  get 'password_resets/new'
+  get 'password_resets/create'
+
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
@@ -33,6 +36,8 @@ Rails.application.routes.draw do
   resources :registrations
 
   resources :team_members
+  
+  resources :password_resets, only: [:new, :create, :edit, :update]
   
   get 'welcome/index'
 
