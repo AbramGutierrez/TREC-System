@@ -27,6 +27,7 @@ class RegistrationsController < ApplicationController
 				shirt_size: participant[:shirt_size],
 				phone: participant[:phone],
 				waiver_signed: false,
+				team: @team,
 				account_attributes: {
 				  email: participant[:email],
 				  first_name: participant[:first_name],

@@ -74,7 +74,7 @@ RSpec.describe PasswordMailer, type: :mailer do
     end
     
     it "after changing the user's password" do
-      account.randomize_email()
+      account.randomize_password()
       new_mail = PasswordMailer.reset_email(account)
       expect(new_mail.body.encoded).to match(account.password)
     end

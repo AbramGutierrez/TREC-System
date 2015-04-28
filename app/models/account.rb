@@ -5,7 +5,7 @@ class Account < ActiveRecord::Base
 	
 	before_save { self.email = email.downcase }
 	after_create { 
-	  self.randomize_email()
+	  self.randomize_password()
 	  
 	  PasswordMailer.welcome_email(self).deliver_now 
 	}
@@ -14,6 +14,8 @@ class Account < ActiveRecord::Base
 	validates :email, presence: true, length: { maximum: 255 },
 					  format: { with: VALID_EMAIL_REGEX },
 					  uniqueness: { case_sensitive: false }
+					  
+	validate :name_validation				  
 					  
 	# This is necessary to create and encrypt the password
 	# To suppress the validations that it adds, pass "validations: false" as an argument to it	
@@ -34,9 +36,16 @@ class Account < ActiveRecord::Base
 	  result
 	end
 	
-	def randomize_email
+
+	def randomize_password
 	  temp_password = SecureRandom.base64 4
     self.password = temp_password
     self.password_confirmation = temp_password
 	end
+
+	private
+		def name_validation
+		  errors.add(:first_name, "first and last name cannot be blank") unless !first_name.blank? || !last_name.blank?
+		end
+
 end

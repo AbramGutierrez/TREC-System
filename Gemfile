@@ -23,7 +23,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use foundation for stylesheets
-gem 'foundation-rails'
+gem 'foundation-rails', github:'zurb/foundation-rails'
 
 # Use icons in sass
 gem 'foundation-icons-sass-rails'
