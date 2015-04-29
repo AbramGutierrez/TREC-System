@@ -71,4 +71,34 @@ RSpec.describe Participant, type: :model do
 		)).to_not be_valid
 	end
   
+	it "should not allow the max team size to be exceeded" do
+		c1 = Conference.create!(start_date: Date.parse("2015-4-4"), 
+			end_date: Date.parse("2015-6-6"),
+			max_team_size: 1,
+			min_team_size: 1,
+			max_teams: 5,
+			tamu_cost: 30.00,
+			other_cost: 60.00,
+			challenge_desc: 'yay!',
+			)
+		
+		team1 = Team.create!(:conference => c1,	
+			:school => "TestSchool",
+			:paid_status => "paid", 
+			:team_name => "PartTest" 
+			)
+			
+		p1 = Participant.create!(captain: false, shirt_size: "large",
+			phone: "1876543211", team: team1,
+			account_attributes: {first_name: "A", last_name: "Z", email: "parti1@example.com",
+			password: "mypassword", password_confirmation: "mypassword"})
+
+		expect(Participant.new(captain: false, shirt_size: "large",
+			phone: "1876543211", team: team1, 
+			account_attributes: {first_name: "A", last_name: "Z", email: "parti2@example.com",
+			password: "mypassword", password_confirmation: "mypassword"}
+		)).to_not be_valid
+			
+	end
+  
 end

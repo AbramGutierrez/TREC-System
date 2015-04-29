@@ -12,5 +12,16 @@ class Participant < ActiveRecord::Base
 	# We could do something like this, but it is not necessary
 	validates :captain, inclusion: [true, false]
 	
+	validate :team_full
+	
 	accepts_nested_attributes_for :account
+	
+	private
+	
+		def team_full
+			if !team.nil?
+				errors.add(:team, "already has the maximum number of participants.") unless
+					team.participants.count < team.conference.max_team_size
+			end		
+		end
 end

@@ -3,7 +3,7 @@ class TeamsController < ApplicationController
   before_action :set_team, only: [:show, :edit, :update, :destroy]
   before_action :admin_account, only: [:index, :destroy]
   before_action :participant_account, only: [:new, :create]
-  before_action :on_team, only: [:show, :edit, :update]
+  before_action :on_team_or_admin, only: [:show, :edit, :update]
 
   # GET /teams
   # GET /teams.json
@@ -80,4 +80,9 @@ class TeamsController < ApplicationController
 	def on_team
 	  redirect_to(root_url) unless current_account.user.is_a?(Participant) && current_participant.team == @team
 	end
+	
+	def on_team_or_admin
+	  redirect_to(root_url) unless (current_account.user.is_a?(Participant) && 
+		current_participant.team == @team) || current_account.user.is_a?(Administrator)	
+	end	
 end
