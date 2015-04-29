@@ -32,7 +32,7 @@ feature 'Log in' do
 		log_in_with('test@example.com', 'password')
 		
 		Capybara.current_session.driver.delete logout_path
-		Capybara.current_session.driver.response.should be_redirect
+		expect(Capybara.current_session.driver.response).to be_redirect
 		visit Capybara.current_session.driver.response.location
 
 		expect(page).to have_content('Home')
