@@ -29,7 +29,7 @@ RSpec.describe "participants/edit", type: :view do
     @participant = assign(:participant, Participant.create!(
       :captain => true,
       :waiver_signed => false,
-      :shirt_size => "small",
+      :shirt_size => "Small",
 	  :phone => "1111111111",
 	  :team => @team,
 	  :account_attributes => {

@@ -46,7 +46,7 @@ RSpec.describe TeamsController, type: :controller do
 			password: "admin", password_confirmation: "admin"}) 	
   }	
   before(:each){
-	@p = Participant.create!(captain: false, shirt_size: "large",
+	@p = Participant.create!(captain: false, shirt_size: "Large",
 			phone: "1876543211", team: @team, account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
 			password: "mypassword", password_confirmation: "mypassword"})
   }
@@ -118,7 +118,7 @@ RSpec.describe TeamsController, type: :controller do
 	  team = Team.create! valid_attributes
 	  log_in_as(@admin.account)
 	  get :show, {:id => team.to_param}, valid_session
-      expect(response).to redirect_to(root_url)
+      expect(response).to_not redirect_to(root_url)
 	end
 	
 	it "redirects show when not logged in" do
@@ -173,7 +173,7 @@ RSpec.describe TeamsController, type: :controller do
 	  team = Team.create! valid_attributes
 	  log_in_as(@admin.account)
 	  get :edit, {:id => team.to_param}, valid_session
-      expect(response).to redirect_to(root_url)
+      expect(response).to_not redirect_to(root_url)
 	end
 	
 	it "redirects edit when not logged in" do
@@ -303,7 +303,7 @@ RSpec.describe TeamsController, type: :controller do
 	    team = Team.create! valid_attributes
 		log_in_as(@admin.account)
 		put :update, {:id => team.to_param, :team => valid_attributes}, valid_session
-		expect(response).to redirect_to(root_url)
+		expect(response).to_not redirect_to(root_url)
 	  end
     end
 

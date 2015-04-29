@@ -3,7 +3,7 @@ require 'rails_helper'
 
 feature 'Log in' do
 	before(:each) do
-		p = Participant.create(captain: false, shirt_size: "medium", 
+		p = Participant.create(captain: false, shirt_size: "Medium", 
 			phone: 1234567890)
 		Account.create(first_name: "TestFirst", last_name: "TestLast",
 			email: "test@example.com", password: "password",

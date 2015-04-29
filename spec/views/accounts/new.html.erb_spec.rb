@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "accounts/new", type: :view do
   before(:each) do
-    p = Participant.create(captain: false, shirt_size: "medium", 
+    p = Participant.create(captain: false, shirt_size: "Medium", 
 			phone: "1234567890")
     @account = assign(:account, Account.create!(
       :email => "test_email@example.com",

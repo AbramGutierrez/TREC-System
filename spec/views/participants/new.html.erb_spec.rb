@@ -5,7 +5,7 @@ RSpec.describe "participants/new", type: :view do
     assign(:participant, Participant.new(
       :captain => false,
       :waiver_signed => false,
-      :shirt_size => "small",
+      :shirt_size => "Small",
 	  :phone => "9876654321",
 	  :account_attributes => {
 	    email: "test@example.com",

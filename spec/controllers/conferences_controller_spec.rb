@@ -42,7 +42,7 @@ RSpec.describe ConferencesController, type: :controller do
 	  :team_name => "ControllerTest" 
 	  )
   
-    @p = Participant.create!(captain: false, shirt_size: "large",
+    @p = Participant.create!(captain: false, shirt_size: "Large",
 			phone: "1876543211", team: @team, account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
 			password: "mypassword", password_confirmation: "mypassword"})
 			

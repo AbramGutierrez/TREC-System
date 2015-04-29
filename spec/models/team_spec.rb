@@ -97,6 +97,9 @@ RSpec.describe Team, type: :model do
 			:paid_status => "paid",
 			:team_name => "team2" 
 		)).to_not be_valid
+		
+		team.destroy
+		c1.destroy
 	end
   
 end
