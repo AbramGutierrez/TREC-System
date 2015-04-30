@@ -37,7 +37,7 @@ Rails.application.routes.draw do
 
   resources :team_members
   
-  resources :password_resets, only: [:new, :create, :edit, :update]
+  resources :password_resets, only: [:create]
   
   get 'welcome/index'
 
