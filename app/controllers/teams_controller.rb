@@ -3,7 +3,8 @@ class TeamsController < ApplicationController
   before_action :set_team, only: [:show, :edit, :update, :destroy]
   before_action :admin_account, only: [:index, :destroy]
   before_action :participant_account, only: [:new, :create]
-  before_action :on_team_or_admin, only: [:show, :edit, :update]
+  before_action :on_team_or_admin, only: :show
+  before_action :captain_or_admin, only: [:edit, :update]
 
   # GET /teams
   # GET /teams.json
@@ -85,4 +86,13 @@ class TeamsController < ApplicationController
 	  redirect_to(root_url) unless (current_account.user.is_a?(Participant) && 
 		current_participant.team == @team) || current_account.user.is_a?(Administrator)	
 	end	
+	
+	def captain_or_admin
+	  if !((current_account.user.is_a?(Participant) && 
+		current_participant.team == @team && current_participant.captain?) || 
+		current_account.user.is_a?(Administrator))
+		  flash[:alert] = "Only the Team Captain can edit team information."
+		  redirect_to(root_url)
+	  end		
+	end
 end

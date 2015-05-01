@@ -1,7 +1,13 @@
 <h1>Show team members</h1>
 
 <% @participants.each do |participant| %>
-	<p><%= participant.id %> | Destroy</p>
+	<% @id = participant.id %>
+	<p>
+		<% @account = Account.find_by user_id: @id %>
+		<%= @account.first_name %>
+		<%= @account.last_name %>
+		| <%= link_to "Remove", team_member_path(@account.id), :confirm => "Are you sure", :method => :delete %>
+	</p>
 <% end %>
 
 

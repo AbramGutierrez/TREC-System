@@ -5,8 +5,6 @@ class TeamMembersController < ApplicationController
 
 	def show
 		@participants = Participant.where(:team_id => params[:id])
-		#@accounts = Accounts.all(:joins => :participant, :conditions => { :participant => { :team_id => params[:id] } })
-
 	end
 
 	def new
@@ -22,6 +20,9 @@ class TeamMembersController < ApplicationController
 	end
 
 	def destroy
+		@account = Account.find(params[:id])
+		@account.destroy
+		redirect_to team_members_path
 	end
 	
 end
