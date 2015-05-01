@@ -326,11 +326,11 @@ RSpec.describe ParticipantsController, type: :controller do
       expect(response).to redirect_to(login_url)
 	end
 	
-	it "redirects destroy when account is not an admin" do
+	it "redirects destroy when account is not the team captain" do
 	  participant = Participant.create! valid_attributes
 	  log_in_as(@p2.account)
       delete :destroy, {:id => participant.to_param}, valid_session
-      expect(response).to redirect_to(root_url)
+      expect(response).to redirect_to(participant_dashboard_url)
 	end
   end
 
