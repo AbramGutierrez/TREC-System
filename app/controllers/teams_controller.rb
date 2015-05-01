@@ -88,8 +88,11 @@ class TeamsController < ApplicationController
 	end	
 	
 	def captain_or_admin
-	  redirect_to(root_url) unless (current_account.user.is_a?(Participant) && 
+	  if !((current_account.user.is_a?(Participant) && 
 		current_participant.team == @team && current_participant.captain?) || 
-		current_account.user.is_a?(Administrator)		
+		current_account.user.is_a?(Administrator))
+		  flash[:alert] = "Only the Team Captain can edit team information."
+		  redirect_to(root_url)
+	  end		
 	end
 end
