@@ -1,7 +1,7 @@
 class Conference < ActiveRecord::Base
 	has_many :teams
 	has_many :sponsors
-	validates :start_date, :end_date, :max_team_size, 
+	validates :start_date, :end_date, :conf_start_date, :conf_end_date, :max_team_size, 
 		:min_team_size, :max_teams, :tamu_cost, :other_cost,
 		:challenge_desc, presence: true
 	
@@ -28,7 +28,10 @@ class Conference < ActiveRecord::Base
 		def date_validation
 		    if (!start_date.nil? && !end_date.nil?)
 				errors.add(:end_date, 'cannot be before the start date') if start_date > end_date
-			end	
+			end
+			if (!conf_start_date.nil? && !conf_end_date.nil?)
+				errors.add(:conf_end_date, 'cannot be before the conference start date') if conf_start_date > conf_end_date
+			end
 		end
 		
 		def team_size_validation
