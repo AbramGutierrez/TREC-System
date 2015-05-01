@@ -70,3 +70,17 @@
 		first_name: "Abram",
 		last_name: "Gutierrez"
 		})
+
+	new_participant4 = Participant.create(
+	  team_id: new_team.id,
+	  waiver_signed: false,
+	  captain: false,
+	  shirt_size: "Small",
+	  phone: "1234567890",
+	  account_attributes: {
+	    email: "participant4@example.com",
+		password: "password",
+		first_name: "Jane",
+		last_name: "Doe"
+	  }) 	
+		
