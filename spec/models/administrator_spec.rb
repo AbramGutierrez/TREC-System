@@ -8,7 +8,7 @@ RSpec.describe Administrator, type: :model do
     end
 	
 	it "should be valid" do
-		@administrator.should be_valid
+		expect(@administrator).to be_valid
 	end
 	
 	it "should require an account" do

@@ -21,11 +21,17 @@ class ParticipantsController < ApplicationController
   # GET /participants/new
   def new
     @participant = Participant.new
-    @team_array = Team.all.map { |team| [team.team_name] }
-	if @team_array.nil? || @team_array.blank?
-	  flash[:error] = "No team available to add participants to."
-	  redirect_to action: "index" and return
-	end
+	# Admins can add participants to any team,
+	# but participants can only add to their own team.
+	if is_admin?
+		@team_array = Team.all.map { |team| [team.team_name] }
+		if @team_array.nil? || @team_array.blank?
+			flash[:alert] = "No team available to add participants to."
+			redirect_to action: "index" and return
+		end
+	else
+		@team_array = current_participant.team.team_name
+	end	
   end
 
   # GET /participants/1/edit

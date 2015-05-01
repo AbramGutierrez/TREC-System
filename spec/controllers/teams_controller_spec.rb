@@ -41,21 +41,33 @@ RSpec.describe TeamsController, type: :controller do
 	  :paid_status => "paid", 
 	  :team_name => "ControllerTest" 
 	  )  
+	  
+	@team2 = Team.create!(:conference => @c,	
+	  :school => "TestSchool",
+	  :paid_status => "paid", 
+	  :team_name => "ControllerTest2" 
+	  )  
 			
     @admin = Administrator.create!(account_attributes: {first_name: "Admin", last_name: "istrator", email: "admin@example.com",
 			password: "admin", password_confirmation: "admin"}) 	
   }	
   before(:each){
-	@p = Participant.create!(captain: false, shirt_size: "Large",
+	@p = Participant.create!(captain: true, shirt_size: "Large",
 			phone: "1876543211", team: @team, account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
 			password: "mypassword", password_confirmation: "mypassword"})
+			
+	@p2 = Participant.create!(captain: false, shirt_size: "Large",
+			phone: "1876543211", team: @team, account_attributes: {first_name: "A", last_name: "Z", email: "p4_2@example.com",
+			password: "mypassword", password_confirmation: "mypassword"})		
   }
   after(:each){
+    @p2.destroy
     @p.destroy
   }
   after(:all){
 	@c.destroy
 	@team.destroy
+	@team2.destroy
 	@admin.account.destroy
 	@admin.destroy
   }
@@ -114,7 +126,7 @@ RSpec.describe TeamsController, type: :controller do
       expect(assigns(:team)).to eq(team)
     end
 	
-	it "does redirect for an admin" do
+	it "does not redirect for an admin" do
 	  team = Team.create! valid_attributes
 	  log_in_as(@admin.account)
 	  get :show, {:id => team.to_param}, valid_session
@@ -128,15 +140,14 @@ RSpec.describe TeamsController, type: :controller do
       expect(response).to redirect_to(login_url)
     end
 	
-	# Team validation added to participant model
-	# it "redirects show when not on team" do
-      # team = Team.create! valid_attributes
-	  # @p.team = nil
-	  # @p.save!
-	  # log_in_as(@p.account)
-      # get :show, {:id => team.to_param}, valid_session
-      # expect(response).to redirect_to(root_url)
-    # end
+	it "redirects show when not on team" do
+      team = Team.create! valid_attributes
+	  @p.team = @team2
+	  @p.save!
+	  log_in_as(@p.account)
+      get :show, {:id => team.to_param}, valid_session
+      expect(response).to redirect_to(root_url)
+    end
   end
 
   describe "GET #new" do
@@ -169,7 +180,7 @@ RSpec.describe TeamsController, type: :controller do
       expect(assigns(:team)).to eq(team)
     end
 	
-	it "does redirect edit for an admin" do
+	it "does not redirect edit for an admin" do
 	  team = Team.create! valid_attributes
 	  log_in_as(@admin.account)
 	  get :edit, {:id => team.to_param}, valid_session
@@ -183,15 +194,23 @@ RSpec.describe TeamsController, type: :controller do
       expect(response).to redirect_to(login_url)
     end
 	
-	# Team validation added to participant model
-	# it "redirects edit when not on team" do
-      # team = Team.create! valid_attributes
-	  # @p.team = nil
-	  # @p.save!
-	  # log_in_as(@p.account)
-      # get :edit, {:id => team.to_param}, valid_session
-      # expect(response).to redirect_to(root_url)
-    # end
+	it "redirects edit when not on team" do
+      team = Team.create! valid_attributes
+	  @p.team = @team2
+	  @p.save!
+	  log_in_as(@p.account)
+      get :edit, {:id => team.to_param}, valid_session
+      expect(response).to redirect_to(root_url)
+    end
+	
+	it "redirects edit when not team captain" do
+      team = Team.create! valid_attributes
+	  @p2.team = team
+	  @p2.save!
+	  log_in_as(@p2.account)
+      get :edit, {:id => team.to_param}, valid_session
+      expect(response).to redirect_to(root_url)
+    end
   end
 
   describe "POST #create" do
@@ -289,17 +308,25 @@ RSpec.describe TeamsController, type: :controller do
 		expect(response).to redirect_to(login_url)
 	  end
 	  
-	  # Team validation added to participant model
-	  # it "redirects update when not on team" do
-	    # team = Team.create! valid_attributes
-		# @p.team = nil
-		# @p.save!
-		# log_in_as(@p.account)
-		# put :update, {:id => team.to_param, :team => valid_attributes}, valid_session
-		# expect(response).to redirect_to(root_url)
-	  # end
+	  it "redirects update when not on team" do
+	    team = Team.create! valid_attributes
+		@p.team = @team2
+		@p.save!
+		log_in_as(@p.account)
+		put :update, {:id => team.to_param, :team => valid_attributes}, valid_session
+		expect(response).to redirect_to(root_url)
+	  end
 	  
-	  it "redirects update for admin" do
+	  it "redirects update when not team captain" do
+	    team = Team.create! valid_attributes
+		@p2.team = team
+		@p2.save!
+		log_in_as(@p2.account)
+		put :update, {:id => team.to_param, :team => valid_attributes}, valid_session
+		expect(response).to redirect_to(root_url)
+	  end
+	  
+	  it "does not redirect update for admin" do
 	    team = Team.create! valid_attributes
 		log_in_as(@admin.account)
 		put :update, {:id => team.to_param, :team => valid_attributes}, valid_session
