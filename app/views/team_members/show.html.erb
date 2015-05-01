@@ -3,10 +3,10 @@
 <% @participants.each do |participant| %>
 	<% @id = participant.id %>
 	<p>
-		<% @account = Account.find(@id) %>
+		<% @account = Account.find_by user_id: @id %>
 		<%= @account.first_name %>
 		<%= @account.last_name %>
-		| <%= link_to "Remove" %>
+		| <%= link_to "Remove", team_member_path(@account.id), :confirm => "Are you sure", :method => :delete %>
 	</p>
 <% end %>
 
