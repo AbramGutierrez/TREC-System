@@ -96,18 +96,18 @@ class TeamsController < ApplicationController
 				redirect_to(participant_dashboard_url)
 			else
 				# if team captain but conference has already begun
-				if @team.conference.conf_start_date <= Date.now
+				if @team.conference.conf_start_date <= Date.parse(Time.now.to_s)
 					flash[:alert] = "Team information cannot be edited during the conference."
 					redirect_to(participant_dashboard_url)
 				end
 			end	
 		end
 	
-	  if !((current_account.user.is_a?(Participant) && 
-		current_participant.team == @team && current_participant.captain?) || 
-		current_account.user.is_a?(Administrator))
-		  flash[:alert] = "Only the Team Captain can edit team information."
-		  redirect_to(root_url)
-	  end		
+	  # if !((current_account.user.is_a?(Participant) && 
+		# current_participant.team == @team && current_participant.captain?) || 
+		# current_account.user.is_a?(Administrator))
+		  # flash[:alert] = "Only the Team Captain can edit team information."
+		  # redirect_to(root_url)
+	  # end		
 	end
 end

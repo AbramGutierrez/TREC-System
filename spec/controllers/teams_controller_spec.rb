@@ -37,6 +37,19 @@ RSpec.describe TeamsController, type: :controller do
 	  challenge_desc: 'fun!',
 	  is_active: true
 	  )
+	  
+	@current = Conference.create!(start_date: Date.parse("2015-4-10"), 
+			end_date: Date.parse("2015-4-12"),
+			conf_start_date: Date.parse("2015-4-30"),
+			conf_end_date: Date.parse("2015-6-9"),
+			max_team_size: 6,
+			min_team_size: 1,
+			max_teams: 6,
+			tamu_cost: 20.00,
+			other_cost: 40.00,
+			challenge_desc: 'fun!',
+			is_active: true
+			)  
 		
     @team = Team.create!(:conference => @c,	
 	  :school => "TestSchool",
@@ -68,6 +81,7 @@ RSpec.describe TeamsController, type: :controller do
   }
   after(:all){
 	@c.destroy
+	@current.destroy
 	@team.destroy
 	@team2.destroy
 	@admin.account.destroy
@@ -89,6 +103,14 @@ RSpec.describe TeamsController, type: :controller do
 	:team_name => "BestTeam"
     } 
   }
+  
+  let(:current_new_attributes) { {
+	    :conference_id => @current.id,	
+		:school => "TestSchool2",
+		:paid_status => "paid", 
+		:team_name => "Losers"
+	    }
+      }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -202,7 +224,7 @@ RSpec.describe TeamsController, type: :controller do
 	  @p.save!
 	  log_in_as(@p.account)
       get :edit, {:id => team.to_param}, valid_session
-      expect(response).to redirect_to(root_url)
+      expect(response).to redirect_to(participant_dashboard_url)
     end
 	
 	it "redirects edit when not team captain" do
@@ -211,8 +233,17 @@ RSpec.describe TeamsController, type: :controller do
 	  @p2.save!
 	  log_in_as(@p2.account)
       get :edit, {:id => team.to_param}, valid_session
-      expect(response).to redirect_to(root_url)
+      expect(response).to redirect_to(participant_dashboard_url)
     end
+	
+	it "redirects edit when team captain but conference has started" do
+	  team = Team.create! current_new_attributes
+	  @p.team = team
+	  @p.save!	
+	  log_in_as(@p.account)
+	  get :edit, {:id => team.to_param}, valid_session
+      expect(response).to redirect_to(participant_dashboard_url)
+	end
   end
 
   describe "POST #create" do
@@ -316,7 +347,7 @@ RSpec.describe TeamsController, type: :controller do
 		@p.save!
 		log_in_as(@p.account)
 		put :update, {:id => team.to_param, :team => valid_attributes}, valid_session
-		expect(response).to redirect_to(root_url)
+		expect(response).to redirect_to(participant_dashboard_url)
 	  end
 	  
 	  it "redirects update when not team captain" do
@@ -325,8 +356,17 @@ RSpec.describe TeamsController, type: :controller do
 		@p2.save!
 		log_in_as(@p2.account)
 		put :update, {:id => team.to_param, :team => valid_attributes}, valid_session
-		expect(response).to redirect_to(root_url)
+		expect(response).to redirect_to(participant_dashboard_url)
 	  end
+	  
+	  it "redirects update when team captain but conference has started" do
+		team = Team.create! current_new_attributes
+		@p.team = team
+		@p.save!
+		log_in_as(@p.account)		
+		put :update, {:id => team.to_param, :team => current_new_attributes}, valid_session
+		expect(response).to redirect_to(participant_dashboard_url)
+	end
 	  
 	  it "does not redirect update for admin" do
 	    team = Team.create! valid_attributes
