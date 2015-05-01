@@ -27,6 +27,8 @@ RSpec.describe AccountsController, type: :controller do
   before(:all){	
     @c = Conference.create!(start_date: Date.parse("2015-4-4"), 
 	  end_date: Date.parse("2015-6-6"),
+	  conf_start_date: Date.parse("2015-6-8"),
+	  conf_end_date: Date.parse("2015-6-9"),
 	  max_team_size: 6,
 	  min_team_size: 1,
 	  max_teams: 5,
