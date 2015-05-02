@@ -11,6 +11,7 @@ module TeamsHelper
 
 	def get_school
 	    @school_value
+		@other_value = String.new
 		School.all.each do |school|
 			if (school.name == @team.school)
 				@school_value = @team.school
@@ -20,6 +21,11 @@ module TeamsHelper
 			@school_value = "Other"
 			@other_value = @team.school
 		end
+		return @school_value
+	end
+	
+	def get_other_value
+		@other_value
 	end
 
 end

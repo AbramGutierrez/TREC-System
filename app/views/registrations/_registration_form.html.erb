@@ -1,13 +1,9 @@
 <%= form_tag :action => 'create' %>
   <p>School Name:
-    <% if !@schools_array.nil? %>
-	  <%= select :team, :school, options_for_select(@schools_array), :id =>"sel" %>
+	  <%= select :team, :school, options_for_select(get_schools_array, get_school_name), :id =>"sel" %>
 	  <div id="other">
-	    Enter School Name Here: <%= text_field :team, :other %>
+	    Enter School Name Here: <%= text_field :team, :other, :value => get_other_val %>
 	  </div>
-	<% else %>  
-	  <%= text_field :team, :school %>
-	<% end %>
   </p>
   <p>Team Name: <%= text_field :team, :team_name %></p>
   <table>

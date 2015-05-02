@@ -21,10 +21,9 @@
   </div>
   <div class="field">
     <%= f.label :school %><br>
-	<%= get_school %>
-	<%= f.select :school, options_for_select(get_schools_array, @school_value), :id =>"sel" %>
+	<%= f.select :school, options_for_select(get_schools_array, get_school), :id =>"sel" %>
 	<div id="other">
-	  Enter School Name Here: <%= text_field :team_name, :other, :value => @other_value %>
+	  Enter School Name Here: <%= text_field :team_name, :other, :value => get_other_value %>
 	</div>
   </div>
   <div class="actions">

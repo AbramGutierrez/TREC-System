@@ -6,6 +6,10 @@
   $(function(){
     console.log("test");
     $('#other').hide();
+	var val = $('#team_school').val();
+	if (val == "Other") {
+	    $('#other').show();
+	  }
 	$('#team_school').change(function() {
 	  console.log("test2");
 	  var val = $(this).val();
