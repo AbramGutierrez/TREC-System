@@ -40,6 +40,28 @@ module SessionsHelper
 	def is_participant?
 	    current_account.user.is_a?(Participant)
 	end
+
+	# Return true if the participant is a team captain, false otherwise.
+	def is_team_captain?
+
+		if is_participant?
+			
+			@participant = current_participant
+
+			# check if the participant is a team captain
+			if @participant.captain
+				true
+			else
+				# participant is not a team captain
+				false
+			end
+
+		else
+			# account is not a participant
+			false
+		end
+
+	end
 	
 	#Logs out the current user.
 	def log_out
