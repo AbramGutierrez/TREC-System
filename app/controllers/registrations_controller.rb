@@ -15,10 +15,19 @@ class RegistrationsController < ApplicationController
 	def create
 	  @conference = Conference.find_by is_active: true
 
+	  # If the user selected the "other" option in the school name select,
+	  # then extract the school name from the text field. Otherwise,
+	  # use the value in the select.
+	  if params[:team][:school] == "Other"
+	    @school = params[:team][:other]
+	  else
+        @school = params[:team][:school]
+      end		
+	  
 	  @team = Team.new(conference_id: @conference.id, 
 	    team_name: params[:team][:team_name],
 	    paid_status: "unpaid",
-	    school: params[:team][:school])
+	    school: @school)
 		
 	  @participants = Array.new
 	  

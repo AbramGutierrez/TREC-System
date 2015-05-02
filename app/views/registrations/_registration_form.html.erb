@@ -3,7 +3,7 @@
     <% if !@schools_array.nil? %>
 	  <%= select :team, :school, options_for_select(@schools_array), :id =>"sel" %>
 	  <div id="other">
-	    Enter School Name Here: <%= text_field :team, :school %>
+	    Enter School Name Here: <%= text_field :team, :other %>
 	  </div>
 	<% else %>  
 	  <%= text_field :team, :school %>
