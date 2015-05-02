@@ -5,11 +5,11 @@ class Administrator < ActiveRecord::Base
 	
 	accepts_nested_attributes_for :account
 	
-	def initialize()
+	after_initialize do
 	  @recipient_participant = "participant"
-	  @recipient_captain = "captain"
-	  @method_email = "email"
-	  @method_text_message = "text message"
+    @recipient_captain = "captain"
+    @method_email = "email"
+    @method_text_message = "text message"
 	end
 	
 	cattr_reader :recipient_participant
@@ -19,16 +19,17 @@ class Administrator < ActiveRecord::Base
 	
 	def self.get_recipients(type)
 	  recipients = Array.new
-	  active_teams = Team.get_active_teams
+	  active_teams = Team.get_active_teams()
 	  if (type == @recipient_participant)
 	    active_teams.each do |team|
-	      recipients.push(team.get_participants())
+	      recipients.push(team.participants)
 	    end
 	  elsif(type == @recipient_captain)
 	    active_teams.each do |team|
-        recipients.push(team.get_captains())
+        recipients.push(team.get_captain())
       end
 	  end
+	  recipients.flatten
 	end
 	
 	def self.email(recipients_type, method_type, message)
