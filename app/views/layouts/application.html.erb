@@ -44,7 +44,9 @@
 		    <li class="divider"></li>
 			<li><%= link_to "Log in", login_path %></li>
 			<li class="divider"></li>
-			<li><%= link_to "Register", controller: "registrations", action: "new" %></li>
+			<% if Conference.find_by is_active: true %>
+			  <li><%= link_to "Register", controller: "registrations", action: "new" %></li>
+			<% end %>
 			<li class="divider"></li>
 			<li>&nbsp;&nbsp;&nbsp;</li>
 		  <% end %>	
