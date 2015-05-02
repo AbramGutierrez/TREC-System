@@ -9,6 +9,9 @@ class Conference < ActiveRecord::Base
 	
 	validate :date_validation, :team_size_validation, :max_teams_validation
 	
+	def self.get_active
+	  Conference.find_by is_active: true
+	end
 	
 	private
 		# Only allow one active conference. Assume that there is

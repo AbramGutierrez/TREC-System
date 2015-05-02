@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'password_resets/create'
   
   get 'messenger' => 'messenger#new'
+  get 'messenger' => 'messenger#create'
 
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'

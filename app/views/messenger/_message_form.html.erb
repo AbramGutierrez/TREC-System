@@ -1,21 +1,21 @@
-<%= form_tag :action => 'new' %>
+<%= form_tag :action => 'create' %>
 	<p>
-	<%= radio_button_tag(:recipients, "participants") %>
+	<%= radio_button_tag(:recipients, Administrator.recipient_participant) %>
 	<%= label_tag(:recipients, "send to all participants") %>
-	<%= radio_button_tag(:recipients, "captains") %>
+	<%= radio_button_tag(:recipients, Administrator.recipient_captain) %>
 	<%= label_tag(:recipients, "send to all team captains") %>
 	</p>
 	
 	<p>
-	<%= radio_button_tag(:method, "email") %>
+	<%= radio_button_tag(:method, Administrator.method_email) %>
 	<%= label_tag(:method, "send via email") %>
-	<%= radio_button_tag(:method, "mobile") %>
+	<%= radio_button_tag(:method, Administrator.method_text_message) %>
 	<%= label_tag(:method, "send via text messaging") %>
 	</p>
 
 	 <td> 
 	 	Message:
-	 	<%= text_area :message, :id => "message", :name => "message", :size => "10x10" %> </td>
+	 	<%= text_area :message_box, :message_body, :id => "message", :size => "10x10" %> </td>
   </tbody>
   </table>
 <%= submit_tag 'Submit' %>
