@@ -38,7 +38,7 @@
   <strong>Maximum Teams:</strong>
   <%= @conference.max_teams %>
 </p>
-
+<% if is_admin? %>
 <p>
   <strong>TAMU Student Cost:</strong>
   <%= number_to_currency(@conference.tamu_cost) %>
@@ -48,22 +48,23 @@
   <strong>Other School Cost:</strong>
   <%= number_to_currency(@conference.other_cost) %>
 </p>
-
+<% end %>
 <p>
   <strong>Challenge Description:</strong>
   <%= @conference.challenge_desc %>
 </p>
-
+<% if is_admin? %>
 <%= link_to 'Edit', edit_conference_path(@conference) %> |
+<% end %>
 <%= link_to 'Back', conferences_path %>
 
 <br/>
-
+<% if is_admin? %>
 <p align="center"><h2>Statistics</h2></p>
 <table>
   <thead>
     <tr>
-      <th colspan='5'>Shirt Sizes</th>
+      <th colspan='6'>Shirt Sizes</th>
     </tr>
     <tr>
       <th>XS</th>
@@ -71,16 +72,19 @@
       <th>M</th>
       <th>L</th>
       <th>XL</th>
+      <th>XXL</th>
     </tr>
   </thead>
 
   <tbody>
     <tr>
-      <td><%= count_shirts('X-small') %></td>
-      <td><%= count_shirts('Small') %></td>
-      <td><%= count_shirts('Medium') %></td>
-      <td><%= count_shirts('Large') %></td>
-      <td><%= count_shirts('X-large') %></td>
+      <td><%= count_shirts('XS') %></td>
+      <td><%= count_shirts('S') %></td>
+      <td><%= count_shirts('M') %></td>
+      <td><%= count_shirts('L') %></td>
+      <td><%= count_shirts('XL') %></td>
+      <td><%= count_shirts('XXL') %></td>
     </tr>
   </tbody>
 </table>
+<% end %>
