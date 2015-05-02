@@ -53,7 +53,7 @@
 	</nav>	
 	<div class='wrapper'>
 		<div class="row">
-		  <div class="small-9 columns">
+		  <div class="small-10 columns">
 		    <% flash.each do |message_type, message| %>
 	          <div class="alert-box <%= message_type %>">
 				<%= message %>
@@ -61,7 +61,7 @@
 	        <% end %>
 			<%= yield %>
 		  </div>
-		  <aside class="small-3 columns" align='center'>
+		  <aside class="small-2 columns" align='center'>
 		  	<br>
 		  	<div class='panel'>
 		    <h4>Sponsors</h4>
