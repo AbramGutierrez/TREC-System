@@ -102,9 +102,20 @@ RSpec.describe Team, type: :model do
 		team.destroy
 		c1.destroy
 	end
-	
-	it "should get active teams" do
-	  active_conference = Conference.create!(start_date: Date.parse("2015-4-4"), 
+end
+
+Rspec.describe Team do
+  Conference.create!(start_date: Date.parse("2015-4-4"), 
+      end_date: Date.parse("2015-6-6"),
+      max_team_size: 6,
+      min_team_size: 1,
+      max_teams: 5,
+      tamu_cost: 30.00,
+      other_cost: 60.00,
+      challenge_desc: 'yay!',
+      is_active: false
+   )
+   active_conference = Conference.create!(start_date: Date.parse("2015-4-4"), 
       end_date: Date.parse("2015-6-6"),
       max_team_size: 6,
       min_team_size: 1,
@@ -114,7 +125,6 @@ RSpec.describe Team, type: :model do
       challenge_desc: 'yay!',
       is_active: true
     )
-    @c.reload
     
     Team.create!(:conference => @c, 
       :school => "TestSchool",
@@ -146,8 +156,9 @@ RSpec.describe Team, type: :model do
       :paid_status => "paid", 
       :team_name => "team6" 
       )
-    
-    expect(Team.get_active_teams()).to match_array([active1, active2, active3])
-	end
-  
+      
+      it "should get active teams" do
+        expect(Team.get_active_teams()).to match_array([active1, active2, active3])
+      end
 end
+  
