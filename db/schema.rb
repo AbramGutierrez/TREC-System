@@ -79,9 +79,4 @@ ActiveRecord::Schema.define(version: 20150417154836) do
 
   add_index "teams", ["conference_id"], name: "index_teams_on_conference_id"
 
-  create_table "users", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
 end
