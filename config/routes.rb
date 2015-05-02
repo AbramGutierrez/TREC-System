@@ -31,6 +31,8 @@ Rails.application.routes.draw do
 
   resources :conferences
   
+  resources :schools
+  
   resources :sessions
   
   resources :registrations
