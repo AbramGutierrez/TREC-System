@@ -6,7 +6,8 @@ class RegistrationsController < ApplicationController
 	  if(@conference.nil?)
 		redirect_to action: "fail" 
 	  end
-	  if School.count > 1
+	  @schools_array = Array.new
+	  if School.count > 0
 	    @schools_array = School.all.map { |school| [school.name] }
 		@schools_array.push("Other")
 	  end	

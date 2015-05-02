@@ -24,6 +24,16 @@ class TeamsController < ApplicationController
 
   # GET /teams/1/edit
   def edit
+	# @school_value
+	# School.all.each do |school|
+		# if (school.name == @team.school)
+			# @school_value = @team.school
+		# end	
+	# end
+	# if @school_value.nil?
+		# @school_value = "Other"
+		# @other_value = @team.school
+	# end
   end
 
   # POST /teams
@@ -45,8 +55,16 @@ class TeamsController < ApplicationController
   # PATCH/PUT /teams/1
   # PATCH/PUT /teams/1.json
   def update
+    new_params = team_params
+	puts "\nnew_params: #{new_params.inspect}\n"
+	puts "\nnew_params[:school]: #{new_params[:school]}\n"
+	if team_params[:school] == "Other"
+	  new_params[:school] = params[:team_name][:other]
+	end	
+	puts "\nnew_params[:school]: #{new_params[:school]}\n"
+	puts "\nteam_params[:school]: #{team_params[:school]}\n"
     respond_to do |format|
-      if @team.update(team_params)
+      if @team.update(new_params)
         format.html { redirect_to @team, notice: 'Team was successfully updated.' }
         format.json { render :show, status: :ok, location: @team }
       else
@@ -74,7 +92,7 @@ class TeamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
-      params.require(:team).permit(:conference, :conference_id, :team_name, :paid_status, :school)
+      params.require(:team).permit(:conference, :conference_id, :team_name, :paid_status, :school, :other)
     end
 	
 	# Ensure that the currently logged-in participant is on the current team
