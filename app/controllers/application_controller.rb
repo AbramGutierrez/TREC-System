@@ -23,4 +23,13 @@ class ApplicationController < ActionController::Base
 	def participant_account
 	  redirect_to(root_url) unless current_account.user.is_a?(Participant)	
 	end
+
+	# Add team captain action security
+	# Ensure that the participant is a team captain
+
+	def team_captain_account
+		redirect_to(root_url) unless is_team_captain?
+	end
+	
+	
 end
