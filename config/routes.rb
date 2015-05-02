@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'events/show_itinerary'
+
+  get 'events/edit_itinerary'
+
   get 'password_resets/new'
   get 'password_resets/create'
 
