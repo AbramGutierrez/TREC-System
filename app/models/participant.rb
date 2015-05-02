@@ -1,3 +1,7 @@
+require 'nokogiri'
+require 'open-uri'
+require 'rubygems'
+
 class Participant < ActiveRecord::Base
 	belongs_to :team
 	has_one :account, :as => :user, dependent: :destroy
@@ -15,6 +19,25 @@ class Participant < ActiveRecord::Base
 	validate :team_full
 	
 	accepts_nested_attributes_for :account
+	
+	def self.get_providers_list
+	  page = Nokogiri::HTML(open("http://www.emailtextmessages.com/"))
+    providers = page.css('h3')
+    providers.map { |provider| provider.text}
+	end
+	
+	def self.get_domains_list
+	  page = Nokogiri::HTML(open("http://www.emailtextmessages.com/"))
+    domains = page.css('li')
+    domains.map { |domain| domain.text}
+	end
+	
+	def domain
+	  provider = "at&t"
+	  providers_list = Participant.get_providers_list()
+	  provider_index = providers_list.find_index(provider)
+	  
+	end
 	
 	private
 	

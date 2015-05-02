@@ -131,5 +131,9 @@ RSpec.describe Administrator, type: :model do
           [@captain, @not_captain1, @not_captain2, @not_captain3, 
             @other_team_captain, @other_team_not_captain])
       end
+      
+      it "should get email addresses of given users" do
+        
+      end
   	end
 end

@@ -108,5 +108,16 @@ RSpec.describe Participant, type: :model do
 		team1.destroy
 		c1.destroy
 	end
+	
+	it "should match the first provider and domain" do
+	  expect(Participant.get_providers_list()[0]).to eql("3 River Wireless")
+	  expect(Participant.get_domains_list[0]).to eql("10digitphonenumber@sms.3rivers.net")
+	end
+	
+	it "should match the last provider and domain" do
+	  last_index = Participant.get_providers_list().size() - 1
+	  expect(Participant.get_providers_list()[last_index]).to eql("West Central Wireless")
+	  expect(Participant.get_domains_list[last_index]).to eql("10digitphonenumber@sms.wcc.net")
+	end
   
 end
