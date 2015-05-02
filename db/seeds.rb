@@ -84,5 +84,8 @@
 		password: "password",
 		first_name: "Jane",
 		last_name: "Doe"
-	  }) 	
+	  }) 
+
+    s = School.create!(name: "Texas A&M University")
+    s2 = School.create!(name: "LSU")	
 		
