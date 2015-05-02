@@ -41,6 +41,7 @@ class Account < ActiveRecord::Base
 	  temp_password = SecureRandom.base64 4
     self.password = temp_password
     self.password_confirmation = temp_password
+	self.save
 	end
 
 	private
