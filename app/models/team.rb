@@ -10,7 +10,7 @@ class Team < ActiveRecord::Base
 	
 	def self.get_active_teams
 	  active_conference = Conference.get_active()
-	  Team.joins(:conference).group(active_conference.id)
+	  Team.where(conference_id: active_conference.id)
 	end	
 	
 	def get_participants
