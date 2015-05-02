@@ -111,24 +111,28 @@ end
 	describe "The model" do
     before(:all) do
       @inactive_conference = Conference.create!(start_date: Date.parse("2015-4-4"), 
-          end_date: Date.parse("2015-6-6"),
-          max_team_size: 6,
-          min_team_size: 1,
-          max_teams: 5,
-          tamu_cost: 30.00,
-          other_cost: 60.00,
-          challenge_desc: 'yay!',
-          is_active: false
+        end_date: Date.parse("2015-6-6"),
+        conf_start_date: Date.parse("2015-6-8"),
+        conf_end_date: Date.parse("2015-6-9"),
+        max_team_size: 6,
+        min_team_size: 1,
+        max_teams: 5,
+        tamu_cost: 30.00,
+        other_cost: 60.00,
+        challenge_desc: 'yay!',
+        is_active: false
        )
        @active_conference = Conference.create!(start_date: Date.parse("2015-4-4"), 
-          end_date: Date.parse("2015-6-6"),
-          max_team_size: 6,
-          min_team_size: 1,
-          max_teams: 5,
-          tamu_cost: 30.00,
-          other_cost: 60.00,
-          challenge_desc: 'yay!',
-          is_active: true
+        end_date: Date.parse("2015-6-6"),
+        conf_start_date: Date.parse("2015-6-8"),
+        conf_end_date: Date.parse("2015-6-9"),
+        max_team_size: 6,
+        min_team_size: 1,
+        max_teams: 5,
+        tamu_cost: 30.00,
+        other_cost: 60.00,
+        challenge_desc: 'yay!',
+        is_active: true
         )
         
         @inactive_team1 = Team.create!(:conference => @inactive_conference, 
@@ -161,7 +165,7 @@ end
           :paid_status => "paid", 
           :team_name => "team6" 
           )
-          @captain = Participant.create!(captain: true, shirt_size: "Large",
+          @captain = Participant.create!(captain: true, shirt_size: "Small",
             phone: "1876543211", team: @active2, 
             account_attributes: {first_name: "A", last_name: "Z", email: "p1@example.com",
             password: "mypassword", password_confirmation: "mypassword"}
@@ -188,7 +192,7 @@ end
             )
             @other_team_not_captain = Participant.create!(captain: false, shirt_size: "Large",
             phone: "1876543211", team: @active3, 
-            account_attributes: {first_name: "A", last_name: "Z", email: "p5@example.com",
+            account_attributes: {first_name: "A", last_name: "Z", email: "p6@example.com",
             password: "mypassword", password_confirmation: "mypassword"}
             )
       end
@@ -215,7 +219,12 @@ end
         end
         
         it "gets participants from team" do
-          expect(@active2.get_participants()).to match_array([@captain, @not_captain1, @not_captain2, @not_captain3])
+          expect(@active2.participants).to match_array([@captain, @not_captain1, @not_captain2, @not_captain3])
+        end
+        
+        it "gets only captain from team" do
+          expect(@active2.get_captain().size()).to eql(1)
+          expect(@active2.get_captain()).to match([@captain])
         end
    end
 end

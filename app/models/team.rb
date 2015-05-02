@@ -13,12 +13,8 @@ class Team < ActiveRecord::Base
 	  Team.where(conference_id: active_conference.id)
 	end	
 	
-	def get_participants
-	  Participants.joins(:team).group(:id)
-	end
-	
-	def get_captains
-	  Participants.joins(:team).group(:id).where(:captain)
+	def get_captain
+	  self.participants.where(captain: true)
 	end
 	  
 	private
