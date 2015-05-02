@@ -133,7 +133,12 @@ RSpec.describe Administrator, type: :model do
       end
       
       it "should get email addresses of given users" do
-        
+        recipients = Administrator.get_recipients(Administrator.recipient_participant)
+        expect(Administrator.get_message_addresses(
+          recipients, Administrator.method_email)).to match_array(
+          [@captain.email, @not_captain1.email, 
+            @not_captain2.email, @not_captain3.email, 
+            @other_team_captain.email, @other_team_not_captain.email])
       end
   	end
 end
