@@ -32,11 +32,17 @@ class Participant < ActiveRecord::Base
     domains.map { |domain| domain.text.downcase}
 	end
 	
+	def self.extract_domain(example)
+	  split_example = example.partition('@')
+	  split_example[2] # should split 3 ways
+	end
+	
 	def domain
 	  provider = "at&t"
 	  providers_list = Participant.get_providers_list()
 	  provider_index = providers_list.find_index(provider)
-	  
+	  domain_format = Participant.get_domains_list()[provider_index]
+	  Participant.extract_domain(domain_format).strip
 	end
 	
 	private

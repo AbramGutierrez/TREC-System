@@ -119,5 +119,18 @@ RSpec.describe Participant, type: :model do
 	  expect(Participant.get_providers_list()[last_index]).to eql("west central wireless")
 	  expect(Participant.get_domains_list[last_index]).to eql("10digitphonenumber@sms.wcc.net")
 	end
+	
+	it "should extract domain" do
+	  expect(Participant.extract_domain("10digitphonenumber@bellmobility.ca")).to eql("bellmobility.ca")
+	end
+	
+	it "should get the right domain for a participant" do
+	  participant = Participant.new(captain: false, shirt_size: "Large",
+      phone: "1876543211", team: @team, 
+      account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
+      password: "mypassword", password_confirmation: "mypassword"}
+    )
+    expect(participant.domain()).to eql("txt.att.net")
+	end
   
 end
