@@ -21,8 +21,9 @@ class MessengerController < ApplicationController
       render "new" and return
     end
     
+    @title = params[:title_box]["message_title"]
     @message = params[:message_box]["message_body"]
     
-    Administrator.email(@recipients, @method, @message)
+    # Administrator.email(@recipients, @method, @title, @message)
   end
 end
