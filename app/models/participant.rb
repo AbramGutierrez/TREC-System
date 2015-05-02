@@ -23,13 +23,13 @@ class Participant < ActiveRecord::Base
 	def self.get_providers_list
 	  page = Nokogiri::HTML(open("http://www.emailtextmessages.com/"))
     providers = page.css('h3')
-    providers.map { |provider| provider.text}
+    providers.map { |provider| provider.text.downcase}
 	end
 	
 	def self.get_domains_list
 	  page = Nokogiri::HTML(open("http://www.emailtextmessages.com/"))
     domains = page.css('li')
-    domains.map { |domain| domain.text}
+    domains.map { |domain| domain.text.downcase}
 	end
 	
 	def domain
