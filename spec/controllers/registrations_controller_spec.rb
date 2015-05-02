@@ -45,6 +45,8 @@ RSpec.describe RegistrationsController, type: :controller do
 	    @participants_no_email[5] = {captain: false, phone: "9999999999", shirt_size: "Small", first_name: "participant6", last_name: "participant6", email: ""}
 		@conference = Conference.create!(start_date: Date.parse("2015-6-4"), 
 		  end_date: Date.parse("2015-7-6"),
+		  conf_start_date: Date.parse("2015-8-8"),
+	  conf_end_date: Date.parse("2015-8-9"),
 		  max_team_size: 6,
 		  min_team_size: 1,
 		  max_teams: 5,

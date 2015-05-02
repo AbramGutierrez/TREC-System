@@ -20,9 +20,9 @@ class TeamMembersController < ApplicationController
 	end
 
 	def destroy
-		@account = Account.find(params[:id])
-		@account.destroy
-		redirect_to team_members_path
+		# @account = Account.find(params[:id])
+		# @account.destroy
+		# redirect_to team_members_path
 	end
 	
 end

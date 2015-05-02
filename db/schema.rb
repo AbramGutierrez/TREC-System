@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150417154836) do
+ActiveRecord::Schema.define(version: 20150501211312) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer  "user_id"
@@ -40,9 +40,11 @@ ActiveRecord::Schema.define(version: 20150417154836) do
     t.float    "tamu_cost"
     t.float    "other_cost"
     t.text     "challenge_desc"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.boolean  "is_active"
+    t.date     "conf_start_date"
+    t.date     "conf_end_date"
   end
 
   create_table "participants", force: :cascade do |t|
