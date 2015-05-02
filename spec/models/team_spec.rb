@@ -5,6 +5,8 @@ RSpec.describe Team, type: :model do
     before(:all) do
 		@c = Conference.create!(start_date: Date.parse("2015-4-4"), 
 			end_date: Date.parse("2015-6-6"),
+			conf_start_date: Date.parse("2015-6-8"),
+			conf_end_date: Date.parse("2015-6-9"),
 			max_team_size: 6,
 			min_team_size: 1,
 			max_teams: 5,
@@ -78,6 +80,8 @@ RSpec.describe Team, type: :model do
 	it "should not allow the number of teams to exceed the max for a conference" do
 		c1 = Conference.create!(start_date: Date.parse("2015-4-4"), 
 			end_date: Date.parse("2015-6-6"),
+			conf_start_date: Date.parse("2015-6-8"),
+			conf_end_date: Date.parse("2015-6-9"),
 			max_team_size: 6,
 			min_team_size: 1,
 			max_teams: 1,

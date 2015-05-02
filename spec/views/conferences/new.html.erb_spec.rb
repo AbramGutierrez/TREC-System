@@ -8,7 +8,11 @@ RSpec.describe "conferences/new", type: :view do
       :max_teams => 1,
       :tamu_cost => 1.5,
       :other_cost => 1.5,
-      :challenge_desc => "MyText"
+      :challenge_desc => "MyText",
+	  start_date: Date.parse("2015-4-4"), 
+	  end_date: Date.parse("2015-6-6"),
+	  conf_start_date: Date.parse("2015-6-8"),
+	  conf_end_date: Date.parse("2015-6-9")
     ))
   end
 

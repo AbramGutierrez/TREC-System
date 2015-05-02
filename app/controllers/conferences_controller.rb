@@ -72,7 +72,7 @@ class ConferencesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def conference_params
-      params.require(:conference).permit(:start_date, :end_date, :max_team_size, :min_team_size, :max_teams, :tamu_cost, :other_cost, :challenge_desc, :is_active)
+      params.require(:conference).permit(:start_date, :end_date, :conf_start_date, :conf_end_date, :max_team_size, :min_team_size, :max_teams, :tamu_cost, :other_cost, :challenge_desc, :is_active)
     end
 	
 	# Only let a user see the "show" for a conference if the user is an admin or if it is the current conference

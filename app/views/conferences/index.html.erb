@@ -3,8 +3,8 @@
 <table>
   <thead>
     <tr>
-      <th>Start Date</th>
-      <th>End Date</th>
+      <th>Registration</th>
+	  <th>Conference Dates</th>
       <th>Team Size</th>
       <th>Max Teams</th>
       <th>Tamu Cost</th>
@@ -18,8 +18,8 @@
   <tbody>
     <% @conferences.each do |conference| %>
       <tr>
-        <td><%= conference.start_date %></td>
-        <td><%= conference.end_date %></td>
+        <td><%= conference.start_date %> through <%= conference.end_date %></td>
+        <td><%= conference.conf_start_date %> through <%= conference.conf_end_date %></td>
         <td><%= conference.min_team_size %> - <%= conference.max_team_size %></td>
         <td><%= conference.max_teams %></td>
         <td><%= number_to_currency(conference.tamu_cost) %></td>

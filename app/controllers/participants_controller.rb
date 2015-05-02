@@ -2,7 +2,8 @@ class ParticipantsController < ApplicationController
   before_action :logged_in_user, only: [:index, :show, :edit, :dashboard, :update, :destroy]
   before_action :set_participant, only: [:show, :edit, :update, :destroy]
   before_action :correct_user_or_admin, only: [:show, :edit, :update]
-  before_action :admin_account, only: [:index, :destroy]
+  before_action :admin_account, only: :index
+  before_action :team_captain_or_admin, only: :destroy
   before_action :participant_account, only: [:new, :create]
   helper_method :sort_column, :sort_direction
 
@@ -111,7 +112,11 @@ class ParticipantsController < ApplicationController
 	@participant.account.destroy
     @participant.destroy
     respond_to do |format|
-      format.html { redirect_to participants_url, notice: 'Participant was successfully deleted.' }
+	  if is_admin?
+        format.html { redirect_to participants_url, notice: 'Participant was successfully deleted.' }
+	  else
+        format.html { redirect_to "/team_members/#{current_participant.team.id}", notice: 'Participant was successfully deleted.' }
+	  end	
       format.json { head :no_content }
     end
   end
@@ -140,7 +145,7 @@ class ParticipantsController < ApplicationController
     def set_participant
       @participant = Participant.find(params[:id])
 	  rescue ActiveRecord::RecordNotFound
-	    flash[:error] = "No such participant exists."	
+	    flash[:alert] = "No such participant exists."	
 	    redirect_to action: "index"  
     end
 
@@ -161,5 +166,12 @@ class ParticipantsController < ApplicationController
 	
 	def sort_direction
 	  %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+	end
+	
+	def team_captain_or_admin
+	  if !(current_account.user.is_a?(Administrator) || (@participant.team == current_participant.team && current_participant.captain?))
+	    flash[:alert] = "Only the team captain can remove team members."
+		redirect_to participant_dashboard_path
+	  end
 	end
 end
