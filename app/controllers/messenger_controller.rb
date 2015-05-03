@@ -6,8 +6,6 @@ class MessengerController < ApplicationController
   def new
   end
   
-  
-  
   def create
     @recipients = params[:recipients]
     @method = params[:method]

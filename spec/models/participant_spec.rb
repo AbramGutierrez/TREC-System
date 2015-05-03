@@ -28,7 +28,7 @@ RSpec.describe Participant, type: :model do
 	end
   
 	it "should be valid" do
-		expect(Participant.new(captain: false, shirt_size: "Large",
+		expect(Participant.new(captain: false, shirt_size: "L",
 			phone: "1876543211", team: @team, 
 			account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
 			password: "mypassword", password_confirmation: "mypassword"}
@@ -36,13 +36,13 @@ RSpec.describe Participant, type: :model do
 	end
 	
 	it "should require an account" do
-		expect(Participant.new(captain: false, shirt_size: "Large",
+		expect(Participant.new(captain: false, shirt_size: "L",
 			phone: "1876543211", team: @team, 
 		)).to_not be_valid
 	end
 	
 	it "should require a phone number" do
-		expect(Participant.new(captain: false, shirt_size: "Large",
+		expect(Participant.new(captain: false, shirt_size: "L",
 			team: @team, 
 			account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
 			password: "mypassword", password_confirmation: "mypassword"}
@@ -66,7 +66,7 @@ RSpec.describe Participant, type: :model do
 	end
 	
 	it "should require a team" do
-		expect(Participant.new(captain: false, shirt_size: "Large",
+		expect(Participant.new(captain: false, shirt_size: "L",
 			phone: "1876543211", 
 			account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
 			password: "mypassword", password_confirmation: "mypassword"}
@@ -92,12 +92,12 @@ RSpec.describe Participant, type: :model do
 			:team_name => "PartTest" 
 			)
 			
-		p1 = Participant.create!(captain: false, shirt_size: "Large",
+		p1 = Participant.create!(captain: false, shirt_size: "L",
 			phone: "1876543211", team: team1,
 			account_attributes: {first_name: "A", last_name: "Z", email: "parti1@example.com",
 			password: "mypassword", password_confirmation: "mypassword"})
 
-		expect(Participant.new(captain: false, shirt_size: "Large",
+		expect(Participant.new(captain: false, shirt_size: "L",
 			phone: "1876543211", team: team1, 
 			account_attributes: {first_name: "A", last_name: "Z", email: "parti2@example.com",
 			password: "mypassword", password_confirmation: "mypassword"}
@@ -125,7 +125,7 @@ RSpec.describe Participant, type: :model do
 	end
 	
 	it "should get the right domain for a participant" do
-	  participant = Participant.new(captain: false, shirt_size: "Large",
+	  participant = Participant.new(captain: false, shirt_size: "L",
       phone: "1876543211", team: @team, 
       account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
       password: "mypassword", password_confirmation: "mypassword"}

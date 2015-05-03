@@ -45,6 +45,29 @@ class Participant < ActiveRecord::Base
 	  domain_format = Participant.get_domains_list()[provider_index]
 	  Participant.extract_domain(domain_format).strip
 	end
+  
+  def self.method_email
+    "email"
+  end
+  
+  def self.method_text_message
+    "text message"
+  end
+  
+  def self.get_message_addresses(users, method_type)
+    addresses = Array.new
+    accounts = Account.get_accounts(users)
+    accounts.each do |account|
+      addresses.push account.email
+    end
+    addresses
+  end
+  
+  def self.email(method_type, title, message)
+    recipients = Team.where(id: team_id).participants
+    addresses = get_message_addresses(recipients)
+    AdminMailer.email(addresses, title, message)
+  end
 	
 	private
 	
