@@ -24,11 +24,11 @@ class Administrator < ActiveRecord::Base
 	def self.get_recipients(type)
 	  recipients = Array.new
 	  active_teams = Team.get_active_teams()
-	  if type == @recipient_participant
+	  if type == Administrator.recipient_participant
 	    active_teams.each do |team|
 	      recipients.push team.participants
 	    end
-	  elsif type == @recipient_captain
+	  elsif type == Administrator.recipient_captain
 	    active_teams.each do |team|
         recipients.push team.get_captain()
       end
@@ -38,12 +38,12 @@ class Administrator < ActiveRecord::Base
 	
 	def self.get_message_addresses(users, method_type)
 	  addresses = Array.new
-	  if method_type == @method_email
+	  if method_type == Administrator.method_email
 	    accounts = Account.get_accounts(users)
 	    accounts.each do |account|
 	      addresses.push account.email
 	    end
-	  elsif method_type == @method_text_message
+	  elsif method_type == Administrator.method_text_message
 	     users.each do |user|
 	       number = user.phone
 	       domain = user.domain()
