@@ -224,6 +224,8 @@ RSpec.describe Conference, type: :model do
   it "should be able to locate the active conference" do
     Conference.create!(start_date: Date.parse("2013-9-5"), 
       end_date: Date.parse("2013-9-18"),
+	  conf_start_date: Date.parse("2015-6-8"),
+	  conf_end_date: Date.parse("2015-6-9"),
       max_team_size: 6,
       min_team_size: 1,
       max_teams: 5,
@@ -234,6 +236,8 @@ RSpec.describe Conference, type: :model do
       ) 
      Conference.create!(start_date: Date.parse("2013-10-3"), 
       end_date: Date.parse("2013-10-7"),
+	  conf_start_date: Date.parse("2015-6-8"),
+	  conf_end_date: Date.parse("2015-6-9"),
       max_team_size: 6,
       min_team_size: 1,
       max_teams: 5,
@@ -244,6 +248,8 @@ RSpec.describe Conference, type: :model do
       ) 
       Conference.create!(start_date: Date.parse("2014-6-12"), 
       end_date: Date.parse("2014-6-13"),
+	  conf_start_date: Date.parse("2015-6-8"),
+	  conf_end_date: Date.parse("2015-6-9"),
       max_team_size: 6,
       min_team_size: 1,
       max_teams: 5,
@@ -254,6 +260,8 @@ RSpec.describe Conference, type: :model do
       ) 
       active_conference = Conference.create!(start_date: Date.parse("2015-9-4"), 
       end_date: Date.parse("2015-10-6"),
+	  conf_start_date: Date.parse("2015-6-8"),
+	  conf_end_date: Date.parse("2015-6-9"),
       max_team_size: 6,
       min_team_size: 1,
       max_teams: 5,
