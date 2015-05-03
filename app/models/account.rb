@@ -49,7 +49,8 @@ class Account < ActiveRecord::Base
 	def self.get_accounts(users)
 	  accounts = Array.new
 	  users.each do |user|
-	    accounts.push(Account.where(id: user.account_id))
+	    # accounts.push(Account.where(id: user.account.id))
+	    accounts.push(user.account)
 	  end
 	  accounts
 	end

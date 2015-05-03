@@ -21,7 +21,7 @@ class Conference < ActiveRecord::Base
 		def one_active_conference
 			if (self.is_active == true)
 				conference = Conference.find_by is_active: true
-				if (!conference.nil?)
+				if (!conference.nil? && self != conference)
 					conference.is_active = false
 					conference.save
 				end

@@ -146,14 +146,15 @@ RSpec.describe Administrator, type: :model do
             @not_captain2.account.email, @not_captain3.account.email, 
             @other_team_captain.account.email, @other_team_not_captain.account.email])
       end
-  	end
   	
-  	it "should get phone numbers of given users" do
-  	  recipients = Administrator.get_recipients(Administrator.recipient_participant)
-        expect(Administrator.get_message_addresses(
-          recipients, Administrator.method_email)).to match_array(
-          ["1876543211@txt.att.net", "3009098512@txt.att.net", 
-            "8133614073@txt.att.net", "9642752086@txt.att.net", 
-            "4296814083@txt.att.net", "7282822361@txt.att.net"])
-  	end
+  	
+		it "should get phone numbers of given users" do
+		  recipients = Administrator.get_recipients(Administrator.recipient_participant)
+			expect(Administrator.get_message_addresses(
+			  recipients, Administrator.method_text_message)).to match_array(
+			  ["1876543211@txt.att.net", "3009098512@txt.att.net", 
+				"8133614073@txt.att.net", "9642752086@txt.att.net", 
+				"4296814083@txt.att.net", "7282822361@txt.att.net"])
+		end
+	end
 end
