@@ -3,11 +3,12 @@ module ConferencesHelper
 	def count_shirts(shirt) 
 
 		@shirt_sizes = {
-			'X-small' => 0,
-			'Small' => 0,
-			'Medium' => 0,
-			'Large' => 0,
-			'X-large' => 0
+			'XS' => 0,
+			'S' => 0,
+			'M' => 0,
+			'L' => 0,
+			'XL' => 0,
+			'XXL' => 0
 		}
 
 		@conference.teams.each do |team|
