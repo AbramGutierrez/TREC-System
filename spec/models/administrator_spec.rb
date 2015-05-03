@@ -76,32 +76,32 @@ RSpec.describe Administrator, type: :model do
             :paid_status => "paid", 
             :team_name => "team6" 
             )
-            @captain = Participant.create!(captain: true, shirt_size: "Small",
+            @captain = Participant.create!(captain: true, shirt_size: "S",
               phone: "1876543211", team: @active2, 
               account_attributes: {first_name: "A", last_name: "Z", email: "p1@example.com",
               password: "mypassword", password_confirmation: "mypassword"}
               )
-             @not_captain1 = Participant.create!(captain: false, shirt_size: "Large",
+             @not_captain1 = Participant.create!(captain: false, shirt_size: "XL",
               phone: "3009098512", team: @active2, 
               account_attributes: {first_name: "A", last_name: "Z", email: "p2@example.com",
               password: "mypassword", password_confirmation: "mypassword"}
               )
-              @not_captain2 = Participant.create!(captain: false, shirt_size: "Large",
+              @not_captain2 = Participant.create!(captain: false, shirt_size: "XL",
               phone: "8133614073", team: @active2, 
               account_attributes: {first_name: "A", last_name: "Z", email: "p3@example.com",
               password: "mypassword", password_confirmation: "mypassword"}
               )
-              @not_captain3 = Participant.create!(captain: false, shirt_size: "Large",
+              @not_captain3 = Participant.create!(captain: false, shirt_size: "M",
               phone: "9642752086", team: @active2, 
               account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
               password: "mypassword", password_confirmation: "mypassword"}
               )
-              @other_team_captain = Participant.create!(captain: true, shirt_size: "Large",
+              @other_team_captain = Participant.create!(captain: true, shirt_size: "M",
               phone: "4296814083", team: @active3, 
               account_attributes: {first_name: "A", last_name: "Z", email: "p5@example.com",
               password: "mypassword", password_confirmation: "mypassword"}
               )
-              @other_team_not_captain = Participant.create!(captain: false, shirt_size: "Large",
+              @other_team_not_captain = Participant.create!(captain: false, shirt_size: "S",
               phone: "7282822361", team: @active3, 
               account_attributes: {first_name: "A", last_name: "Z", email: "p6@example.com",
               password: "mypassword", password_confirmation: "mypassword"}
