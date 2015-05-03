@@ -5,7 +5,9 @@ class Account < ActiveRecord::Base
 	
 	before_save { self.email = email.downcase }
 	after_create { 
-	  self.randomize_password()
+	  if self.password.nil?	
+		self.randomize_password()
+	  end	
 	  
 	  PasswordMailer.welcome_email(self).deliver_now 
 	}

@@ -24,7 +24,7 @@ RSpec.describe "participants/show", type: :view do
 	  :team => @new_team,
       :captain => true,
       :waiver_signed => false,
-      :shirt_size => "Large",
+      :shirt_size => "L",
 	  :phone => "1111111111",
 	  :account_attributes => {
 	    email: "test@example.com",
@@ -45,7 +45,7 @@ RSpec.describe "participants/show", type: :view do
     render
     expect(rendered).to match(/true/)
     expect(rendered).to match(/false/)
-    expect(rendered).to match(/Large/)
+    expect(rendered).to match(/L/)
 	# expect(rendered).to match(/1111111111/)
   end
 end

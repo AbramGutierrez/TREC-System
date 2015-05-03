@@ -22,7 +22,7 @@ RSpec.describe "teams/show", type: :view do
       :school => "MyString",
 	  :conference => c
     ))
-	@p = Participant.create!(captain: false, shirt_size: "Large",
+	@p = Participant.create!(captain: false, shirt_size: "L",
 			phone: "1876543211", account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
 			password: "password", password_confirmation: "password"}, team: @team)
 	log_in_as(@p.account)		

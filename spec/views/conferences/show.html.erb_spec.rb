@@ -14,9 +14,12 @@ RSpec.describe "conferences/show", type: :view do
       :other_cost => 1.5,
       :challenge_desc => "MyText"
     ))
+	@admin = Administrator.create!(account_attributes: {first_name: "Admin", last_name: "istrator", email: "admin@example.com",
+			password: "admin", password_confirmation: "admin"})
   end
 
   it "renders attributes in <p>" do
+    log_in_as(@admin.account)
     render
     expect(rendered).to match(/2/)
     expect(rendered).to match(/1/)

@@ -32,7 +32,7 @@ RSpec.describe "participants/index", type: :view do
       Participant.create!(
         :captain => true,
         :waiver_signed => true,
-        :shirt_size => "Small",
+        :shirt_size => "S",
 		:phone => "1111111111",
 		:team => @team,
 	    :account_attributes => {
@@ -45,7 +45,7 @@ RSpec.describe "participants/index", type: :view do
       Participant.create!(
         :captain => true,
         :waiver_signed => true,
-        :shirt_size => "Small",
+        :shirt_size => "S",
 		:phone => "1111111111",
 		:team => @team,
 	    :account_attributes => {
