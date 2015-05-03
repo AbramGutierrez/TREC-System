@@ -20,8 +20,8 @@ class Team < ActiveRecord::Base
 	private
 
 		def max_team_check
-			if !conference.nil?
-				errors.add(:conference, 'There are already the maximum number of teams for the current conference.') unless
+			if !conference.nil? && self.new_record?
+				errors.add(:conference, 'already has the maximum number of teams.') unless
 					conference.teams.count < conference.max_teams
 			end		
 		end
