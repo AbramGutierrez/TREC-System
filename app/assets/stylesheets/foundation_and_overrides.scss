@@ -127,7 +127,7 @@ $warning-color: #f08a24;
 $info-color: #a0d3e8;
 
 // We use these to control various global styles
- $body-bg: $white !default;
+$body-bg: $white !default;
 $body-font-color: $jet;
 $body-font-family: $font-family-sans-serif;
 $body-font-weight: $font-weight-normal;
@@ -1382,7 +1382,7 @@ $tooltip-max-width: 300px;
 $include-html-top-bar-classes: $include-html-classes;
 
 // Background color for the top bar
-$topbar-bg-color: $oil;
+$topbar-bg-color: $jet;
 $topbar-bg: $topbar-bg-color;
 
 // Height and margin
@@ -1467,11 +1467,47 @@ $include-accessibility-classes: true;
 $include-table-visibility-classes: true;
 $include-legacy-visibility-classes: true;
 
+/*
 nav.top-bar{
   text-align:center;
 }
 section.top-bar-section{
   display:inline-block;
 }
+*/
+
+.sponsor-bg {
+	background-color: $smoke;
+}
+
+
+//STICKY FOOTER
+* {
+	margin: 0;
+}
+html, body {
+	height: 100%;
+}
+.wrapper {
+	min-height: 100%;
+	height: auto !important; /* This line and the next line are not necessary unless you need IE6 support */
+	height: 100%;
+	margin: 0 auto -70px; /* the bottom margin is the negative value of the footer's height */
+}
+.footer {
+	height: 70px; /* .push must be the same height as .footer */
+	background-color: $oil;
+	color: $white;
+}
+.push {
+	height: 70px; /* .push must be the same height as .footer */
+}
+
+/*
+
+Sticky Footer by Ryan Fait
+http://ryanfait.com/
+
+*/
 
 @import 'foundation';

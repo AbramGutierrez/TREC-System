@@ -20,8 +20,8 @@ class RegistrationsController < ApplicationController
 	  else
         @school = params[:team][:school]
       end		
-	  
-	  @team = Team.new(conference_id: @conference.id, 
+
+	  @team = Team.new(conference: @conference, 
 	    team_name: params[:team][:team_name],
 	    paid_status: "unpaid",
 	    school: @school)
@@ -43,12 +43,13 @@ class RegistrationsController < ApplicationController
 				  first_name: participant[:first_name],
 				  last_name: participant[:last_name]
 				})
-				#if is a valid participant then try create a account for it
+				
 				if @new_participant.valid?
 				  @participants.push(@new_participant)
 				else
-				  flash.now[:alert] = "There was an error with the provided participant information." +
-				  " Please make sure that name, email, and phone number are provided for each participant and are in the correct format." 
+				  #flash.now[:alert] = "There was an error with the provided participant information." +
+				  #" Please make sure that name, email, and phone number are provided for each participant and are in the correct format." 
+				  flash.now[:alert] = @new_participant.errors.full_messages.to_sentence
 				  render 'new' and return
 				end
 		    end
@@ -62,7 +63,7 @@ class RegistrationsController < ApplicationController
 		@team.save
 		
 	    if @participants.length > @conference.max_team_size 
-		  flash.now[:alert] = flash.now[:alert] = "Too many participants."
+		  flash.now[:alert] = "Too many participants."
 		  render 'new' and return
 	    end
 		#create participants
@@ -75,7 +76,9 @@ class RegistrationsController < ApplicationController
 		#and a list of accounts linked to each participant
 	    redirect_to action: "success"
 	  else 
-	    flash.now[:alert] = "Make sure that school name is filled and please try a different team name."
+	    #@participant.errors.
+		#flash.now[:alert] = "Make sure that school name is filled or try a different team name."
+		flash.now[:alert] = @team.errors.full_messages.to_sentence
 		render 'new' and return
 	  end
 	end
@@ -99,9 +102,9 @@ class RegistrationsController < ApplicationController
 	  participants.each do |participant|
 	    if(participant.captain == true)
 		  return true
-	    end
-	    return false
+	    end  
 	  end
+	  return false
 	end
 	
     private :has_blank, :has_captain
