@@ -221,4 +221,50 @@ RSpec.describe Conference, type: :model do
 		  )).to_not be_valid
   end
   
+  it "should be able to locate the active conference" do
+    Conference.create!(start_date: Date.parse("2013-9-5"), 
+      end_date: Date.parse("2013-9-18"),
+      max_team_size: 6,
+      min_team_size: 1,
+      max_teams: 5,
+      tamu_cost: 30.00,
+      other_cost: 60.00,
+      challenge_desc: 'testing2!',
+      is_active: false
+      ) 
+     Conference.create!(start_date: Date.parse("2013-10-3"), 
+      end_date: Date.parse("2013-10-7"),
+      max_team_size: 6,
+      min_team_size: 1,
+      max_teams: 5,
+      tamu_cost: 30.00,
+      other_cost: 60.00,
+      challenge_desc: 'testing2!',
+      is_active: false
+      ) 
+      Conference.create!(start_date: Date.parse("2014-6-12"), 
+      end_date: Date.parse("2014-6-13"),
+      max_team_size: 6,
+      min_team_size: 1,
+      max_teams: 5,
+      tamu_cost: 30.00,
+      other_cost: 60.00,
+      challenge_desc: 'testing2!',
+      is_active: false
+      ) 
+      active_conference = Conference.create!(start_date: Date.parse("2015-9-4"), 
+      end_date: Date.parse("2015-10-6"),
+      max_team_size: 6,
+      min_team_size: 1,
+      max_teams: 5,
+      tamu_cost: 30.00,
+      other_cost: 60.00,
+      challenge_desc: 'testing2!',
+      is_active: true
+      ) 
+      @conference1.reload
+      
+      expect(Conference.get_active()).to eql(active_conference)
+  end
+  
 end

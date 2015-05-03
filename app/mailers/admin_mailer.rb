@@ -1,6 +1,5 @@
 class AdminMailer < ApplicationMailer
-  def email(accounts, title, message)
-    recipients = Proc.new { accounts.pluck(email) }
+  def email(recipients, title, message)
     @message = message
     mail(subject: title, to: recipients)
   end

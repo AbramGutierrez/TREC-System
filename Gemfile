@@ -73,6 +73,9 @@ group :development, :test do
   #TDD 
   gem 'factory_girl'
   
+  #clean up error messages while testing
+  gem 'quiet_assets'
+  
 end
 
 group :test do
