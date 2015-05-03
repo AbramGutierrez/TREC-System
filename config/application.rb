@@ -25,5 +25,7 @@ module TREC
     
     # Because of this, need to use *_url instead of *_path in mailer code
     config.action_mailer.default_url_options = { host: 'TREC.herokuapp.com' }
+    
+    config.quiet_assets = false
   end
 end

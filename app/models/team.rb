@@ -6,7 +6,16 @@ class Team < ActiveRecord::Base
 	validates :team_name, uniqueness: true , 
 	  presence: true
 	
-	validate :max_team_check	
+	validate :max_team_check
+	
+	def self.get_active_teams
+	  active_conference = Conference.get_active()
+	  Team.where(conference_id: active_conference.id)
+	end	
+	
+	def get_captain
+	  self.participants.where(captain: true)
+	end
 	  
 	private
 

@@ -45,6 +45,14 @@ class Account < ActiveRecord::Base
     self.password_confirmation = temp_password
 	self.save
 	end
+	
+	def self.get_accounts(users)
+	  accounts = Array.new
+	  users.each do |user|
+	    accounts.push(Account.where(id: user.account_id))
+	  end
+	  accounts
+	end
 
 	private
 		def name_validation

@@ -2,6 +2,9 @@ Rails.application.routes.draw do
 
   get 'password_resets/new'
   get 'password_resets/create'
+  
+  get 'messenger' => 'messenger#new'
+  get 'messenger' => 'messenger#create'
 
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
@@ -39,7 +42,9 @@ Rails.application.routes.draw do
 
   resources :team_members
   
-  resources :password_resets, only: [:new, :create, :edit, :update]
+  resources :password_resets, only: [:create]
+  
+  resources :messenger
   
   get 'welcome/index'
 
