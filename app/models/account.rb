@@ -14,10 +14,12 @@ class Account < ActiveRecord::Base
 	
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	validates :email, presence: true, length: { maximum: 255 },
-					  format: { with: VALID_EMAIL_REGEX },
-					  uniqueness: { case_sensitive: false }
+					  format: { with: VALID_EMAIL_REGEX }
+					  # format: { with: VALID_EMAIL_REGEX },
+					  # uniqueness: { case_sensitive: false }
 					  
-	validate :name_validation				  
+	validate :name_validation
+    validate :unique_email	
 					  
 	# This is necessary to create and encrypt the password
 	# To suppress the validations that it adds, pass "validations: false" as an argument to it	
@@ -57,6 +59,33 @@ class Account < ActiveRecord::Base
 	private
 		def name_validation
 		  errors.add(:first_name, "first and last name cannot be blank") unless !first_name.blank? || !last_name.blank?
+		end
+		
+		# Do not allow accounts to be created with an email that is an admin
+		# email or an email that is being used in the active conference.
+		def unique_email
+		    self.email = email.downcase
+			if !self.email.nil?
+				Administrator.all.each do |admin|
+					if !admin.nil? && !admin.account.nil?
+						if admin.account.email == self.email && admin.account != self
+							errors.add(:email, "is already taken.")
+						end
+					end
+				end
+				conference = Conference.find_by is_active: true
+				if !conference.nil?
+					conference.teams.each do |t|
+						t.participants.each do |participant|
+							if !participant.nil? && !participant.account.nil?
+								if participant.account.email == self.email && participant.account != self
+									errors.add(:email, "is already taken.")
+								end
+							end
+						end
+					end
+				end
+			end
 		end
 
 end
