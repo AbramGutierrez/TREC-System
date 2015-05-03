@@ -5,17 +5,21 @@ class Administrator < ActiveRecord::Base
 	
 	accepts_nested_attributes_for :account
 	
-	after_initialize do
-	  @recipient_participant = "participant"
-    @recipient_captain = "captain"
-    @method_email = "email"
-    @method_text_message = "text message"
+	def self.recipient_participant
+	  "participant"
 	end
 	
-	cattr_reader :recipient_participant
-	cattr_reader :recipient_captain
-	cattr_reader :method_email
-	cattr_reader :method_text_message
+	def self.recipient_captain
+	  "captain"
+	end
+	
+	def self.method_email
+	  "email"
+	end
+	
+	def self.method_text_message
+	  "text message"
+	end
 	
 	def self.get_recipients(type)
 	  recipients = Array.new
