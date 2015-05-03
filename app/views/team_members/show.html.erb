@@ -6,7 +6,7 @@
 		<% @account = Account.find_by user_id: @id %>
 		<%= @account.first_name %>
 		<%= @account.last_name %>
-		| <%= link_to "Remove", participant, method: :delete, data: { confirm: 'Are you sure?' } %>
+		| <%= link_to "Remove", participant, method: :delete, data: { confirm: "Remove #{@account.first_name} #{@account.last_name} from the team?" } %>
 	</p>
 <% end %>
 
