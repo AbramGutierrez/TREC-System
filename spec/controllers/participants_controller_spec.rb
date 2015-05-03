@@ -43,7 +43,7 @@ RSpec.describe ParticipantsController, type: :controller do
 	  :team_name => "PartControllerTest" 
 	  )
   
-    @p2 = Participant.create!(captain: false, shirt_size: "Large",
+    @p2 = Participant.create!(captain: false, shirt_size: "L",
 			phone: "1876543211", team: @team, account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
 			password: "mypassword", password_confirmation: "mypassword"})
 			
@@ -61,7 +61,7 @@ RSpec.describe ParticipantsController, type: :controller do
   
   let(:valid_attributes) { {
     :captain => false, 
-	:shirt_size => "Medium", 
+	:shirt_size => "M", 
 	:phone => "1234567890",
 	:team_id => @team.id,
 	:account_attributes => {
@@ -76,7 +76,7 @@ RSpec.describe ParticipantsController, type: :controller do
 
   let(:invalid_attributes) {{
     :captain => false, 
-	:shirt_size => "Medium", 
+	:shirt_size => "M", 
 	:phone => "",
 	:team_id => @team.id,
 	:account_attributes => {
@@ -230,7 +230,7 @@ RSpec.describe ParticipantsController, type: :controller do
     context "with valid params" do
       let(:new_attributes) { {
 		:captain => true, 
-		:shirt_size => "Medium", 
+		:shirt_size => "M", 
 		:phone => "1234567890",
 		:team => @team.id,
 		:account_attributes => {

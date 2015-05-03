@@ -67,11 +67,11 @@ RSpec.describe TeamsController, type: :controller do
 			password: "admin", password_confirmation: "admin"}) 	
   }	
   before(:each){
-	@p = Participant.create!(captain: true, shirt_size: "Large",
+	@p = Participant.create!(captain: true, shirt_size: "L",
 			phone: "1876543211", team: @team, account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
 			password: "mypassword", password_confirmation: "mypassword"})
 			
-	@p2 = Participant.create!(captain: false, shirt_size: "Large",
+	@p2 = Participant.create!(captain: false, shirt_size: "L",
 			phone: "1876543211", team: @team, account_attributes: {first_name: "A", last_name: "Z", email: "p4_2@example.com",
 			password: "mypassword", password_confirmation: "mypassword"})		
   }
