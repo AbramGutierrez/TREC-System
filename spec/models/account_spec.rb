@@ -5,6 +5,9 @@ RSpec.describe Account, type: :model do
 		@account = Account.new(first_name: "first", last_name: "last",
 								email: "valid_email@test.com", password: "123456",
 								password_confirmation: "123456")
+		@admin = Administrator.create!(account_attributes: {first_name: "first", last_name: "last",
+								email: "admin@test.com", password: "123456",
+								password_confirmation: "123456"})						
     end
 	
 	it "should be valid" do
@@ -31,16 +34,19 @@ RSpec.describe Account, type: :model do
 	end
 	
 	it "should not allow duplicate email addresses" do
-		duplicate_email = @account.dup
-		@account.save
-		expect(duplicate_email).to_not be_valid
+		# duplicate_email = @account.dup
+		# @account.save
+		# expect(duplicate_email).to_not be_valid
+		
+		duplicate = @admin.account.dup
+		expect(duplicate).to_not be_valid
 	end
 	
 	it "should ignore case when saving email" do
-		duplicate_email = @account.dup
-		duplicate_email.email = @account.email.upcase
-		@account.save
-		expect(duplicate_email).to_not be_valid
+		duplicate = @admin.account.dup
+		duplicate.email = @admin.account.email.upcase
+		# @account.save
+		expect(duplicate).to_not be_valid
 	end
 	
 	it "should combine first and last name" do
