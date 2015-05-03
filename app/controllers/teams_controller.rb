@@ -24,16 +24,6 @@ class TeamsController < ApplicationController
 
   # GET /teams/1/edit
   def edit
-	# @school_value
-	# School.all.each do |school|
-		# if (school.name == @team.school)
-			# @school_value = @team.school
-		# end	
-	# end
-	# if @school_value.nil?
-		# @school_value = "Other"
-		# @other_value = @team.school
-	# end
   end
 
   # POST /teams
@@ -56,13 +46,9 @@ class TeamsController < ApplicationController
   # PATCH/PUT /teams/1.json
   def update
     new_params = team_params
-	puts "\nnew_params: #{new_params.inspect}\n"
-	puts "\nnew_params[:school]: #{new_params[:school]}\n"
 	if team_params[:school] == "Other"
 	  new_params[:school] = params[:team_name][:other]
 	end	
-	puts "\nnew_params[:school]: #{new_params[:school]}\n"
-	puts "\nteam_params[:school]: #{team_params[:school]}\n"
     respond_to do |format|
       if @team.update(new_params)
         format.html { redirect_to @team, notice: 'Team was successfully updated.' }
