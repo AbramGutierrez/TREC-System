@@ -40,7 +40,8 @@ RSpec.describe Conference, type: :model do
 
 	expect(@conference1.is_active).to be(false)
 	
-	expect(conference2.is_active).to be(true)	
+	expect(conference2.is_active).to be(true)
+	conference2.destroy!	
   end
 
   it "should have a start date" do
@@ -222,7 +223,7 @@ RSpec.describe Conference, type: :model do
   end
   
   it "should be able to locate the active conference" do
-    Conference.create!(start_date: Date.parse("2013-9-5"), 
+    conf_a = Conference.create!(start_date: Date.parse("2013-9-5"), 
       end_date: Date.parse("2013-9-18"),
 	  conf_start_date: Date.parse("2015-6-8"),
 	  conf_end_date: Date.parse("2015-6-9"),
@@ -234,7 +235,7 @@ RSpec.describe Conference, type: :model do
       challenge_desc: 'testing2!',
       is_active: false
       ) 
-     Conference.create!(start_date: Date.parse("2013-10-3"), 
+     conf_b = Conference.create!(start_date: Date.parse("2013-10-3"), 
       end_date: Date.parse("2013-10-7"),
 	  conf_start_date: Date.parse("2015-6-8"),
 	  conf_end_date: Date.parse("2015-6-9"),
@@ -246,7 +247,7 @@ RSpec.describe Conference, type: :model do
       challenge_desc: 'testing2!',
       is_active: false
       ) 
-      Conference.create!(start_date: Date.parse("2014-6-12"), 
+      conf_c = Conference.create!(start_date: Date.parse("2014-6-12"), 
       end_date: Date.parse("2014-6-13"),
 	  conf_start_date: Date.parse("2015-6-8"),
 	  conf_end_date: Date.parse("2015-6-9"),
@@ -258,7 +259,7 @@ RSpec.describe Conference, type: :model do
       challenge_desc: 'testing2!',
       is_active: false
       ) 
-      active_conference = Conference.create!(start_date: Date.parse("2015-9-4"), 
+      conf_d = active_conference = Conference.create!(start_date: Date.parse("2015-9-4"), 
       end_date: Date.parse("2015-10-6"),
 	  conf_start_date: Date.parse("2015-6-8"),
 	  conf_end_date: Date.parse("2015-6-9"),
@@ -273,6 +274,11 @@ RSpec.describe Conference, type: :model do
       @conference1.reload
       
       expect(Conference.get_active()).to eql(active_conference)
+      
+      conf_a.destroy
+      conf_b.destroy
+      conf_c.destroy
+      conf_d.destroy
   end
   
 end
