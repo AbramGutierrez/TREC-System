@@ -16,8 +16,7 @@
         <td><%= team.team_name %></td>
         <td><%= team.paid_status %></td>
         <td><%= team.school %></td>
-        <td><%= link_to 'Show', team %></td>
-        <td><%= link_to 'Edit', edit_team_path(team) %></td>
+        <td><%= link_to 'Manage Team', team %></td>
         <td><%= link_to 'Destroy', team, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -26,4 +25,6 @@
 
 <br>
 
-<%= link_to 'New Team', new_team_path %>
+<%= link_to 'New Team', new_team_path %> |
+<%= link_to 'View all Participants', { controller: "participants", method: "index" } %> |
+<%= link_to 'Back to Dashboard', admin_dashboard_url %>
