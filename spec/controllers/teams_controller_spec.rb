@@ -176,7 +176,7 @@ RSpec.describe TeamsController, type: :controller do
 
   describe "GET #new" do
     it "assigns a new team as @team" do
-	  log_in_as(@p.account)
+	  log_in_as(@admin.account)
       get :new, {}, valid_session
       expect(assigns(:team)).to be_a_new(Team)
     end
@@ -187,11 +187,11 @@ RSpec.describe TeamsController, type: :controller do
 	  expect(response).to redirect_to(login_url)
 	end
 	
-	it "redirects new when not a participant" do
-	  log_in_as(@admin.account)
-	  get :new, {}, valid_session
-	  expect(response).to redirect_to(root_url)
-	end
+	# it "redirects new when not a participant" do
+	  # log_in_as(@admin.account)
+	  # get :new, {}, valid_session
+	  # expect(response).to redirect_to(root_url)
+	# end
   end
 
   describe "GET #edit" do
@@ -249,21 +249,21 @@ RSpec.describe TeamsController, type: :controller do
   describe "POST #create" do
     context "with valid params" do
       it "creates a new Team" do
-	    log_in_as(@p.account)
+	    log_in_as(@admin.account)
         expect {
           post :create, {:team => valid_attributes}, valid_session
         }.to change(Team, :count).by(1)
       end
 
       it "assigns a newly created team as @team" do
-	    log_in_as(@p.account)
+	    log_in_as(@admin.account)
         post :create, {:team => valid_attributes}, valid_session
         expect(assigns(:team)).to be_a(Team)
         expect(assigns(:team)).to be_persisted
       end
 
       it "redirects to the created team" do
-	    log_in_as(@p.account)
+	    log_in_as(@admin.account)
         post :create, {:team => valid_attributes}, valid_session
         expect(response).to redirect_to(Team.last)
       end
@@ -274,22 +274,22 @@ RSpec.describe TeamsController, type: :controller do
 		expect(response).to redirect_to(login_url)
 	  end
 	  
-	  it "redirects create when not a participant" do
-	    log_in_as(@admin.account)
-		post :create, {:team => valid_attributes}, valid_session
-		expect(response).to redirect_to(root_url)
-	  end
+	  # it "redirects create when not a participant" do
+	    # log_in_as(@admin.account)
+		# post :create, {:team => valid_attributes}, valid_session
+		# expect(response).to redirect_to(root_url)
+	  # end
     end
 
     context "with invalid params" do
       it "assigns a newly created but unsaved team as @team" do
-	    log_in_as(@p.account)
+	    log_in_as(@admin.account)
         post :create, {:team => invalid_attributes}, valid_session
         expect(assigns(:team)).to be_a_new(Team)
       end
 
       it "re-renders the 'new' template" do
-	    log_in_as(@p.account)
+	    log_in_as(@admin.account)
         post :create, {:team => invalid_attributes}, valid_session
         expect(response).to render_template("new")
       end
