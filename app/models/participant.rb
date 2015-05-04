@@ -9,6 +9,8 @@ class Participant < ActiveRecord::Base
 	validates :account, :team, presence: true
 	
 	validates :phone, length: {is: 10}, presence: true
+	
+	validates :phone_email, presence: true
 
 	validates :shirt_size, presence: true, inclusion: { in: %w(XS S M L XL XXL),
       message: "%{value} is not a valid size, try entering XS, S, M, L, XL, or XXL." }
