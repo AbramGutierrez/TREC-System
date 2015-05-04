@@ -43,8 +43,6 @@ Rails.application.routes.draw do
   resources :registrations
 
   resources :team_members
-
-  resources :faqs
   
   resources :password_resets, only: [:create]
   
