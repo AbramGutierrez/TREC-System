@@ -57,6 +57,14 @@ RSpec.describe Participant, type: :model do
 			)).to_not be_valid
 	end
 	
+	it "should not allow a phone number that is not digits" do
+		expect(Participant.new(captain: false, shirt_size: "L",
+				phone: "aaaaaaaaaa", team: @team, 
+				account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
+				password: "mypassword", password_confirmation: "mypassword"}
+			)).to_not be_valid
+	end
+	
 	it "should require a shirt size" do
 		expect(Participant.new(captain: false, 
 			phone: "1876543211", team: @team, 

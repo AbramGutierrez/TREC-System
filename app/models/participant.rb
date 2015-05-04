@@ -8,7 +8,8 @@ class Participant < ActiveRecord::Base
 	
 	validates :account, :team, presence: true
 	
-	validates :phone, length: {is: 10}, presence: true
+	PHONE_REGEX = /\A^[0-9]+$\z/
+	validates :phone, length: {is: 10}, format: { with: PHONE_REGEX }, presence: true
 
 	validates :shirt_size, presence: true, inclusion: { in: %w(XS S M L XL XXL),
       message: "%{value} is not a valid size, try entering XS, S, M, L, or XL." }
