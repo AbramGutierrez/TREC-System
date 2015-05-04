@@ -34,10 +34,13 @@
 
 <% end %>
 
+<% if is_participant? %>
+
 <% @faqs.each do |faq| %>
   <%= faq.question %>
   <%= faq.answer %>
   <hr />
 <% end %>
 
+<% end %>
 

@@ -1,11 +1,12 @@
 class FaqsController < ApplicationController
+  before_action :logged_in_user, only: [:index, :show, :new, :edit, :create, :update, :destroy]
   before_action :set_faq, only: [:show, :edit, :update, :destroy]
   before_action :admin_account, only: [:new, :edit, :create, :update, :destroy]
 
   # GET /faqs
   # GET /faqs.json
   def index
-    @faqs = Faq.all
+    @faqs = Faq.order(:order)
   end
 
   # GET /faqs/1
