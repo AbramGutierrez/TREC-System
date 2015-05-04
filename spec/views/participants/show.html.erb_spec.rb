@@ -33,16 +33,21 @@ RSpec.describe "participants/show", type: :view do
 		last_name: "world"
 	  }
     ))
+	
+	@admin = Administrator.create!(account_attributes: {first_name: "Admin", last_name: "istrator", email: "admin@example.com",
+			password: "password", password_confirmation: "password"}) 
   end
   
   after(:all) do
+    @admin.destroy
     @c.destroy
 	@new_team.destroy
 	@participant.destroy
   end
 
   it "renders attributes in <p>" do
-    render
+    log_in_as(@admin.account)
+	render
     expect(rendered).to match(/true/)
     expect(rendered).to match(/false/)
     expect(rendered).to match(/L/)
