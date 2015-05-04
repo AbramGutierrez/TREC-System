@@ -3,11 +3,11 @@ class SessionsController < ApplicationController
   end
   
   def create
-	# email = params[:session][:email].downcase
-	# puts "\nEmail: #{email}\n"
+
 	# Check to see if admin
 	account = Account.where('email = ? and user_type = ?', params[:session][:email].downcase, Administrator).take
-	# puts "\naccount0: #{account.inspect}\n"
+
+	# If it is not an admin, then check to see if it belongs to a participant of the active conference
 	if account.nil?
 		accounts = Account.where('email = ?', params[:session][:email].downcase)
 		accounts.each do |a|
@@ -18,11 +18,9 @@ class SessionsController < ApplicationController
 			end
 		end
 	end	
-	# puts "\naccount: #{account.inspect}\n"
-	# if account.nil?
-		# puts "\nNIL!!!\n"
-	# end
-	# account = Account.find_by(email: params[:session][:email].downcase)
+
+	# If it meets one of the two checks above, then authenticate with the password,
+	# Otherwise do not allow login.
 	if account && account.authenticate(params[:session][:password])
 		log_in account
 		if is_admin?
