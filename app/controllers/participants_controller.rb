@@ -80,6 +80,7 @@ class ParticipantsController < ApplicationController
 		    @participant.id, @participant.team_id)
 		  @participants.each do |participant|
 		    participant.update(:captain => false)
+			participant.save
 		  end
 		end
 		if !is_admin?

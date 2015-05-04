@@ -20,9 +20,12 @@ RSpec.describe "participants/edit", type: :view do
 		  :paid_status => "paid", 
 		  :team_name => "PartControllerTest" 
 		  )
+		@admin = Administrator.create!(account_attributes: {first_name: "Admin", last_name: "istrator", email: "admin@example.com",
+			password: "password", password_confirmation: "password"}) 
 	end
 	
 	after(:all) do
+		@admin.destroy
 		@team.destroy
 		@c.destroy
 	end
@@ -44,6 +47,8 @@ RSpec.describe "participants/edit", type: :view do
   end
 
   it "renders the edit participant form" do
+	log_in_as(@admin.account)
+  
     render
 
     assert_select "form[action=?][method=?]", participant_path(@participant), "post" do
