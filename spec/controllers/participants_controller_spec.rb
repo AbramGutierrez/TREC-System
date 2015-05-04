@@ -44,7 +44,8 @@ RSpec.describe ParticipantsController, type: :controller do
 	  )
   
     @p2 = Participant.create!(captain: false, shirt_size: "L",
-			phone: "1876543211", team: @team, account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
+			phone: "1876543211", phone_email: Participant.create_phone_email("sumcom", "1876543211"),
+			team: @team, account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
 			password: "mypassword", password_confirmation: "mypassword"})
 			
     @admin = Administrator.create!(account_attributes: {first_name: "Admin", last_name: "istrator", email: "admin@example.com",
@@ -63,6 +64,7 @@ RSpec.describe ParticipantsController, type: :controller do
     :captain => false, 
 	:shirt_size => "M", 
 	:phone => "1234567890",
+	:phone_email => "1234567890@satellink.net",
 	:team_id => @team.id,
 	:account_attributes => {
 	  first_name: "A", 
@@ -78,6 +80,7 @@ RSpec.describe ParticipantsController, type: :controller do
     :captain => false, 
 	:shirt_size => "M", 
 	:phone => "",
+	:phone_email => nil,
 	:team_id => @team.id,
 	:account_attributes => {
 	  first_name: "A", 
