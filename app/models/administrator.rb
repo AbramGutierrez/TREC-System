@@ -45,10 +45,7 @@ class Administrator < ActiveRecord::Base
 	    end
 	  elsif method_type == Administrator.method_text_message
 	     users.each do |user|
-	       number = user.phone
-	       domain = user.domain()
-	       address = number + "@" + domain
-	       addresses.push(address)
+	       addresses.push user.phone_email
 	     end
 	  end
 	  addresses
