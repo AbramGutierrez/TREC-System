@@ -17,7 +17,7 @@ module RegistrationsHelper
 						@school_value = @team.school
 					end	
 				end
-				if @school_value.nil?
+				if @school_value.blank?
 					@school_value = "Other"
 					@other_value = @team.school
 				end
