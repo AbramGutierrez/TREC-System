@@ -36,7 +36,7 @@ class RegistrationsController < ApplicationController
 				@new_participant = Participant.new(captain: participant[:captain],
 				shirt_size: participant[:shirt_size],
 				phone: participant[:phone],
-				phone_email: Participant.create_phone_email[:phone_provider],
+				phone_email: Participant.create_phone_email(participant[:phone_provider],participant[:phone]),
 				waiver_signed: false,
 				team: @team,
 				account_attributes: {

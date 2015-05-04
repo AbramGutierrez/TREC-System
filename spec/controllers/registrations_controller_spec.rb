@@ -90,7 +90,7 @@ RSpec.describe RegistrationsController, type: :controller do
   describe "POST #create" do
     before(:example) do
       #post :create 
-	end
+	   end
 
 	
 	context "when valid" do
