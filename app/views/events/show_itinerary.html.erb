@@ -1,2 +1,19 @@
-<h1>Events#show_itinerary</h1>
-<p>Find me in app/views/events/show_itinerary.html.erb</p>
+<h1>Itinerary</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Time</th>
+	  <th>Description</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+	<% @itinerary.each do |event| %>
+		<tr>
+			<td><%= event.start_time %> through <%= event.end_time %></td>
+			<td><%= event.desc %></td>
+		</tr>
+	<% end %>
+  </tbody>
+</table>
