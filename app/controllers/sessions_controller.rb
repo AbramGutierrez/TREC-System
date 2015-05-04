@@ -30,6 +30,7 @@ class SessionsController < ApplicationController
 		elsif is_participant?
 			redirect_back_or participant_dashboard_path
 		else
+			# This line should never be hit, but it is a safety check
 			redirect_back_or root_url
 		end
 	else
