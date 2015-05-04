@@ -151,7 +151,7 @@ class ParticipantsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def participant_params
-      params.require(:participant).permit(:captain, :waiver_signed, :shirt_size, :phone, :team_id,
+      params.require(:participant).permit(:captain, :waiver_signed, :shirt_size, :phone, :phone_email, :team_id,
 		:account_attributes => [:first_name, :last_name, :email, :password, :password_confirmation])
     end
 	
