@@ -6,7 +6,9 @@ class Participant < ActiveRecord::Base
 	belongs_to :team
 	has_one :account, :as => :user, dependent: :destroy
 	
-	validates :phone, :account, :team, presence: true
+	validates :account, :team, presence: true
+	
+	validates :phone, length: {is: 10}, presence: true
 
 	validates :shirt_size, presence: true, inclusion: { in: %w(XS S M L XL XXL),
       message: "%{value} is not a valid size, try entering XS, S, M, L, XL, or XXL." }

@@ -35,5 +35,6 @@
 <%= will_paginate @participants %>
 <br>
 
-
+<%= link_to 'Team List', {controller: "teams", method: "index"} %> | 
+<%= link_to 'Back to Dashboard', admin_dashboard_url %>
 <!-- TODO: <%= link_to 'New Participant', new_participant_path %> -->
