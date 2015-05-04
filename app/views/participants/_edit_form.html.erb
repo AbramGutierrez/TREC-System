@@ -41,6 +41,12 @@
       <%= f.label :shirt_size %><br>
       <%= f.select :shirt_size, options_for_select(%w[XS S M L XL XXL], :selected => @participant.shirt_size) %>
     </div>
+	<% if is_admin? %>
+		<div class="field">
+			<%= f.label :captain %><br>
+			<%= f.check_box :captain %>
+		</div>
+	<% end %>	
     <div class="actions">
       <%= f.submit %>
     </div>

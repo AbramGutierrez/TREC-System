@@ -1,9 +1,9 @@
 class Administrator < ActiveRecord::Base
 	has_one :account, :as => :user, dependent: :destroy
 	
-	validates :account, presence: true
+	accepts_nested_attributes_for :account, :update_only => true
 	
-	accepts_nested_attributes_for :account
+	validates :account, presence: true
 	
 	def self.recipient_participant
 	  "participant"

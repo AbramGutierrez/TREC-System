@@ -46,5 +46,10 @@
   <%= @participant.phone %>
 </p>
 
-<%= link_to 'Edit', edit_participant_path(@participant) %> |
-<%= link_to 'Back', :back %>
+<%= link_to 'Edit', edit_participant_path(@participant) %>
+<% if is_admin? %>
+	| <%= link_to 'Participant List', participants_path %>
+	| <%= link_to 'Participant\'s Team', "/teams/#{@participant.team.id}" %>
+<% else %>
+	| <%= link_to 'Back', :back %>
+<% end %>

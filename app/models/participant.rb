@@ -6,6 +6,8 @@ class Participant < ActiveRecord::Base
 	belongs_to :team
 	has_one :account, :as => :user, dependent: :destroy
 	
+	accepts_nested_attributes_for :account, :update_only => true
+	
 	validates :account, :team, presence: true
 	
 	PHONE_REGEX = /\A^[0-9]+$\z/
@@ -21,8 +23,6 @@ class Participant < ActiveRecord::Base
 	validates :captain, inclusion: [true, false]
 	
 	validate :team_full
-	
-	accepts_nested_attributes_for :account
 	
 	def self.get_providers_list
 	  page = Nokogiri::HTML(open("http://www.emailtextmessages.com/"))

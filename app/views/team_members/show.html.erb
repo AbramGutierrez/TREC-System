@@ -6,6 +6,9 @@
 		<% @account = Account.find_by user_id: @id %>
 		<%= @account.first_name %>
 		<%= @account.last_name %>
+		<% if is_admin? %>
+			| <%= link_to "Edit", [:edit, participant] %>
+		<% end %>
 		| <%= link_to "Remove", participant, method: :delete, data: { confirm: "Remove #{@account.first_name} #{@account.last_name} from the team?" } %>
 	</p>
 <% end %>
