@@ -1,34 +1,30 @@
 class Account < ActiveRecord::Base
 	belongs_to :user, :polymorphic => true
 	
-	# validates :user, presence: true
-	
 	before_save { self.email = email.downcase }
-	after_create { 
-	  if self.password.nil?	
-		self.randomize_password()
-	  end	
-	  
+	before_validation {
+		# If this is a new record and there is no password,
+		# then generate a random password that will be emailed to
+		# the user.
+		if self.password.nil? && self.new_record?	
+			self.randomize_password()
+		end
+	}	
+		
+	after_create {   
 	  PasswordMailer.welcome_email(self).deliver_now 
 	}
 	
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	validates :email, presence: true, length: { maximum: 255 },
 					  format: { with: VALID_EMAIL_REGEX }
-					  # format: { with: VALID_EMAIL_REGEX },
-					  # uniqueness: { case_sensitive: false }
 					  
 	validate :name_validation
     validate :unique_email	
 					  
-	# This is necessary to create and encrypt the password
-	# To suppress the validations that it adds, pass "validations: false" as an argument to it	
-	has_secure_password validations: false
+	has_secure_password
 	
-	#validates :password, length: { minimum: 6 }
-
-	# Temporary work-around
-	attr_accessor :password_confirmation	
+	validates :password, length: { minimum: 4 }, allow_blank: true	
 	
 	def name
 	  result = String.new
@@ -45,7 +41,7 @@ class Account < ActiveRecord::Base
 	  temp_password = SecureRandom.base64 4
     self.password = temp_password
     self.password_confirmation = temp_password
-	self.save
+	# self.save
 	end
 	
 	def self.get_accounts(users)
