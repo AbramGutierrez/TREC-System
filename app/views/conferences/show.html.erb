@@ -1,11 +1,11 @@
-<p align="center">
+<h3 align="center"><u>
   <%= if @conference.is_active == true 
-        'This is the current conference'
+        'Current conference information'
       else
         'This conference is currently inactive'
       end
   %>
-</p>
+</u></h3>
 
 <p>
   <strong>Registration Start Date:</strong>
@@ -54,7 +54,11 @@
 <% if is_admin? %>
 <%= link_to 'Edit', edit_conference_path(@conference) %> |
 <% end %>
+<% if is_admin? %>
+<%= link_to 'Conference List', conferences_path %>
+<% else %>
 <%= link_to 'Back', :back %>
+<% end %>
 
 <br/>
 <% if is_admin? %>
