@@ -1,5 +1,6 @@
 class FaqsController < ApplicationController
   before_action :set_faq, only: [:show, :edit, :update, :destroy]
+  before_action :admin_account, only: [:new, :edit, :create, :update, :destroy]
 
   # GET /faqs
   # GET /faqs.json

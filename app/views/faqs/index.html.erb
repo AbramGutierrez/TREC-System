@@ -1,6 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Faqs</h1>
+<h1>FAQs</h1>
+
+<% if is_admin? %>
 
 <table>
   <thead>
@@ -29,3 +31,13 @@
 <br>
 
 <%= link_to 'New Faq', new_faq_path %>
+
+<% end %>
+
+<% @faqs.each do |faq| %>
+  <%= faq.question %>
+  <%= faq.answer %>
+  <hr />
+<% end %>
+
+
