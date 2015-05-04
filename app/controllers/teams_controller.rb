@@ -1,8 +1,8 @@
 class TeamsController < ApplicationController
   before_action :logged_in_user, only: [:index, :show, :new, :edit, :create, :update, :destroy]
   before_action :set_team, only: [:show, :edit, :update, :destroy]
-  before_action :admin_account, only: [:index, :destroy]
-  before_action :participant_account, only: [:new, :create]
+  before_action :admin_account, only: [:index, :destroy, :new, :create]
+  # before_action :participant_account, only: [:new, :create]
   before_action :on_team_or_admin, only: :show
   before_action :captain_or_admin, only: [:edit, :update]
 
@@ -29,7 +29,11 @@ class TeamsController < ApplicationController
   # POST /teams
   # POST /teams.json
   def create
-	@team = Team.new(team_params) 
+	new_params = team_params
+	if team_params[:school] == "Other"
+	  new_params[:school] = params[:team_name][:other]
+	end
+	@team = Team.new(new_params) 
 
     respond_to do |format|
       if @team.save

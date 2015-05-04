@@ -21,7 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :school %><br>
-	<%= f.select :school, options_for_select(get_schools_array, get_school), :id =>"sel" %>
+	<%= f.select :school, options_for_select(get_schools_array, get_school_name), :id =>"sel" %>
 	<div id="other">
 	  Enter School Name Here: <%= text_field :team_name, :other, :value => get_other_value %>
 	</div>
@@ -33,19 +33,15 @@
 
 <script>
   $(function(){
-    console.log("test");
     $('#other').hide();
 	var val = $('#team_school').val();
 	if (val == "Other") {
 	    $('#other').show();
 	  }
 	$('#team_school').change(function() {
-	  console.log("test2");
 	  var val = $(this).val();
 	  $('#other').hide();
-	  console.log("val: " + val);
 	  if (val == "Other") {
-	    console.log("test3");
 	    $('#other').show();
 	  }	    
 	});
