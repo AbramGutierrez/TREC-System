@@ -125,12 +125,23 @@ RSpec.describe Participant, type: :model do
 	end
 	
 	it "should get the right domain for a participant" do
-	  participant = Participant.new(captain: false, shirt_size: "L",
-      phone: "1876543211", team: @team, 
-      account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
-      password: "mypassword", password_confirmation: "mypassword"}
-    )
-    expect(participant.domain()).to eql("txt.att.net")
+	  expect(Participant.domain("AT&T")).to eql("txt.att.net")
 	end
+	
+	it "should create the right phone email for invalid phone number" do
+	  expect(Participant.create_phone_email("Sprint", nil)).to eql("XXXXXXXXXX@messaging.sprintpcs.com")
+	end
+	
+	it "should create the right phone email for valid phone number" do
+	  expect(Participant.create_phone_email("Sprint", "1234567899")).to eql("1234567899@messaging.sprintpcs.com")
+	end
+	
+	it "should return nil for nil phone provider" do
+    expect(Participant.create_phone_email(nil, nil)).to be_nil
+  end
+  
+  it "should return nil for invalid phone provider" do
+    expect(Participant.create_phone_email("Invalid Provider", nil)).to be_nil
+  end
   
 end

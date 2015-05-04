@@ -11,6 +11,7 @@
     <tr>
       <th> Role </th>
 	  <th> Phone Number </th>
+	  <th> Phone Provider </th>
 	  <th> Shirt Size </th>
 	  <th> First Name </th>
 	  <th> Last Name </th>
@@ -28,7 +29,8 @@
 		    <td> <p>Member</p> </td>
 		    <%= f.hidden_field :captain, :value => false %>
 		  <% end %>
-		  <td> <%= f.text_field :phone, :placeholder => "EX. 0123456789"%> </td>	
+		  <td> <%= f.text_field :phone, :placeholder => "EX. 0123456789"%> </td>
+		  <td> <%= f.text_field :phone_provider, :placeholder => "EX. AT&T"%> </td>	
 		  <td> <%= f.select :shirt_size, options_for_select(%w[XS S M L XL XXL]) %> </td>
 		  <td> <%= f.text_field :first_name %> </td>	
 		  <td> <%= f.text_field :last_name %> </td>	

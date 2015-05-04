@@ -38,36 +38,34 @@ class Participant < ActiveRecord::Base
 	  split_example[2] # should split 3 ways
 	end
 	
-	def domain
-	  provider = "at&t"
+	def self.domain(provider)
+	  if provider.nil?
+	    return nil
+	  end
+	  
 	  providers_list = Participant.get_providers_list()
-	  provider_index = providers_list.find_index(provider)
+	  
+	  provider_index = providers_list.find_index(provider.downcase)
+	  if provider_index.nil?
+	    return nil
+	  end
+	  
 	  domain_format = Participant.get_domains_list()[provider_index]
 	  Participant.extract_domain(domain_format).strip
 	end
-  
-  def self.method_email
-    "email"
-  end
-  
-  def self.method_text_message
-    "text message"
-  end
-  
-  def self.get_message_addresses(users, method_type)
-    addresses = Array.new
-    accounts = Account.get_accounts(users)
-    accounts.each do |account|
-      addresses.push account.email
+	
+	def self.create_phone_email(provider, number)
+	  if number.nil?
+	    number = "XXXXXXXXXX"  # in case user inputs correct provider but incorrect number
+	  end
+	  
+	  domain = Participant.domain(provider)
+    if domain.nil?
+      return nil
     end
-    addresses
-  end
-  
-  def self.email(method_type, title, message)
-    recipients = Team.where(id: team_id).participants
-    addresses = get_message_addresses(recipients)
-    AdminMailer.email(addresses, title, message)
-  end
+    
+    address = number + "@" + domain
+	end
 	
 	private
 	
