@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :faqs
+
   get 'password_resets/new'
   get 'password_resets/create'
   
