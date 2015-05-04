@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe PasswordMailer, type: :mailer do
   describe "sends a confirmation email" do
     let(:participant) { Participant.new() }
-    let(:account) { Account.create(first_name: "first", last_name: "last",
+    let(:account) { Account.create!(first_name: "first", last_name: "last",
                 email: "valid_email@test.com", user: participant)
     }
     let(:mail) { PasswordMailer.welcome_email(account) }
