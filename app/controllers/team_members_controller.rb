@@ -1,5 +1,5 @@
 class TeamMembersController < ApplicationController
-	before_action :team_captain_account, only: [:show, :destroy]
+	before_action :team_captain_or_admin, only: [:show, :destroy]
 	
 	def index
 	end

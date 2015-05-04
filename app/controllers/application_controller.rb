@@ -31,5 +31,10 @@ class ApplicationController < ActionController::Base
 		redirect_to(root_url) unless is_team_captain?
 	end
 	
-	
+	def team_captain_or_admin
+	  if !(current_account.user.is_a?(Administrator) || (@participant.team == current_participant.team && current_participant.captain?))
+	    flash[:alert] = "Only the team captain can remove team members."
+		redirect_to participant_dashboard_path
+	  end
+	end
 end
