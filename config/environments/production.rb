@@ -93,4 +93,8 @@ Rails.application.configure do
     :enable_starttls_auto => true,
     :openssl_verify_mode  => 'none'
   }
+
+
+  #My attempts to force assets to compile - MP
+  config.serve_static_assets = true
 end
