@@ -32,6 +32,7 @@ class SponsorsController < ApplicationController
   def create
     @conference = Conference.find_by_start_date(params[:sponsor][:conference])
     @sponsor = Sponsor.new(:conference => @conference,
+	  :website_url => params[:sponsor][:website_url],
 	  :sponsor_name => params[:sponsor][:sponsor_name],
 	  :logo_path => params[:sponsor][:logo_path],
 	  :priority => params[:sponsor][:priority]
