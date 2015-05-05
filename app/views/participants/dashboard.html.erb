@@ -4,15 +4,15 @@
 
   <table class="icon">
     <tr>
-      <td class="icon"><%= link_to "", {controller: "conferences", action: "show", id: current_participant.team.conference}, :class => "ibutton fi-torsos-all"%></td>
+      <td class="icon"><%= link_to "", {controller: "conferences", action: "show", id: current_participant.team.conference}, {:class => "ibutton fi-torsos-all", :id => "Conference Information"}%></td>
       <td class="icon-label">Conference Information</td> 
     </tr>
     <tr>
-      <td class="icon"><%= link_to "", {controller: "teams", action: "show", id: current_participant.team}, :class => "ibutton fi-results-demographics"%></td>
+      <td class="icon"><%= link_to "", {controller: "teams", action: "show", id: current_participant.team}, {:class => "ibutton fi-results-demographics", :id => "Team Information"}%></td>
       <td class="icon-label">Team Information</td>  
     </tr>
     <tr>
-      <td class="icon"><%= link_to "", {controller: "participants", action: "show", id: current_participant}, :class => "ibutton fi-torso"%></td>
+      <td class="icon"><%= link_to "", {controller: "participants", action: "show", id: current_participant}, {:class => "ibutton fi-torso", :id => "Manage Account"}%></td>
       <td class="icon-label">Manage Account</td>  
     </tr>
   </table>
