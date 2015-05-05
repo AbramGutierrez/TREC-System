@@ -47,7 +47,8 @@ RSpec.describe AccountsController, type: :controller do
 			# phone: "1234567890", team: @team)	
 			
     @p2 = Participant.create!(captain: false, shirt_size: "L",
-			phone: "1876543211", team: @team, account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
+			phone: "1876543211", team: @team, phone_email: Participant.create_phone_email("comcast", "1876543211"),
+			account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
 			password: "mypassword", password_confirmation: "mypassword"})
 			
     @admin = Administrator.create!(account_attributes: {first_name: "Admin", last_name: "istrator", email: "admin@example.com",
@@ -113,7 +114,8 @@ RSpec.describe AccountsController, type: :controller do
     it "assigns the requested account as @account" do
       account = Account.create! valid_attributes
 	  p = Participant.create!(captain: false, shirt_size: "M", 
-			phone: "1234567890", team: @team, account: account)
+			phone: "1234567890", phone_email: Participant.create_phone_email("qwest", "1234567890"),
+			team: @team, account: account)
 	  log_in_as(p.account)
       get :show, {:id => account.to_param}, valid_session
       expect(assigns(:account)).to eq(account)
@@ -147,7 +149,8 @@ RSpec.describe AccountsController, type: :controller do
     it "assigns the requested account as @account" do
       account = Account.create! valid_attributes
 	  p = Participant.create!(captain: false, shirt_size: "M", 
-			phone: "1234567890", team: @team, account: account)
+      phone: "1234567890", phone_email: Participant.create_phone_email("qwest", "1234567890"),
+      team: @team, account: account)
 	  log_in_as(p.account)
       get :edit, {:id => account.to_param}, valid_session
       expect(assigns(:account)).to eq(account)
@@ -219,7 +222,8 @@ RSpec.describe AccountsController, type: :controller do
 	    
         account = Account.create! valid_attributes
 		p = Participant.create!(captain: false, shirt_size: "M", 
-			phone: "1234567890", team: @team, account: account)
+      phone: "1234567890", phone_email: Participant.create_phone_email("qwest", "1234567890"),
+      team: @team, account: account)
 		log_in_as(p.account)
         put :update, {:id => account.to_param, :account => new_attributes}, valid_session
         account.reload
@@ -230,7 +234,8 @@ RSpec.describe AccountsController, type: :controller do
       it "assigns the requested account as @account" do
         account = Account.create! valid_attributes
 		p = Participant.create!(captain: false, shirt_size: "M", 
-			phone: "1234567890", team: @team, account: account)
+      phone: "1234567890", phone_email: Participant.create_phone_email("qwest", "1234567890"),
+      team: @team, account: account)
 		log_in_as(p.account)
         put :update, {:id => account.to_param, :account => valid_attributes}, valid_session
         expect(assigns(:account)).to eq(account)
@@ -240,7 +245,8 @@ RSpec.describe AccountsController, type: :controller do
       it "redirects to the account" do
         account = Account.create! valid_attributes
 		p = Participant.create!(captain: false, shirt_size: "M", 
-			phone: "1234567890", team: @team, account: account)
+      phone: "1234567890", phone_email: Participant.create_phone_email("qwest", "1234567890"),
+      team: @team, account: account)
 		log_in_as(p.account)
         put :update, {:id => account.to_param, :account => valid_attributes}, valid_session
         expect(response).to redirect_to(account)
@@ -267,7 +273,8 @@ RSpec.describe AccountsController, type: :controller do
       it "assigns the account as @account" do
         account = Account.create! valid_attributes
 		p = Participant.create!(captain: false, shirt_size: "M", 
-			phone: "1234567890", team: @team, account: account)
+      phone: "1234567890", phone_email: Participant.create_phone_email("qwest", "1234567890"),
+      team: @team, account: account)
 		log_in_as(p.account)
         put :update, {:id => account.to_param, :account => invalid_attributes}, valid_session
         expect(assigns(:account)).to eq(account)
@@ -277,7 +284,8 @@ RSpec.describe AccountsController, type: :controller do
       it "re-renders the 'edit' template" do
         account = Account.create! valid_attributes
 		p = Participant.create!(captain: false, shirt_size: "M", 
-			phone: "1234567890", team: @team, account: account)
+      phone: "1234567890", phone_email: Participant.create_phone_email("qwest", "1234567890"),
+      team: @team, account: account)
 		log_in_as(p.account)
         put :update, {:id => account.to_param, :account => invalid_attributes}, valid_session
         expect(response).to render_template("edit")

@@ -21,7 +21,8 @@ RSpec.describe "login_behavior", :type => :request do
 		  :team_name => "ControllerTest" 
 		  )
 		@p = Participant.create!(captain: false, shirt_size: "L",
-			phone: "1876543211", team: @team, account_attributes: {first_name: "A", last_name: "Z", email: "p@example.com",
+			phone: "1876543211", phone_email: "1876543211@utext.com",
+			team: @team, account_attributes: {first_name: "A", last_name: "Z", email: "p@example.com",
 			password: "password", password_confirmation: "password"}) 
 
 		@admin = Administrator.create!(account_attributes: {first_name: "Admin", last_name: "istrator", email: "admin@example.com",
@@ -90,7 +91,8 @@ RSpec.describe "login_behavior", :type => :request do
 			  :team_name => "ControllerTest2" 
 			  )
 			@p2 = Participant.create!(captain: false, shirt_size: "L",
-				phone: "1876543211", team: @team2, account_attributes: {first_name: "A", last_name: "Z", email: "p2@example.com",
+				phone: "1876543211", phone_email: "1876543211@utext.com",
+				team: @team2, account_attributes: {first_name: "A", last_name: "Z", email: "p2@example.com",
 				password: "password", password_confirmation: "password"})
 		end
 		
@@ -118,7 +120,8 @@ RSpec.describe "login_behavior", :type => :request do
 		
 		it 'allows the email of the old participant to be used for a new account' do
 			p3 = Participant.new(captain: false, shirt_size: "L",
-			phone: "1876543211", team: @team2, account_attributes: {first_name: "A", last_name: "Z", email: "p@example.com",
+			phone: "1876543211", phone_email: "1876543211@utext.com",
+			team: @team2, account_attributes: {first_name: "A", last_name: "Z", email: "p@example.com",
 			password: "password", password_confirmation: "password"})
 			
 			expect(p3).to be_valid
@@ -129,7 +132,8 @@ RSpec.describe "login_behavior", :type => :request do
 		
 		it 'does not allow a participant to use an admins email' do
 			p4 = Participant.new(captain: false, shirt_size: "L",
-			phone: "1876543211", team: @team2, account_attributes: {first_name: "A", last_name: "Z", email: "admin@example.com",
+			phone: "1876543211", phone_email: "1876543211@utext.com",
+			team: @team2, account_attributes: {first_name: "A", last_name: "Z", email: "admin@example.com",
 			password: "password", password_confirmation: "password"})
 			
 			expect(p4).to_not be_valid
@@ -137,7 +141,8 @@ RSpec.describe "login_behavior", :type => :request do
 		
 		it 'does not allow a participant to use another participants email from the same conference' do
 			p4 = Participant.new(captain: false, shirt_size: "L",
-			phone: "1876543211", team: @team2, account_attributes: {first_name: "A", last_name: "Z", email: "p2@example.com",
+			phone: "1876543211", phone_email: "1876543211@utext.com",
+			team: @team2, account_attributes: {first_name: "A", last_name: "Z", email: "p2@example.com",
 			password: "password", password_confirmation: "password"})
 			
 			expect(p4).to_not be_valid

@@ -16,33 +16,33 @@ RSpec.describe RegistrationsController, type: :controller do
 	
 	before(:all) do
 	    @valid_participants = Hash.new
-	    @valid_participants[0] = {captain: true, phone: "9999999999", shirt_size: "S", first_name: "participant1", last_name: "participant1", email: "partici1@example.com"}
-	    @valid_participants[1] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant2", last_name: "participant2", email: "partici2@example.com"}
-	    @valid_participants[2] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant3", last_name: "participant3", email: "partici3@example.com"}
-	    @valid_participants[3] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant4", last_name: "participant4", email: "partici4@example.com"}
-	    @valid_participants[4] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant5", last_name: "participant5", email: "partici5@example.com"}
-	    @valid_participants[5] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant6", last_name: "participant6", email: "partici6@example.com"}
+	    @valid_participants[0] = {captain: true, phone: "9999999999", phone_email: "9999999999@utext.com", shirt_size: "S", first_name: "participant1", last_name: "participant1", email: "partici1@example.com"}
+	    @valid_participants[1] = {captain: false, phone: "9999999999", phone_email: "9999999999@utext.com", shirt_size: "S", first_name: "participant2", last_name: "participant2", email: "partici2@example.com"}
+	    @valid_participants[2] = {captain: false, phone: "9999999999", phone_email: "9999999999@utext.com", shirt_size: "S", first_name: "participant3", last_name: "participant3", email: "partici3@example.com"}
+	    @valid_participants[3] = {captain: false, phone: "9999999999", phone_email: "9999999999@utext.com", shirt_size: "S", first_name: "participant4", last_name: "participant4", email: "partici4@example.com"}
+	    @valid_participants[4] = {captain: false, phone: "9999999999", phone_email: "9999999999@utext.com", shirt_size: "S", first_name: "participant5", last_name: "participant5", email: "partici5@example.com"}
+	    @valid_participants[5] = {captain: false, phone: "9999999999", phone_email: "9999999999@utext.com", shirt_size: "S", first_name: "participant6", last_name: "participant6", email: "partici6@example.com"}
 		@participants_no_captain = Hash.new
-	    @participants_no_captain[0] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant1", last_name: "participant1", email: "partici1@example.com"}
-	    @participants_no_captain[1] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant2", last_name: "participant2", email: "partici2@example.com"}
-	    @participants_no_captain[2] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant3", last_name: "participant3", email: "partici3@example.com"}
-	    @participants_no_captain[3] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant4", last_name: "participant4", email: "partici4@example.com"}
-	    @participants_no_captain[4] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant5", last_name: "participant5", email: "partici5@example.com"}
-	    @participants_no_captain[5] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant6", last_name: "participant6", email: "partici6@example.com"}
+	    @participants_no_captain[0] = {captain: false, phone: "9999999999", phone_email: "9999999999@utext.com", shirt_size: "S", first_name: "participant1", last_name: "participant1", email: "partici1@example.com"}
+	    @participants_no_captain[1] = {captain: false, phone: "9999999999", phone_email: "9999999999@utext.com", shirt_size: "S", first_name: "participant2", last_name: "participant2", email: "partici2@example.com"}
+	    @participants_no_captain[2] = {captain: false, phone: "9999999999", phone_email: "9999999999@utext.com", shirt_size: "S", first_name: "participant3", last_name: "participant3", email: "partici3@example.com"}
+	    @participants_no_captain[3] = {captain: false, phone: "9999999999", phone_email: "9999999999@utext.com", shirt_size: "S", first_name: "participant4", last_name: "participant4", email: "partici4@example.com"}
+	    @participants_no_captain[4] = {captain: false, phone: "9999999999", phone_email: "9999999999@utext.com", shirt_size: "S", first_name: "participant5", last_name: "participant5", email: "partici5@example.com"}
+	    @participants_no_captain[5] = {captain: false, phone: "9999999999", phone_email: "9999999999@utext.com", shirt_size: "S", first_name: "participant6", last_name: "participant6", email: "partici6@example.com"}
 		@participants_no_phone = Hash.new
-	    @participants_no_phone[0] = {captain: true, phone: "9999999999", shirt_size: "S", first_name: "participant1", last_name: "participant1", email: "partici1@example.com"}
-	    @participants_no_phone[1] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant2", last_name: "participant2", email: "partici2@example.com"}
-	    @participants_no_phone[2] = {captain: false, phone: "", shirt_size: "S", first_name: "participant3", last_name: "participant3", email: "partici3@example.com"}
-	    @participants_no_phone[3] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant4", last_name: "participant4", email: "partici4@example.com"}
-	    @participants_no_phone[4] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant5", last_name: "participant5", email: "partici5@example.com"}
-	    @participants_no_phone[5] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant6", last_name: "participant6", email: "partici6@example.com"}
+	    @participants_no_phone[0] = {captain: true, phone: "9999999999", phone_email: "9999999999@utext.com", shirt_size: "S", first_name: "participant1", last_name: "participant1", email: "partici1@example.com"}
+	    @participants_no_phone[1] = {captain: false, phone: "9999999999", phone_email: "9999999999@utext.com", shirt_size: "S", first_name: "participant2", last_name: "participant2", email: "partici2@example.com"}
+	    @participants_no_phone[2] = {captain: false, phone: "", phone_email: "@utext.com", shirt_size: "S", first_name: "participant3", last_name: "participant3", email: "partici3@example.com"}
+	    @participants_no_phone[3] = {captain: false, phone: "9999999999", phone_email: "9999999999@utext.com", shirt_size: "S", first_name: "participant4", last_name: "participant4", email: "partici4@example.com"}
+	    @participants_no_phone[4] = {captain: false, phone: "9999999999", phone_email: "9999999999@utext.com", shirt_size: "S", first_name: "participant5", last_name: "participant5", email: "partici5@example.com"}
+	    @participants_no_phone[5] = {captain: false, phone: "9999999999", phone_email: "9999999999@utext.com", shirt_size: "S", first_name: "participant6", last_name: "participant6", email: "partici6@example.com"}
 		@participants_no_email = Hash.new
-	    @participants_no_email[0] = {captain: true, phone: "9999999999", shirt_size: "S", first_name: "participant1", last_name: "participant1", email: "partici1@example.com"}
-	    @participants_no_email[1] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant2", last_name: "participant2", email: "partici2@example.com"}
-	    @participants_no_email[2] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant3", last_name: "participant3", email: "partici3@example.com"}
-	    @participants_no_email[3] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant4", last_name: "participant4", email: "partici4@example.com"}
-	    @participants_no_email[4] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant5", last_name: "participant5", email: "partici5@example.com"}
-	    @participants_no_email[5] = {captain: false, phone: "9999999999", shirt_size: "S", first_name: "participant6", last_name: "participant6", email: ""}
+	    @participants_no_email[0] = {captain: true, phone: "9999999999", phone_email: "9999999999@utext.com", shirt_size: "S", first_name: "participant1", last_name: "participant1", email: "partici1@example.com"}
+	    @participants_no_email[1] = {captain: false, phone: "9999999999", phone_email: "9999999999@utext.com", shirt_size: "S", first_name: "participant2", last_name: "participant2", email: "partici2@example.com"}
+	    @participants_no_email[2] = {captain: false, phone: "9999999999", phone_email: "9999999999@utext.com", shirt_size: "S", first_name: "participant3", last_name: "participant3", email: "partici3@example.com"}
+	    @participants_no_email[3] = {captain: false, phone: "9999999999", phone_email: "9999999999@utext.com", shirt_size: "S", first_name: "participant4", last_name: "participant4", email: "partici4@example.com"}
+	    @participants_no_email[4] = {captain: false, phone: "9999999999", phone_email: "9999999999@utext.com", shirt_size: "S", first_name: "participant5", last_name: "participant5", email: "partici5@example.com"}
+	    @participants_no_email[5] = {captain: false, phone: "9999999999", phone_email: "9999999999@utext.com", shirt_size: "S", first_name: "participant6", last_name: "participant6", email: ""}
 		@conference = Conference.create!(start_date: Date.parse("2015-6-4"), 
 		  end_date: Date.parse("2015-7-6"),
 		  conf_start_date: Date.parse("2015-8-8"),
@@ -90,7 +90,7 @@ RSpec.describe RegistrationsController, type: :controller do
   describe "POST #create" do
     before(:example) do
       #post :create 
-	end
+	   end
 
 	
 	context "when valid" do

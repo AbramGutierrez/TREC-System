@@ -45,7 +45,8 @@ RSpec.describe ConferencesController, type: :controller do
 	  )
   
     @p = Participant.create!(captain: false, shirt_size: "L",
-			phone: "1876543211", team: @team, account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
+			phone: "1876543211", phone_email: Participant.create_phone_email("sumcom", "1876543211"),
+			team: @team, account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
 			password: "mypassword", password_confirmation: "mypassword"})
 			
     @admin = Administrator.create!(account_attributes: {first_name: "Admin", last_name: "istrator", email: "admin@example.com",

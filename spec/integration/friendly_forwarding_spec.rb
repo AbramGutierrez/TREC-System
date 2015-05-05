@@ -24,7 +24,8 @@ RSpec.describe "friendly forwarding", :type => :request do
 
     before(:each) do
 		@p = Participant.create!(captain: false, shirt_size: "L",
-			phone: "1876543211", team: @team, account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
+			phone: "1876543211", phone_email: "1876543211@utext.com",
+			team: @team, account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
 			password: "password", password_confirmation: "password"})
 	end
 	

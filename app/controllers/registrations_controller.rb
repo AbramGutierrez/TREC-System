@@ -36,6 +36,7 @@ class RegistrationsController < ApplicationController
 				@new_participant = Participant.new(captain: participant[:captain],
 				shirt_size: participant[:shirt_size],
 				phone: participant[:phone],
+				phone_email: Participant.create_phone_email(participant[:phone_provider],participant[:phone]),
 				waiver_signed: false,
 				team: @team,
 				account_attributes: {
@@ -91,7 +92,7 @@ class RegistrationsController < ApplicationController
 	
 	def has_blank(fields)
 	  if (fields[:phone].blank? && fields[:first_name].blank? && 
-	    fields[:last_name].blank? && fields[:email].blank?) 
+	    fields[:phone_provider].blank? && fields[:last_name].blank? && fields[:email].blank?) 
 	    return true
 	  else
 		return false

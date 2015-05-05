@@ -6,15 +6,23 @@ class Participant < ActiveRecord::Base
 	belongs_to :team
 	has_one :account, :as => :user, dependent: :destroy
 	
+<<<<<<< HEAD
 	accepts_nested_attributes_for :account, :update_only => true
 	
 	validates :account, :team, presence: true
 	
 	PHONE_REGEX = /\A^[0-9]+$\z/
 	validates :phone, length: {is: 10}, format: { with: PHONE_REGEX }, presence: true
+=======
+	validates :account, :team, :phone_email, presence: true
+	
+	validates :phone, length: {is: 10}, presence: true
+	
+	validate :phone_email_correct
+>>>>>>> AddParticipantPhoneEmail
 
 	validates :shirt_size, presence: true, inclusion: { in: %w(XS S M L XL XXL),
-      message: "%{value} is not a valid size, try entering XS, S, M, L, or XL." }
+      message: "%{value} is not a valid size, try entering XS, S, M, L, XL, or XXL." }
 	  
 	# Apparently Ruby views nil and false as the same thing, so this only allows captain to be true
 	# validates :captain, presence: true
@@ -41,38 +49,45 @@ class Participant < ActiveRecord::Base
 	  split_example[2] # should split 3 ways
 	end
 	
-	def domain
-	  provider = "at&t"
+	def self.domain(provider)
+	  if provider.nil?
+	    return nil
+	  end
+	  
 	  providers_list = Participant.get_providers_list()
-	  provider_index = providers_list.find_index(provider)
+	  
+	  provider_index = providers_list.find_index(provider.downcase)
+	  if provider_index.nil?
+	    return nil
+	  end
+	  
 	  domain_format = Participant.get_domains_list()[provider_index]
 	  Participant.extract_domain(domain_format).strip
 	end
-  
-  def self.method_email
-    "email"
-  end
-  
-  def self.method_text_message
-    "text message"
-  end
-  
-  def self.get_message_addresses(users, method_type)
-    addresses = Array.new
-    accounts = Account.get_accounts(users)
-    accounts.each do |account|
-      addresses.push account.email
+	
+	def self.create_phone_email(provider, number)
+	  if number.nil?
+	    number = "XXXXXXXXXX"  # in case user inputs correct provider but incorrect number
+	  end
+	  
+	  domain = Participant.domain(provider)
+    if domain.nil?
+      return nil
     end
-    addresses
-  end
-  
-  def self.email(method_type, title, message)
-    recipients = Team.where(id: team_id).participants
-    addresses = get_message_addresses(recipients)
-    AdminMailer.email(addresses, title, message)
-  end
+    
+    address = number + "@" + domain
+	end
 	
 	private
+	
+	 def phone_email_correct
+	   if !phone_email.nil?
+	     split = phone_email.split("@")
+	     if split[0] != phone
+	       errors.add(:phone_email_number, "does not match phone number.")
+	     end
+	   end
+	 end
 	
 		def team_full
 			if !team.nil?

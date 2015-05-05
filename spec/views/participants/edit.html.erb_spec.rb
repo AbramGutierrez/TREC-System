@@ -36,6 +36,7 @@ RSpec.describe "participants/edit", type: :view do
       :waiver_signed => false,
       :shirt_size => "S",
 	  :phone => "1111111111",
+	  :phone_email => Participant.create_phone_email("virgin mobile", "1111111111"),
 	  :team => @team,
 	  :account_attributes => {
 	    email: "test@example.com",

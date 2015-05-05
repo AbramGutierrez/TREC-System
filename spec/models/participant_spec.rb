@@ -29,7 +29,8 @@ RSpec.describe Participant, type: :model do
   
 	it "should be valid" do
 		expect(Participant.new(captain: false, shirt_size: "L",
-			phone: "1876543211", team: @team, 
+			phone: "1876543211", phone_email: Participant.create_phone_email("at&t", "1876543211"),
+			team: @team, 
 			account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
 			password: "mypassword", password_confirmation: "mypassword"}
 		)).to be_valid
@@ -37,13 +38,13 @@ RSpec.describe Participant, type: :model do
 	
 	it "should require an account" do
 		expect(Participant.new(captain: false, shirt_size: "L",
-			phone: "1876543211", team: @team, 
-		)).to_not be_valid
+			phone: "1876543211", phone_email: "1876543211@utext.com", 
+			team: @team)).to_not be_valid
 	end
 	
 	it "should require a phone number" do
 		expect(Participant.new(captain: false, shirt_size: "L",
-			team: @team, 
+			team: @team, phone_email: "@utext.com",
 			account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
 			password: "mypassword", password_confirmation: "mypassword"}
 		)).to_not be_valid
@@ -51,7 +52,7 @@ RSpec.describe Participant, type: :model do
 	
 	it "should not allow a phone number that is not 10 digits" do
 		expect(Participant.new(captain: false, shirt_size: "L",
-				phone: "18765", team: @team, 
+				phone: "18765", phone_email: "18765@utext.com", team: @team, 
 				account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
 				password: "mypassword", password_confirmation: "mypassword"}
 			)).to_not be_valid
@@ -67,15 +68,15 @@ RSpec.describe Participant, type: :model do
 	
 	it "should require a shirt size" do
 		expect(Participant.new(captain: false, 
-			phone: "1876543211", team: @team, 
-			account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
-			password: "mypassword", password_confirmation: "mypassword"}
-		)).to_not be_valid
+			phone: "1876543211", phone_email: "1876543211@vtext.com",
+			team: @team, account_attributes: {first_name: "A", last_name: "Z", 
+			  email: "p4@example.com", password: "mypassword", 
+			  password_confirmation: "mypassword"})).to_not be_valid
 	end
 	
 	it "should be a valid shirt size" do
 		expect(Participant.new(captain: false, shirt_size: "not_a_shirt_size",
-			phone: "1876543211", team: @team, 
+			phone: "1876543211", phone_email: "1876543211@vtext.com", team: @team, 
 			account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
 			password: "mypassword", password_confirmation: "mypassword"}
 		)).to_not be_valid
@@ -83,7 +84,7 @@ RSpec.describe Participant, type: :model do
 	
 	it "should require a team" do
 		expect(Participant.new(captain: false, shirt_size: "L",
-			phone: "1876543211", 
+			phone: "1876543211", phone_email: "1876543211@vtext.com",
 			account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
 			password: "mypassword", password_confirmation: "mypassword"}
 		)).to_not be_valid
@@ -109,12 +110,12 @@ RSpec.describe Participant, type: :model do
 			)
 			
 		p1 = Participant.create!(captain: false, shirt_size: "L",
-			phone: "1876543211", team: team1,
+			phone: "1876543211", phone_email: "1876543211@vtext.com", team: team1,
 			account_attributes: {first_name: "A", last_name: "Z", email: "parti1@example.com",
 			password: "mypassword", password_confirmation: "mypassword"})
 
 		expect(Participant.new(captain: false, shirt_size: "L",
-			phone: "1876543211", team: team1, 
+			phone: "1876543211", phone_email: "1876543211@vtext.com", team: team1, 
 			account_attributes: {first_name: "A", last_name: "Z", email: "parti2@example.com",
 			password: "mypassword", password_confirmation: "mypassword"}
 		)).to_not be_valid
@@ -141,12 +142,23 @@ RSpec.describe Participant, type: :model do
 	end
 	
 	it "should get the right domain for a participant" do
-	  participant = Participant.new(captain: false, shirt_size: "L",
-      phone: "1876543211", team: @team, 
-      account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
-      password: "mypassword", password_confirmation: "mypassword"}
-    )
-    expect(participant.domain()).to eql("txt.att.net")
+	  expect(Participant.domain("AT&T")).to eql("txt.att.net")
 	end
+	
+	it "should create the right phone email for invalid phone number" do
+	  expect(Participant.create_phone_email("Sprint", nil)).to eql("XXXXXXXXXX@messaging.sprintpcs.com")
+	end
+	
+	it "should create the right phone email for valid phone number" do
+	  expect(Participant.create_phone_email("Sprint", "1234567899")).to eql("1234567899@messaging.sprintpcs.com")
+	end
+	
+	it "should return nil for nil phone provider" do
+    expect(Participant.create_phone_email(nil, nil)).to be_nil
+  end
+  
+  it "should return nil for invalid phone provider" do
+    expect(Participant.create_phone_email("Invalid Provider", nil)).to be_nil
+  end
   
 end
