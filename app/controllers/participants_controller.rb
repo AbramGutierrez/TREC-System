@@ -161,7 +161,7 @@ class ParticipantsController < ApplicationController
 	end
 	
 	def sort_column
-	  %w[teams.team_name accounts.first_name accounts.last_name captain waiver_signed shirt_size 
+	  %w[teams.school teams.team_name accounts.first_name accounts.last_name captain waiver_signed shirt_size 
 	    teams.conference_id].include?( params[:sort]) ? params[:sort] : "teams.conference_id"
 	end
 	
