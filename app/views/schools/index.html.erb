@@ -1,6 +1,6 @@
 <br>
 <h3 style='display:inline'>Schools List</h3>
-<%= link_to '', new_school_path, :class => "i-button-small fi-plus button tiny round", :style => 'color:white;', :title => 'Add a School' %>
+<%= link_to '', new_school_path, :class => "i-button-small fi-plus button tiny round", :style => 'color:white;', :title => 'Add a School', :id => "add_school" %>
 
 <table>
   <thead>
@@ -14,9 +14,9 @@
   <tbody>
     <% @schools.each do |school| %>
       <tr>
-        <td><%= link_to '', school, { :class => "ibutton-small fi-magnifying-glass", :title => "View School" } %></td>
+        <td><%= link_to '', school, { :class => "ibutton-small fi-magnifying-glass", :title => "View School", :id => "view#{school.id}" } %></td>
         <td><%= school.name %></td>
-        <td><%= link_to '', edit_school_path(school), { :class => "ibutton-small fi-pencil", :title => "Update School" } %></td>
+        <td><%= link_to '', edit_school_path(school), { :class => "ibutton-small fi-pencil", :title => "Update School", :id => "update#{school.id}" } %></td>
         <td><%= link_to '', school, method: :delete, data: { confirm: 'Are you sure you want to delete this school?' }, :class => "ibutton-small fi-trash", :title => "Destroy School" %></td>
       </tr>
     <% end %>

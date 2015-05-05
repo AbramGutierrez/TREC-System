@@ -51,6 +51,9 @@ module NavigationHelpers
 	  
 	when /^the conference show page/
 	  '/conferences/1'
+	  
+	when /^the conference show 2 page/
+	  '/conferences/2'  
 
 	when /^the team show page/
 	  '/teams/1'
@@ -60,6 +63,9 @@ module NavigationHelpers
 	  
 	when /^the team invalid edit page/
 	  '/teams/1'   
+	  
+	when /^the team new page/
+	  '/teams/new'  
 
 	when /^the participant show page/
 	  '/participants/1'  
@@ -78,6 +84,45 @@ module NavigationHelpers
 	  
 	when /^the participants page/
 	  '/participants'	
+	  
+	when /^the teams page/
+	  '/teams'  
+	  
+	when /^the conference new page/
+	  '/conferences/new' 
+
+	when /^the conference edit page/
+	  '/conferences/1/edit'	
+	  
+	when /^the sponsor new page/
+	  '/sponsors/new'
+
+	when /^the sponsor edit page/
+	  '/sponsors/1/edit'
+
+	when /^the sponsor invalid edit page/
+	  '/sponsors/1'	
+	  
+	when /^the sponsors page/
+	  '/sponsors'  
+	  
+	when /^the check in page/
+	  '/participants/waiver_checklist'	
+	  
+	when /^the school new page/
+	  '/schools/new'
+
+	when /^the school edit page/
+	  '/schools/1/edit'
+
+	when /^the school show page/
+	  '/schools/1'	
+	  
+	when /^the school invalid edit page/
+	  '/schools/1'  
+	  
+	when /^the schools page/
+	  '/schools'   
 	
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
