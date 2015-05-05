@@ -25,6 +25,15 @@ class Participant < ActiveRecord::Base
 	
 	validate :team_full
 	
+	def self.get_active
+	  active_teams = Team.get_active_teams
+	  participants = Array.new
+	  active_teams.each do |team|
+	    participants.append team.participants
+	  end
+	  return participants.flatten
+	end
+	
 	def self.get_providers_list
 	  page = Nokogiri::HTML(open("http://www.emailtextmessages.com/"))
     providers = page.css('h3')

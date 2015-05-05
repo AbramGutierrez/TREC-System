@@ -19,39 +19,12 @@ RSpec.describe MessengerController, type: :controller do
             :paid_status => "paid", 
             :team_name => "team5" 
             )
-           @active3 = Team.create!(:conference => @active_conference,  
-            :school => "TestSchool",
-            :paid_status => "paid", 
-            :team_name => "team6" 
-            )
+            @admin = Administrator.new(account_attributes: {first_name: "first", last_name: "last",
+                  email: "valid_email@test.com", password: "123456",
+                  password_confirmation: "123456"})
             @captain = Participant.create!(captain: true, shirt_size: "S",
               phone: "1876543211", team: @active2, phone_email: "1876543211@place.com", 
               account: Account.create!(first_name: "A", last_name: "Z", email: "p1@example.com",
-              password: "mypassword", password_confirmation: "mypassword")
-              )
-             @not_captain1 = Participant.create!(captain: false, shirt_size: "XL",
-              phone: "3009098512", team: @active2, phone_email: "3009098512@place.com", 
-              account: Account.create!(first_name: "A", last_name: "Z", email: "p2@example.com",
-              password: "mypassword", password_confirmation: "mypassword")
-              )
-              @not_captain2 = Participant.create!(captain: false, shirt_size: "XL",
-              phone: "8133614073", team: @active2, phone_email: "8133614073@place.com", 
-              account: Account.create!(first_name: "A", last_name: "Z", email: "p3@example.com",
-              password: "mypassword", password_confirmation: "mypassword")
-              )
-              @not_captain3 = Participant.create!(captain: false, shirt_size: "M",
-              phone: "9642752086", team: @active2, phone_email: "9642752086@att.com", 
-              account: Account.create!(first_name: "A", last_name: "Z", email: "p4@example.com",
-              password: "mypassword", password_confirmation: "mypassword")
-              )
-              @other_team_captain = Participant.create!(captain: true, shirt_size: "M",
-              phone: "4296814083", team: @active3, phone_email: "4296814083@att.com", 
-              account: Account.create!(first_name: "A", last_name: "Z", email: "p5@example.com",
-              password: "mypassword", password_confirmation: "mypassword")
-              )
-              @other_team_not_captain = Participant.create!(captain: false, shirt_size: "S",
-              phone: "7282822361", team: @active3, phone_email: "7282822361@great.yeah",
-              account: Account.create!(first_name: "A", last_name: "Z", email: "p6@example.com",
               password: "mypassword", password_confirmation: "mypassword")
               )
         end
@@ -59,14 +32,30 @@ RSpec.describe MessengerController, type: :controller do
   after(:all) do
         @active_conference.destroy
         @active2.destroy
-        @active3.destroy
         @captain.destroy
-        @not_captain1.destroy
-        @not_captain2.destroy
-        @not_captain3.destroy
-        @other_team_captain.destroy
-        @other_team_not_captain.destroy
   end
   
-  it "redirect "
+  let(:valid_session) {{}}
+  
+  it "redirects to root url when not logged in" do
+    get :new, valid_session
+    expect(flash).to_not be_nil
+    expect(response).to redirect_to(login_url)
+  end
+  
+  it "redirects to root url with logged in as participant" do
+    log_in_as(@captain.account)
+    get :new, valid_session
+    expect(flash).to_not be_nil
+    expect(response).to redirect_to(root_url)
+  end
+  
+  describe "when admin is logged in" do
+    it "shows the email page" do
+      log_in_as(@captain.account)
+    get :new, valid_session
+    expect(flash).to be_nil
+    expect(response).to redirect_to(root_url)
+    end
+  end
 end

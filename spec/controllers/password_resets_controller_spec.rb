@@ -88,6 +88,11 @@ RSpec.describe PasswordResetsController, type: :controller do
               account: Account.create!(first_name: "A", last_name: "Z", email: "p6@example.com",
               password: "mypassword", password_confirmation: "mypassword")
               )
+              @inactive_person = Participant.create!(captain: true, shirt_size: "S",
+              phone: "7282822361", team: @inactive_team1, phone_email: "7282822361@great.yeah",
+              account: Account.create!(first_name: "A", last_name: "Z", email: "p7@example.com",
+              password: "mypassword", password_confirmation: "mypassword")
+              )
         end
       
   after(:all) do
@@ -105,14 +110,15 @@ RSpec.describe PasswordResetsController, type: :controller do
         @not_captain3.destroy
         @other_team_captain.destroy
         @other_team_not_captain.destroy
+        @inactive_person.destroy
   end
   
   let(:valid_email) {
-    { :email => "p1@example.com" }
+    { :email => "p4@example.com" }
   }
   
   let(:invalid_email) {
-    { :email => "LOL@no.com" }
+    { :email => "p7@example.com" }
   }
 
   describe "GET #new" do
