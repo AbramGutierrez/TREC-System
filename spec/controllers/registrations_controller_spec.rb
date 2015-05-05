@@ -43,10 +43,10 @@ RSpec.describe RegistrationsController, type: :controller do
 	    @participants_no_email[3] = {captain: false, phone: "9999999999", phone_provider: "AT&T", shirt_size: "S", first_name: "participant4", last_name: "participant4", email: "partici4@example.com"}
 	    @participants_no_email[4] = {captain: false, phone: "9999999999", phone_provider: "AT&T", shirt_size: "S", first_name: "participant5", last_name: "participant5", email: "partici5@example.com"}
 	    @participants_no_email[5] = {captain: false, phone: "9999999999", phone_provider: "AT&T", shirt_size: "S", first_name: "participant6", last_name: "participant6", email: ""}
-		@conference = Conference.create!(start_date: Date.parse("2015-6-4"), 
+		@conference = Conference.create!(start_date: Date.parse("2015-4-4"), 
 		  end_date: Date.parse("2015-7-6"),
 		  conf_start_date: Date.parse("2015-8-8"),
-	  conf_end_date: Date.parse("2015-8-9"),
+	      conf_end_date: Date.parse("2015-8-9"),
 		  max_team_size: 6,
 		  min_team_size: 1,
 		  max_teams: 5,
@@ -109,7 +109,50 @@ RSpec.describe RegistrationsController, type: :controller do
 	  
 	  it "redirects to the success page" do
 	    post :create, {:team => valid_team, :participants => @valid_participants}, valid_session
-		expect(response).to redirect_to('/registrations/success')
+		expect(flash[:success]).to_not be_nil
+		expect(response).to redirect_to(login_url)
+	  end
+	  
+	  it "redirects when before register period" do
+	    @c2 = Conference.create!(start_date: Date.parse("2015-6-4"), 
+		  end_date: Date.parse("2015-7-6"),
+		  conf_start_date: Date.parse("2015-8-8"),
+	      conf_end_date: Date.parse("2015-8-9"),
+		  max_team_size: 6,
+		  min_team_size: 1,
+		  max_teams: 5,
+		  tamu_cost: 30.00,
+		  other_cost: 60.00,
+		  challenge_desc: 'testing!',
+		  is_active: true
+		  )
+		post :create, {:team => valid_team, :participants => @valid_participants}, valid_session
+		# expect(flash[:alert]).to_not be_present
+		expect(response).to redirect_to(root_url)
+		@c2.destroy
+		@conference.is_active = true
+		@conference.save!
+	  end
+	  
+	  it "redirects when after register period" do
+	    @c2 = Conference.create!(start_date: Date.parse("2015-4-4"), 
+		  end_date: Date.parse("2015-4-6"),
+		  conf_start_date: Date.parse("2015-8-8"),
+	      conf_end_date: Date.parse("2015-8-9"),
+		  max_team_size: 6,
+		  min_team_size: 1,
+		  max_teams: 5,
+		  tamu_cost: 30.00,
+		  other_cost: 60.00,
+		  challenge_desc: 'testing!',
+		  is_active: true
+		  )
+		post :create, {:team => valid_team, :participants => @valid_participants}, valid_session
+		# expect(flash[:alert]).to_not be_present
+		expect(response).to redirect_to(root_url)
+		@c2.destroy
+		@conference.is_active = true
+		@conference.save!
 	  end
 	end
 	
