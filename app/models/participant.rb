@@ -6,7 +6,7 @@ class Participant < ActiveRecord::Base
 	belongs_to :team
 	has_one :account, :as => :user, dependent: :destroy
 	
-  accepts_nested_attributes_for :account, :update_only => true
+    accepts_nested_attributes_for :account, :update_only => true
 	
 	PHONE_REGEX = /\A^[0-9]+$\z/
 	validates :phone, length: {is: 10}, format: { with: PHONE_REGEX }, presence: true
