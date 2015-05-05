@@ -82,7 +82,7 @@ class Participant < ActiveRecord::Base
 	
 	private
 	
-	 def phone_email_correct
+	 def phone_provider_correct
 	   if !phone_provider.nil? && !phone.nil?
 	     phone_email = Participant.create_phone_email(phone_provider, phone)
 	     if phone_email.nil?
