@@ -22,7 +22,12 @@ class MessengerController < ApplicationController
     @title = params[:title_box]["message_title"]
     @message = params[:message_box]["message_body"]
     
-    Administrator.email(@recipients, @method, @title, @message)
+    begin
+      Administrator.email(@recipients, @method, @title, @message).deliver_now!
+    rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
+      flash.now[:alert] = "Error sending email. Please check your connection."
+      render 'new' and return
+    end
     
     render "success" and return
   end
