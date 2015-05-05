@@ -65,13 +65,22 @@
 		  </div>
 		  <aside class="small-2 columns" align='center'>
 		  	<br>
-		  	<div class='panel'>
+		  	<div class='panel' align='center'>
 		    <h4>Sponsors</h4>
 			<% if !(get_sponsors).nil? %>
 			  <% (get_sponsors).each do |sponsor| %>
-			  
-			    <%= image_tag(sponsor.logo_path_url.to_s, size: "100", alt: "") %> <br><br>
-			  
+				<% if sponsor.priority == 1%>
+			    <%= link_to image_tag(sponsor.logo_path_url.to_s, size: "100", alt: ""), sponsor.website_url, :target => "_blank" %> <br><br>
+			    <% end %>
+				<% if sponsor.priority == 2%>
+			    <%= link_to image_tag(sponsor.logo_path_url.to_s, size: "85", alt: ""), sponsor.website_url, :target => "_blank" %> <br><br>
+			    <% end %>
+				<% if sponsor.priority == 3%>
+			    <%= link_to image_tag(sponsor.logo_path_url.to_s, size: "75", alt: ""), sponsor.website_url, :target => "_blank" %> <br><br>
+			    <% end %>
+				<% if sponsor.priority == 4%>
+			    <%= link_to image_tag(sponsor.logo_path_url.to_s, size: "65", alt: ""), sponsor.website_url, :target => "_blank" %> <br><br>
+			    <% end %>
 			  <% end %>
 			<% end %>  
 		</div>
