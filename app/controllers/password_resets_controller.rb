@@ -5,7 +5,7 @@ class PasswordResetsController < ApplicationController
   def create
     @account = Account.find_by(email: params[:password_reset][:email].downcase)
     if @account
-      @account.randomize_email()
+      @account.randomize_password()
       begin
         PasswordMailer.reset_email(@account).deliver_now!
       rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
