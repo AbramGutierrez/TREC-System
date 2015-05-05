@@ -124,11 +124,11 @@ RSpec.describe PasswordResetsController, type: :controller do
       post :create, { :password_reset => valid_email }
       expect(ActionMailer::Base.deliveries.count).to eql(first_count + 1)
     end
-=begin
+
     it "redirects to home" do
       post :create, { :password_reset => valid_email }
       expect(response).to redirect_to(root_url)
     end
-=end
+    
   end
 end
