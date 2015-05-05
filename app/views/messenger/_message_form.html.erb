@@ -19,4 +19,5 @@
 	 	<%= text_area :message_box, :message_body, :id => "message", :size => "10x10" %> </td>
   </tbody>
   </table>
-<%= submit_tag 'Submit' %>
+<%= submit_tag 'Submit', :class => "button round" %>
+<%= link_to "Back", admin_dashboard_url, :class => "button round" %>

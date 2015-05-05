@@ -24,5 +24,5 @@
   End Date:<%= @sponsor.conference.end_date %><br>
 </p>
 
-<%= link_to 'Edit', edit_sponsor_path(@sponsor) %> |
-<%= link_to 'Back', sponsors_path %>
+<%= link_to 'Edit', edit_sponsor_path(@sponsor), :class => "button round" %>
+<%= link_to 'Sponsor List', sponsors_path, :class => "button round" %>
