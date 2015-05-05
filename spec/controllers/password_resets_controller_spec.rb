@@ -108,7 +108,11 @@ RSpec.describe PasswordResetsController, type: :controller do
   end
   
   let(:valid_email) {
-    {:email => "p1@example.com" }
+    { :email => "p1@example.com" }
+  }
+  
+  let(:invalid_email) {
+    { :email => "LOL@no.com" }
   }
 
   describe "GET #new" do
@@ -128,6 +132,21 @@ RSpec.describe PasswordResetsController, type: :controller do
     it "redirects to home" do
       post :create, { :password_reset => valid_email }
       expect(response).to redirect_to(root_url)
+    end
+    
+    it "gives the right flash upon success" do
+      post :create, { :password_reset => valid_email }
+      expect(flash[:info]).to be_present
+    end
+    
+    it "gives the right flash upon failure" do
+      post :create, { :password_reset => invalid_email }
+      expect(flash[:danger]).to be_present
+    end
+    
+    it "redirects to new upon failure" do
+      post :create, { :password_reset => invalid_email }
+      expect(flash[:danger]).to be_present
     end
     
   end
