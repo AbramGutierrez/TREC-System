@@ -4,6 +4,7 @@
   <thead>
     <tr>
 	  <th><%= sortable "teams.conference_id", "Conference" %></th>
+	  <th><%= sortable "teams.school", "School" %></th>
 	  <th><%= sortable "teams.team_name", "Team Name" %></th>
 	  <th><%= sortable "accounts.first_name", "First Name" %></th>
 	  <th><%= sortable "accounts.last_name", "Last Name" %></th>
@@ -18,9 +19,10 @@
     <% @participants.each do |participant| %>
       <tr>
   	    <td><%= participant.team.conference.start_date %></td>
-  	    <td><%= participant.team.team_name %></td>
-  		  <td><%= participant.account.first_name %></td>
-  		  <td><%= participant.account.last_name %></td>
+  	    <td><%= participant.team.school %></td>
+		<td><%= participant.team.team_name %></td>
+  		<td><%= participant.account.first_name %></td>
+  		<td><%= participant.account.last_name %></td>
         <td><%= participant.captain %></td>
         <td><%= participant.waiver_signed %></td>
         <td><%= participant.shirt_size %></td>
