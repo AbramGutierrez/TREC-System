@@ -37,7 +37,7 @@
 <% end %>
 
 
-
+<% unless logged_in? %>
 
 <% @terms.each do |term| %>
   <h3><%= term.title %></h3>
@@ -45,3 +45,4 @@
   <hr />
 <% end %>
 
+<% end %>

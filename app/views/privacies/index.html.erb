@@ -38,9 +38,12 @@
 <% end %>
 
 
+<% unless logged_in? %>
+
 <% @privacies.each do |privacy| %>
   <h3><%= privacy.title %></h3>
   <%= privacy.body %>
   <hr />
 <% end %>
 
+<% end %>

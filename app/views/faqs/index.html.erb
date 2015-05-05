@@ -1,8 +1,10 @@
 <h1>FAQs</h1>
 
-<% if is_admin? %>
+<% if logged_in? %>
 
-<table>
+  <% if is_admin? %>
+
+  <table>
   <thead>
     <tr>
       <th>Order</th>
@@ -24,15 +26,17 @@
       </tr>
     <% end %>
   </tbody>
-</table>
+  </table>
 
-<br>
+  <br>
 
-<%= link_to 'New Faq', new_faq_path %>
+  <%= link_to 'New Faq', new_faq_path %>
+
+  <% end %>
 
 <% end %>
 
-<% if is_participant? %>
+<% unless logged_in? %>
 
 <% @faqs.each do |faq| %>
   <%= faq.question %>

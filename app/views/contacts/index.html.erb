@@ -1,8 +1,12 @@
 <h1>Contact Information</h1>
 
-<% if is_admin? %>
 
-<table>
+
+<% if logged_in? %>
+
+  <% if is_admin? %>
+
+  <table>
   <thead>
     <tr>
       <th>Rank</th>
@@ -30,15 +34,18 @@
       </tr>
     <% end %>
   </tbody>
-</table>
+  </table>
 
-<br>
+  <br>
 
-<%= link_to 'New Contact', new_contact_path %>
+  <%= link_to 'New Contact', new_contact_path %>
+
+  <% end %>
 
 <% end %>
 
-<% if is_participant? %>
+
+<% unless logged_in? %>
 
 <table style="width:100%">
 <% @group = "temp" %>
@@ -59,6 +66,7 @@
 </table>
 
 <% end %>
+
 
 
 
