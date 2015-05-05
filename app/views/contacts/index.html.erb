@@ -1,0 +1,64 @@
+<h1>Contact Information</h1>
+
+<% if is_admin? %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Rank</th>
+      <th>Group</th>
+      <th>Position</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Other</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @contacts.each do |contact| %>
+      <tr>
+        <td><%= contact.rank %></td>
+        <td><%= contact.group %></td>
+        <td><%= contact.position %></td>
+        <td><%= contact.name %></td>
+        <td><%= contact.email %></td>
+        <td><%= contact.other %></td>
+        <td><%= link_to 'Show', contact %></td>
+        <td><%= link_to 'Edit', edit_contact_path(contact) %></td>
+        <td><%= link_to 'Destroy', contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Contact', new_contact_path %>
+
+<% end %>
+
+<% if is_participant? %>
+
+<table style="width:100%">
+<% @group = "temp" %>
+<% @contacts.each do |contact| %>
+  <tr bgcolor="#8F8F8C">
+    <% if @group != contact.group %>
+       <td><%= contact.group %></td>  
+       <% @group = contact.group %>
+    <% end %>
+  </tr>
+  <tr>
+    <td><%= contact.position %></td>
+    <td><%= contact.name %></td>    
+    <td><%= contact.email %></td>
+    <td><%= contact.other %></td>
+  </tr>
+<% end %>
+</table>
+
+<% end %>
+
+
+
