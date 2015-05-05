@@ -29,7 +29,7 @@ RSpec.describe Participant, type: :model do
   
 	it "should be valid" do
 		expect(Participant.new(captain: false, shirt_size: "L",
-			phone: "1876543211", phone_email: Participant.create_phone_email("at&t", "1876543211"),
+			phone: "1876543211", phone_provider: "3 River Wireless",
 			team: @team, 
 			account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
 			password: "mypassword", password_confirmation: "mypassword"}
@@ -38,13 +38,13 @@ RSpec.describe Participant, type: :model do
 	
 	it "should require an account" do
 		expect(Participant.new(captain: false, shirt_size: "L",
-			phone: "1876543211", phone_email: "1876543211@utext.com", 
+			phone: "1876543211", phone_provider: "3 River Wireless",
 			team: @team)).to_not be_valid
 	end
 	
 	it "should require a phone number" do
 		expect(Participant.new(captain: false, shirt_size: "L",
-			team: @team, phone_email: "@utext.com",
+			team: @team, phone_provider: "3 River Wireless",
 			account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
 			password: "mypassword", password_confirmation: "mypassword"}
 		)).to_not be_valid
@@ -52,7 +52,7 @@ RSpec.describe Participant, type: :model do
 	
 	it "should not allow a phone number that is not 10 digits" do
 		expect(Participant.new(captain: false, shirt_size: "L",
-				phone: "18765", phone_email: "18765@utext.com", team: @team, 
+				phone: "18765", phone_provider: "3 River Wireless", team: @team, 
 				account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
 				password: "mypassword", password_confirmation: "mypassword"}
 			)).to_not be_valid
@@ -60,7 +60,7 @@ RSpec.describe Participant, type: :model do
 	
 	it "should not allow a phone number that is not digits" do
 		expect(Participant.new(captain: false, shirt_size: "L",
-				phone: "aaaaaaaaaa", team: @team, 
+				phone: "aaaaaaaaaa", phone_provider: "3 River Wireless", team: @team, 
 				account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
 				password: "mypassword", password_confirmation: "mypassword"}
 			)).to_not be_valid
@@ -68,7 +68,7 @@ RSpec.describe Participant, type: :model do
 	
 	it "should require a shirt size" do
 		expect(Participant.new(captain: false, 
-			phone: "1876543211", phone_email: "1876543211@vtext.com",
+			phone: "1876543211", phone_provider: "3 River Wireless",
 			team: @team, account_attributes: {first_name: "A", last_name: "Z", 
 			  email: "p4@example.com", password: "mypassword", 
 			  password_confirmation: "mypassword"})).to_not be_valid
@@ -76,7 +76,7 @@ RSpec.describe Participant, type: :model do
 	
 	it "should be a valid shirt size" do
 		expect(Participant.new(captain: false, shirt_size: "not_a_shirt_size",
-			phone: "1876543211", phone_email: "1876543211@vtext.com", team: @team, 
+			phone: "1876543211", phone_provider: "3 River Wireless", team: @team, 
 			account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
 			password: "mypassword", password_confirmation: "mypassword"}
 		)).to_not be_valid
@@ -84,7 +84,7 @@ RSpec.describe Participant, type: :model do
 	
 	it "should require a team" do
 		expect(Participant.new(captain: false, shirt_size: "L",
-			phone: "1876543211", phone_email: "1876543211@vtext.com",
+			phone: "1876543211", phone_provider: "3 River Wireless",
 			account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
 			password: "mypassword", password_confirmation: "mypassword"}
 		)).to_not be_valid
@@ -110,12 +110,12 @@ RSpec.describe Participant, type: :model do
 			)
 			
 		p1 = Participant.create!(captain: false, shirt_size: "L",
-			phone: "1876543211", phone_email: "1876543211@vtext.com", team: team1,
+			phone: "1876543211", phone_provider: "3 River Wireless", team: team1,
 			account_attributes: {first_name: "A", last_name: "Z", email: "parti1@example.com",
 			password: "mypassword", password_confirmation: "mypassword"})
 
 		expect(Participant.new(captain: false, shirt_size: "L",
-			phone: "1876543211", phone_email: "1876543211@vtext.com", team: team1, 
+			phone: "1876543211", phone_provider: "3 River Wireless", team: team1, 
 			account_attributes: {first_name: "A", last_name: "Z", email: "parti2@example.com",
 			password: "mypassword", password_confirmation: "mypassword"}
 		)).to_not be_valid
@@ -199,32 +199,32 @@ RSpec.describe Participant, type: :model do
             :team_name => "team5" 
             )
             @captain = Participant.create!(captain: true, shirt_size: "S",
-              phone: "1876543211", team: @active2, phone_email: "1876543211@att.net", 
+              phone: "1876543211", team: @active2, phone_provider: "3 River Wireless",
               account: Account.create!(first_name: "A", last_name: "Z", email: "p1@example.com",
               password: "mypassword", password_confirmation: "mypassword")
               )
              @not_captain1 = Participant.create!(captain: false, shirt_size: "XL",
-              phone: "3009098512", team: @active2, phone_email: "3009098512@att.net", 
+              phone: "3009098512", team: @active2, phone_provider: "3 River Wireless",
               account: Account.create!(first_name: "A", last_name: "Z", email: "p2@example.com",
               password: "mypassword", password_confirmation: "mypassword")
               )
               @not_captain2 = Participant.create!(captain: false, shirt_size: "XL",
-              phone: "8133614073", team: @active2, phone_email: "8133614073@att.net", 
+              phone: "8133614073", team: @active2, phone_provider: "3 River Wireless",
               account: Account.create!(first_name: "A", last_name: "Z", email: "p3@example.com",
               password: "mypassword", password_confirmation: "mypassword")
               )
               @not_captain3 = Participant.create!(captain: false, shirt_size: "M",
-              phone: "9642752086", team: @active2, phone_email: "9642752086@utext.com", 
+              phone: "9642752086", team: @active2, phone_provider: "3 River Wireless",
               account: Account.create!(first_name: "A", last_name: "Z", email: "p4@example.com",
               password: "mypassword", password_confirmation: "mypassword")
               )
               @inactive_captain = Participant.create!(captain: true, shirt_size: "S",
-              phone: "7282822361", team: @inactive_team1, phone_email: "7282822361@utext.com",
+              phone: "7282822361", team: @inactive_team1, phone_provider: "3 River Wireless",
               account: Account.create!(first_name: "A", last_name: "Z", email: "p7@example.com",
               password: "mypassword", password_confirmation: "mypassword")
               )
               @inactive_person = Participant.create!(captain: false, shirt_size: "S",
-              phone: "9999999999", team: @inactive_team1, phone_email: "9999999999@great.scott",
+              phone: "9999999999", team: @inactive_team1, phone_provider: "3 River Wireless",
               account: Account.create!(first_name: "A", last_name: "Z", email: "p8@example.com",
               password: "mypassword", password_confirmation: "mypassword")
               )
