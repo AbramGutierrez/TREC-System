@@ -6,20 +6,13 @@ class Participant < ActiveRecord::Base
 	belongs_to :team
 	has_one :account, :as => :user, dependent: :destroy
 	
-<<<<<<< HEAD
-	accepts_nested_attributes_for :account, :update_only => true
-	
-	validates :account, :team, presence: true
+  accepts_nested_attributes_for :account, :update_only => true
 	
 	PHONE_REGEX = /\A^[0-9]+$\z/
 	validates :phone, length: {is: 10}, format: { with: PHONE_REGEX }, presence: true
-=======
 	validates :account, :team, :phone_email, presence: true
 	
-	validates :phone, length: {is: 10}, presence: true
-	
 	validate :phone_email_correct
->>>>>>> AddParticipantPhoneEmail
 
 	validates :shirt_size, presence: true, inclusion: { in: %w(XS S M L XL XXL),
       message: "%{value} is not a valid size, try entering XS, S, M, L, XL, or XXL." }
