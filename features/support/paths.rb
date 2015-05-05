@@ -43,6 +43,12 @@ module NavigationHelpers
 	when /^the send message page/
 	  '/messenger'
 	  
+	when /^ the message success page/
+	  '/messenger/success'
+
+	when /^ the message failure page/
+	  '/messenger/fail'  
+	  
 	when /^the conference show page/
 	  '/conferences/1'
 

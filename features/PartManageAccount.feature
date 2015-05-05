@@ -23,14 +23,14 @@ Scenario: Displays proper info
 	And I should see "Shirt size"	
 	And I should see "Email"	
 	And I should see "Phone Number"
-	And I should see "Edit"
+	And I should see "Update Participant"
 	And I should see "Back"	
 	
 Scenario: Edit Info(happy)
 	Given I am on the participant dashboard
 	When I follow "Manage Account"
 	Then I should be on the participant show page
-	When I follow "Edit"
+	When I follow "Update Participant"
 	Then I should be on the participant edit page
 	When I fill in "First name" with "Abram"	
 	And I fill in "Last name" with "Gutierrez"
@@ -38,14 +38,14 @@ Scenario: Edit Info(happy)
 	And I fill in "Password" with "password"
 	And I fill in "Password confirmation" with "password"
 	And I fill in "Phone" with "1876543211"
-	And I press "Update Participant"
+	And I press "Submit"
 	Then I should be on the participant show page	
 	
 Scenario: Edit Info(sad)
 	Given I am on the participant dashboard
 	When I follow "Manage Account"
 	Then I should be on the participant show page
-	When I follow "Edit"
+	When I follow "Update Participant"
 	Then I should be on the participant edit page
 	When I fill in "First name" with "Abram"	
 	And I fill in "Last name" with "Gutierrez"
@@ -53,7 +53,7 @@ Scenario: Edit Info(sad)
 	And I fill in "Password" with "password"
 	And I fill in "Password confirmation" with "password"
 	And I fill in "Phone" with "1876543211"
-	And I press "Update Participant"
+	And I press "Submit"
 	Then I should see "Account email is invalid"
 	And I should be on the participant invalid edit page	
 	

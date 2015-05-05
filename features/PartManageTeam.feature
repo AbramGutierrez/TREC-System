@@ -16,7 +16,7 @@ Scenario: Displays Team Info
 	And I should see "School"	
 	And I should see "Team name"	
 	And I should see "Paid status"	
-	And I should see "Edit Team Info"	
+	And I should see "Update Team Info"	
 	And I should see "Add/Remove Team Members"	
 	And I should see "Back"	
 	
@@ -24,20 +24,20 @@ Scenario: Edit Team Info(happy)
 	Given I am on the participant dashboard
 	When I follow "Team Information"
 	Then I should be on the team show page
-	When I follow "Edit Team Info"
+	When I follow "Update Team Info"
 	Then I should be on the team edit page
 	When I fill in "Team name" with "testTeam1"
-	And I press "Update Team"
+	And I press "Submit"
 	Then I should be on the team show page
 	
 Scenario: Edit Team Info(sad)
 	Given I am on the participant dashboard
 	When I follow "Team Information"
 	Then I should be on the team show page
-	When I follow "Edit Team Info"
+	When I follow "Update Team Info"
 	Then I should be on the team edit page
 	When I fill in "Team name" with ""
-	And I press "Update Team"
+	And I press "Submit"
 	Then I should be on the team invalid edit page
 	And I should see "Team name can't be blank"
 
