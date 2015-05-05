@@ -22,12 +22,14 @@
 
 
 table.icon {
-	width: 100%;
+	width: 60%;
 	box-shadow: 10px 10px 5px #888888;
+	background-color: transparent;
+	border-color: transparent;
 }
 
 table.icon tr {
-	background: #ffffff;
+	background: transparent;
 }
 
 td.icon {
@@ -45,7 +47,7 @@ a.ibutton {
 	width: 60%;
 	background: #500000;
 	color: #ffffff;
-	font-size: 60px;
+	font-size: 40px;
 }
 
 a.ibutton:hover {
@@ -55,6 +57,6 @@ a.ibutton:hover {
 td.icon-label {
 	padding: 0px;
 	margin: auto;
-	font-size: 24px;
+	font-size: 20px;
 	vertical-align: middle;
 }

@@ -9,7 +9,7 @@
 	  conf_end_date: Date.parse("2015-6-9"),
 	  max_team_size: 7,
 	  min_team_size: 1,
-	  max_teams: 2,
+	  max_teams: 20,
 	  tamu_cost: 30.00,
 	  other_cost: 60.00,
 	  challenge_desc: 'yay!',
