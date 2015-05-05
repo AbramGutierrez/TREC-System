@@ -1,8 +1,10 @@
-<h1>Participants List</h1>
+<br>
+<h3>Registered Participants</h3>
 <%= will_paginate @participants %>
 <table class="list_participant">
   <thead>
     <tr>
+    <th></th>
 	  <th><%= sortable "teams.conference_id", "Conference" %></th>
 	  <th><%= sortable "teams.school", "School" %></th>
 	  <th><%= sortable "teams.team_name", "Team Name" %></th>
@@ -11,24 +13,24 @@
 	  <th><%= sortable "captain", "Is the Captain?" %></th>
 	  <th><%= sortable "waiver_signed", "Waiver Signed?" %></th>
 	  <th><%= sortable "shirt_size", "Shirt Size" %></th>
-    <th colspan='3'></th>
+    <th colspan='2'></th>
     </tr>
   </thead>
 
   <tbody>
     <% @participants.each do |participant| %>
       <tr>
+        <td><%= link_to '', participant, { :class => "ibutton-small fi-magnifying-glass", :title => "View Participant" } %></td>
   	    <td><%= participant.team.conference.start_date %></td>
   	    <td><%= participant.team.school %></td>
-		<td><%= participant.team.team_name %></td>
-  		<td><%= participant.account.first_name %></td>
-  		<td><%= participant.account.last_name %></td>
+		    <td><%= participant.team.team_name %></td>
+  		  <td><%= participant.account.first_name %></td>
+  		  <td><%= participant.account.last_name %></td>
         <td><%= participant.captain %></td>
         <td><%= participant.waiver_signed %></td>
         <td><%= participant.shirt_size %></td>
-        <td><%= link_to 'Show', participant %></td>
-        <td><%= link_to 'Edit', edit_participant_path(participant) %></td>
-        <td><%= link_to 'Destroy', participant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to '', edit_participant_path(participant), { :class => "ibutton-small fi-pencil", :title => "Update Participant" } %></td>
+        <td><%= link_to '', participant, method: :delete,  data: { confirm: 'Are you sure destroy this participant?' }, :class => "ibutton-small fi-trash", :title => "Destroy Participant" %></td>
       </tr>
     <% end %>
 	
@@ -37,6 +39,6 @@
 <%= will_paginate @participants %>
 <br>
 
-<%= link_to 'Team List', {controller: "teams", method: "index"} %> | 
-<%= link_to 'Back to Dashboard', admin_dashboard_url %>
+<%= link_to 'Team List', {controller: "teams", method: "index"}, :class => "button round", :style => "color:white" %> | 
+<%= link_to 'Back to Dashboard', admin_dashboard_url, :class => "button round", :style => "color:white" %>
 <!-- TODO: <%= link_to 'New Participant', new_participant_path %> -->

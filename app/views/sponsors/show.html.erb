@@ -1,3 +1,5 @@
+<br>
+<h3>Sponsor Details</h3>
 <p>
   <strong>Sponsor Name:</strong>
   <%= @sponsor.sponsor_name %>
@@ -24,5 +26,5 @@
   End Date:<%= @sponsor.conference.end_date %><br>
 </p>
 
-<%= link_to 'Edit', edit_sponsor_path(@sponsor), :class => "button round" %>
-<%= link_to 'Sponsor List', sponsors_path, :class => "button round" %>
+<%= link_to 'Update Sponsor', edit_sponsor_path(@sponsor), :class => "button round", :style => "color:white" %> |
+<%= link_to 'Back', sponsors_path, :class => "button round", :style => "color:white" %>
