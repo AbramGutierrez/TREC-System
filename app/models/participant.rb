@@ -87,7 +87,8 @@ class Participant < ActiveRecord::Base
 	private
 	
 	 def phone_provider_correct
-	   if phone_email.nil?
+	   domain = Participant.domain(phone_provider)
+	   if domain.nil?
 	      errors.add(:phone_provider, "cannot be found.")
 	   end
 	 end

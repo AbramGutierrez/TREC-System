@@ -47,7 +47,7 @@ RSpec.describe AccountsController, type: :controller do
 			# phone: "1234567890", team: @team)	
 			
     @p2 = Participant.create!(captain: false, shirt_size: "L",
-			phone: "1876543211", team: @team, phone_email: Participant.create_phone_email("comcast", "1876543211"),
+			phone: "1876543211", team: @team, phone_provider: "qwest",
 			account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
 			password: "mypassword", password_confirmation: "mypassword"})
 			
@@ -114,7 +114,7 @@ RSpec.describe AccountsController, type: :controller do
     it "assigns the requested account as @account" do
       account = Account.create! valid_attributes
 	  p = Participant.create!(captain: false, shirt_size: "M", 
-			phone: "1234567890", phone_email: Participant.create_phone_email("qwest", "1234567890"),
+			phone: "1234567890", phone_provider: "qwest",
 			team: @team, account: account)
 	  log_in_as(p.account)
       get :show, {:id => account.to_param}, valid_session
@@ -149,7 +149,7 @@ RSpec.describe AccountsController, type: :controller do
     it "assigns the requested account as @account" do
       account = Account.create! valid_attributes
 	  p = Participant.create!(captain: false, shirt_size: "M", 
-      phone: "1234567890", phone_email: Participant.create_phone_email("qwest", "1234567890"),
+      phone: "1234567890", phone_provider: "qwest",
       team: @team, account: account)
 	  log_in_as(p.account)
       get :edit, {:id => account.to_param}, valid_session
@@ -222,7 +222,7 @@ RSpec.describe AccountsController, type: :controller do
 	    
         account = Account.create! valid_attributes
 		p = Participant.create!(captain: false, shirt_size: "M", 
-      phone: "1234567890", phone_email: Participant.create_phone_email("qwest", "1234567890"),
+      phone: "1234567890", phone_provider: "qwest",
       team: @team, account: account)
 		log_in_as(p.account)
         put :update, {:id => account.to_param, :account => new_attributes}, valid_session
@@ -234,7 +234,7 @@ RSpec.describe AccountsController, type: :controller do
       it "assigns the requested account as @account" do
         account = Account.create! valid_attributes
 		p = Participant.create!(captain: false, shirt_size: "M", 
-      phone: "1234567890", phone_email: Participant.create_phone_email("qwest", "1234567890"),
+      phone: "1234567890", phone_provider: "qwest",
       team: @team, account: account)
 		log_in_as(p.account)
         put :update, {:id => account.to_param, :account => valid_attributes}, valid_session
@@ -245,7 +245,7 @@ RSpec.describe AccountsController, type: :controller do
       it "redirects to the account" do
         account = Account.create! valid_attributes
 		p = Participant.create!(captain: false, shirt_size: "M", 
-      phone: "1234567890", phone_email: Participant.create_phone_email("qwest", "1234567890"),
+      phone: "1234567890", phone_provider: "qwest",
       team: @team, account: account)
 		log_in_as(p.account)
         put :update, {:id => account.to_param, :account => valid_attributes}, valid_session
@@ -273,7 +273,7 @@ RSpec.describe AccountsController, type: :controller do
       it "assigns the account as @account" do
         account = Account.create! valid_attributes
 		p = Participant.create!(captain: false, shirt_size: "M", 
-      phone: "1234567890", phone_email: Participant.create_phone_email("qwest", "1234567890"),
+      phone: "1234567890", phone_provider: "qwest",
       team: @team, account: account)
 		log_in_as(p.account)
         put :update, {:id => account.to_param, :account => invalid_attributes}, valid_session
@@ -284,7 +284,7 @@ RSpec.describe AccountsController, type: :controller do
       it "re-renders the 'edit' template" do
         account = Account.create! valid_attributes
 		p = Participant.create!(captain: false, shirt_size: "M", 
-      phone: "1234567890", phone_email: Participant.create_phone_email("qwest", "1234567890"),
+      phone: "1234567890", phone_provider: "qwest",
       team: @team, account: account)
 		log_in_as(p.account)
         put :update, {:id => account.to_param, :account => invalid_attributes}, valid_session
