@@ -39,6 +39,10 @@
       <%= f.text_field :phone, :placeholder => "EX. 0123456789" %>
     </div>
     <div class="field">
+      <%= f.label :phone_provider %><br>
+      <%= f.text_field :phone_provider, :placeholder => "EX. AT&T" %>
+    </div>
+    <div class="field">
       <%= f.label :shirt_size %><br>
       <%= f.select :shirt_size, options_for_select(%w[XS S M L XL XXL]) %>
     </div>
