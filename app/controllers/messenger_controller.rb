@@ -1,7 +1,7 @@
 class MessengerController < ApplicationController
   #These confuse me. I feel like I only need admin_account portion
-  before_action :logged_in_user, only: [:new]
-  before_action :admin_account, only: [:new]
+  before_action :logged_in_user, only: [:new, :create]
+  before_action :admin_account, only: [:new, :create]
   
   def new
   end

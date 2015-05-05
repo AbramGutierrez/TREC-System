@@ -1,3 +1,6 @@
+<br>
+<h3>Participant Details</h3>
+<br>
 <p>
   <strong>Conference Start Date:</strong>
   <%= @participant.team.conference.start_date %>
@@ -46,10 +49,13 @@
   <%= @participant.phone %>
 </p>
 
-<%= link_to 'Edit', edit_participant_path(@participant) %>
+<%= link_to 'Update Participant', edit_participant_path(@participant), :class => "button round", :style => "color:white" %>
 <% if is_admin? %>
-	| <%= link_to 'Participant List', participants_path %>
-	| <%= link_to 'Participant\'s Team', "/teams/#{@participant.team.id}" %>
+  | <%= link_to 'Participant\'s Team', "/teams/#{@participant.team.id}", :class => "button round", :style => "color:white" %>
+  <br>
+	<%= link_to 'Back', participants_path, :class => "button round", :style => "color:white" %>
+	  
 <% else %>
-	| <%= link_to 'Back', participant_dashboard_url %>
+  <br>
+	| <%= link_to 'Back', participant_dashboard_url, :class => "button round", :style => "color:white" %>
 <% end %>

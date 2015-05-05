@@ -27,7 +27,5 @@ module TREC
     config.action_mailer.default_url_options = { host: 'TREC.herokuapp.com' }
     
     config.quiet_assets = false
-
-    config.assets.precompile += %w( .svg .eot .woff .ttf .png .jpg .gif)
   end
 end

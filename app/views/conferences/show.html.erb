@@ -1,8 +1,9 @@
+<br>
 <h3 align="center"><u>
   <%= if @conference.is_active == true 
-        'Current conference information'
+        'Current Conference Details'
       else
-        'This conference is currently inactive'
+        'This Conference is Currently Inactive'
       end
   %>
 </u></h3>
@@ -29,7 +30,7 @@
 
 <p>
   <strong>Team Size:</strong>
-  <%= @conference.min_team_size %> - <%= @conference.max_team_size %>
+  <%= @conference.min_team_size %> to <%= @conference.max_team_size %>
 </p>
 
 <p>
@@ -52,10 +53,10 @@
   <%= @conference.challenge_desc %>
 </p>
 <% if is_admin? %>
-<%= link_to 'Edit', edit_conference_path(@conference), :class => "button round" %>
-<%= link_to 'Conference List', conferences_path, :class => "button round" %>
+<%= link_to 'Update Conference', edit_conference_path(@conference), :class => "button round", :style => "color:white" %> |
+<%= link_to 'Back', conferences_path, :class => "button round", :style => "color:white" %>
 <% else %>
-<%= link_to 'Back', participant_dashboard_url, :class => "button round" %>
+<%= link_to 'Back to Dashboard', participant_dashboard_url, :class => "button round", :style => "color:white" %>
 <% end %>
 
 <br/>

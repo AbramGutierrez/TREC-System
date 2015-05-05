@@ -51,6 +51,15 @@ class Account < ActiveRecord::Base
 	  end
 	  accounts
 	end
+	
+	def self.get_active
+	  participants = Participant.get_active
+	  accounts = Array.new
+	  participants.each do |participant|
+	    accounts.append participant.account
+	  end
+	  accounts
+	end
 
 	private
 		def name_validation

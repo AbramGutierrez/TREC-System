@@ -1,23 +1,26 @@
 <%= form_tag :action => 'create' %>
-	<p>
-	<%= radio_button_tag(:recipients, Administrator.recipient_captain, true, :id => "All Team Captains") %>
-	<%= label_tag(:recipients, "send to all team captains") %>
-	<%= radio_button_tag(:recipients, Administrator.recipient_participant, :id => "All Participants") %>
-	<%= label_tag(:recipients, "send to all participants") %>
-	</p>
-	
-	<p>
-	<%= radio_button_tag(:method, Administrator.method_email, true, :id => "Email") %>
-	<%= label_tag(:method, "send via email") %>
-	<%= radio_button_tag(:method, Administrator.method_text_message, :id => "Text Messaging") %>
-	<%= label_tag(:method, "send via text messaging") %>
-	</p>
+	<div class='row'>
+		<div class='small-6 columns'>
+			<p><strong>Recipients</strong></p>
+			<%= radio_button_tag(:recipients, Administrator.recipient_captain, true) %>
+			<%= label_tag(:recipients, "All Team Captains") %>
+			<br>
+			<%= radio_button_tag(:recipients, Administrator.recipient_participant) %>
+			<%= label_tag(:recipients, "All Participants") %>
+		</div>
+		<div class='small-6 columns'>
+			<p><strong>Message Type</strong></p>
+			<%= radio_button_tag(:method, Administrator.method_email, true) %>
+			<%= label_tag(:method, "Email") %>
+			<br>
+			<%= radio_button_tag(:method, Administrator.method_text_message) %>
+			<%= label_tag(:method, "Text Messaging") %>
+		</div>
+	</div>
+	<br>
+	<p><strong>Subject:</strong> <%= text_field :title_box, :message_title %></p>
+ 	<strong>Message:</strong>
+ 	<%= text_area :message_box, :message_body, :id => "message", :size => "10x10" %>
 
-	<p>Title: <%= text_field :title_box, :message_title %></p>
-	 <td> 
-	 	Message:
-	 	<%= text_area :message_box, :message_body, :id => "message", :size => "10x10" %> </td>
-  </tbody>
-  </table>
-<%= submit_tag 'Submit', :class => "button round" %>
-<%= link_to "Back", admin_dashboard_url, :class => "button round" %>
+<%= submit_tag 'Send Message', :class => "button round" %> |
+<%= link_to "Back to Dashboard", admin_dashboard_url, :class => "button round", :style => 'color:white;' %>

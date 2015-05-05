@@ -88,6 +88,11 @@ RSpec.describe PasswordResetsController, type: :controller do
               account: Account.create!(first_name: "A", last_name: "Z", email: "p6@example.com",
               password: "mypassword", password_confirmation: "mypassword")
               )
+              @inactive_person = Participant.create!(captain: true, shirt_size: "S",
+              phone: "7282822361", team: @inactive_team1, phone_email: "7282822361@great.yeah",
+              account: Account.create!(first_name: "A", last_name: "Z", email: "p7@example.com",
+              password: "mypassword", password_confirmation: "mypassword")
+              )
         end
       
   after(:all) do
@@ -105,14 +110,15 @@ RSpec.describe PasswordResetsController, type: :controller do
         @not_captain3.destroy
         @other_team_captain.destroy
         @other_team_not_captain.destroy
+        @inactive_person.destroy
   end
   
   let(:valid_email) {
-    { :email => "p1@example.com" }
+    { :email => "p4@example.com" }
   }
   
   let(:invalid_email) {
-    { :email => "LOL@no.com" }
+    { :email => "p7@example.com" }
   }
 
   describe "GET #new" do
@@ -139,14 +145,26 @@ RSpec.describe PasswordResetsController, type: :controller do
       expect(flash[:info]).to be_present
     end
     
-    it "gives the right flash upon failure" do
+    it "gives the right flash upon email location failure" do
       post :create, { :password_reset => invalid_email }
       expect(flash[:danger]).to be_present
     end
     
-    it "redirects to new upon failure" do
+    it "redirects to new upon email location failure" do
       post :create, { :password_reset => invalid_email }
-      expect(flash[:danger]).to be_present
+      expect(response).to render_template("new")
+    end
+    
+    it "gives the right flash upon email sending failure" do
+      PasswordMailer.any_instance.stub(:reset_email).and_raise(Net::SMTPAuthenticationError)
+      post :create, { :password_reset => valid_email }
+      expect(flash[:alert]).to be_present
+    end
+    
+    it "redirects to new upon email sending failure" do
+      PasswordMailer.any_instance.stub(:reset_email).and_raise(Net::SMTPAuthenticationError)
+      post :create, { :password_reset => valid_email }
+      expect(response).to render_template("new")
     end
     
   end

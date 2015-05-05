@@ -3,8 +3,10 @@ class PasswordResetsController < ApplicationController
   end
   
   def create
-    @account = Account.find_by(email: params[:password_reset][:email].downcase)
-    if @account
+    accounts = Account.get_active
+    index = accounts.index{|account| account.email == params[:password_reset][:email].downcase}
+    if index
+      @account = accounts[index]
       @account.randomize_password()
       begin
         PasswordMailer.reset_email(@account).deliver_now!

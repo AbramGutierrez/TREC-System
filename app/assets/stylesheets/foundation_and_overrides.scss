@@ -260,7 +260,7 @@ $code-padding: rem-calc(2) rem-calc(5) rem-calc(1);
 $anchor-text-decoration: none;
 $anchor-text-decoration-hover: none;
 $anchor-font-color: $maroon;
-$anchor-font-color-hover: scale-color($anchor-font-color, $lightness: -14%);
+$anchor-font-color-hover: scale-color($anchor-font-color, $lightness: 100%);
 
 // We use these to style the <hr> element
 $hr-border-width: 1px;
@@ -628,7 +628,7 @@ $form-spacing: rem-calc(16);
 // We use these to style the labels in different ways
 $form-label-pointer: pointer;
 $form-label-font-size: rem-calc(14);
-$form-label-font-weight: $font-weight-normal;
+$form-label-font-weight: $font-weight-bold;
 $form-label-line-height: 1.5;
 $form-label-font-color: $black;
 $form-label-small-transform: capitalize;
@@ -969,7 +969,7 @@ $pagination-link-current-active-bg: $primary-color;
 $include-html-panel-classes: $include-html-classes;
 
 // We use these to control the background and border styles
-$panel-bg: scale-color($iron, $lightness: -5%);
+$panel-bg: scale-color($base, $lightness: -5%);
 $panel-border-style: solid;
 $panel-border-size: 1px;
 
@@ -1280,12 +1280,12 @@ $table-even-row-bg: $snow;
 // These control the table cell border style
 $table-border-style: solid;
 $table-border-size: 1px;
-$table-border-color: $gainsboro;
+$table-border-color: $maroon;
 
 // These control the table head styles
-$table-head-bg: $white-smoke;
+$table-head-bg: $maroon;
 $table-head-font-size: rem-calc(14);
-$table-head-font-color: $jet;
+$table-head-font-color: $white;
 $table-head-font-weight: $font-weight-bold;
 $table-head-padding: rem-calc(8 10 10);
 
@@ -1514,6 +1514,12 @@ html, body {
 
 .push {
 	height: 60px; /* .push must be the same height as .footer */
+}
+
+#sexy-table {
+	table {
+		border-color: $black;
+	}
 }
 
 /*
