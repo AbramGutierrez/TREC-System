@@ -37,25 +37,41 @@ RSpec.describe MessengerController, type: :controller do
   
   let(:valid_session) {{}}
   
-  it "redirects to root url when not logged in" do
-    get :new, valid_session
-    expect(flash).to_not be_nil
-    expect(response).to redirect_to(login_url)
-  end
-  
-  it "redirects to root url with logged in as participant" do
-    log_in_as(@captain.account)
-    get :new, valid_session
-    expect(flash).to_not be_nil
-    expect(response).to redirect_to(root_url)
-  end
-  
-  describe "when admin is logged in" do
-    it "shows the email page" do
+  describe "when going to #create" do
+    it "redirects to root url when not logged in" do
+      get :create, valid_session
+      expect(flash.now).to be_present
+      expect(response).to redirect_to(login_url)
+    end
+    
+    it "redirects to root url with logged in as participant" do
       log_in_as(@captain.account)
-    get :new, valid_session
-    expect(flash).to be_nil
-    expect(response).to redirect_to(root_url)
+      get :create, valid_session
+      expect(flash.now).to be_present
+      expect(response).to redirect_to(root_url)
+    end
+  end
+  
+  describe "when going to #new" do
+    it "redirects to root url when not logged in" do
+      get :new, valid_session
+      expect(flash.now).to be_present
+      expect(response).to redirect_to(login_url)
+    end
+    
+    it "redirects to root url with logged in as participant" do
+      log_in_as(@captain.account)
+      get :new, valid_session
+      expect(flash.now).to be_present
+      expect(response).to redirect_to(root_url)
+    end
+    
+    describe "when admin is logged in" do
+      it "shows the email page" do
+        log_in_as(@admin.account)
+        get :new, valid_session
+        expect(response).to_not redirect_to(root_url)
+      end
     end
   end
 end
