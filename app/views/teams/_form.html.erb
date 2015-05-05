@@ -22,12 +22,13 @@
   <div class="field">
     <%= f.label :school %><br>
 	<%= f.select :school, options_for_select(get_schools_array, get_school_name), :id =>"sel" %>
-	<div id="other">
-	  Enter School Name Here: <%= text_field :team_name, :other, :value => get_other_value %>
-	</div>
   </div>
+	<div id="field">
+    <%= f.label :other, 'School Name' %><br>
+    <%= text_field :team_name, :other, :value => get_other_value %>
+	</div>
   <div class="actions">
-    <%= f.submit :class => "button round" %>
+    <%= f.submit 'Submit', :class => "button round", :style => "color:white" %>
   </div>
 <% end %>
 

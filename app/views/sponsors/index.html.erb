@@ -22,7 +22,7 @@
         <td><%= sponsor.priority %></td>
         
         <td><%= link_to '', edit_sponsor_path(sponsor), { :class => "ibutton-small fi-pencil", :title => "Update Sponsor" } %></td>
-        <td><%= link_to '', sponsor, method: :delete, data: { confirm: 'Are you sure you want to remove this sponsor?' } %></td>
+        <td><%= link_to '', sponsor, method: :delete, data: { confirm: 'Are you sure you want to remove this sponsor?' }, :class => "ibutton-small fi-trash", :title => "Destroy Participant" %></td>
       </tr>
     <% end %>
   </tbody>
