@@ -1,9 +1,10 @@
 <h1>Make Changes to the Itinerary</h1>
 
-<table>
+<table class="medium-12 columns">
   <thead>
     <tr>
-      <th>Time</th>
+      <th>Start Time</th>
+	  <th>End Time</th>
 	  <th>Description</th>
     </tr>
   </thead>
@@ -11,12 +12,28 @@
   <tbody>
 	<% @itinerary.each do |event| %>
 		<tr>
-			<td><%= event.start_time %> through <%= event.end_time %></td>
+			<td><%= event.start_time %></td>
+			<td><%= event.end_time %></td>
 			<td><%= event.desc %></td>
 		</tr>
 	<% end %>
   </tbody>
 </table>
+
+<%= form_for(@itinerary) do |f| %>
+  <% if @itinerary.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this administrator from being saved:</h2>
+
+      <ul>
+      <% @administrator.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.fields_for :account_attributes do |ff| %>
 
 
 
