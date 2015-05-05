@@ -139,14 +139,26 @@ RSpec.describe PasswordResetsController, type: :controller do
       expect(flash[:info]).to be_present
     end
     
-    it "gives the right flash upon failure" do
+    it "gives the right flash upon email location failure" do
       post :create, { :password_reset => invalid_email }
       expect(flash[:danger]).to be_present
     end
     
-    it "redirects to new upon failure" do
+    it "redirects to new upon email location failure" do
       post :create, { :password_reset => invalid_email }
-      expect(flash[:danger]).to be_present
+      expect(response).to render_template("new")
+    end
+    
+    it "gives the right flash upon email sending failure" do
+      PasswordMailer.any_instance.stub(:reset_email).and_raise(Net::SMTPAuthenticationError)
+      post :create, { :password_reset => valid_email }
+      expect(flash[:alert]).to be_present
+    end
+    
+    it "redirects to new upon email sending failure" do
+      PasswordMailer.any_instance.stub(:reset_email).and_raise(Net::SMTPAuthenticationError)
+      post :create, { :password_reset => valid_email }
+      expect(response).to render_template("new")
     end
     
   end
