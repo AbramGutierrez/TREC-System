@@ -12,7 +12,7 @@ class Account < ActiveRecord::Base
 	}	
 		
 	after_create {   
-	  PasswordMailer.welcome_email(self).deliver_now 
+    PasswordMailer.welcome_email(self).deliver_now!
 	}
 	
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
