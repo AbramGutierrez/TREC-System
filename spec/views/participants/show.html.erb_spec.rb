@@ -26,6 +26,7 @@ RSpec.describe "participants/show", type: :view do
       :waiver_signed => false,
       :shirt_size => "L",
 	  :phone => "1111111111",
+	  :phone_email => "1111111111@messaging.sprintpcs.com",
 	  :account_attributes => {
 	    email: "test@example.com",
 		password: "password",
