@@ -1,3 +1,5 @@
+<br>
+<h3>Your Team Details</h3>
 <p>
   <strong>Team name:</strong>
   <%= @team.team_name %>
@@ -14,13 +16,13 @@
 </p>
 
 <% if is_team_captain? || is_admin? %>
-<%= link_to 'Edit Team Info', edit_team_path(@team), :class => "button round" %>
-<% @team_id = @team.id %>
-<%= link_to "Add/Remove Team Members", {controller: "team_members", action: "show", id: @team_id}, :class => "button round" %>
+<%= link_to 'Update Team Info', edit_team_path(@team), :class => "button round", :style => "color:white" %>
+<% @team_id = @team.id %>|
+<%= link_to "Add/Remove Team Members", {controller: "team_members", action: "show", id: @team_id}, :class => "button round", :style => "color:white" %>
 <% end %>
-
+<br>
 <% if is_admin? %>
-<%= link_to 'Back', teams_path, :class => "button round" %>
+<%= link_to 'Back', teams_path, :class => "button round", :style => "color:white" %>
 <% else %>
-<%= link_to 'Back', participant_dashboard_url, :class => "button round" %>
+<%= link_to 'Back to Dashboard', participant_dashboard_url, :class => "button round", :style => "color:white" %>
 <% end %>

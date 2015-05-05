@@ -1,16 +1,19 @@
-<h1><%= current_account.first_name + " " + current_account.last_name + "'s Dashboard"%></h1>
+<br>
+<div align='center'>
+  <h3><%= current_account.first_name + " " + current_account.last_name + "'s Dashboard"%></h3>
 
-<table class="icon">
-  <tr>
-    <td class="icon"><%= link_to "", {controller: "conferences", action: "show", id: current_participant.team.conference}, :class => "ibutton fi-torsos-all"%></td>
-    <td class="icon-label">Conference Information</td> 
-  </tr>
-  <tr>
-    <td class="icon"><%= link_to "", {controller: "teams", action: "show", id: current_participant.team}, :class => "ibutton fi-results-demographics"%></td>
-    <td class="icon-label">Team Information</td>  
-  </tr>
-  <tr>
-    <td class="icon"><%= link_to "", {controller: "participants", action: "show", id: current_participant}, :class => "ibutton fi-torso"%></td>
-    <td class="icon-label">Manage Account</td>  
-  </tr>
-</table>
+  <table class="icon">
+    <tr>
+      <td class="icon"><%= link_to "", {controller: "conferences", action: "show", id: current_participant.team.conference}, :class => "ibutton fi-torsos-all"%></td>
+      <td class="icon-label">Conference Information</td> 
+    </tr>
+    <tr>
+      <td class="icon"><%= link_to "", {controller: "teams", action: "show", id: current_participant.team}, :class => "ibutton fi-results-demographics"%></td>
+      <td class="icon-label">Team Information</td>  
+    </tr>
+    <tr>
+      <td class="icon"><%= link_to "", {controller: "participants", action: "show", id: current_participant}, :class => "ibutton fi-torso"%></td>
+      <td class="icon-label">Manage Account</td>  
+    </tr>
+  </table>
+</div>

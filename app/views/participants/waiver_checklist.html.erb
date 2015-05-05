@@ -1,5 +1,6 @@
 <%= form_tag :action => 'update_waivers' %>
-<h1> Waiver Checklist </h1>
+<br>
+<h3> Waiver Checklist </h3>
 <table>
   <thead>
     <tr>
@@ -26,5 +27,5 @@
 
 </tbody>
  </table>
- <%= submit_tag 'Submit', :class => "button round" %>
- <%= link_to 'Back to Dashboard', admin_dashboard_url, :class => "button round" %>
+ <%= submit_tag 'Submit', :class => "button round" %> |
+ <%= link_to 'Back to Dashboard', admin_dashboard_url, :class => "button round", :style => 'color:white;' %>
