@@ -75,7 +75,7 @@ RSpec.describe Sponsor, type: :model do
 			:conference_id => @c.id,
 			:sponsor_name => "Test",
 			:logo_path => File.new(File.join(Rails.root.join, "app/assets/images/up.gif")),
-			:priority => 4
+			:priority => 5
 		)).to_not be_valid
 	end
   
