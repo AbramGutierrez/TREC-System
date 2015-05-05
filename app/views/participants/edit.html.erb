@@ -3,4 +3,8 @@
 <%= render 'edit_form' %>
 
 <%= link_to 'Show', @participant %> |
-<%= link_to 'Back', :back %>
+<% if is_admin? %>
+	<%= link_to 'Participant List', participants_url %>
+<% else %>
+	<%= link_to 'Dashboard', participant_dashboard_url %>
+<% end %>

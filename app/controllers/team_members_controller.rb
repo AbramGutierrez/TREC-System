@@ -21,9 +21,13 @@ class TeamMembersController < ApplicationController
 	end
 
 	def destroy
-		# @account = Account.find(params[:id])
-		# @account.destroy
-		# redirect_to team_members_path
+	end
+	
+	def team_captain_or_admin
+	  if !(current_account.user.is_a?(Administrator) || (current_participant.team.id.to_s == params[:id].to_s && current_participant.captain?))
+	    flash[:alert] = "Only the team captain can add and remove team members."
+		redirect_to participant_dashboard_path
+	  end
 	end
 	
 end

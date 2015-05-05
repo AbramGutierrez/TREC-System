@@ -15,4 +15,5 @@
 
 
 
-<%= link_to "Add new team member", controller: "participants", action: "new" %> | <%= link_to 'Back', :back %>
+<%= link_to "Add new team member", {controller: "participants", action: "new"}, :class => "button round" %>
+<%= link_to 'Back', {controller: "teams", action: "show", id: params[:id]}, :class => "button round" %>

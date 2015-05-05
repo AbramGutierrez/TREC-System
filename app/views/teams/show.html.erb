@@ -22,5 +22,5 @@
 <% if is_admin? %>
 <%= link_to 'Back', teams_path, :class => "button round" %>
 <% else %>
-<%= link_to 'Back', :back, :class => "button round" %>
+<%= link_to 'Back', participant_dashboard_url, :class => "button round" %>
 <% end %>

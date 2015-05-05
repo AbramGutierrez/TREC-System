@@ -51,5 +51,5 @@
 	| <%= link_to 'Participant List', participants_path %>
 	| <%= link_to 'Participant\'s Team', "/teams/#{@participant.team.id}" %>
 <% else %>
-	| <%= link_to 'Back', :back %>
+	| <%= link_to 'Back', participant_dashboard_url %>
 <% end %>

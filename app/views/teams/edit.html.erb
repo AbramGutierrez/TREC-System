@@ -2,5 +2,9 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @team, :class => "button round" %>
+<% if is_admin? %>
+<%= link_to 'View Team', @team, :class => "button round" %>
 <%= link_to 'Team List', teams_path, :class => "button round" %>
+<% else %>
+<%= link_to 'Back', @team, :class => "button round" %>
+<% end %>
