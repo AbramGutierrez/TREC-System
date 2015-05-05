@@ -1,8 +1,10 @@
 <h1>Terms of Use</h1><br />
 
-<% if is_admin? %>
+<% if logged_in? %>
 
-<table>
+  <% if is_admin? %>
+
+  <table>
   <thead>
     <tr>
       <th>Order</th>
@@ -24,16 +26,18 @@
       </tr>
     <% end %>
   </tbody>
-</table>
+  </table>
 
-<br>
+  <br>
 
-<%= link_to 'New Term', new_term_path %>
+  <%= link_to 'New Term', new_term_path %>
+
+  <% end %>
 
 <% end %>
 
 
-<% if is_participant? %>
+
 
 <% @terms.each do |term| %>
   <h3><%= term.title %></h3>
@@ -41,4 +45,3 @@
   <hr />
 <% end %>
 
-<% end %>
