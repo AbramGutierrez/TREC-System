@@ -22,7 +22,8 @@ feature 'Log in' do
 		  :team_name => "PartControllerTest" 
 		  )
 		p = Participant.create!(captain: false, shirt_size: "M", 
-			phone: "1234567890", team: team, account_attributes: {
+			phone: "1234567890", phone_email: "1234567890@utext.com",
+			team: team, account_attributes: {
 				first_name: "TestFirst", last_name: "TestLast",
 				email: "test@example.com", password: "password",
 				password_confirmation: "password"
