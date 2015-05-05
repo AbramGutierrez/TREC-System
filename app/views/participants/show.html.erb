@@ -49,6 +49,11 @@
   <%= @participant.phone %>
 </p>
 
+<p>
+  <strong>Phone Email:</strong>
+  <%= @participant.phone_email %>
+</p>
+
 <%= link_to 'Update Participant', edit_participant_path(@participant), :class => "button round", :style => "color:white" %>
 <% if is_admin? %>
   | <%= link_to 'Participant\'s Team', "/teams/#{@participant.team.id}", :class => "button round", :style => "color:white" %>
