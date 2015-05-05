@@ -48,12 +48,15 @@ ActiveRecord::Schema.define(version: 20150502193430) do
   end
 
   create_table "events", force: :cascade do |t|
+    t.integer  "conference_id"
     t.time     "start_time"
     t.time     "end_time"
     t.text     "event_desc"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
+
+  add_index "events", ["conference_id"], name: "index_events_on_conference_id"
 
   create_table "participants", force: :cascade do |t|
     t.integer  "team_id"
