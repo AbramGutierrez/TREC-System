@@ -77,7 +77,7 @@ class Participant < ActiveRecord::Base
 	   if !phone_email.nil?
 	     split = phone_email.split("@")
 	     if split[0] != phone
-	       errors.add(self, "phone email number does not match phone number.")
+	       errors.add(:phone_email_number, "does not match phone number.")
 	     end
 	   end
 	 end
