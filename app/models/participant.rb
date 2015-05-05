@@ -10,9 +10,9 @@ class Participant < ActiveRecord::Base
 	
 	PHONE_REGEX = /\A^[0-9]+$\z/
 	validates :phone, length: {is: 10}, format: { with: PHONE_REGEX }, presence: true
-	validates :account, :team, :phone_email, presence: true
+	validates :account, :team, :phone_provider, presence: true
 	
-	validate :phone_email_correct
+	validate :phone_provider_correct
 
 	validates :shirt_size, presence: true, inclusion: { in: %w(XS S M L XL XXL),
       message: "%{value} is not a valid size, try entering XS, S, M, L, XL, or XXL." }
@@ -83,10 +83,10 @@ class Participant < ActiveRecord::Base
 	private
 	
 	 def phone_email_correct
-	   if !phone_email.nil?
-	     split = phone_email.split("@")
-	     if split[0] != phone
-	       errors.add(:phone_email_number, "does not match phone number.")
+	   if !phone_provider.nil? && !phone.nil?
+	     phone_email = Participant.create_phone_email(phone_provider, phone)
+	     if phone_email.nil?
+	       errors.add(:phone_provider, "cannot be found.")
 	     end
 	   end
 	 end
