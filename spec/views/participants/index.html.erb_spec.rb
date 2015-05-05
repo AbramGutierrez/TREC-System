@@ -34,6 +34,7 @@ RSpec.describe "participants/index", type: :view do
         :waiver_signed => true,
         :shirt_size => "S",
 		:phone => "1111111111",
+		:phone_provider => "3 River Wireless",
 		:phone_email => "1111111111@uswestdatamail.com",
 		:team => @team,
 	    :account_attributes => {
@@ -48,6 +49,7 @@ RSpec.describe "participants/index", type: :view do
         :waiver_signed => true,
         :shirt_size => "S",
 		:phone => "1111111111",
+		:phone_provider => "3 River Wireless",
 		:phone_email => "1111111111@sms.wcc.net",
 		:team => @team,
 	    :account_attributes => {
