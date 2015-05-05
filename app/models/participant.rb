@@ -6,11 +6,11 @@ class Participant < ActiveRecord::Base
 	belongs_to :team
 	has_one :account, :as => :user, dependent: :destroy
 	
-	validates :account, :team, presence: true
+	validates :account, :team, :phone_email, presence: true
 	
 	validates :phone, length: {is: 10}, presence: true
 	
-	validates :phone_email, presence: true
+	validate :phone_email_correct
 
 	validates :shirt_size, presence: true, inclusion: { in: %w(XS S M L XL XXL),
       message: "%{value} is not a valid size, try entering XS, S, M, L, XL, or XXL." }
@@ -72,6 +72,15 @@ class Participant < ActiveRecord::Base
 	end
 	
 	private
+	
+	 def phone_email_correct
+	   if !phone_email.nil?
+	     split = phone_email.split("@")
+	     if split[0] != phone
+	       errors.add(self, "phone email number does not match phone number.")
+	     end
+	   end
+	 end
 	
 		def team_full
 			if !team.nil?

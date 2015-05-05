@@ -92,7 +92,7 @@ class RegistrationsController < ApplicationController
 	
 	def has_blank(fields)
 	  if (fields[:phone].blank? && fields[:first_name].blank? && 
-	    fields[:last_name].blank? && fields[:email].blank?) 
+	    fields[:phone_provider].blank? && fields[:last_name].blank? && fields[:email].blank?) 
 	    return true
 	  else
 		return false
