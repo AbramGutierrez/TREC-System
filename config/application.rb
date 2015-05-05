@@ -28,6 +28,6 @@ module TREC
     
     config.quiet_assets = false
 
-    config.assets.precompile += %w( .svg .eot .woff .ttf .png .jpg .gif)
+    config.serve_static_assets = true
   end
 end
