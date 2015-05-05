@@ -20,6 +20,15 @@ require 'rails_helper'
 
 RSpec.describe FaqsController, type: :controller do
 
+  before(:all){			
+    @admin = Administrator.create!(account_attributes: {first_name: "Admin", last_name: "istrator", email: "admin@example.com",
+			password: "admin", password_confirmation: "admin"}) 		
+  }	
+  after(:all){
+	@admin.destroy
+  } 
+
+
   # This should return the minimal set of attributes required to create a valid
   # Faq. As you add validations to Faq, be sure to
   # adjust the attributes here as well.
@@ -38,6 +47,7 @@ RSpec.describe FaqsController, type: :controller do
 
   describe "GET #index" do
     it "assigns all faqs as @faqs" do
+	  log_in_as(@admin.account)
       faq = Faq.create! valid_attributes
       get :index, {}, valid_session
       expect(assigns(:faqs)).to eq([faq])
@@ -46,6 +56,7 @@ RSpec.describe FaqsController, type: :controller do
 
   describe "GET #show" do
     it "assigns the requested faq as @faq" do
+	  log_in_as(@admin.account)
       faq = Faq.create! valid_attributes
       get :show, {:id => faq.to_param}, valid_session
       expect(assigns(:faq)).to eq(faq)
@@ -54,6 +65,7 @@ RSpec.describe FaqsController, type: :controller do
 
   describe "GET #new" do
     it "assigns a new faq as @faq" do
+	  log_in_as(@admin.account)
       get :new, {}, valid_session
       expect(assigns(:faq)).to be_a_new(Faq)
     end
@@ -61,6 +73,7 @@ RSpec.describe FaqsController, type: :controller do
 
   describe "GET #edit" do
     it "assigns the requested faq as @faq" do
+	  log_in_as(@admin.account)
       faq = Faq.create! valid_attributes
       get :edit, {:id => faq.to_param}, valid_session
       expect(assigns(:faq)).to eq(faq)
@@ -70,18 +83,21 @@ RSpec.describe FaqsController, type: :controller do
   describe "POST #create" do
     context "with valid params" do
       it "creates a new Faq" do
+	    log_in_as(@admin.account)
         expect {
           post :create, {:faq => valid_attributes}, valid_session
         }.to change(Faq, :count).by(1)
       end
 
       it "assigns a newly created faq as @faq" do
+	    log_in_as(@admin.account)
         post :create, {:faq => valid_attributes}, valid_session
         expect(assigns(:faq)).to be_a(Faq)
         expect(assigns(:faq)).to be_persisted
       end
 
       it "redirects to the created faq" do
+	    log_in_as(@admin.account)
         post :create, {:faq => valid_attributes}, valid_session
         expect(response).to redirect_to(Faq.last)
       end
@@ -89,11 +105,13 @@ RSpec.describe FaqsController, type: :controller do
 
     context "with invalid params" do
       it "assigns a newly created but unsaved faq as @faq" do
+	    log_in_as(@admin.account)
         post :create, {:faq => invalid_attributes}, valid_session
         expect(assigns(:faq)).to be_a_new(Faq)
       end
 
       it "re-renders the 'new' template" do
+	    log_in_as(@admin.account)
         post :create, {:faq => invalid_attributes}, valid_session
         expect(response).to render_template("new")
       end
@@ -107,6 +125,7 @@ RSpec.describe FaqsController, type: :controller do
       }
 
       it "updates the requested faq" do
+	    log_in_as(@admin.account)
         faq = Faq.create! valid_attributes
         put :update, {:id => faq.to_param, :faq => new_attributes}, valid_session
         faq.reload
@@ -114,12 +133,14 @@ RSpec.describe FaqsController, type: :controller do
       end
 
       it "assigns the requested faq as @faq" do
+	    log_in_as(@admin.account)
         faq = Faq.create! valid_attributes
         put :update, {:id => faq.to_param, :faq => valid_attributes}, valid_session
         expect(assigns(:faq)).to eq(faq)
       end
 
       it "redirects to the faq" do
+	    log_in_as(@admin.account)
         faq = Faq.create! valid_attributes
         put :update, {:id => faq.to_param, :faq => valid_attributes}, valid_session
         expect(response).to redirect_to(faq)
@@ -128,12 +149,14 @@ RSpec.describe FaqsController, type: :controller do
 
     context "with invalid params" do
       it "assigns the faq as @faq" do
+	    log_in_as(@admin.account)
         faq = Faq.create! valid_attributes
         put :update, {:id => faq.to_param, :faq => invalid_attributes}, valid_session
         expect(assigns(:faq)).to eq(faq)
       end
 
       it "re-renders the 'edit' template" do
+	    log_in_as(@admin.account)
         faq = Faq.create! valid_attributes
         put :update, {:id => faq.to_param, :faq => invalid_attributes}, valid_session
         expect(response).to render_template("edit")
@@ -143,6 +166,7 @@ RSpec.describe FaqsController, type: :controller do
 
   describe "DELETE #destroy" do
     it "destroys the requested faq" do
+	  log_in_as(@admin.account)
       faq = Faq.create! valid_attributes
       expect {
         delete :destroy, {:id => faq.to_param}, valid_session
@@ -150,6 +174,7 @@ RSpec.describe FaqsController, type: :controller do
     end
 
     it "redirects to the faqs list" do
+	  log_in_as(@admin.account)
       faq = Faq.create! valid_attributes
       delete :destroy, {:id => faq.to_param}, valid_session
       expect(response).to redirect_to(faqs_url)

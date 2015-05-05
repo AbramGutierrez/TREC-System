@@ -22,9 +22,12 @@ RSpec.describe "teams/edit", type: :view do
       :school => "MyString",
 	  :conference => c
     ))
+	@admin = Administrator.create!(account_attributes: {first_name: "Admin", last_name: "istrator", email: "admin@example.com",
+			password: "admin", password_confirmation: "admin"})
   end
 
   it "renders the edit team form" do
+    log_in_as(@admin.account)
     render
 
     assert_select "form[action=?][method=?]", team_path(@team), "post" do

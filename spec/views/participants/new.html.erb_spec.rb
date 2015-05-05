@@ -14,9 +14,12 @@ RSpec.describe "participants/new", type: :view do
 		last_name: "world"
 	  }
     ))
+	@admin = Administrator.create!(account_attributes: {first_name: "Admin", last_name: "istrator", email: "admin@example.com",
+			password: "admin", password_confirmation: "admin"})
   end
 
   it "renders new participant form" do
+    log_in_as(@admin.account)
     render
 
     assert_select "form[action=?][method=?]", participants_path, "post" do
