@@ -25,6 +25,10 @@ class Participant < ActiveRecord::Base
 	
 	validate :team_full
 	
+	before_validation do
+	  phone_email = Participant.create_phone_email(phone_provider, phone)
+	end
+	
 	def self.get_active
 	  active_teams = Team.get_active_teams
 	  participants = Array.new
@@ -83,11 +87,8 @@ class Participant < ActiveRecord::Base
 	private
 	
 	 def phone_provider_correct
-	   if !phone_provider.nil? && !phone.nil?
-	     update_attribute(:phone_email, Participant.create_phone_email(phone_provider, phone))
-	     if phone_email.nil?
-	       errors.add(:phone_provider, "cannot be found.")
-	     end
+	   if phone_email.nil?
+	      errors.add(:phone_provider, "cannot be found.")
 	   end
 	 end
 	
