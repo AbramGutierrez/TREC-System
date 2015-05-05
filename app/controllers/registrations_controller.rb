@@ -1,11 +1,14 @@
 class RegistrationsController < ApplicationController
+	before_action :active_conference_check, only: [:new, :create]
+	before_action :date_check, only: [:new, :create]
 
 	def new
 	  @conference = Conference.find_by is_active: true
 	  #tell user no active conference exists 
-	  if(@conference.nil?)
-		redirect_to action: "fail" 
-	  end
+	  # if(@conference.nil?)
+		# redirect_to action: "fail" 
+	  # end	
+	  
 	  @team = Team.new
 	end
 	
@@ -75,7 +78,9 @@ class RegistrationsController < ApplicationController
 
 		#successfully created a team, a list of participants of that team, 
 		#and a list of accounts linked to each participant
-	    redirect_to action: "success"
+		flash[:success] = "You have successfully registered. Check your email for your temporary password."
+	    # redirect_to action: "success"
+	    redirect_to login_url
 	  else 
 	    #@participant.errors.
 		#flash.now[:alert] = "Make sure that school name is filled or try a different team name."
@@ -109,5 +114,25 @@ class RegistrationsController < ApplicationController
 	end
 	
     private :has_blank, :has_captain
+	
+	def active_conference_check
+		@conference = Conference.find_by is_active: true
+		#tell user no active conference exists 
+		if(@conference.nil?)
+			flash[:alert] = "Registration is currently closed."
+			redirect_to root_url
+		end
+	end
+	
+	def date_check
+		@conference = Conference.find_by is_active: true
+		if !@conference.nil?
+			if Date.parse(Time.now.to_s) < @conference.start_date || 
+				@conference.end_date < Date.parse(Time.now.to_s)
+				flash[:alert] = "Registration is currently closed."
+				redirect_to root_url
+			end
+		end
+	end
 	
 end
