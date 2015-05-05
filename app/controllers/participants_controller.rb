@@ -50,7 +50,7 @@ class ParticipantsController < ApplicationController
 	  if !params[:team][:team_name].nil?
         @team = Team.find_by_team_name(params[:team][:team_name])
 	  end	
-	  params[:phone_email] = Participant.create_phone_email(params[:phone_email], params[:phone])
+	  params[:phone_email] = Participant.create_phone_email(params[:phone_provider], params[:phone])
 	end  
     @participant = Participant.new(participant_params)
 
@@ -74,7 +74,7 @@ class ParticipantsController < ApplicationController
   # PATCH/PUT /participants/1.json
   def update
     respond_to do |format|
-      params[:phone_email] = Participant.create_phone_email(params[:phone_email], params[:phone])
+      params[:phone_email] = Participant.create_phone_email(params[:phone_provider], params[:phone])
       if @participant.update(participant_params)
 	    # there can only be one captain per team
 	    if @participant.captain == true
