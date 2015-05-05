@@ -118,32 +118,32 @@ RSpec.describe Account, type: :model do
             :team_name => "team5" 
             )
             @captain = Participant.create!(captain: true, shirt_size: "S",
-              phone: "1876543211", team: @active2, phone_email: "1876543211@att.net", 
+              phone: "1876543211", team: @active2, phone_provider: "3 River Wireless",
               account: Account.create!(first_name: "A", last_name: "Z", email: "p1@example.com",
               password: "mypassword", password_confirmation: "mypassword")
               )
              @not_captain1 = Participant.create!(captain: false, shirt_size: "XL",
-              phone: "3009098512", team: @active2, phone_email: "3009098512@att.net", 
+              phone: "3009098512", team: @active2, phone_provider: "3 River Wireless",
               account: Account.create!(first_name: "A", last_name: "Z", email: "p2@example.com",
               password: "mypassword", password_confirmation: "mypassword")
               )
               @not_captain2 = Participant.create!(captain: false, shirt_size: "XL",
-              phone: "8133614073", team: @active2, phone_email: "8133614073@att.net", 
+              phone: "8133614073", team: @active2, phone_provider: "3 River Wireless",
               account: Account.create!(first_name: "A", last_name: "Z", email: "p3@example.com",
               password: "mypassword", password_confirmation: "mypassword")
               )
               @not_captain3 = Participant.create!(captain: false, shirt_size: "M",
-              phone: "9642752086", team: @active2, phone_email: "9642752086@utext.com", 
+              phone: "9642752086", team: @active2, phone_provider: "3 River Wireless",
               account: Account.create!(first_name: "A", last_name: "Z", email: "p4@example.com",
               password: "mypassword", password_confirmation: "mypassword")
               )
               @inactive_captain = Participant.create!(captain: true, shirt_size: "S",
-              phone: "7282822361", team: @inactive_team1, phone_email: "7282822361@utext.com",
+              phone: "7282822361", team: @inactive_team1, phone_provider: "3 River Wireless",
               account: Account.create!(first_name: "A", last_name: "Z", email: "p7@example.com",
               password: "mypassword", password_confirmation: "mypassword")
               )
               @inactive_person = Participant.create!(captain: false, shirt_size: "S",
-              phone: "9999999999", team: @inactive_team1, phone_email: "9999999999@great.scott",
+              phone: "9999999999", team: @inactive_team1, phone_provider: "3 River Wireless",
               account: Account.create!(first_name: "A", last_name: "Z", email: "p8@example.com",
               password: "mypassword", password_confirmation: "mypassword")
               )

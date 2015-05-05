@@ -23,7 +23,7 @@ RSpec.describe SchoolsController, type: :controller do
 	  )    
 			
     @p = Participant.create!(captain: false, shirt_size: "L",
-			phone: "1876543211", phone_provider: "AT&T",
+			phone: "1876543211", phone_provider: "3 River Wireless",
 			team: @team, account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
 			password: "mypassword", password_confirmation: "mypassword"})
 			

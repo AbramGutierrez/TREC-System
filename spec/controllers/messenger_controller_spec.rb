@@ -23,7 +23,7 @@ RSpec.describe MessengerController, type: :controller do
       email: "valid_email@test.com", password: "123456",
       password_confirmation: "123456"})
     @captain = Participant.create!(captain: true, shirt_size: "S",
-      phone: "1876543211", team: @active2, phone_provider: "AT&T", 
+      phone: "1876543211", team: @active2, phone_provider: "3 River Wireless",
       account: Account.create!(first_name: "A", last_name: "Z", email: "p1@example.com",
       password: "mypassword", password_confirmation: "mypassword")
     )

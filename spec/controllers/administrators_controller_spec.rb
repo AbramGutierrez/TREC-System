@@ -44,7 +44,7 @@ RSpec.describe AdministratorsController, type: :controller do
 	  :team_name => "ControllerTest" 
 	  )  
     @p = Participant.create!(captain: false, shirt_size: "M", 
-			phone: "1234567890", phone_provider: "AT&T",
+			phone: "1234567890", phone_provider: "3 River Wireless",
 			team: @team, account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
 			password: "mypassword", password_confirmation: "mypassword"}) 
     @admin = Administrator.create!(account_attributes: {first_name: "Admin", last_name: "istrator", email: "admin@example.com",
