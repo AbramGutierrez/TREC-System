@@ -106,6 +106,16 @@ RSpec.describe Administrator, type: :model do
               account: Account.create!(first_name: "A", last_name: "Z", email: "p6@example.com",
               password: "mypassword", password_confirmation: "mypassword")
               )
+              @inactive_captain = Participant.create!(captain: true, shirt_size: "S",
+              phone: "7282822361", team: @inactive_team1, phone_email: Participant.create_phone_email("nextel", "7282822361"),
+              account: Account.create!(first_name: "A", last_name: "Z", email: "p7@example.com",
+              password: "mypassword", password_confirmation: "mypassword")
+              )
+              @inactive_person = Participant.create!(captain: false, shirt_size: "S",
+              phone: "7282822361", team: @inactive_team1, phone_email: Participant.create_phone_email("nextel", "7282822361"),
+              account: Account.create!(first_name: "A", last_name: "Z", email: "p8@example.com",
+              password: "mypassword", password_confirmation: "mypassword")
+              )
         end
       
        after(:all) do
@@ -123,6 +133,8 @@ RSpec.describe Administrator, type: :model do
         @not_captain3.destroy
         @other_team_captain.destroy
         @other_team_not_captain.destroy
+        @inactive_captain.destroy
+        @inactive_person.destroy
       end
       
       it "should get all participant recipients" do
