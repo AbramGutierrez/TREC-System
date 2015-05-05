@@ -26,7 +26,7 @@ class Participant < ActiveRecord::Base
 	validate :team_full
 	
 	before_validation do
-	  phone_email = Participant.create_phone_email(phone_provider, phone)
+	  write_attribute(:phone_email, Participant.create_phone_email(phone_provider, phone))
 	end
 	
 	def self.get_active
