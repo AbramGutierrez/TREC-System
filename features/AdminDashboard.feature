@@ -20,7 +20,7 @@ Scenario: Dashboard Options
 Scenario: Send Notifications
 	Given I am on the administrator dashboard
 	When I follow "Send Notifications"
-	Then I should be on the messenger page	
+	Then I should be on the send message page	
 	
 Scenario: Manage Teams
 	Given I am on the administrator dashboard

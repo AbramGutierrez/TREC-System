@@ -40,17 +40,38 @@ module NavigationHelpers
 	when /^the schools page/
 	  '/schools'
 	
-	when /^the messenger page/
+	when /^the send message page/
 	  '/messenger'
 	  
-	when /^conference show page/
-	  "/conferences/#{/\A^[0-9]+$\z/}"
+	when /^the conference show page/
+	  '/conferences/1'
 
-	when /^team show page/
-	  "/teams/#{/\A^[0-9]+$\z/}"
+	when /^the team show page/
+	  '/teams/1'
+	  
+	when /^the team edit page/
+	  '/teams/1/edit'  
+	  
+	when /^the team invalid edit page/
+	  '/teams/1'   
 
-	when /^participant show page/
-	  "/participants/#{/\A^[0-9]+$\z/}"  
+	when /^the participant show page/
+	  '/participants/1'  
+	  
+	when /^the team members page/
+	  '/team_members/1'	
+	  
+	when /^the participant new page/
+	  '/participants/new'
+
+	when /^the participant edit page/
+	  '/participants/1/edit'
+
+	when /^the participant invalid edit page/
+	  '/participants/1'	
+	  
+	when /^the participants page/
+	  '/participants'	
 	
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

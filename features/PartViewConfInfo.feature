@@ -18,7 +18,7 @@ Scenario: View Conference Info
 	And I should see "Conference Start Date"
 	And I should see "Conference End Date"
 	And I should see "Team Size"
-	And I should see "Max Teams"
+	And I should see "Maximum Teams"
 	And I should see "Challenge Description"
 	
 Scenario: Go back to Participant Dashboard

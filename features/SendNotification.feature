@@ -15,7 +15,7 @@ Feature: Send notification
 		Then I should be on the send message page
 	
 	Scenario: Sends an email to all participants (happy)
-		When I select "send to all participants"
+		When I choose "All Participants"
 		And I fill in "Title" with "Welcome, Everyone!"
 		And I fill in "Message" with "Hello, everyone! We will meet tomorrow at 9:00 pm in Koldus 110. I hope to see all of you there and happy. Please bring an extra pair of shoes. I hear it will rain tomorrow!"
 		And I press "Submit"
@@ -25,7 +25,7 @@ Feature: Send notification
 		And I should see "Message: Hello, everyone! We will meet tomorrow at 9:00 pm in Koldus 110. I hope to see all of you there and happy. Please bring an extra pair of shoes. I hear it will rain tomorrow!"
 		
 	Scenario: Sends an email to all participants (sad)
-		When I select "send to all participants"
+		When I choose "All Participants"
 		And I fill in "Title" with "Welcome, Everyone!"
 		And I fill in "Message" with "Hello, everyone! We will meet tomorrow at 9:00 pm in Koldus 110."
 		And I press "Submit"
@@ -35,7 +35,7 @@ Feature: Send notification
 		And I should see "Message: Hello, everyone! We will meet tomorrow at 9:00 pm in Koldus 110."
 		
 	Scenario: Sends a text message to all captains (happy)
-		When  I select "send via text messaging"
+		When  I choose "Text Messaging"
 		And I fill in "Title" with "Welcome, Everyone!"
 		And I fill in "Message" with "Hello, everyone! We will meet tomorrow at 9:00 pm in Koldus 110."
 		And I press "Submit"
@@ -45,7 +45,7 @@ Feature: Send notification
 		And I should see "Message: Hello, everyone! We will meet tomorrow at 9:00 pm in Koldus 110."
 		
 	Scenario: Sends a text message to all captains (sad)
-		When I select "send via text messaging"
+		When I choose "Text Messaging"
 		And I fill in "Title" with "Welcome, Everyone!"
 		And I fill in "Message" with "Hello, everyone! We will meet tomorrow at 9:00 pm in Koldus 110. I hope to see all of you there and happy. Please bring an extra pair of shoes. I hear it will rain tomorrow!"
 		And I press "Submit"
@@ -55,7 +55,7 @@ Feature: Send notification
 		And I should see "Hello, everyone! We will meet tomorrow at 9:00 pm in Koldus 110. I hope to see all of you there and happy. Please bring an extra pair of shoes. I hear it will rain tomorrow!" in "Message"
 		
 	Scenario: Sends a text message to all captains (happy)
-		When  I select "send via text messaging"
+		When I choose "Text Messaging"
 		And I fill in "Title" with "Welcome, Everyone!"
 		And I fill in "Message" with "Hello, everyone! We will meet tomorrow at 9:00 pm in Koldus 110."
 		And I press "Submit"

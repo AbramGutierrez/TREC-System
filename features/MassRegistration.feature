@@ -22,22 +22,22 @@ Scenario: Correct Information on Register Page
 Scenario: Good input on register page
 	Given I am on the register page
 	When I fill in "Team Name" with "CucTestTeam"
-	And I fill in "Phone Number" with "1234567890"
-	And I fill in "Phone Provider" with "AT&T"
-	And I fill in "First Name" with "firstTest"
-	And I fill in "Last Name" with "lastTest"
-	And I fill in "Email" with "cucTesting@test.com"
+	And I fill in "Phone Number1" with "1234567890"
+	And I fill in "Phone Provider1" with "AT&T"
+	And I fill in "First Name1" with "firstTest"
+	And I fill in "Last Name1" with "lastTest"
+	And I fill in "Email1" with "cucTesting@test.com"
 	And I press "Submit"
 	Then I should be on the Log in page
 	
 Scenario: Bad input on register page
 	Given I am on the register page
 	When I fill in "Team Name" with "CucTestTeam"
-	And I fill in "Phone Number" with "1234567890"
-	And I fill in "Phone Provider" with "AT&T"
-	And I fill in "First Name" with "firstTest"
-	And I fill in "Last Name" with "lastTest"
-	And I fill in "Email" with "bad email"
+	And I fill in "Phone Number1" with "1234567890"
+	And I fill in "Phone Provider1" with "AT&T"
+	And I fill in "First Name1" with "firstTest"
+	And I fill in "Last Name1" with "lastTest"
+	And I fill in "Email1" with "bad email"
 	And I press "Submit"
 	Then I should be on the register page
-	And I should see "error"
+	And I should see "Account email is invalid"

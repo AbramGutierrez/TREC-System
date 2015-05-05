@@ -1,15 +1,15 @@
 <%= form_tag :action => 'create' %>
 	<p>
-	<%= radio_button_tag(:recipients, Administrator.recipient_captain, true) %>
+	<%= radio_button_tag(:recipients, Administrator.recipient_captain, true, :id => "All Team Captains") %>
 	<%= label_tag(:recipients, "send to all team captains") %>
-	<%= radio_button_tag(:recipients, Administrator.recipient_participant) %>
+	<%= radio_button_tag(:recipients, Administrator.recipient_participant, :id => "All Participants") %>
 	<%= label_tag(:recipients, "send to all participants") %>
 	</p>
 	
 	<p>
-	<%= radio_button_tag(:method, Administrator.method_email, true) %>
+	<%= radio_button_tag(:method, Administrator.method_email, true, :id => "Email") %>
 	<%= label_tag(:method, "send via email") %>
-	<%= radio_button_tag(:method, Administrator.method_text_message) %>
+	<%= radio_button_tag(:method, Administrator.method_text_message, :id => "Text Messaging") %>
 	<%= label_tag(:method, "send via text messaging") %>
 	</p>
 
