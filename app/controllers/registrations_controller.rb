@@ -73,7 +73,12 @@ class RegistrationsController < ApplicationController
 		#create participants
 	    @participants.each do |participant|
 	      participant.team_id = @team.id
-	      participant.save
+	      begin
+	       participant.save!
+	      rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
+	        flash.now[:alert] = "Error sending email authentication."
+	        render 'new' and return
+	      end
 	    end
 
 		#successfully created a team, a list of participants of that team, 
