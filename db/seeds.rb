@@ -34,6 +34,7 @@
 	  captain: true,
 	  shirt_size: "M",
 	  phone: "1876543211",
+	  phone_provider: "sumcom",
 	  phone_email: Participant.create_phone_email("sumcom", "1876543211"),
 	  account_attributes: {email: "participant@example.com",
 	  password: "password",
@@ -47,6 +48,7 @@
 	  captain: true,
 	  shirt_size: "L",
 	  phone: "1876543211",
+	  phone_provider: "sumcom",
 	  phone_email: Participant.create_phone_email("sumcom", "1876543211"),
 	  account_attributes: {email: "participant2@example.com",
 		password: "password",
@@ -60,6 +62,7 @@
 	  captain: false,
 	  shirt_size: "S",
 	  phone: "1876543211",
+	  phone_provider: "sumcom",
 	  phone_email: Participant.create_phone_email("sumcom", "1876543211"),
 	  account_attributes: {
 	    email: "participant3@example.com",
@@ -82,6 +85,7 @@
 	  captain: false,
 	  shirt_size: "S",
 	  phone: "1876543211",
+	  phone_provider: "sumcom",
 	  phone_email: Participant.create_phone_email("sumcom", "1876543211"),
 	  account_attributes: {
 	    email: "participant4@example.com",
