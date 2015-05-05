@@ -1,28 +1,29 @@
-<h1>Admin Dashboard</h1>
-
-<table class="icon">
-  <tr>
-    <td class="icon"><%= link_to "", messenger_path, :class => "ibutton fi-mail"%></td>
-    <td class="icon-label">Send Notifications</td> 
-  </tr>
-  <tr>
-    <td class="icon"><%= link_to "", { controller: "teams", method: "index" }, :class => "ibutton fi-address-book"%></td>
-    <td class="icon-label">Manage Teams</td>  
-  </tr>
-  <tr>
-    <td class="icon"><%= link_to "", { controller: "conferences", method: "index" }, :class => "ibutton fi-torsos-all"%></td>
-    <td class="icon-label">Manage Conferences</td>  
-  </tr>
-  <tr>
-    <td class="icon"><%= link_to "", root_path, :class => "ibutton fi-torso-business"%></td>
-    <td class="icon-label">Manage Sponsors</td>  
-  </tr>
-  <tr>
-    <td class="icon"><%= link_to "", "/participants/waiver_checklist", :class => "ibutton fi-checkbox"%></td>
-    <td class="icon-label">Participant Check-In</td>  
-  </tr>
-  <tr>
-    <td class="icon"><%= link_to "", "/schools", :class => "ibutton fi-book"%></td>
-    <td class="icon-label">Manage Schools</td>  
-  </tr>
-</table>
+<h3 align='center'>Admin Dashboard</h3>
+<div align='center'>
+  <table class="icon" size='70%'>
+    <tr>
+      <td class="icon"><%= link_to "", messenger_path, :class => "ibutton fi-mail"%></td>
+      <td class="icon-label">Send Notifications</td> 
+    </tr>
+    <tr>
+      <td class="icon"><%= link_to "", { controller: "teams", method: "index" }, :class => "ibutton fi-address-book"%></td>
+      <td class="icon-label">Manage Teams</td>  
+    </tr>
+    <tr>
+      <td class="icon"><%= link_to "", { controller: "conferences", method: "index" }, :class => "ibutton fi-torsos-all"%></td>
+      <td class="icon-label">Manage Conferences</td>  
+    </tr>
+    <tr>
+      <td class="icon"><%= link_to "", root_path, :class => "ibutton fi-torso-business"%></td>
+      <td class="icon-label">Manage Sponsors</td>  
+    </tr>
+    <tr>
+      <td class="icon"><%= link_to "", "/participants/waiver_checklist", :class => "ibutton fi-checkbox"%></td>
+      <td class="icon-label">Participant Check-In</td>  
+    </tr>
+    <tr>
+      <td class="icon"><%= link_to "", "/schools", :class => "ibutton fi-book"%></td>
+      <td class="icon-label">Manage Schools</td>  
+    </tr>
+  </table>
+</div>

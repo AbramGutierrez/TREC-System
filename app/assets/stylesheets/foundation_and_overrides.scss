@@ -127,8 +127,8 @@ $warning-color: #f08a24;
 $info-color: #a0d3e8;
 
 // We use these to control various global styles
-$body-bg: $white !default;
-$body-font-color: $jet;
+$body-bg: transparent;
+$body-font-color: $black;
 $body-font-family: $font-family-sans-serif;
 $body-font-weight: $font-weight-normal;
 $body-font-style: normal;
@@ -259,7 +259,7 @@ $code-padding: rem-calc(2) rem-calc(5) rem-calc(1);
 // We use these to style anchors
 $anchor-text-decoration: none;
 $anchor-text-decoration-hover: none;
-$anchor-font-color: $primary-color;
+$anchor-font-color: $maroon;
 $anchor-font-color-hover: scale-color($anchor-font-color, $lightness: -14%);
 
 // We use these to style the <hr> element
@@ -453,7 +453,7 @@ $button-function-factor: -20%;
 // We use these to control button border styles.
 $button-border-width: 0;
 $button-border-style: solid;
-$button-bg-color: $primary-color;
+$button-bg-color: $maroon;
 $button-bg-hover: scale-color($button-bg-color, $lightness: $button-function-factor);
 $button-border-color: $button-bg-hover;
 $secondary-button-bg-hover: scale-color($secondary-color, $lightness: $button-function-factor);
@@ -630,7 +630,7 @@ $form-label-pointer: pointer;
 $form-label-font-size: rem-calc(14);
 $form-label-font-weight: $font-weight-normal;
 $form-label-line-height: 1.5;
-$form-label-font-color: scale-color($black, $lightness: 30%);
+$form-label-font-color: $black;
 $form-label-small-transform: capitalize;
 $form-label-bottom-margin: 0;
 $input-font-family: inherit;
@@ -969,7 +969,7 @@ $pagination-link-current-active-bg: $primary-color;
 $include-html-panel-classes: $include-html-classes;
 
 // We use these to control the background and border styles
-$panel-bg: scale-color($white, $lightness: -5%);
+$panel-bg: scale-color($iron, $lightness: -5%);
 $panel-border-style: solid;
 $panel-border-size: 1px;
 
@@ -1382,7 +1382,7 @@ $tooltip-max-width: 300px;
 $include-html-top-bar-classes: $include-html-classes;
 
 // Background color for the top bar
-$topbar-bg-color: $jet;
+$topbar-bg-color: $black;
 $topbar-bg: $topbar-bg-color;
 
 // Height and margin
@@ -1480,6 +1480,17 @@ section.top-bar-section{
 	background-color: $smoke;
 }
 
+html { 
+    background: url(/assets/background.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.gradient-footer {
+	background-image:linear-gradient($base, $black);
+}
 
 //STICKY FOOTER
 * {
@@ -1496,9 +1507,10 @@ html, body {
 }
 .footer {
 	height: 70px; /* .push must be the same height as .footer */
-	background-color: $oil;
+	//background-color: $steel;
 	color: $white;
 }
+
 .push {
 	height: 70px; /* .push must be the same height as .footer */
 }
