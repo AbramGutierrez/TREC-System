@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Order:</strong>
+  <%= @privacy.order %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @privacy.title %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @privacy.body %>
+</p>
+
+<%= link_to 'Edit', edit_privacy_path(@privacy) %> |
+<%= link_to 'Back', privacies_path %>

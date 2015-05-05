@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :privacies
+
   resources :terms
 
   get 'password_resets/new'
