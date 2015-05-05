@@ -68,11 +68,13 @@ RSpec.describe TeamsController, type: :controller do
   }	
   before(:each){
 	@p = Participant.create!(captain: true, shirt_size: "L",
-			phone: "1876543211", team: @team, account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
+			phone: "1876543211", phone_email: "1876543211@example.com",
+			team: @team, account_attributes: {first_name: "A", last_name: "Z", email: "p4@example.com",
 			password: "mypassword", password_confirmation: "mypassword"})
 			
 	@p2 = Participant.create!(captain: false, shirt_size: "L",
-			phone: "1876543211", team: @team, account_attributes: {first_name: "A", last_name: "Z", email: "p4_2@example.com",
+			phone: "1876543211", phone_email: "1876543211@utext.com", 
+			team: @team, account_attributes: {first_name: "A", last_name: "Z", email: "p4_2@example.com",
 			password: "mypassword", password_confirmation: "mypassword"})		
   }
   after(:each){
