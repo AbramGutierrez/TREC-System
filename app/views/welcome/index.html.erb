@@ -2,26 +2,13 @@
 <h3>Texas A&M Regional Engineering Conference</h3>
 
 <ul class="example-orbit" data-orbit>
-  <li>
-    THIS IS JUST SOME TEXT!
-    <div class="orbit-caption">
-    </div>
-  </li>
-  <li class="active">
-    TO TEST OUT THIS ORBIT SLIDER!
-    <div class="orbit-caption">
-    </div>
-  </li>
-  <li>
-    IMAGES WILL BE LOOPED AND GO HERE! YAY!
-    <div class="orbit-caption">
-    </div>
-  </li>
-  <li>
-    HERP DERP DERP
-    <div class="orbit-caption">
-    </div>
-  </li>
+  <% @images.each do |image| %>
+     <li>
+        <%= image_tag(image.image_url_url.to_s, size: "250x100") %>
+		<div class="orbit-caption" align='center'>
+        </div>
+     </li>
+   <% end %>
 </ul>
 
 <br>
