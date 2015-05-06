@@ -25,7 +25,9 @@
 </ul>
 
 <br>
-<div><%= @welcome.body%></div> 
+<% if !@welcome.nil? && !@welcome.body.nil? %>
+	<div><%= @welcome.body%></div> 
+<% end %>
 
 <br>
 <div>Down here will be some info about the current conference!</div>
