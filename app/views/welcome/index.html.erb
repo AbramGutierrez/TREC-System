@@ -1,6 +1,7 @@
 <br>
 <h3>Texas A&M Regional Engineering Conference</h3>
 
+<% if !@images.nil? %>
 <ul class="example-orbit" data-orbit>
   <% @images.each do |image| %>
      <li>
@@ -10,6 +11,7 @@
      </li>
    <% end %>
 </ul>
+<% end %>
 
 <br>
 <h3>Welcome</h3>
