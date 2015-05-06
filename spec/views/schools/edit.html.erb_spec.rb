@@ -1,5 +1,5 @@
 require 'rails_helper'
 
 RSpec.describe "schools/edit.html.erb", type: :view do
-  pending "add some examples to (or delete) #{__FILE__}"
+  # Thoroughly tested with Cucumber
 end

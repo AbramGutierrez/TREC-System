@@ -12,7 +12,7 @@ RSpec.describe "contacts/index", type: :view do
         :other => "Other"
       ),
       Contact.create!(
-        :rank => 1,
+        :rank => 2,
         :group => "Group",
         :position => "Position",
         :name => "Name",
@@ -24,8 +24,9 @@ RSpec.describe "contacts/index", type: :view do
 
   it "renders a list of contacts" do
     render
-    assert_select "tr>td", :text => 1.to_s, :count => 2
-    assert_select "tr>td", :text => "Group".to_s, :count => 2
+	# Rank is not shown on the view
+    # assert_select "tr>td", :text => 1.to_s, :count => 2
+    assert_select "tr>td", :text => "Group".to_s, :count => 1
     assert_select "tr>td", :text => "Position".to_s, :count => 2
     assert_select "tr>td", :text => "Name".to_s, :count => 2
     assert_select "tr>td", :text => "Email".to_s, :count => 2

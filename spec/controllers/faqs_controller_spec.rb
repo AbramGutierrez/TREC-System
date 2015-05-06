@@ -33,11 +33,15 @@ RSpec.describe FaqsController, type: :controller do
   # Faq. As you add validations to Faq, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {:order => 1,
+	:question => "test question",
+	:answer => "test answer"}
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {:order => 5,
+	:question => "",
+	:answer => ""}
   }
 
   # This should return the minimal set of values that should be in the session
@@ -50,7 +54,7 @@ RSpec.describe FaqsController, type: :controller do
 	  log_in_as(@admin.account)
       faq = Faq.create! valid_attributes
       get :index, {}, valid_session
-      expect(assigns(:faqs)).to eq([faq])
+      expect(assigns(:faqs)).to include(faq)
     end
   end
 
@@ -121,7 +125,9 @@ RSpec.describe FaqsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {:order => 2,
+		:question => "testquestion2",
+		:answer => "testanswer2"}
       }
 
       it "updates the requested faq" do
@@ -129,7 +135,7 @@ RSpec.describe FaqsController, type: :controller do
         faq = Faq.create! valid_attributes
         put :update, {:id => faq.to_param, :faq => new_attributes}, valid_session
         faq.reload
-        skip("Add assertions for updated state")
+        expect(assigns(:faq)).to eq(faq)
       end
 
       it "assigns the requested faq as @faq" do

@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
+
   resources :images
+
+  resources :pageinfos
 
   resources :contacts
 
@@ -9,6 +12,8 @@ Rails.application.routes.draw do
   resources :terms
 
   get 'password_resets/' => 'password_resets#new'
+  
+  get 'events/itinerary' => 'events#itinerary', as: :itinerary
   
   get 'messenger' => 'messenger#new'
   get 'messenger' => 'messenger#create'
@@ -29,6 +34,8 @@ Rails.application.routes.draw do
   
   resources :accounts
 
+  resources :events
+  
   resources :administrators
 
   resources :participants

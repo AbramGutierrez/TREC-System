@@ -1,6 +1,7 @@
 class Conference < ActiveRecord::Base
 	has_many :teams
 	has_many :sponsors
+	has_many :events
 	validates :start_date, :end_date, :conf_start_date, :conf_end_date, :max_team_size, 
 		:min_team_size, :max_teams, :tamu_cost, :other_cost,
 		:challenge_desc, presence: true

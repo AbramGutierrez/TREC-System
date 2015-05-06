@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Itinerary</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Day</th>
+      <th>Start time</th>
+      <th>End time</th>
+      <th>Event Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @events.each do |event| %>
+      <tr>
+        <td><%= Date::DAYNAMES[event.day.wday] %></td>
+        <td><%= event.start_time.strftime("%I:%M %p") %></td>
+        <td><%= event.end_time.strftime("%I:%M %p") %></td>
+        <td><%= event.event_desc %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

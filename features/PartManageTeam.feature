@@ -68,7 +68,7 @@ Scenario: Add Team Members(happy)
 	And I fill in "Password confirmation" with "password"
 	And I fill in "Phone" with "1111111111"
 	And I fill in "Phone provider" with "AT&T"
-	And I press "Create Participant"
+	And I press "Submit"
 	Then I should be on the team members page
 	
 Scenario: Add Team Members(sad)
@@ -86,7 +86,7 @@ Scenario: Add Team Members(sad)
 	And I fill in "Password confirmation" with "password"
 	And I fill in "Phone" with "1111111111"
 	And I fill in "Phone provider" with "AT&T"
-	And I press "Create Participant"
+	And I press "Submit"
 	Then I should be on the participants page
 	And I should see "Account email can't be blank"	
 	

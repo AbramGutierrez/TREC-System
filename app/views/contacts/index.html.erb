@@ -52,7 +52,7 @@
 <% @contacts.each do |contact| %>
   <tr bgcolor="#8F8F8C">
     <% if @group != contact.group %>
-       <td><%= contact.group %></td>  
+       <td colspan="4"><%= contact.group %></td>  
        <% @group = contact.group %>
     <% end %>
   </tr>

@@ -210,7 +210,7 @@ RSpec.describe ParticipantsController, type: :controller do
       it "redirects to the created participant" do
 	    log_in_as(@p2.account)
         post :create, {:participant => valid_attributes}, valid_session
-        expect(response).to redirect_to(Participant.last)
+        expect(response).to redirect_to("/team_members/#{@team.id}")
       end
     end
 
