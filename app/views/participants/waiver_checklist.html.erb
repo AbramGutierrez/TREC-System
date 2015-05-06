@@ -14,7 +14,11 @@
 	  <tr>
 	    <td> <%= team.team_name %> </td>	
 	    <%= fields_for "teams[#{team.id}]" do |f| %>
-		  <td> <%= f.check_box :paid_status, {}, 'paid', 'unpaid' %> </td>
+		  <td> <%= f.check_box :paid_status, {
+		  	if team.paid_status == "paid"
+		  		:checked => "checked"
+		  	end
+		  }, 'paid', 'unpaid' %> </td>
 	    <% end %>
 	  </tr>
 <% end %>
@@ -47,5 +51,5 @@
 
 </tbody>
  </table>
- <%= submit_tag 'Submit', :class => "button round" %> |
+ <%= submit_tag 'Submit', :class => "button round" %> 
  <%= link_to 'Back to Dashboard', admin_dashboard_url, :class => "button round", :style => 'color:white;' %>

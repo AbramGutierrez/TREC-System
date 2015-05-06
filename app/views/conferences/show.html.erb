@@ -58,7 +58,7 @@
   <%= @conference.challenge_desc %>
 </p>
 <% if is_admin? %>
-<%= link_to 'Update Conference', edit_conference_path(@conference), :class => "button round", :style => "color:white" %> |
+<%= link_to 'Update Conference', edit_conference_path(@conference), :class => "button round", :style => "color:white" %> 
 <%= link_to 'Back', conferences_path, :class => "button round", :style => "color:white" %>
 <% else %>
 <%= link_to 'Back to Dashboard', participant_dashboard_url, :class => "button round", :style => "color:white" %>
