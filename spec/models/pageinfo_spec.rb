@@ -1,5 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Pageinfo, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  
+  it "should be valid" do
+	expect(Pageinfo.new(:page => "page",
+		:body => "textext")).to be_valid
+  end
 end

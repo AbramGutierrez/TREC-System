@@ -19,9 +19,8 @@ Scenario: Add Team (happy)
 	And I should see "Paid status"
 	And I should see "School"
 	When I fill in "Team name" with "TestTeam19284384"
-	And I fill in "Paid status" with "unpaid"
 	And I press "Submit"
-	Then I should be on the teams page
+	Then I should see "success"
 	
 Scenario: Add Team (sad)
 	Given I am on the administrator dashboard
@@ -33,7 +32,6 @@ Scenario: Add Team (sad)
 	And I should see "Paid status"
 	And I should see "School"
 	When I fill in "Team name" with ""
-	And I fill in "Paid status" with "unpaid"
 	And I press "Submit"
 	Then I should be on the teams page
 	And I should see "error"
