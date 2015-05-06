@@ -156,7 +156,7 @@ class ParticipantsController < ApplicationController
 	unless @checked_teams.nil?
 	  Team.update(@checked_teams.keys, @checked_teams.values)
 	end
-	redirect_to participants_url
+	redirect_to admin_dashboard_url
 	
   end
 
