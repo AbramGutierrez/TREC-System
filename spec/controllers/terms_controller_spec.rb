@@ -20,15 +20,30 @@ require 'rails_helper'
 
 RSpec.describe TermsController, type: :controller do
 
+  before(:all){			
+    @admin = Administrator.create!(account_attributes: {first_name: "Admin", last_name: "istrator", email: "admin@example.com",
+			password: "admin", password_confirmation: "admin"}) 
+	log_in_as(@admin.account)			
+  }	
+  after(:all){
+	@admin.destroy
+  }
+
   # This should return the minimal set of attributes required to create a valid
   # Term. As you add validations to Term, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {:order => 1,
+	:title => "this is a title",
+	:body => "this is a long body"
+	}
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {:order => 1,
+	:title => "",
+	:body => ""
+	}
   }
 
   # This should return the minimal set of values that should be in the session
@@ -103,14 +118,17 @@ RSpec.describe TermsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {:order => 1,
+		:title => "newtitle",
+		:body => "newbody"
+		}
       }
 
       it "updates the requested term" do
         term = Term.create! valid_attributes
         put :update, {:id => term.to_param, :term => new_attributes}, valid_session
         term.reload
-        skip("Add assertions for updated state")
+        expect(assigns(:term)).to eq(term)
       end
 
       it "assigns the requested term as @term" do
