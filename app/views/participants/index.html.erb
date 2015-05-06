@@ -26,8 +26,22 @@
 		    <td><%= participant.team.team_name %></td>
   		  <td><%= participant.account.first_name %></td>
   		  <td><%= participant.account.last_name %></td>
-        <td><%= participant.captain %></td>
-        <td><%= participant.waiver_signed %></td>
+        <td>
+          <%= if participant.captain == true
+                'Yes'
+              elsif participant.captain == false
+                'No'
+              end
+          %>
+        </td>
+        <td>
+          <%= if participant.waiver_signed == true
+                'Yes'
+              elsif participant.waiver_signed == false
+                'No'
+              end
+          %>
+        </td>
         <td><%= participant.shirt_size %></td>
         <td><%= link_to '', edit_participant_path(participant), { :class => "ibutton-small fi-pencil", :title => "Update Participant" } %></td>
         <td><%= link_to '', participant, method: :delete,  data: { confirm: 'Are you sure destroy this participant?' }, :class => "ibutton-small fi-trash", :title => "Destroy Participant" %></td>

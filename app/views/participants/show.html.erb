@@ -26,12 +26,24 @@
 
 <p>
   <strong>Is Captain?:</strong>
-  <%= @participant.captain %>
+  <%= 
+    if @participant.captain == true 
+      'Yes'
+    else
+      'No'
+    end
+  %>
 </p>
 
 <p>
   <strong>Waiver signed?:</strong>
-  <%= @participant.waiver_signed %>
+  <%= 
+    if @participant.waiver_signed 
+      'Yes'
+    else
+      'No'
+    end
+  %>
 </p>
 
 <p>
