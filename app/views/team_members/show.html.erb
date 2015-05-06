@@ -7,9 +7,9 @@
 		<%= @account.first_name %>
 		<%= @account.last_name %>
 		<% if is_admin? %>
-			| <%= link_to "Edit", [:edit, participant] %>
+			| <%= link_to '', [:edit, participant], { :class => "ibutton-small fi-pencil", :title => "Update Participant", :id => "update#{participant.id}" } %>
 		<% end %>
-		| <%= link_to "Remove", participant, method: :delete, data: { confirm: "Remove #{@account.first_name} #{@account.last_name} from the team?" } %>
+		| <%= link_to '', participant, method: :delete, data: { confirm: "Remove #{@account.first_name} #{@account.last_name} from the team?" }, :class => "ibutton-small fi-trash", :title => "Destroy Conference" %>
 	</p>
 <% end %>
 
