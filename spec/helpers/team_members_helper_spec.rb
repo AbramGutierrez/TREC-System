@@ -11,5 +11,6 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe TeamMembersHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  # Most of the helpers are empty.
+  # All of the helper code is significantly tested with the controller and integration tests
 end

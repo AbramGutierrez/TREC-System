@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   get 'password_resets/' => 'password_resets#new'
   
+  get 'events/itinerary' => 'events#itinerary', as: :itinerary
+  
   get 'messenger' => 'messenger#new'
   get 'messenger' => 'messenger#create'
 
@@ -29,6 +31,8 @@ Rails.application.routes.draw do
   
   resources :accounts
 
+  resources :events
+  
   resources :administrators
 
   resources :participants
