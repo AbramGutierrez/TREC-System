@@ -25,6 +25,10 @@ class ImagesController < ApplicationController
   # POST /images
   # POST /images.json
   def create
+    if image_params.nil?
+	    flash[:alert] = "Image cannot be blank."
+		render 'new' and return
+	end
     @image = Image.new(image_params)
 
     respond_to do |format|
@@ -71,6 +75,10 @@ class ImagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def image_params
+	  if params[:image].nil?
+	    flash[:alert] = "Image cannot be blank."
+		render 'new' and return
+	  end	
       params.require(:image).permit(:image_url)
     end
 end
