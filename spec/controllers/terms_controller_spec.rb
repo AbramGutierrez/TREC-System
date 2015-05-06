@@ -22,8 +22,7 @@ RSpec.describe TermsController, type: :controller do
 
   before(:all){			
     @admin = Administrator.create!(account_attributes: {first_name: "Admin", last_name: "istrator", email: "admin@example.com",
-			password: "admin", password_confirmation: "admin"}) 
-	log_in_as(@admin.account)			
+			password: "admin", password_confirmation: "admin"}) 			
   }	
   after(:all){
 	@admin.destroy
@@ -53,6 +52,7 @@ RSpec.describe TermsController, type: :controller do
 
   describe "GET #index" do
     it "assigns all terms as @terms" do
+	  log_in_as(@admin.account)
       term = Term.create! valid_attributes
       get :index, {}, valid_session
       expect(assigns(:terms)).to eq([term])
@@ -61,6 +61,7 @@ RSpec.describe TermsController, type: :controller do
 
   describe "GET #show" do
     it "assigns the requested term as @term" do
+	  log_in_as(@admin.account)
       term = Term.create! valid_attributes
       get :show, {:id => term.to_param}, valid_session
       expect(assigns(:term)).to eq(term)
@@ -69,6 +70,7 @@ RSpec.describe TermsController, type: :controller do
 
   describe "GET #new" do
     it "assigns a new term as @term" do
+	  log_in_as(@admin.account)
       get :new, {}, valid_session
       expect(assigns(:term)).to be_a_new(Term)
     end
@@ -76,6 +78,7 @@ RSpec.describe TermsController, type: :controller do
 
   describe "GET #edit" do
     it "assigns the requested term as @term" do
+	  log_in_as(@admin.account)
       term = Term.create! valid_attributes
       get :edit, {:id => term.to_param}, valid_session
       expect(assigns(:term)).to eq(term)
@@ -85,18 +88,21 @@ RSpec.describe TermsController, type: :controller do
   describe "POST #create" do
     context "with valid params" do
       it "creates a new Term" do
+	    log_in_as(@admin.account)
         expect {
           post :create, {:term => valid_attributes}, valid_session
         }.to change(Term, :count).by(1)
       end
 
       it "assigns a newly created term as @term" do
+	    log_in_as(@admin.account)
         post :create, {:term => valid_attributes}, valid_session
         expect(assigns(:term)).to be_a(Term)
         expect(assigns(:term)).to be_persisted
       end
 
       it "redirects to the created term" do
+	    log_in_as(@admin.account)
         post :create, {:term => valid_attributes}, valid_session
         expect(response).to redirect_to(Term.last)
       end
@@ -104,11 +110,13 @@ RSpec.describe TermsController, type: :controller do
 
     context "with invalid params" do
       it "assigns a newly created but unsaved term as @term" do
+	    log_in_as(@admin.account)
         post :create, {:term => invalid_attributes}, valid_session
         expect(assigns(:term)).to be_a_new(Term)
       end
 
       it "re-renders the 'new' template" do
+	    log_in_as(@admin.account)
         post :create, {:term => invalid_attributes}, valid_session
         expect(response).to render_template("new")
       end
@@ -125,6 +133,7 @@ RSpec.describe TermsController, type: :controller do
       }
 
       it "updates the requested term" do
+	    log_in_as(@admin.account)
         term = Term.create! valid_attributes
         put :update, {:id => term.to_param, :term => new_attributes}, valid_session
         term.reload
@@ -132,12 +141,14 @@ RSpec.describe TermsController, type: :controller do
       end
 
       it "assigns the requested term as @term" do
+	    log_in_as(@admin.account)
         term = Term.create! valid_attributes
         put :update, {:id => term.to_param, :term => valid_attributes}, valid_session
         expect(assigns(:term)).to eq(term)
       end
 
       it "redirects to the term" do
+	    log_in_as(@admin.account)
         term = Term.create! valid_attributes
         put :update, {:id => term.to_param, :term => valid_attributes}, valid_session
         expect(response).to redirect_to(term)
@@ -146,12 +157,14 @@ RSpec.describe TermsController, type: :controller do
 
     context "with invalid params" do
       it "assigns the term as @term" do
+	    log_in_as(@admin.account)
         term = Term.create! valid_attributes
         put :update, {:id => term.to_param, :term => invalid_attributes}, valid_session
         expect(assigns(:term)).to eq(term)
       end
 
       it "re-renders the 'edit' template" do
+	    log_in_as(@admin.account)
         term = Term.create! valid_attributes
         put :update, {:id => term.to_param, :term => invalid_attributes}, valid_session
         expect(response).to render_template("edit")
@@ -161,6 +174,7 @@ RSpec.describe TermsController, type: :controller do
 
   describe "DELETE #destroy" do
     it "destroys the requested term" do
+	  log_in_as(@admin.account)
       term = Term.create! valid_attributes
       expect {
         delete :destroy, {:id => term.to_param}, valid_session
@@ -168,6 +182,7 @@ RSpec.describe TermsController, type: :controller do
     end
 
     it "redirects to the terms list" do
+	  log_in_as(@admin.account)
       term = Term.create! valid_attributes
       delete :destroy, {:id => term.to_param}, valid_session
       expect(response).to redirect_to(terms_url)
