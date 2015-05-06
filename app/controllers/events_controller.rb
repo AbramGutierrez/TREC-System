@@ -10,7 +10,7 @@ class EventsController < ApplicationController
 		@events = []
 	else
 		@events = conference.events
-		@events = Event(@events)
+		@events = Event.sort(@events)
 	end
   end
 
