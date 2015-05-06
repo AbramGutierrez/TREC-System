@@ -9,8 +9,7 @@ class EventsController < ApplicationController
 	if conference.nil? || conference.events.nil?
 		@events = []
 	else
-		@events = conference.events
-		@events = Event.sort(@events)
+		@events = conference.events.order(:day, :start_time, :end_time)
 	end
   end
 
@@ -19,8 +18,7 @@ class EventsController < ApplicationController
 	if conference.nil? || conference.events.nil?
 		@events = []
 	else
-		@events = conference.events
-		@events = Event.sort(@events)
+		@events = conference.events.order(:day, :start_time, :end_time)
 	end
   end
   

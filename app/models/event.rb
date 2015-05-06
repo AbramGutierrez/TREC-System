@@ -5,11 +5,7 @@ class Event < ActiveRecord::Base
 	
 	validate :time_check
 	
-	def sort(events)
-	  events.sort { |a,b| a <=> b}
-	end
-	
-	def <=>(another_event)
+	def <=> (another_event)
 	  if self.day < another_event.day
 	    return -1
 	  elsif another_event.day > self.day
