@@ -1,6 +1,26 @@
 <%= form_tag :action => 'update_waivers' %>
 <br>
-<h3> Waiver Checklist </h3>
+<h3> Checklist </h3>
+<table>
+  <thead>
+    <tr>
+      <th> Team </th>
+	  <th> Paid? </th>
+	</tr>
+  </thead>
+  <tbody>
+  
+<% @active_teams.each do |team| %>   
+	  <tr>
+	    <td> <%= team.team_name %> </td>	
+	    <%= fields_for "teams[#{team.id}]" do |f| %>
+		  <td> <%= f.check_box :paid_status, {}, 'paid', 'unpaid' %> </td>
+	    <% end %>
+	  </tr>
+<% end %>
+
+</tbody>
+ </table>
 <table>
   <thead>
     <tr>
