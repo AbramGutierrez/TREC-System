@@ -37,7 +37,7 @@
 <% end %>
 
 
-<% unless logged_in? %>
+<% if !(logged_in?) || is_participant? %>
 
 <% @terms.each do |term| %>
   <h3><%= term.title %></h3>

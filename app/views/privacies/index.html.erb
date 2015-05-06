@@ -38,7 +38,7 @@
 <% end %>
 
 
-<% unless logged_in? %>
+<% if !(logged_in?) || is_participant? %>
 
 <% @privacies.each do |privacy| %>
   <h3><%= privacy.title %></h3>
