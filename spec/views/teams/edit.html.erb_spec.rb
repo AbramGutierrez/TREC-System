@@ -34,7 +34,7 @@ RSpec.describe "teams/edit", type: :view do
 
       assert_select "input#team_team_name[name=?]", "team[team_name]"
 
-      assert_select "input#team_paid_status[name=?]", "team[paid_status]"
+      # assert_select "input#team_paid_status[name=?]", "team[paid_status]"
 
 	  # Need to test with cucumber
       # assert_select "input#team_school[name=?]", "team[school]"

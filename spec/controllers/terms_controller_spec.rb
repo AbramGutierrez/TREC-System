@@ -55,7 +55,7 @@ RSpec.describe TermsController, type: :controller do
 	  log_in_as(@admin.account)
       term = Term.create! valid_attributes
       get :index, {}, valid_session
-      expect(assigns(:terms)).to eq([term])
+      expect(assigns(:terms)).to include(term)
     end
   end
 

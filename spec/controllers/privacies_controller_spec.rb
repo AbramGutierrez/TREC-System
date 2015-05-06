@@ -55,7 +55,7 @@ RSpec.describe PrivaciesController, type: :controller do
 	  log_in_as(@admin.account)
       privacy = Privacy.create! valid_attributes
       get :index, {}, valid_session
-      expect(assigns(:privacies)).to eq([privacy])
+      expect(assigns(:privacies)).to include(privacy)
     end
   end
 

@@ -54,7 +54,7 @@ RSpec.describe FaqsController, type: :controller do
 	  log_in_as(@admin.account)
       faq = Faq.create! valid_attributes
       get :index, {}, valid_session
-      expect(assigns(:faqs)).to eq([faq])
+      expect(assigns(:faqs)).to include(faq)
     end
   end
 
