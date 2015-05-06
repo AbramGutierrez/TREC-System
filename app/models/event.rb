@@ -6,45 +6,25 @@ class Event < ActiveRecord::Base
 	validate :time_check
 	
 	def sort(events)
-	  events.sort { |a,b|
-	    if a.day < b.day
-        return -1
-      elsif b.day > a.day
-        return 1
-      end
-      
-      if a.start_time < b.start_time
-        return -1
-      elsif b.start_time < a.start_time
-        return 1
-      end
-      
-      if a.end_time < b.end_time
-        return -1
-      elsif b.end_time < a.end_time
-        return 1
-      else
-        return 0
-      end
-	    }
+	  events.sort { |a,b| a <=> b}
 	end
 	
-	def compare(a, b)
-	  if a.day < b.day
+	def <=>(another_event)
+	  if self.day < another_event.day
 	    return -1
-	  elsif b.day > a.day
+	  elsif another_event.day > self.day
 	    return 1
 	  end
 	  
-	  if a.start_time < b.start_time
+	  if self.start_time < another_event.start_time
 	    return -1
-	  elsif b.start_time < a.start_time
+	  elsif another_event.start_time < self.start_time
 	    return 1
 	  end
 	  
-	  if a.end_time < b.end_time
+	  if self.end_time < another_event.end_time
 	    return -1
-	  elsif b.end_time < a.end_time
+	  elsif another_event.end_time < self.end_time
 	    return 1
 	  else
 	    return 0
