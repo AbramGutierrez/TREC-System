@@ -1,25 +1,26 @@
-<h1>Listing Images</h1>
+<br>
+<h3 style='display:inline'>Home Page Images</h3>
+  <%= link_to '', new_image_path, :class => "i-button-small fi-plus button tiny round", :style => 'color:white;', :title => 'Create a New Image', :id => "add_image" %>
 
 <table>
   <thead>
     <tr>
+	  <th></th>
       <th>Image</th>
-      <th colspan="3"></th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @images.each do |image| %>
       <tr>
+	    <td><%= link_to '', image, { :class => "ibutton-small fi-magnifying-glass", :title => "View Image", :id => "view#{image.id}"} %></td>
         <td><%= image_tag(image.image_url_url.to_s, size: "100") %></td>
-        <td><%= link_to 'Show', image %></td>
-        <td><%= link_to 'Edit', edit_image_path(image) %></td>
-        <td><%= link_to 'Destroy', image, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to '', edit_image_path(image), { :class => "ibutton-small fi-pencil", :title => "Update Image", :id => "update#{image.id}" } %></td>
+        <td><%= link_to '', image, method: :delete, data: { confirm: 'Are you sure?' }, :class => "ibutton-small fi-trash", :title => "Destroy Image" %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Image', new_image_path %>

@@ -61,7 +61,7 @@
 
 <%= link_to 'Update Participant', edit_participant_path(@participant), :class => "button round", :style => "color:white" %>
 <% if is_admin? %>
-  | <%= link_to 'Participant\'s Team', "/teams/#{@participant.team.id}", :class => "button round", :style => "color:white" %>
+    <%= link_to 'Participant\'s Team', "/teams/#{@participant.team.id}", :class => "button round", :style => "color:white" %>
   <br>
 	<%= link_to 'Back', participants_path, :class => "button round", :style => "color:white" %>
 	  

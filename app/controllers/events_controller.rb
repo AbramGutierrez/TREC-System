@@ -40,13 +40,18 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     conference = Conference.find_by is_active: true
-    @event = Event.new(
-		:conference => conference,
-		:day => params[:event][:day],
-		:start_time => params[:event][:start_time], 
-		:end_time => params[:event][:end_time], 
-		:event_desc => params[:event][:event_desc]
-	)
+    # @event = Event.new(
+		# :conference => conference,
+		# :day => params[:event][:day],
+		# :start_time => params[:event][:start_time], 
+		# :end_time => params[:event][:end_time], 
+		# :event_desc => params[:event][:event_desc]
+	# )
+	new_params = event_params
+	if !conference.nil?
+		new_params[:conference] = conference
+	end
+	@event = Event.new(new_params)
 
     respond_to do |format|
       if @event.save

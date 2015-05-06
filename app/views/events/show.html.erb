@@ -1,5 +1,4 @@
-<p id="notice"><%= notice %></p>
-
+<h3><u>Event Details</u></h3>
 <p>
   <strong>Day:</strong>
   <%= @event.day %>
@@ -20,5 +19,5 @@
   <%= @event.event_desc %>
 </p>
 
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+<%= link_to 'Edit', edit_event_path(@event), :class => "button round", :style => "color:white" %>
+<%= link_to 'Back', events_path, :class => "button round", :style => "color:white" %>
