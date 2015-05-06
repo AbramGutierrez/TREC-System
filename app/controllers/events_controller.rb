@@ -5,11 +5,10 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
 	conference = Conference.find_by is_active: true
-    @events = conference.events
-	if conference.events
-		
+	if conference.events.nil?
+		@events = []
 	else
-	
+		@events = conference.events
 	end
   end
 
@@ -19,7 +18,12 @@ class EventsController < ApplicationController
   end
   
   def show_itinerary
-  
+    conference = Conference.find_by is_active: true
+	if conference.events.nil?
+		@events = []
+	else
+		@events = conference.events
+	end
   end
 
   # GET /events/new
