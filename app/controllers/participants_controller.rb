@@ -1,11 +1,11 @@
 class ParticipantsController < ApplicationController
-  #before_action :logged_in_user, only: [:index, :show, :edit, :dashboard, :update, :destroy]
-  #before_action :set_participant, only: [:show, :edit, :update, :destroy]
-  #before_action :correct_user_or_admin, only: [:show, :edit, :update]
-  #before_action :admin_account, only: :index
-  #before_action :team_captain_or_admin, only: :destroy
-  #before_action :participant_account, only: [:new, :create]
-  #helper_method :sort_column, :sort_direction
+  before_action :logged_in_user, only: [:index, :show, :edit, :dashboard, :update, :destroy]
+  before_action :set_participant, only: [:show, :edit, :update, :destroy]
+  before_action :correct_user_or_admin, only: [:show, :edit, :update]
+  before_action :admin_account, only: :index
+  before_action :team_captain_or_admin, only: :destroy
+  before_action :participant_account, only: [:new, :create]
+  helper_method :sort_column, :sort_direction
 
   # GET /participants
   # GET /participants.json
@@ -147,7 +147,7 @@ class ParticipantsController < ApplicationController
   def update_waivers
   
     #ignore unchecked waivers
-    @checked_participants = params[:participants].delete_if {|key, value| value["waiver_signed"] == "0"}
+    @checked_participants = params[:participants].delete_if {|key, value| value["waiver_signed"] == "unpaid"}
 	@checked_teams = params[:teams].delete_if {|key, value| value["paid_status"] == "0"}
 	  
 	unless @checked_participants.nil?
