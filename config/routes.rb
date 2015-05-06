@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :pageinfos
+
   resources :contacts
 
   resources :privacies
