@@ -62,6 +62,7 @@
 <%= link_to 'Back', conferences_path, :class => "button round", :style => "color:white" %>
 <% else %>
 <%= link_to 'Back to Dashboard', participant_dashboard_url, :class => "button round", :style => "color:white" %>
+<%= link_to 'Pay Here', @conference.marketplace_link, :class => "button round", :style => "color:white" %>
 <% end %>
 
 <br/>
