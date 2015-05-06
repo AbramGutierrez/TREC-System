@@ -123,6 +123,30 @@ module NavigationHelpers
 	  
 	when /^the schools page/
 	  '/schools'   
+	  
+	when /^the term new page/
+	  '/terms/new'
+
+	when /^the term edit page/
+	  '/terms/1/edit'
+
+	when /^the term show page/
+	  '/terms/1'	
+	  
+	when /^the term invalid edit page/
+	  '/terms/1'  
+	  
+	when /^the terms page/
+	  '/terms'  
+
+	when /^the privacies page/
+	  '/privacies'
+
+	when /^the contacts page/
+	  '/contacts'	
+
+	when /^the faqs page/
+	  '/faqs'		
 	
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
