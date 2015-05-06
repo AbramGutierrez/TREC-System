@@ -46,22 +46,35 @@ class ParticipantsController < ApplicationController
   # POST /participants
   # POST /participants.json
   def create
-    if !params[:team].nil?
+    new_params = participant_params
+	if !params[:team].nil?
 	  if !params[:team][:team_name].nil?
-        @team = Team.find_by_team_name(params[:team][:team_name])
+        new_params[:team] = Team.find_by_team_name(params[:team][:team_name])
 	  end	
 	  #params[:phone_email] = Participant.create_phone_email(params[:phone_provider], params[:phone])
 	end  
-    @participant = Participant.new(participant_params)
+	if new_params[:team].nil? && is_participant?
+		new_params[:team] = current_participant.team		
+	end
+	if new_params[:captain].nil?
+		new_params[:captain] = false
+	end
+    @participant = Participant.new(new_params)
 
     respond_to do |format|
       if @participant.save
-	    if participant_params[:team_id].nil? && !params[:team][:team_name].nil?
-	      @participant.team = @team
-		  @participant.save
+	    # if participant_params[:team_id].nil? && !params[:team][:team_name].nil?
+	      # @participant.team = @team
+		  # @participant.save
+		# end
+		if (!logged_in?)
+			log_in @participant.account
 		end
-		log_in @participant.account
-        format.html { redirect_to @participant, notice: 'Participant was successfully created.' }
+		if (is_admin?)
+			format.html { redirect_to @participant, notice: 'Participant was successfully created.' }
+		else
+			format.html { redirect_to "/team_members/#{@participant.team.id}", notice: 'Participant was successfully created.' }
+		end
         format.json { render :show, status: :created, location: @participant }
       else
         format.html { render :new }
@@ -135,9 +148,13 @@ class ParticipantsController < ApplicationController
   
     #ignore unchecked waivers
     @checked_participants = params[:participants].delete_if {|key, value| value["waiver_signed"] == "0"}
+	@checked_teams = params[:teams].delete_if {|key, value| value["paid_status"] == "0"}
 	  
 	unless @checked_participants.nil?
 	  Participant.update(@checked_participants.keys, @checked_participants.values)
+	end
+	unless @checked_teams.nil?
+	  Team.update(@checked_teams.keys, @checked_teams.values)
 	end
 	redirect_to participants_url
 	

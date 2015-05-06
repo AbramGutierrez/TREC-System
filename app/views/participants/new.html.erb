@@ -6,5 +6,5 @@
 <% if is_admin? %>
 <%= link_to 'Back', participants_path, :class => "button round" %>
 <% else %>
-<%= link_to 'Back', :back, :class => "button round" %>
+<%= link_to 'Back', "/team_members/#{current_participant.team.id}", :class => "button round" %>
 <% end %>

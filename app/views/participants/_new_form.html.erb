@@ -46,22 +46,23 @@
       <%= f.label :shirt_size %><br>
       <%= f.select :shirt_size, options_for_select(%w[XS S M L XL XXL]) %>
     </div>
-	<div class"field">
-	  <%= f.label :captain %><br>
-	  <%= f.check_box :captain %>
-	</div>
-	<div class"field">
-	  <%= f.label :waiver_signed %><br>
-	  <%= f.check_box :waiver_signed %>
-	</div>
+	<% if is_admin? %>
+		<div class"field">
+			<%= f.label :captain %><br>
+			<%= f.check_box :captain %>
+		</div>
+		<div class"field">
+			<%= f.label :waiver_signed %><br>
+			<%= f.check_box :waiver_signed %>
+		</div>
   
-  <% if !@team_array.nil? %>
-    <div class="field">
-	  <%= label_tag :team %><br>
-      <%= select :team, :team_name, options_for_select(@team_array) %>
-    </div>	 
-  <% end %>
-  
+		<% if !@team_array.nil? %>
+			<div class="field">
+				<%= label_tag :team %><br>
+				<%= select :team, :team_name, options_for_select(@team_array) %>
+			</div>	 
+		<% end %>
+	<% end %>	  
   <div class="actions">
     <%= f.submit 'Submit', :class => "button round", :style => "color:white" %>
   </div>
