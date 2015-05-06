@@ -17,11 +17,13 @@
   </div>
   <div class="field">
     <%= f.label :start_time %><br>
-    <%= f.time_select :start_time, {:ampm => true} %>
+    <%= f.time_select :start_time, :default => {:hour => '12', :minute => '00'}, 
+    	{:ampm => true, :minute_step => 5} %>
   </div>
   <div class="field">
     <%= f.label :end_time %><br>
-    <%= f.time_select :end_time, {:ampm => true} %>
+    <%= f.time_select :end_time, :default => {:hour => '12', :minute => '00'}, 
+    	{:ampm => true, :minute_step => 5} %>
   </div>
   <div class="field">
     <%= f.label "Event Description" %><br>
