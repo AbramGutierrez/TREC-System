@@ -4,12 +4,22 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+	conference = Conference.find_by is_active: true
+    @events = conference.events
+	if conference.events
+		
+	else
+	
+	end
   end
 
   # GET /events/1
   # GET /events/1.json
   def show
+  end
+  
+  def show_itinerary
+  
   end
 
   # GET /events/new
