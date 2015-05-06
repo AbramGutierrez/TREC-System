@@ -14,11 +14,13 @@
 	  <tr>
 	    <td> <%= team.team_name %> </td>	
 	    <%= fields_for "teams[#{team.id}]" do |f| %>
-		  <td> <%= f.check_box :paid_status, {
+		  <td> <%= f.check_box :paid_status, 
 		  	if team.paid_status.eql? "paid"
-		  		:checked => "checked"
-		  	end
-		  }, 'paid', 'unpaid' %> </td>
+		  		{ :checked => "checked" }
+		  	else
+		  		{ }
+		  	end,
+		   'paid', 'unpaid' %> </td>
 	    <% end %>
 	  </tr>
 <% end %>
