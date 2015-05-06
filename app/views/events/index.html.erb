@@ -16,11 +16,10 @@
   <tbody>
     <% @events.each do |event| %>
       <tr>
-        <td><%= event.day %></td>
-        <td><%= event.start_time %></td>
-        <td><%= event.end_time %></td>
+        <td><%= Date::DAYNAMES[event.day.wday] %></td>
+        <td><%= event.start_time.strftime("%I:%M %p") %></td>
+        <td><%= event.end_time.strftime("%I:%M %p") %></td>
         <td><%= event.event_desc %></td>
-        <td><%= link_to 'Show', event %></td>
         <td><%= link_to 'Edit', edit_event_path(event) %></td>
         <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

@@ -1,29 +1,30 @@
 class EventsController < ApplicationController
+  before_action :logged_in_user, only: [:index, :show, :new, :edit, :create, :update, :destroy]
   before_action :set_event, only: [:show, :edit, :update, :destroy]
-
+  before_action :admin_account, only: [:index, :show, :new, :edit, :create, :update, :destroy]
   # GET /events
   # GET /events.json
   def index
 	conference = Conference.find_by is_active: true
-	if conference.events.nil?
+	if conference.nil? || conference.events.nil?
 		@events = []
 	else
 		@events = conference.events
 	end
   end
 
-  # GET /events/1
-  # GET /events/1.json
-  def show
-  end
-  
-  def show_itinerary
+  def itinerary
     conference = Conference.find_by is_active: true
-	if conference.events.nil?
+	if conference.nil? || conference.events.nil?
 		@events = []
 	else
 		@events = conference.events
 	end
+  end
+  
+  # GET /events/1
+  # GET /events/1.json
+  def show
   end
 
   # GET /events/new
@@ -38,7 +39,14 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @event = Event.new(event_params)
+    conference = Conference.find_by is_active: true
+    @event = Event.new(
+		:conference => conference,
+		:day => params[:event][:day],
+		:start_time => params[:event][:start_time], 
+		:end_time => params[:event][:end_time], 
+		:event_desc => params[:event][:event_desc]
+	)
 
     respond_to do |format|
       if @event.save
