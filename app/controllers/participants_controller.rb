@@ -46,22 +46,36 @@ class ParticipantsController < ApplicationController
   # POST /participants
   # POST /participants.json
   def create
-    if !params[:team].nil?
+    new_params = participant_params
+	if !params[:team].nil?
 	  if !params[:team][:team_name].nil?
-        @team = Team.find_by_team_name(params[:team][:team_name])
+        new_params[:team] = Team.find_by_team_name(params[:team][:team_name])
 	  end	
 	  #params[:phone_email] = Participant.create_phone_email(params[:phone_provider], params[:phone])
 	end  
-    @participant = Participant.new(participant_params)
+	if new_params[:team].nil? && is_participant?
+		new_params[:team] = current_participant.team		
+	end
+	if new_params[:captain].nil?
+		new_params[:captain] = false
+	end
+	puts "\nnew_params: #{new_params.inspect}\n"
+    @participant = Participant.new(new_params)
 
     respond_to do |format|
       if @participant.save
-	    if participant_params[:team_id].nil? && !params[:team][:team_name].nil?
-	      @participant.team = @team
-		  @participant.save
+	    # if participant_params[:team_id].nil? && !params[:team][:team_name].nil?
+	      # @participant.team = @team
+		  # @participant.save
+		# end
+		if (!logged_in?)
+			log_in @participant.account
 		end
-		log_in @participant.account
-        format.html { redirect_to @participant, notice: 'Participant was successfully created.' }
+		if (is_admin?)
+			format.html { redirect_to @participant, notice: 'Participant was successfully created.' }
+		else
+			format.html { redirect_to "/team_members/#{@participant.team.id}", notice: 'Participant was successfully created.' }
+		end
         format.json { render :show, status: :created, location: @participant }
       else
         format.html { render :new }
