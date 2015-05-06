@@ -9,7 +9,7 @@ RSpec.describe PasswordMailer, type: :mailer do
     let(:mail) { PasswordMailer.welcome_email(account) }
     
     it "containing the user's first password" do
-      expect(mail.body.encoded).to match(account.password)
+      expect(mail.body.encoded).to include(account.password)
     end
     
     it "containing a 6-digit password" do
@@ -17,23 +17,23 @@ RSpec.describe PasswordMailer, type: :mailer do
     end
     
     it "and renders the subject" do
-      expect(mail.subject).to match('Welcome to TREC')
+      expect(mail.subject).to eql('Welcome to TREC')
     end
     
     it "to the correct person" do
-      expect(mail.to).to match([account.email])
+      expect(mail.to).to match_array([account.email])
     end
     
     it "from TREC" do
-      expect(mail.from).to match([PasswordMailer.default_from()])
+      expect(mail.from).to match_array([PasswordMailer.default_from()])
     end
     
     it "containing the user's name" do
-      expect(mail.body.encoded).to match(account.name)
+      expect(mail.body.encoded).to include(account.name)
     end
     
     it "containing a link to the login page" do
-      expect(mail.body.encoded).to match('http://trec.herokuapp.com/login')
+      expect(mail.body.encoded).to include('http://trec.herokuapp.com/login')
     end
   end
   
@@ -54,29 +54,29 @@ RSpec.describe PasswordMailer, type: :mailer do
     let(:mail) { PasswordMailer.reset_email(account) }
     
     it "containing the user's new password" do
-      expect(mail.body.encoded).to match(account.password)
+      expect(mail.body.encoded).to include(account.password)
     end
     
     it "and renders the subject" do
-      expect(mail.subject).to match('TREC Password Reset')
+      expect(mail.subject).to eql('TREC Password Reset')
     end
     
     it "to the correct person" do
-      expect(mail.to).to match([account.email])
+      expect(mail.to).to match_array([account.email])
     end
     
     it "from TREC" do
-      expect(mail.from).to match([PasswordMailer.default_from()])
+      expect(mail.from).to match_array([PasswordMailer.default_from()])
     end
     
     it "containing a link to the login page" do
-      expect(mail.body.encoded).to match('http://trec.herokuapp.com/login')
+      expect(mail.body.encoded).to include('http://trec.herokuapp.com/login')
     end
     
     it "after changing the user's password" do
       account.randomize_password()
       new_mail = PasswordMailer.reset_email(account)
-      expect(new_mail.body.encoded).to match(account.password)
+      expect(new_mail.body.encoded).to include(account.password)
     end
   end
 end
