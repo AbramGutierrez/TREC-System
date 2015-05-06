@@ -54,6 +54,6 @@ class Administrator < ActiveRecord::Base
 	def self.email(recipients_type, method_type, title, message)
 	  recipients = get_recipients(recipients_type)
 	  addresses = get_message_addresses(recipients, method_type)
-	  AdminMailer.email(addresses, title, message)
+	  AdminMailer.email(addresses, title, message).deliver_now!
 	end
 end

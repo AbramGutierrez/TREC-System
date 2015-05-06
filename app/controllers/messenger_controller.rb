@@ -64,7 +64,7 @@ class MessengerController < ApplicationController
     end
     
     begin
-      Administrator.email(@recipients, @method, @subject, @message).deliver_now!
+      Administrator.email(@recipients, @method, @subject, @message)
     rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
       flash.now[:alert] = "Error sending email. Please check your connection."
       render 'new' and return

@@ -168,5 +168,11 @@ RSpec.describe Administrator, type: :model do
 				"8133614073@mobile.celloneusa.com", "9642752086@comcastpcs.textmsg.com", 
 				"4296814083@fido.ca", "7282822361@messaging.nextel.com"])
 		end
+		
+		it "should send an email" do
+		  expect { Administrator.email(Administrator.recipient_captain, 
+		    Administrator.method_text_message, "Title", "Message") }.to change { 
+		        ActionMailer::Base.deliveries.count }.by(1)
+    end
 	end
 end
