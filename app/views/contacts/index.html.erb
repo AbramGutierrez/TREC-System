@@ -45,7 +45,7 @@
 <% end %>
 
 
-<% unless logged_in? %>
+<% if !(logged_in?) || is_participant? %>
 
 <table style="width:100%">
 <% @group = "temp" %>
