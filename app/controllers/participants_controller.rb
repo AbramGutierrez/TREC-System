@@ -59,7 +59,6 @@ class ParticipantsController < ApplicationController
 	if new_params[:captain].nil?
 		new_params[:captain] = false
 	end
-	puts "\nnew_params: #{new_params.inspect}\n"
     @participant = Participant.new(new_params)
 
     respond_to do |format|
