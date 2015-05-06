@@ -29,13 +29,15 @@
         <td><%= number_to_currency(conference.tamu_cost) %></td>
         <td><%= number_to_currency(conference.other_cost) %></td>
         <td><%= conference.challenge_desc %></td>
-        <td><%= 
-                if conference.is_active == true
-                  'Yes' 
-                elsif conference.is_active == false
-                  'No'
-                end
-            %></td>
+        <td>
+          <%= 
+            if conference.is_active == true
+              'Yes' 
+            elsif conference.is_active == false
+              'No'
+            end
+          %>
+        </td>
         <td><%= link_to '', edit_conference_path(conference), { :class => "ibutton-small fi-pencil", :title => "Update Conference", :id => "update#{conference.id}" } %></td>
         <td><%= link_to '', conference, method: :delete, data: { confirm: 'Are you sure you want to destroy this conference?' }, :class => "ibutton-small fi-trash", :title => "Destroy Conference" %></td>
       </tr>
