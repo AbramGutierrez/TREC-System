@@ -15,17 +15,19 @@
     <%= f.label :team_name %><br>
     <%= f.text_field :team_name %>
   </div>
-  <div class="field">
-    <%= f.label :paid_status %><br>
-    <%= f.text_field :paid_status %>
-  </div>
+  <% if is_admin? %>
+    <div class="field">
+      <%= f.label :paid_status %><br>
+	  <%= f.select :paid_status, options_for_select(%w[unpaid paid], :selected => @team.paid_status) %>
+    </div>
+  <% end %>
   <div class="field">
     <%= f.label :school %><br>
-	<%= f.select :school, options_for_select(get_schools_array, get_school_name), :id =>"sel" %>
+	<%= f.select :school, options_for_select(get_schools_array, get_school_name), :id =>"team_school" %>
   </div>
 	<div id="field">
     <%= f.label :other, 'School Name' %><br>
-    <%= text_field :team_name, :other, :value => get_other_value %>
+    <%= text_field :team_name, :other, :value => get_other_value, :id => "other" %>
 	</div>
   <div class="actions">
     <%= f.submit 'Submit', :class => "button round", :style => "color:white" %>

@@ -33,6 +33,7 @@ class TeamsController < ApplicationController
 	if team_params[:school] == "Other"
 	  new_params[:school] = params[:team_name][:other]
 	end
+	new_params[:conference] = Conference.find_by is_active: true
 	@team = Team.new(new_params) 
 
     respond_to do |format|
