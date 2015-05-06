@@ -5,7 +5,7 @@
 <ul class="example-orbit" data-orbit>
   <% @images.each do |image| %>
      <li>
-        <%= image_tag(image.image_url_url.to_s, size: "250x100") %>
+        <%= image_tag(image.image_url_url.to_s) %>
 		<div class="orbit-caption" align='center'>
         </div>
      </li>
@@ -14,16 +14,12 @@
 <% end %>
 
 <br>
-<h3>Welcome</h3>
-<% if !@welcome.nil? && !@welcome.body.nil? %>
-	<div><%= @welcome.body%></div> 
+<% if !@pageinfos.nil? %>
+	<% @pageinfos.each do |pageinfo| %>
+		<h3><%= pageinfo.page %></h3>
+		<div><%= pageinfo.body %></div>
+		<br>
+	<% end %>
 <% end %>
-
-<h3>About</h3>
-<% if !@about.nil? && !@about.body.nil? %>
-  <div><%= @about.body%></div> 
-<% end %>
-
 
 <br>
-
