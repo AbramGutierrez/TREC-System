@@ -57,6 +57,9 @@ RSpec.describe ConferencesController, type: :controller do
 	@team.destroy
 	@admin.destroy
 	@p.destroy
+	first = Conference.first
+	first.is_active = true
+	first.save!
   } 
   
   let(:valid_attributes) { {

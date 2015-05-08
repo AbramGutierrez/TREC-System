@@ -11,6 +11,12 @@ RSpec.describe "teams/new", type: :view do
 	@admin = Administrator.create!(account_attributes: {first_name: "Admin", last_name: "istrator", email: "admin@example.com",
 			password: "password", password_confirmation: "password"}) 
   end
+  
+  after(:all) do
+		first = Conference.first
+		first.is_active = true
+		first.save!
+  end
 
   it "renders new team form" do
 	log_in_as(@admin.account)

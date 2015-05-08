@@ -31,6 +31,12 @@ RSpec.describe "teams/index", type: :view do
       )
     ])
   end
+  
+  after(:all) do
+		first = Conference.first
+		first.is_active = true
+		first.save!
+  end
 
   it "renders a list of teams" do
     render

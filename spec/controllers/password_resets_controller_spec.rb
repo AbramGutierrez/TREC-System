@@ -111,6 +111,9 @@ RSpec.describe PasswordResetsController, type: :controller do
         @other_team_captain.destroy
         @other_team_not_captain.destroy
         @inactive_person.destroy
+		first = Conference.first
+		first.is_active = true
+		first.save!
   end
   
   let(:valid_email) {

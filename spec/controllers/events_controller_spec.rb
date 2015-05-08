@@ -40,6 +40,9 @@ RSpec.describe EventsController, type: :controller do
   after(:all){
 	@c.destroy
 	@admin.destroy
+	first = Conference.first
+	first.is_active = true
+	first.save!
   }
 
   # This should return the minimal set of attributes required to create a valid

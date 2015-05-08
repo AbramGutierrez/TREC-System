@@ -18,6 +18,9 @@ RSpec.describe Sponsor, type: :model do
 	
 	after(:all) do
 		@c.destroy
+		first = Conference.first
+		first.is_active = true
+		first.save!
 	end
   
 	it "should be valid" do

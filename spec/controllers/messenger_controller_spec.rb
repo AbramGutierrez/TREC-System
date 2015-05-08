@@ -33,6 +33,9 @@ RSpec.describe MessengerController, type: :controller do
         @active_conference.destroy
         @active2.destroy
         @captain.destroy
+		first = Conference.first
+		first.is_active = true
+		first.save!
   end
   
   let(:valid_session) {{}}

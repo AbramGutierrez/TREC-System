@@ -28,6 +28,9 @@ RSpec.describe "participants/edit", type: :view do
 		@admin.destroy
 		@team.destroy
 		@c.destroy
+		first = Conference.first
+		first.is_active = true
+		first.save!
 	end
 	
   before(:each) do

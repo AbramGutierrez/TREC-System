@@ -31,6 +31,12 @@ RSpec.describe "teams/show", type: :view do
   after(:each) do
     @p.destroy
   end
+  
+  after(:all) do
+		first = Conference.first
+		first.is_active = true
+		first.save!
+  end
 
   it "renders attributes in <p>" do
     render

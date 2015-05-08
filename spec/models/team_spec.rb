@@ -26,6 +26,9 @@ RSpec.describe Team, type: :model do
 	after(:all) do
 		@team.destroy
 		@c.destroy
+		first = Conference.first
+		first.is_active = true
+		first.save!
 	end
 	
 	it "should be valid" do

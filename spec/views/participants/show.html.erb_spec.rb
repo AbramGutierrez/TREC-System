@@ -45,6 +45,9 @@ RSpec.describe "participants/show", type: :view do
     @c.destroy
 	@new_team.destroy
 	@participant.destroy
+	first = Conference.first
+		first.is_active = true
+		first.save!
   end
 
   it "renders attributes in <p>" do

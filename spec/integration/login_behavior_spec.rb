@@ -34,6 +34,9 @@ RSpec.describe "login_behavior", :type => :request do
 	    @p.destroy
 		@team.destroy
 		@c.destroy
+		first = Conference.first
+		first.is_active = true
+		first.save!
 	end
 	
 	it 'allows the admin to log in' do

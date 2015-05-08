@@ -17,6 +17,9 @@ RSpec.describe "sponsors/new", type: :view do
   end
   after(:all) do
 	@c.destroy
+	first = Conference.first
+		first.is_active = true
+		first.save!
   end
   
   before(:each) do

@@ -25,6 +25,9 @@ RSpec.describe "participants/index", type: :view do
 	after(:all) do
 		@team.destroy
 		@c.destroy
+		first = Conference.first
+		first.is_active = true
+		first.save!
 	end
 
   before(:each) do

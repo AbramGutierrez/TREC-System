@@ -135,6 +135,9 @@ RSpec.describe Administrator, type: :model do
         @other_team_not_captain.destroy
         @inactive_captain.destroy
         @inactive_person.destroy
+		first = Conference.first
+		first.is_active = true
+		first.save!
       end
       
       it "should get all participant recipients" do

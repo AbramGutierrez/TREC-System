@@ -29,6 +29,12 @@ feature 'Log in' do
 				password_confirmation: "password"
 			})
 	end
+	
+	after(:all) {
+		first = Conference.first
+		first.is_active = true
+		first.save!
+	}
 
 	scenario 'with valid email and password' do		
 		log_in_with('test@example.com', 'password')

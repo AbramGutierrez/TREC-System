@@ -36,6 +36,9 @@ RSpec.describe "friendly forwarding", :type => :request do
 	after(:all) do
 		@team.destroy
 		@c.destroy
+		first = Conference.first
+		first.is_active = true
+		first.save!
 	end
 	
 	it 'user is properly redirected with friendly forwarding' do

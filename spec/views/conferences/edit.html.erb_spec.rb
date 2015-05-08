@@ -15,6 +15,12 @@ RSpec.describe "conferences/edit", type: :view do
       :challenge_desc => "MyText"
     ))
   end
+  
+    after(:all) do
+		first = Conference.first
+		first.is_active = true
+		first.save!
+	end
 
   it "renders the edit conference form" do
     render

@@ -17,6 +17,9 @@ RSpec.describe Conference, type: :model do
   }
   after(:all) {
     @conference1.destroy
+	first = Conference.first
+		first.is_active = true
+		first.save!
   }
   
   it "should be valid" do

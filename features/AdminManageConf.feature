@@ -37,7 +37,7 @@ Scenario: Add Conference(happy)
 	And I fill in "Other cost" with "0"
 	And I fill in "Challenge desc" with "fun times"
 	And I press "Submit"
-	Then I should be on the conference show 2 page	
+	Then I should see "success"	
 	
 Scenario: Add Conference(sad)
 	Given I am on the administrator dashboard

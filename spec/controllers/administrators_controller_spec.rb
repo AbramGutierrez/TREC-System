@@ -65,6 +65,9 @@ RSpec.describe AdministratorsController, type: :controller do
 	@team.destroy
 	@c.destroy
 	@admin.destroy
+	first = Conference.first
+	first.is_active = true
+	first.save!
   } 
   
   let(:valid_attributes) { {account_attributes: {

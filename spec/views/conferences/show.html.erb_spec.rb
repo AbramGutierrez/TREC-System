@@ -17,6 +17,12 @@ RSpec.describe "conferences/show", type: :view do
 	@admin = Administrator.create!(account_attributes: {first_name: "Admin", last_name: "istrator", email: "admin@example.com",
 			password: "admin", password_confirmation: "admin"})
   end
+  
+  after(:all) do
+		first = Conference.first
+		first.is_active = true
+		first.save!
+	end
 
   it "renders attributes in <p>" do
     log_in_as(@admin.account)

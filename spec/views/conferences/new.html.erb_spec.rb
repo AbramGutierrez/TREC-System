@@ -15,6 +15,12 @@ RSpec.describe "conferences/new", type: :view do
 	  conf_end_date: Date.parse("2015-6-9")
     ))
   end
+  
+    after(:all) do
+		first = Conference.first
+		first.is_active = true
+		first.save!
+	end
 
   it "renders new conference form" do
     render
