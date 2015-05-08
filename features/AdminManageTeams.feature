@@ -66,8 +66,6 @@ Scenario: View Team Members
 	Then I should be on the team show page
 	When I follow "Add/Remove Team Members"
 	Then I should be on the team members page
-	And I should see "Edit"
-	And I should see "Remove"
 	And I should see "Add new team member"
 	And I should see "Back"	
 	
